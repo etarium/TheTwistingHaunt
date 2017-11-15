@@ -2,6 +2,7 @@
 Codenamed The Twisting Haunt based off of the RPG concept we had, this project seeks to create a combat system meant to be implemented into a larger game system, with a text-based RPG game being the primary target.
 
 Current Goals:
+
 -(WIP)Implement a battlesim where all entities are controlled by a player or players for testing the structure
 
 -(NOT STARTED)Implement a basic client to test the classes
