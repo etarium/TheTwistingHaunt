@@ -78,7 +78,11 @@ public class StatBlock {
         this.initiative = initiative;
     }
     
+    //member methods
     
+    public double healthPercentage(){
+        return currentHealth/maxHealth;
+    }
     
     
 }
