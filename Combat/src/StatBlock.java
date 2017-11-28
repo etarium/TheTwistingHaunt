@@ -13,13 +13,14 @@ public class StatBlock {
     
     //data members
     
-    private int currentHealth;
+    protected int currentHealth;
     private int maxHealth;
-    private int physDef;
+    protected int physDef;
+    protected int evasion;
     //private int specDef;   //to be added later
-    private int physAtt;
+    protected int physAtt;
     //private int specAtt;   //to be added later
-    private int initiative;
+    protected int initiative;
 
     
     //constructors
@@ -27,10 +28,12 @@ public class StatBlock {
     public StatBlock() {
     }
 
-    public StatBlock(int currentHealth, int maxHealth, int physDef, int physAtt, int initiative) {
+    public StatBlock(int currentHealth, int maxHealth, int physDef, 
+                        int evasion, int physAtt, int initiative) {
         this.currentHealth = currentHealth;
         this.maxHealth = maxHealth;
         this.physDef = physDef;
+        this.evasion = evasion;
         this.physAtt = physAtt;
         this.initiative = initiative;
     }
@@ -62,6 +65,14 @@ public class StatBlock {
         this.physDef = physDef;
     }
 
+    public int getEvasion() {
+        return evasion;
+    }
+
+    public void setEvasion(int evasion) {
+        this.evasion = evasion;
+    }
+
     public int getPhysAtt() {
         return physAtt;
     }
@@ -84,5 +95,8 @@ public class StatBlock {
         return currentHealth/maxHealth;
     }
     
+    public boolean isAlive() {
+        return currentHealth > 0;
+    }
     
 }
