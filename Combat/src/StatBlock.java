@@ -92,7 +92,7 @@ public class StatBlock {
     //member methods
     
     public double healthPercentage(){
-        return currentHealth/maxHealth;
+        return (double)currentHealth/maxHealth;
     }
     
     public boolean isAlive() {

@@ -11,7 +11,7 @@ public class TestClient {
         StatBlock statBlock2 = new StatBlock(100, 100, 50, 60, 50, 10);
 
         Entity player = new Entity(statBlock1, "Player");
-        Entity opp = new Entity(statBlock2, "Enemy");
+        Entity opp = new Entity(statBlock2, "Helpless Cripple");
 
         while ( opp.getStats().isAlive() ) {
             int damage = player.attack(opp);
