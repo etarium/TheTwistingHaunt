@@ -7,11 +7,13 @@ Current Goals:
 
 -(WIP)Implement a basic client to test the classes
 
+-(WIP)Implement consumable item objects to be used by entities capable of using them
+
 -(NOT STARTED)Implement an Player subclass of entity, implementing a unique PlayerADT
 
 -(NOT STARTED)Implement "special attack" objects to be contained in a list inside entity
 
--(NOT STARTED)Implement consumable item objects to be used by entities capable of using them
+-(NOT STARTED)Implement InvalidTargetClassException for invalid Item uses so as not to "eat" turn.
 
 -(NOT STARTED)Implement a "stupid" RNG ai to speed testing and enhance gameplay
 
