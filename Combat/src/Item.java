@@ -8,39 +8,54 @@
  *
  * @author qn4795oh
  */
-public class Item {
+public abstract class Item {
     
     //data members
     private int potency;
+    private String name;
+    private String description;
    
+    
     
     //constructors
     public Item() {
     }
-    public Item(int potency) {
+    
+    public Item(int potency, String name) {
         this.potency = potency;
+        this.name = name;
     }
     
-    //getter
+    public Item(int potency, String name, String description) {
+        this.potency = potency;
+        this.name = name;
+        this.description = description;
+    }
+    
+    
+    //getters
     public int getPotency() {
         return potency;
     }
-
-    
-    
+    public String getName() {
+        return name;
+    }
+    public String getDescription() {
+        return description;
+    }
     
     //class methods
-    public void targettingHP(Entity x){
-        int currentHP = x.getStats().getCurrentHealth();
-        int maxHP = x.getStats().getMaxHealth();
-        int newHP = currentHP + potency;
-        
-        int val = (maxHP > newHP) ? maxHP:newHP;
-        
-        x.getStats().setCurrentHealth(val);
-    }
-    public void targettingHP(Entity[] x){
-        
-    }
     
-}
+    //
+    //still considering what to return
+    //should we return anything at all? damage done, etc?
+    //what about for multitargeted ones? should we also have dialog here?
+    //
+    
+    public abstract void singleTarget(Entity x);
+    
+    public abstract void multiTarget(Entity[] group);
+    
+    public abstract void omniTarget(Encounter enc);
+    
+}//end Item
