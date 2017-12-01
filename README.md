@@ -5,7 +5,7 @@ Current Goals:
 
 -(WIP)Implement a battlesim where all entities are controlled by a player or players for testing the structure
 
--(NOT STARTED)Implement a basic client to test the classes
+-(WIP)Implement a basic client to test the classes
 
 -(NOT STARTED)Implement an Player subclass of entity, implementing a unique PlayerADT
 
