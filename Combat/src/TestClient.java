@@ -15,26 +15,8 @@ public class TestClient {
 
         while ( opp.getStats().isAlive() ) {
             int damage = player.attack(opp);
-            
-            if(damage < 0){
-                System.out.println("Miss!");
-            }
-            else {
-                
-                int beforeHealth = opp.getStats().currentHealth;
-                opp.defend(damage);
-                int afterHealth = opp.getStats().currentHealth;
-                
-                if(beforeHealth == afterHealth){
-                    System.out.println("Armor nullifes.");
-                }
-                else {
-                    int shave = beforeHealth - afterHealth;
-                    System.out.println("Hit for " + shave + "!");
-                }
-            }
-            System.out.println(opp);
-            System.out.print("\n\n");
+            player.combatDialog(damage);
+            System.out.println();
 
         }//end while
     }//end main

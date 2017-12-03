@@ -46,22 +46,40 @@ public class Entity implements EntityADT{
         int baseAcc = this.stats.initiative;
         int modifiedRoll = attackRoll + baseAcc ; 
         
+        int totalDamage = -1;
         
-        if(modifiedRoll < enemy.stats.evasion){
-            return -1; //designates miss
-        }
-        else{
+        if(modifiedRoll >= enemy.stats.evasion){
             int randAtt = rng.nextInt(20) + 1;
-            return this.stats.physAtt + randAtt;
+            int damageValue = this.stats.physAtt + randAtt;
+            totalDamage = enemy.defend(damageValue);
         }
+        
+        return totalDamage;
     }//end attack
     
-    
-    public void defend(int damageValue) {
+    public int defend(int damageValue) {
         int modifiedDamage = damageValue - this.stats.physDef;
         
         if(modifiedDamage > 0){
             this.stats.setCurrentHealth(this.stats.currentHealth - modifiedDamage);
+        }
+        else {
+            modifiedDamage = 0;
+        }
+        return modifiedDamage;
+    }
+    
+    //dialog methods
+    public void combatDialog(int damageValue){
+        if (damageValue < 0) {
+            System.out.println(name + "'s attack fails to connect. Miss!");
+        }
+        else if (damageValue == 0){
+            System.out.println(name + "'s attack glances off, dealing " + damageValue
+                             + " damage.");
+        }
+        else {
+            System.out.println(name + "'s attack deals " + damageValue + " damage.");
         }
     }
     
