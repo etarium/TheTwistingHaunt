@@ -23,13 +23,23 @@ public class Encounter implements EncounterADT {
     }
 
     public void RunCombat() {
-        boolean valid = runQueue(); //initial enqueue
+        boolean valid = runQueue(); //initial enqueue, never runs combat if failed
         while (valid) {
-
+            System.out.print("I got this far!");
         }
     }
 
     private boolean runQueue() {
-        return true;
+        boolean teamCheck = false; //boolean to check team compositions
+        int firstTeam = entities.lastKey();
+        Entity temp;
+        while(!entities.isEmpty()){
+            temp = entities.lastEntry().getValue();
+            entities.remove(entities.lastKey());
+            System.out.print(temp.getName());
+            if(temp.getTeamId() != firstTeam && teamCheck == false)
+                teamCheck = true;
+        }
+        return teamCheck; //returns boolean representing validity of fight
     }
 }
