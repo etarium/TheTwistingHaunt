@@ -10,8 +10,8 @@
  */
 public class Player extends Entity{
     
-    public Player(StatBlock stats, String name) {
-        super(stats, name);
+    public Player(StatBlock stats, String name, int teamId) {
+        super(stats, name, teamId);
     }
     
     
