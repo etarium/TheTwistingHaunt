@@ -10,13 +10,15 @@ public class Entity implements EntityADT{
     
     private StatBlock stats;
     private String name;
+    private int teamId; //id of entity's team
     //private ArrayList<Item> itemList;
     //private ArrayList<SpecialAttack> specAttList;
     
     
-    public Entity(StatBlock stats, String name){
+    public Entity(StatBlock stats, String name, int teamId){
         this.stats = stats;
         this.name = name;
+        this.teamId = teamId;
     }
 
     //getters and setters
@@ -35,6 +37,15 @@ public class Entity implements EntityADT{
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
+    }
+    
     
     
     
