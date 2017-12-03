@@ -9,7 +9,7 @@ Current Goals:
 
 -(WIP)Implement consumable item objects to be used by entities capable of using them
 
--(NOT STARTED)Implement an Player subclass of entity, implementing a unique PlayerADT
+-(WIP)Implement an Player subclass of entity, implementing a unique PlayerADT
 
 -(NOT STARTED)Implement "special attack" objects to be contained in a list inside entity
 
