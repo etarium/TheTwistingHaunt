@@ -17,20 +17,23 @@ public class Encounter implements EncounterADT {
     }
 
     public Encounter(ArrayList<Entity> combatants) {
-        for(int i = 0; i > combatants.size(); i++){ //populate tree sorted by initiative
-            entities.put(combatants.get(i).getStats().getInitiative(), combatants.get(i));
+        //populate tree sorted by initiative
+        for(Entity temp : combatants){
+            entities.put(temp.getStats().getInitiative(), temp);
         }
+        System.out.println(entities);
     }
 
     public void RunCombat() {
         boolean valid = runQueue(); //initial enqueue, never runs combat if failed
-        while (valid) {
+        if (valid) {
             System.out.print("I got this far!");
         }
     }
 
     private boolean runQueue() {
         boolean teamCheck = false; //boolean to check team compositions
+        
         int firstTeam = entities.lastKey();
         Entity temp;
         while(!entities.isEmpty()){

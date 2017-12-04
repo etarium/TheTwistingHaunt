@@ -10,9 +10,11 @@ public class TestClient {
 
     public static void main(String[] args) {
         // currentHealth,  maxHealth,  physDef,  evasion,  physAtt,  initiative
-        StatBlock statBlock1 = new StatBlock(100, 100, 50, 60, 50, 10);
+        //initiative must currently be different
+        StatBlock statBlock1 = new StatBlock(100, 100, 50, 60, 50, 15);
         StatBlock statBlock2 = new StatBlock(100, 100, 50, 60, 50, 10);
 
+        //stats, team#
         Entity player = new Entity(statBlock1, "Player", 1);
         Entity opp = new Entity(statBlock2, "Helpless Cripple", 2);
         
