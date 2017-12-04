@@ -1,15 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
- * @author qn4795oh
+ * @author Jason Richter, Samuel Fiscus
  */
 public class SingleTargetItem extends Item{
 
+    @Override
+    public void use(Entity[] targetList) {
+        targetList[0].
+    }
+
+    
+    /*
     @Override
     public void singleTarget(Entity x) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -24,7 +26,7 @@ public class SingleTargetItem extends Item{
     public void omniTarget(Encounter enc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    */
     /*
     private void targettingHP(Entity x){
         int currentHP = x.getStats().getCurrentHealth();
