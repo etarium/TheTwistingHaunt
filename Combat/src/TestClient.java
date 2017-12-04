@@ -18,7 +18,7 @@ public class TestClient {
         StatBlock statBlock5 = new StatBlock(0, 100, 50, 60, 50, 30);
 
         //stats, team#
-        Entity player = new Entity(statBlock1, "Player", 2);
+        Entity player = new Entity(statBlock1, "Player", 1);
         Entity opp1 = new Entity(statBlock2, "Helpless Cripple1", 2);
         Entity opp2 = new Entity(statBlock3, "Helpless Cripple2", 2);
         Entity opp3 = new Entity(statBlock4, "Helpless Cripple3", 2);
@@ -31,7 +31,7 @@ public class TestClient {
         fighters.add(opp3);
         fighters.add(opp4);
         Encounter fight1 = new Encounter(fighters);
-        fight1.RunCombat();
+        fight1.runCombat();
         /*
         while ( opp.getStats().isAlive() ) {
             int damage = player.attack(opp);

@@ -1,7 +1,6 @@
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.PriorityQueue;
 import java.util.TreeMap;
 
 /**
@@ -9,69 +8,69 @@ import java.util.TreeMap;
  */
 public class Encounter implements EncounterADT {
 
-    private TreeMap<Integer, Entity> rekt = new TreeMap<>();
-    private PriorityQueue<Entity> turn = new PriorityQueue<>();
+    private ArrayList<Entity> rekt;
+    private ArrayList<Entity> combatants;
     
-    private TreeMap<Integer, Entity> entities = new TreeMap<>();
+    private TreeMap<Integer, Entity> combQueue = new TreeMap<>();
 
+    
+    //constructors
     public Encounter() {
     }
 
     public Encounter(ArrayList<Entity> combatants) {
-        //populate tree sorted by initiative
-        for(Entity temp : combatants){
-            entities.put(temp.getStats().getInitiative(), temp);
-        }
-        //System.out.println(entities); //test print
+        
+        this.rekt = new ArrayList<>();
+        this.combatants = combatants;
     }
 
-    public void RunCombat() {
+    //Encounter methods
+    public void runCombat() {
         boolean valid = runQueue(); //initial enqueue, never runs combat if failed
-        if (valid) {
-            System.out.println("I got this far!");
+        if (valid) {            
+            //populate tree sorted by initiative
+            for(Entity temp : combatants){
+                combQueue.put(0 - temp.getStats().getInitiative(), temp);
+            }
             
             //test print
-            for(Map.Entry<Integer,Entity> entry: entities.entrySet()){
+            for(Map.Entry<Integer,Entity> entry: combQueue.entrySet()){
                 System.out.println(entry.getValue());
             }
             
-            System.out.println("Defeated:");
-            for(Map.Entry<Integer,Entity> entry : rekt.entrySet()){
-                System.out.println("\t" + entry.getValue().getName());
+            System.out.println("\n\nDefeated:");
+            for(Entity dead : rekt){
+                System.out.println("\t" + dead.getName());
             }
         }
         else {
             System.out.println("No conflict here.");
-            
-            
         }
-        
-        //all entries currently removed from entities
-    }
+       
+    }//end RunCombat()
 
     private boolean runQueue() {
         boolean teamCheck = false; //boolean to check team compositions
         
-        int firstTeam = entities.lastEntry().getValue().getTeamId();
-        Entity temp;
-        
-        for(Map.Entry<Integer,Entity> entry: entities.entrySet()){
-            temp = entry.getValue();
-            if(temp.getStats().isAlive()){
-                //System.out.println(temp.getName());
-                if(temp.getTeamId() != firstTeam && teamCheck == false)
-                    teamCheck = true;
+        if (!combatants.isEmpty()) {
+            int firstTeam = combatants.get(0).getTeamId();
+            
+
+            for (Entity temp : combatants) {
+                if (temp.getStats().isAlive()) {
+                    if (temp.getTeamId() != firstTeam && teamCheck == false) {
+                        teamCheck = true;
+                    }
+                } else { //can remove Entity from combat and add to rekt
+                    rekt.add(temp);
+                }
             }
-            else{ //can remove Entity from combat and add to rekt
-                rekt.put(entry.getKey(), entry.getValue());
-            } 
-        }
-        for(Map.Entry<Integer,Entity> entry: rekt.entrySet()){
-            int key = entry.getKey();
-            if (entities.containsKey(key) ){
-                entities.remove(key);
+            for (Entity dead : rekt) {
+                if (combatants.contains(dead)) {
+                    combatants.remove(dead);
+                }
             }
         }
         return teamCheck; //returns boolean representing validity of fight
-    }
+    }//end runQueue()
 }

@@ -97,7 +97,7 @@ public class Entity implements EntityADT{
     @Override
     public String toString(){
         return String.format("%s%n"
-                           + "Health: %s --- %3.0f%%",
+                           + "\tHealth: %s --- %3.0f%%",
                             name, stats.currentHealth, 
                             stats.healthPercentage() * 100);
     }
