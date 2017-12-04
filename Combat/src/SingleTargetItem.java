@@ -1,15 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
- * @author qn4795oh
+ * @author Jason Richter, Samuel Fiscus
  */
 public class SingleTargetItem extends Item{
 
+    @Override
+    public void useHP(Entity[] targetList) {
+        int currentHP = targetList[0].getStats().getCurrentHealth();
+        int maxHP = targetList[0].getStats().getMaxHealth();
+        
+        int newHP = currentHP + potency;
+        
+        //if newHP greater than maxHP, target at full health
+        //otherwise, newHP replaces old value
+        int val = (maxHP > newHP) ? newHP:maxHP;
+        
+        targetList[0].getStats().setCurrentHealth(val);
+    }
+
+    
+    /*
     @Override
     public void singleTarget(Entity x) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -24,20 +35,6 @@ public class SingleTargetItem extends Item{
     public void omniTarget(Encounter enc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    /*
-    private void targettingHP(Entity x){
-        int currentHP = x.getStats().getCurrentHealth();
-        int maxHP = x.getStats().getMaxHealth();
-        
-        int newHP = currentHP + potency;
-        
-        //if newHP greater than maxHP, target at full health
-        //otherwise, newHP replaces old value
-        int val = (maxHP > newHP) ? newHP:maxHP;
-        
-        x.getStats().setCurrentHealth(val);
-    }
-*/
+    */
     
 }//end SingleTargetItem
