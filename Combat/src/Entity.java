@@ -5,6 +5,7 @@
  */
 
 import java.util.Random;
+import java.util.ArrayList;
 
 public class Entity implements EntityADT{
     
@@ -13,6 +14,8 @@ public class Entity implements EntityADT{
     private int teamId; //id of entity's team
     //private ArrayList<Item> itemList;
     //private ArrayList<SpecialAttack> specAttList;
+    
+    Random rng = new Random();
     
     
     public Entity(StatBlock stats, String name, int teamId){
@@ -51,7 +54,6 @@ public class Entity implements EntityADT{
     
     //class methods
     public int attack(Entity enemy){
-        Random rng = new Random();
         
         int attackRoll = rng.nextInt(100) + 1;
         int baseAcc = this.stats.initiative;
@@ -78,19 +80,46 @@ public class Entity implements EntityADT{
             modifiedDamage = 0;
         }
         return modifiedDamage;
+    }//end defend()
+    
+    public ArrayList<Entity> getTargetList(ArrayList<Entity> list){
+        ArrayList<Entity> targetList = new ArrayList<>();
+        for(Entity targ : list){
+            //target must be an enemy and alive
+            if (targ.getTeamId() != this.getTeamId() && targ.getStats().isAlive() ){
+                targetList.add(targ);
+            }
+        }
+        
+        return targetList;
+    }
+        
+    public Entity chooseTarget(ArrayList<Entity> targetList){
+        int size = targetList.size();
+        Entity target = null;
+        
+        if(size > 0){
+            int selection = rng.nextInt(targetList.size());
+            target = targetList.get(selection);
+        }
+        return target;
     }
     
     //dialog methods
-    public void combatDialog(int damageValue){
-        if (damageValue < 0) {
+    public void combatDialog(int damageValue, Entity target){
+        
+       String targName = target.name; 
+        
+       if (damageValue < 0) {
             System.out.println(name + "'s attack fails to connect. Miss!");
         }
         else if (damageValue == 0){
             System.out.println(name + "'s attack glances off, dealing " + damageValue
-                             + " damage.");
+                             + " damage to " + targName + ".");
         }
         else {
-            System.out.println(name + "'s attack deals " + damageValue + " damage.");
+            System.out.println(name + "'s attack deals " + damageValue 
+                             + " damage to " + targName + ".");
         }
     }
     

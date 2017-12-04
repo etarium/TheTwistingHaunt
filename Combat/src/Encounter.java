@@ -33,17 +33,38 @@ public class Encounter implements EncounterADT {
                 combQueue.put(0 - temp.getStats().getInitiative(), temp);
             }
             
+            /*
+            
             //test print
             for(Map.Entry<Integer,Entity> entry: combQueue.entrySet()){
                 System.out.println(entry.getValue());
             }
-            
             System.out.println("\n\nDefeated:");
             for(Entity dead : rekt){
                 System.out.println("\t" + dead.getName());
             }
+            
+            */
+            for(Map.Entry<Integer,Entity> entry : combQueue.entrySet()){
+                Entity actor = entry.getValue();
+                
+                if(actor.getStats().isAlive()){
+                    Entity target = actor.chooseTarget(actor.getTargetList(combatants));
+                    if(target != null){
+                        int dialog = actor.attack(target);
+                        actor.combatDialog(dialog, target);
+                    }
+                }
+            }//end for
+            System.out.println("\n");
+            runCombat();
+            
+            
         }
         else {
+            for(Entity victor : combatants){
+                System.out.println(victor);
+            }
             System.out.println("No conflict here.");
         }
        
