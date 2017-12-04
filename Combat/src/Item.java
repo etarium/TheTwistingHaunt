@@ -6,7 +6,7 @@
 public abstract class Item {
 
     //data members
-    private int potency;
+    protected int potency;
     private String name;
     private String description;
 
@@ -45,7 +45,7 @@ public abstract class Item {
     //what about for multitargeted ones? should we also have dialog here?
     //
     
-    public abstract void use(Entity[] targetList);
+    public abstract void useHP(Entity[] targetList);
     /*
     public abstract void singleTarget(Entity x);
     

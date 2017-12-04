@@ -3,11 +3,22 @@
  *
  * @author Jason Richter, Samuel Fiscus
  */
-public class MultiTargetItem extends Item{
+public class MultiTargetItem extends Item {
 
     @Override
-    public void use(Entity[] targetList) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void useHP(Entity[] targetList) {
+        for (int i = 0; i < targetList.length; i++) {
+            int currentHP = targetList[i].getStats().getCurrentHealth();
+            int maxHP = targetList[i].getStats().getMaxHealth();
+
+            int newHP = currentHP + potency;
+
+            //if newHP greater than maxHP, target at full health
+            //otherwise, newHP replaces old value
+            int val = (maxHP > newHP) ? newHP : maxHP;
+
+            targetList[i].getStats().setCurrentHealth(val);
+        }
     }
 
     /*
@@ -25,6 +36,5 @@ public class MultiTargetItem extends Item{
     public void omniTarget(Encounter enc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    */
-    
+     */
 }
