@@ -3,9 +3,9 @@ Codenamed The Twisting Haunt based off of the RPG concept we had, this project s
 
 Current Goals:
 
--(WIP)Implement a battlesim where all entities are controlled by a player or players for testing the structure
+-(Completed)Implement a battlesim where all entities are controlled by a player or players for testing the structure
 
--(WIP)Implement a basic client to test the classes
+-(Completed)Implement a basic client to test the classes
 
 -(WIP)Implement consumable item objects to be used by entities capable of using them
 
