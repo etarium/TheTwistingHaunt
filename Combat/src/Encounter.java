@@ -9,7 +9,7 @@ import java.util.TreeMap;
  */
 public class Encounter implements EncounterADT {
 
-    private ArrayList<Entity> rekt = new ArrayList<>();
+    private TreeMap<Integer, Entity> rekt = new TreeMap<>();
     private PriorityQueue<Entity> turn = new PriorityQueue<>();
     
     private TreeMap<Integer, Entity> entities = new TreeMap<>();
@@ -35,8 +35,9 @@ public class Encounter implements EncounterADT {
                 System.out.println(entry.getValue());
             }
             
-            for(Entity ent : rekt){
-                
+            System.out.println("Defeated:");
+            for(Map.Entry<Integer,Entity> entry : rekt.entrySet()){
+                System.out.println("\t" + entry.getValue().getName());
             }
         }
         else {
@@ -53,7 +54,7 @@ public class Encounter implements EncounterADT {
         
         int firstTeam = entities.lastEntry().getValue().getTeamId();
         Entity temp;
-        //while(!entities.isEmpty()){
+        
         for(Map.Entry<Integer,Entity> entry: entities.entrySet()){
             temp = entry.getValue();
             if(temp.getStats().isAlive()){
@@ -62,8 +63,13 @@ public class Encounter implements EncounterADT {
                     teamCheck = true;
             }
             else{ //can remove Entity from combat and add to rekt
-                entities.remove(entry.getKey());
-                rekt.add(temp);
+                rekt.put(entry.getKey(), entry.getValue());
+            } 
+        }
+        for(Map.Entry<Integer,Entity> entry: rekt.entrySet()){
+            int key = entry.getKey();
+            if (entities.containsKey(key) ){
+                entities.remove(key);
             }
         }
         return teamCheck; //returns boolean representing validity of fight
