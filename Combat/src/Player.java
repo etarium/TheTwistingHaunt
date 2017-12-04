@@ -17,5 +17,25 @@ public class Player extends Entity{
     
     
     
+    public void displayMenu(){
+        
+        String menu = "Select choice for " + getName() + ":\n"
+                    + "&----------------------------&\n"
+                    + "| 1 --- Attack               |\n"
+                    + "| 2 --- Special Attack       |\n"
+                    + "| 3 --- Use Item             |\n"
+                    + "&----------------------------&\n\n"
+                    + "Make your selection: \n"
+                    + ">";
+        System.out.print(menu);
+    }
+    
+    public void attackEntity(){
+        
+    }
+    
+    
+    
+    
     
 }

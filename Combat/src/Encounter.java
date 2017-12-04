@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.TreeMap;
 
@@ -28,12 +29,22 @@ public class Encounter implements EncounterADT {
         boolean valid = runQueue(); //initial enqueue, never runs combat if failed
         if (valid) {
             System.out.println("I got this far!");
+            
+            //test print
+            for(Map.Entry<Integer,Entity> entry: entities.entrySet()){
+                System.out.println(entry.getValue());
+            }
+            
+            for(Entity ent : rekt){
+                
+            }
         }
         else {
             System.out.println("No conflict here.");
+            
+            
         }
         
-        System.out.println(entities);
         //all entries currently removed from entities
     }
 
@@ -41,14 +52,19 @@ public class Encounter implements EncounterADT {
         boolean teamCheck = false; //boolean to check team compositions
         
         int firstTeam = entities.lastEntry().getValue().getTeamId();
-        System.out.println(firstTeam);
         Entity temp;
-        while(!entities.isEmpty()){
-            temp = entities.lastEntry().getValue();
-            entities.remove(entities.lastKey());
-            System.out.println(temp.getName());
-            if(temp.getTeamId() != firstTeam && teamCheck == false)
-                teamCheck = true;
+        //while(!entities.isEmpty()){
+        for(Map.Entry<Integer,Entity> entry: entities.entrySet()){
+            temp = entry.getValue();
+            if(temp.getStats().isAlive()){
+                //System.out.println(temp.getName());
+                if(temp.getTeamId() != firstTeam && teamCheck == false)
+                    teamCheck = true;
+            }
+            else{ //can remove Entity from combat and add to rekt
+                entities.remove(entry.getKey());
+                rekt.add(temp);
+            }
         }
         return teamCheck; //returns boolean representing validity of fight
     }
