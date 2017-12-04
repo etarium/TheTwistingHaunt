@@ -27,12 +27,12 @@ public class Encounter implements EncounterADT {
     //Encounter methods
     public void runCombat() {
         boolean valid = runQueue(); //initial enqueue, never runs combat if failed
-        if (valid) {            
+        if (valid) {
             //populate tree sorted by initiative
-            for(Entity temp : combatants){
+            for (Entity temp : combatants) {
                 combQueue.put(0 - temp.getStats().getInitiative(), temp);
             }
-            
+
             /*
             
             //test print
@@ -44,30 +44,35 @@ public class Encounter implements EncounterADT {
                 System.out.println("\t" + dead.getName());
             }
             
-            */
-            for(Map.Entry<Integer,Entity> entry : combQueue.entrySet()){
+             */
+            for (Map.Entry<Integer, Entity> entry : combQueue.entrySet()) {
                 Entity actor = entry.getValue();
-                
-                if(actor.getStats().isAlive()){
-                    Entity target = actor.chooseTarget(actor.getTargetList(combatants));
-                    if(target != null){
-                        int dialog = actor.attack(target);
-                        actor.combatDialog(dialog, target);
+
+                if (actor.getStats().isAlive()) {
+
+                    if (actor instanceof Player) {
+                        ((Player) actor).attackEntity(combatants);
+
+                    } else {
+                        Entity target = actor.chooseTarget(actor.getTargetList(combatants));
+                        if (target != null) {
+                            int dialog = actor.attack(target);
+                            actor.combatDialog(dialog, target);
+                        }
                     }
                 }
             }//end for
+            combQueue.clear();
             System.out.println("\n");
             runCombat();
-            
-            
-        }
-        else {
-            for(Entity victor : combatants){
+
+        } else {
+            for (Entity victor : combatants) {
                 System.out.println(victor);
             }
             System.out.println("No conflict here.");
         }
-       
+
     }//end RunCombat()
 
     private boolean runQueue() {
