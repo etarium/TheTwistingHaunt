@@ -65,6 +65,8 @@ public class Player extends Entity{
                     Usable item = selectUsable();
                     if(item != null){
                         item.useItem(enc.getCombatants());
+                        this.getItemList().remove(item);
+                        run = false;
                     }
                     break;
             }
