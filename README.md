@@ -7,19 +7,19 @@ Current Goals:
 
 -(Completed)Implement a basic client to test the classes
 
--(WIP)Implement consumable item objects to be used by entities capable of using them
+-(Completed)Implement consumable item objects to be used by entities capable of using them
+
+-(Completed)Implement "special attack" objects to be contained in a list inside entity
+
+-(Completed)Implement a "stupid" RNG ai to speed testing and enhance gameplay
+
+-(Completed)Implement equipable item list for entities to enhance stats ie. armor, weapons
+
 
 -(WIP)Implement an Player subclass of entity, implementing a unique PlayerADT
 
--(NOT STARTED)Implement "special attack" objects to be contained in a list inside entity
-
--(NOT STARTED)Implement InvalidTargetClassException for invalid Item uses so as not to "eat" turn.
-
--(NOT STARTED)Implement a "stupid" RNG ai to speed testing and enhance gameplay
 
 -(NOT STARTED)Implement other subclasses of Entity ie. creature, undead, humaniod, etc
-
--(NOT STARTED)Implement equipable item list for entities to enhance stats ie. armor, weapons
 
 -(NOT STARTED)Implement smarter ai specific to entity type and based off intelligence to give players a greater challenge
 
