@@ -84,7 +84,7 @@ public class Encounter implements EncounterADT {
         }
     } //end RunCombat()
 
-    private boolean runQueue() {
+    public boolean runQueue() {
         boolean teamCheck = false; //boolean to check team compositions
         
         if (!combatants.isEmpty()) {
