@@ -48,7 +48,7 @@ public class Player extends Entity{
             
             switch(selection){
                 case "1":   //attack
-                    Entity target = selectEntity(enc.getCombatants());
+                    Entity target = selectEntity(enc);
                     if(target != null){
                         this.attackEntity(target);
                         run = false;
@@ -60,7 +60,7 @@ public class Player extends Entity{
                             SpecAttack spec = selectSpecAttack();
                             if (spec != null) {
 
-                                if (spec.useSpecAttack(enc.getCombatants(), this)) {
+                                if (spec.useSpecAttack(enc, this)) {
                                     this.getStats().decrementSpecPoints();
                                     run = false;
                                 }
@@ -77,7 +77,7 @@ public class Player extends Entity{
                         Usable item = selectUsable();
                         if (item != null) {
 
-                            if (item.useItem(enc.getCombatants(), this)) {
+                            if (item.useItem(enc, this)) {
                                 this.getItemList().remove(item);
                                 run = false;
                             }
@@ -104,12 +104,13 @@ public class Player extends Entity{
         this.combatDialog(damage, target);
     }
     
-    public Entity selectEntity(ArrayList<Entity> list) {
+    public Entity selectEntity(Encounter enc) {
+        ArrayList<Entity> list = enc.getCombatants();
         while (true) {
             try {
                 
                 Entity target = null;
-                printCombatants(list);
+                printCombatants(enc);
                 System.out.print("Choose a combatant to select (or 0 to exit) :\n>");
                 int selection = console.nextInt() - 1; //account for indexing
                 
@@ -169,7 +170,8 @@ public class Player extends Entity{
         
     }
     
-    public ArrayList<Entity> selectTeam(ArrayList<Entity> list){
+    public ArrayList<Entity> selectTeam(Encounter enc){
+        ArrayList<Entity> list = enc.getCombatants();
         while(true){
             ArrayList<Entity> targetList = null;
             System.out.println
@@ -271,7 +273,10 @@ public class Player extends Entity{
         }
     }
     
-    public void printCombatants(ArrayList<Entity> list){
+    public void printCombatants(Encounter enc){
+        ArrayList<Entity> list = enc.getCombatants();
+
+        
         String output = 
                       "Combatants:\n"
                     + "-----------------\n";
@@ -324,5 +329,4 @@ public class Player extends Entity{
     
     
     
-    
-}
+}//end player

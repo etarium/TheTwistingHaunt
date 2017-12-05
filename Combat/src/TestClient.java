@@ -26,10 +26,10 @@ public class TestClient {
         Usable_SingleTarget_HP dart = new Usable_SingleTarget_HP(-25, "Throwing Dart");
         dart.setDescription("This throwing dart hits for  " + Math.abs(dart.getPotency()) + " HP");
         
-        Usable_MultiTarget_HP grenade = new Usable_MultiTarget_HP(-100, "Grenade");
+        Usable_MultiTarget_HP grenade = new Usable_MultiTarget_HP(-75, "Grenade");
         
         SpecAttack_SingleTarget_HP heal = new SpecAttack_SingleTarget_HP(75,"Heal");
-        SpecAttack_MultiTarget_HP fireball = new SpecAttack_MultiTarget_HP(-100, "Fireball");
+        SpecAttack_MultiTarget_HP fireball = new SpecAttack_MultiTarget_HP(-75, "Fireball");
         player.getSpecAttackList().add(heal);
         player.getSpecAttackList().add(fireball);
         

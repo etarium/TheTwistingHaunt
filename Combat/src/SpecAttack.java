@@ -1,15 +1,9 @@
 
 import java.util.ArrayList;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
- * @author qn4795oh
+ * @author Jason Richter, Samuel Fiscus
  */
 public abstract class SpecAttack {
     
@@ -56,9 +50,9 @@ public abstract class SpecAttack {
 
     //class methods
        
-    public boolean useSpecAttack(ArrayList<Entity> group, Player user){
+    public boolean useSpecAttack(Encounter enc, Player user){
         if(this instanceof SpecAttack_SingleTarget){
-            Entity target = user.selectEntity(group);
+            Entity target = user.selectEntity(enc);
             
             if(target != null){
                 singleTarget(target);
@@ -66,7 +60,7 @@ public abstract class SpecAttack {
             }
         }
         else if(this instanceof SpecAttack_MultiTarget){
-            ArrayList<Entity> targetList = user.selectTeam(group);
+            ArrayList<Entity> targetList = user.selectTeam(enc);
             
             if(targetList != null){
                 multiTarget(targetList);

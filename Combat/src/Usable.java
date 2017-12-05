@@ -50,9 +50,9 @@ public abstract class Usable {
 
     //class methods
        
-    public boolean useItem(ArrayList<Entity> group, Player user){
+    public boolean useItem(Encounter enc, Player user){
         if(this instanceof Usable_SingleTarget){
-            Entity target = user.selectEntity(group);
+            Entity target = user.selectEntity(enc);
             
             if(target != null){
                 singleTarget(target);
@@ -60,7 +60,7 @@ public abstract class Usable {
             }
         }
         else if(this instanceof Usable_MultiTarget){
-            ArrayList<Entity> targetList = user.selectTeam(group);
+            ArrayList<Entity> targetList = user.selectTeam(enc);
             
             if(targetList != null){
                 multiTarget(targetList);
