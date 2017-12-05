@@ -47,7 +47,7 @@ public interface UsableADT {
      *          enc.getCombatants().size() &gt; 0
      * @ensure new_user.getItemList.size() = old_user.getItemList.size() -1
      */
-    public boolean useSpecAttack(Encounter enc, Player user);
+    public boolean useItem(Encounter enc, Player user);
     
     /**
      * Abstract method that targets an Entity and performs actions based off of subclass's code.
