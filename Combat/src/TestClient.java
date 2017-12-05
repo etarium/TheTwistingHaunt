@@ -1,7 +1,6 @@
 
 import java.util.ArrayList;
 
-
 /**
  *
  * @author Jason Richter, Samuel Fiscus
@@ -19,27 +18,25 @@ public class TestClient {
         Entity player = new Player(statBlock1, "Player", 1);
         Entity gob1 = new Entity(statBlock2, "Goblin1", 2);
         Entity gob2 = new Entity(statBlock3, "Goblin2", 2);
-        
-        Usable_SingleTarget_HP potion = new Usable_SingleTarget_HP(50,"Potion");
+
+        Usable_SingleTarget_HP potion = new Usable_SingleTarget_HP(50, "Potion");
         potion.setDescription("This potion heals " + Math.abs(potion.getPotency()) + " HP");
-        
+
         Usable_SingleTarget_HP dart = new Usable_SingleTarget_HP(-25, "Throwing Dart");
         dart.setDescription("This throwing dart hits for  " + Math.abs(dart.getPotency()) + " HP");
-        
+
         Usable_MultiTarget_HP grenade = new Usable_MultiTarget_HP(-75, "Grenade");
-        
-        SpecAttack_SingleTarget_HP heal = new SpecAttack_SingleTarget_HP(75,"Heal");
+
+        SpecAttack_SingleTarget_HP heal = new SpecAttack_SingleTarget_HP(75, "Heal");
         SpecAttack_MultiTarget_HP fireball = new SpecAttack_MultiTarget_HP(-75, "Fireball");
         player.getSpecAttackList().add(heal);
         player.getSpecAttackList().add(fireball);
-        
+
         Equipable_Weapon axe = new Equipable_Weapon(15, "Axe");
         Equipable_Armor shield = new Equipable_Armor(15, "Shield");
         player.setUsedWeapon(axe);
         player.setWornArmor(shield);
-                
-        
-        
+
         player.getItemList().add(potion);
         player.getItemList().add(potion);
         player.getItemList().add(dart);
@@ -48,10 +45,7 @@ public class TestClient {
         player.getItemList().add(dart);
         player.getItemList().add(grenade);
         player.getItemList().add(grenade);
-        
-        
-        
-        
+
         ArrayList<Entity> fighters1 = new ArrayList<>();
         fighters1.add(gob1);
         fighters1.add(player);
@@ -59,29 +53,22 @@ public class TestClient {
         Encounter fight1 = new Encounter(fighters1);
         boolean combat1Complete;
         fight1.runCombat();
-        
-        
-        
-            StatBlock statBlock4 = new StatBlock(100, 100, 1, 50, 60, 50, 10);
-            StatBlock statBlock5 = new StatBlock(100, 100, 1, 50, 60, 50, 11);
-            Entity gob3 = new Entity(statBlock4, "Goblin3", 2);
-            Entity gob4 = new Entity(statBlock5, "Goblin4", 2);
-            StatBlock statBlock6 = new StatBlock(400, 400, 1, 60, 30, 70, 7);
-            Entity ogre = new Entity(statBlock6, "Shrek", 3);
 
-            ArrayList<Entity> fighters2 = new ArrayList<>();
-            fighters2.clear();
-            fighters2.add(player);
-            fighters2.add(gob3);
-            fighters2.add(gob4);
-            fighters2.add(ogre);
-            Encounter fight2 = new Encounter(fighters2);
-            fight2.runCombat();
+        StatBlock statBlock4 = new StatBlock(100, 100, 1, 50, 60, 50, 10);
+        StatBlock statBlock5 = new StatBlock(100, 100, 1, 50, 60, 50, 11);
+        Entity gob3 = new Entity(statBlock4, "Goblin3", 2);
+        Entity gob4 = new Entity(statBlock5, "Goblin4", 2);
+        StatBlock statBlock6 = new StatBlock(400, 400, 1, 60, 30, 70, 7);
+        Entity ogre = new Entity(statBlock6, "Shrek", 3);
 
-        
-        
-        
-        
-        
+        ArrayList<Entity> fighters2 = new ArrayList<>();
+        fighters2.clear();
+        fighters2.add(player);
+        fighters2.add(gob3);
+        fighters2.add(gob4);
+        fighters2.add(ogre);
+        Encounter fight2 = new Encounter(fighters2);
+        fight2.runCombat();
+
     }//end main
 }//end class
