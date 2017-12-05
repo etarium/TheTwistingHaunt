@@ -3,8 +3,24 @@
  *
  * @author Jason Richter, Samuel Fiscus
  */
-public class MultiTargetUsable extends Usable {
 
+import java.util.ArrayList;
+
+public abstract class MultiTargetUsable extends Usable {
+
+    public MultiTargetUsable() {
+    }
+
+    public MultiTargetUsable(int potency, String name) {
+        super(potency, name);
+    }
+
+    public MultiTargetUsable(int potency, String name, String description) {
+        super(potency, name, description);
+    }
+
+    
+    
     /*
     @Override
     public void useHP(Entity[] targetList) {
@@ -30,9 +46,7 @@ public class MultiTargetUsable extends Usable {
     }
 
     @Override
-    public void multiTarget(Entity[] group) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public abstract void multiTarget(ArrayList<Entity> group);
 
     @Override
     public void omniTarget(Encounter enc) {

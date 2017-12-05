@@ -3,6 +3,9 @@
  *
  * @author Jason Richter, Samuel Fiscus
  */
+
+import java.util.ArrayList;
+
 public abstract class SingleTargetUsable extends Usable{
 
     public SingleTargetUsable() {
@@ -24,7 +27,7 @@ public abstract class SingleTargetUsable extends Usable{
     public abstract void singleTarget(Entity x);
 
     @Override
-    public void multiTarget(Entity[] group) {
+    public void multiTarget(ArrayList<Entity> group) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -13,7 +13,7 @@ public abstract class Usable {
     private String name;
     private String description;
     
-    private Player user = new Player();
+    //private Player user = new Player();
 
     //constructors
     public Usable() {
@@ -57,7 +57,7 @@ public abstract class Usable {
     
     //public abstract void useHP(Entity[] targetList);
     
-    public boolean useItem(ArrayList<Entity> group){
+    public boolean useItem(ArrayList<Entity> group, Player user){
         if(this instanceof SingleTargetUsable){
             Entity target = user.selectEntity(group);
             
@@ -66,11 +66,19 @@ public abstract class Usable {
                 return true;
             }
         }
+        else if(this instanceof MultiTargetUsable){
+            ArrayList<Entity> targetList = user.selectTeam(group);
+            
+            if(targetList != null){
+                multiTarget(targetList);
+                return true;
+            }
+        }
         return false;
     }
     public abstract void singleTarget(Entity x);
     
-    public abstract void multiTarget(Entity[] group);
+    public abstract void multiTarget(ArrayList<Entity> group);
     
     public abstract void omniTarget(Encounter enc);
      

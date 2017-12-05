@@ -66,12 +66,19 @@ public class Player extends Entity{
                     Usable item = selectUsable();
                     if(item != null){
                         
-                        if(item.useItem(enc.getCombatants())){
+                        if(item.useItem(enc.getCombatants(), this)){
                             this.getItemList().remove(item);
                             run = false;
                         }
                     }
                     break;
+                    
+                case "0":
+                    run = false;
+                    break;
+                    
+                default:
+                    System.out.println("Invalid input. Try again.");
             }
         
         }
@@ -147,6 +154,48 @@ public class Player extends Entity{
         
         
     }
+    
+    public ArrayList<Entity> selectTeam(ArrayList<Entity> list){
+        while(true){
+            ArrayList<Entity> targetList = null;
+            System.out.println
+                     ("&-----------------&\n"
+                    + "| 1 --- Allies    |\n"
+                    + "| 2 --- Enemies   |\n"
+                    + "&-----------------&\n"
+                    + "| 0 --- Back      |\n"
+                    + "&-----------------&");
+            System.out.print("Select who to use this on (or 0 to exit) :");
+            
+            String selection = console.next();
+            
+            switch(selection){
+                case "1":   //allies
+                    targetList = new ArrayList<>();
+                    for(Entity ally : list){
+                        if(ally.getTeamId() == this.getTeamId()){
+                            targetList.add(ally);
+                        }
+                    }
+                    return targetList;
+                case "2":
+                    targetList = new ArrayList<>();
+                    for(Entity enemy : list){
+                        if(enemy.getTeamId() != this.getTeamId()){
+                            targetList.add(enemy);
+                        }
+                    }
+                    return targetList;
+                    
+                case "0":
+                    return targetList;
+                    
+                default:
+                    System.out.println("Invalid input. Try again.");
+                        
+            }//end switch
+        }//end while
+    }//end selectTeam()
     
     public Usable selectUsable(){
         

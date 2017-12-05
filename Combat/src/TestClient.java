@@ -30,6 +30,8 @@ public class TestClient {
         SingleTargetUsable_HP dart = new SingleTargetUsable_HP(-25, "Throwing Dart");
         dart.setDescription("This potion hits for  " + Math.abs(dart.getPotency()) + " HP");
         
+        MultiTargetUsable_HP grenade = new MultiTargetUsable_HP(-75, "Grenade");
+        
         
         player.getItemList().add(potion);
         player.getItemList().add(potion);
@@ -37,6 +39,7 @@ public class TestClient {
         player.getItemList().add(potion);
         player.getItemList().add(potion);
         player.getItemList().add(dart);
+        player.getItemList().add(grenade);
         
         
         
