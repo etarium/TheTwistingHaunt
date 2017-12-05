@@ -3,12 +3,17 @@
  *
  * @author Jason Richter, Samuel Fiscus
  */
+
+import java.util.ArrayList;
+
 public abstract class Usable {
 
     //data members
     protected int potency;
     private String name;
     private String description;
+    
+    private Player user = new Player();
 
     //constructors
     public Usable() {
@@ -38,6 +43,11 @@ public abstract class Usable {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+
     //class methods
     //
     //still considering what to return
@@ -45,13 +55,18 @@ public abstract class Usable {
     //what about for multitargeted ones? should we also have dialog here?
     //
     
-    public abstract void useHP(Entity[] targetList);
-    /*
+    //public abstract void useHP(Entity[] targetList);
+    
+    public void useItem(ArrayList<Entity> group){
+        if(this instanceof SingleTargetUsable){
+            singleTarget(user.selectEntity(group));
+        }
+    }
     public abstract void singleTarget(Entity x);
     
     public abstract void multiTarget(Entity[] group);
     
     public abstract void omniTarget(Encounter enc);
-     */
+     
     
 }//end Item

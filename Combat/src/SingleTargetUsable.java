@@ -3,28 +3,25 @@
  *
  * @author Jason Richter, Samuel Fiscus
  */
-public class SingleTargetUsable extends Usable{
+public abstract class SingleTargetUsable extends Usable{
 
-    @Override
-    public void useHP(Entity[] targetList) {
-        int currentHP = targetList[0].getStats().getCurrentHealth();
-        int maxHP = targetList[0].getStats().getMaxHealth();
-        
-        int newHP = currentHP + potency;
-        
-        //if newHP greater than maxHP, target at full health
-        //otherwise, newHP replaces old value
-        int val = (maxHP > newHP) ? newHP:maxHP;
-        
-        targetList[0].getStats().setCurrentHealth(val);
+    public SingleTargetUsable() {
+    }
+
+    public SingleTargetUsable(int potency, String name) {
+        super(potency, name);
+    }
+
+    public SingleTargetUsable(int potency, String name, String description) {
+        super(potency, name, description);
     }
 
     
-    /*
+
+    
+    
     @Override
-    public void singleTarget(Entity x) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public abstract void singleTarget(Entity x);
 
     @Override
     public void multiTarget(Entity[] group) {
@@ -35,6 +32,6 @@ public class SingleTargetUsable extends Usable{
     public void omniTarget(Encounter enc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    */
+    
     
 }//end SingleTargetItem

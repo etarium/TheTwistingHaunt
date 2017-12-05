@@ -24,6 +24,14 @@ public class TestClient {
         Entity opp3 = new Entity(statBlock4, "Helpless Cripple3", 2);
         Entity opp4 = new Entity(statBlock5, "Helpless Cripple4", 1);
         
+        SingleTargetUsable_HP potion = new SingleTargetUsable_HP(50,"Potion");
+        potion.setDescription("This potion heals " + potion.getPotency() + " HP");
+        player.getItemList().add(potion);
+        player.getItemList().add(potion);
+        player.getItemList().add(potion);
+        player.getItemList().add(potion);
+        
+        
         ArrayList<Entity> fighters = new ArrayList<>();
         fighters.add(opp1);
         fighters.add(player);

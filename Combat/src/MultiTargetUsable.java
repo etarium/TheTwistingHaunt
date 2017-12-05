@@ -5,6 +5,7 @@
  */
 public class MultiTargetUsable extends Usable {
 
+    /*
     @Override
     public void useHP(Entity[] targetList) {
         for (int i = 0; i < targetList.length; i++) {
@@ -20,8 +21,9 @@ public class MultiTargetUsable extends Usable {
             targetList[i].getStats().setCurrentHealth(val);
         }
     }
+*/
 
-    /*
+    
     @Override
     public void singleTarget(Entity x) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -36,5 +38,5 @@ public class MultiTargetUsable extends Usable {
     public void omniTarget(Encounter enc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-     */
+     
 }

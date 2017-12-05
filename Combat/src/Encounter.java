@@ -23,6 +23,16 @@ public class Encounter implements EncounterADT {
         this.rekt = new ArrayList<>();
         this.combatants = combatants;
     }
+       
+
+    //getters
+    public ArrayList<Entity> getCombatants() {
+        return combatants;
+    }
+    public ArrayList<Entity> getRekt() {
+        return rekt;
+
+    } 
 
     //Encounter methods
     public void runCombat() {
@@ -37,21 +47,21 @@ public class Encounter implements EncounterADT {
             
             //test print
             for(Map.Entry<Integer,Entity> entry: combQueue.entrySet()){
-                System.out.println(entry.getValue());
+            System.out.println(entry.getValue());
             }
             System.out.println("\n\nDefeated:");
             for(Entity dead : rekt){
-                System.out.println("\t" + dead.getName());
+            System.out.println("\t" + dead.getName());
             }
             
-             */
+            */
             for (Map.Entry<Integer, Entity> entry : combQueue.entrySet()) {
                 Entity actor = entry.getValue();
 
                 if (actor.getStats().isAlive()) {
 
                     if (actor instanceof Player) {
-                        ((Player) actor).attackEntity(combatants);
+                        ((Player) actor).playerRun(this);
 
                     } else {
                         Entity target = actor.chooseTarget(actor.getTargetList(combatants));
@@ -72,8 +82,7 @@ public class Encounter implements EncounterADT {
             }
             System.out.println("No conflict here.");
         }
-
-    }//end RunCombat()
+    } //end RunCombat()
 
     private boolean runQueue() {
         boolean teamCheck = false; //boolean to check team compositions
