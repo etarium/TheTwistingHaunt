@@ -5,7 +5,7 @@ import java.util.ArrayList;
  *
  * @author Jason Richter, Samuel Fiscus
  */
-public abstract class SpecAttack {
+public abstract class SpecAttack implements SpecAttackADT{
     
     
     //data members

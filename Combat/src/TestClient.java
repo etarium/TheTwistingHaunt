@@ -33,8 +33,8 @@ public class TestClient {
         player.getSpecAttackList().add(heal);
         player.getSpecAttackList().add(fireball);
         
-        Weapon axe = new Weapon(15, "Axe");
-        Armor shield = new Armor(15, "Shield");
+        Equipable_Weapon axe = new Equipable_Weapon(15, "Axe");
+        Equipable_Armor shield = new Equipable_Armor(15, "Shield");
         player.setUsedWeapon(axe);
         player.setWornArmor(shield);
                 

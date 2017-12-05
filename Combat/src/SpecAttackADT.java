@@ -34,22 +34,28 @@ public interface SpecAttackADT {
     public void setDescription(String description);
     
     /**
-     * 
-     * @param group
-     * @param user
-     * @return 
+     * Overarching special attack use method. Uses abstract methods in order to polymorphically carry out special attack code.
+     * @param enc Encounter that passed player inhabits.
+     * @param user Player who is using this special attack.
+     * @return Boolean value representing whether or not special attack was used.
+     * @require user.getSpecAttackList.size() &gt; 0 &amp;&amp;
+     *          user.getStats().isAlive() &amp;&amp;
+     *          enc.getCombatants().size() &gt; 0
+     * @ensure user.getStats().decrementSpecPoints()
      */
-    public boolean useSpecAttack(ArrayList<Entity> group, Player user);
+    public boolean useSpecAttack(Encounter enc, Player user);
     
     /**
-     * 
-     * @param target 
+     * Abstract method that targets an Entity and performs actions based off of subclass's code.
+     * @param target Entity to be the target of special attack.
+     * @require target != null
      */
     public abstract void singleTarget(Entity target);
     
     /**
-     * 
-     * @param group 
+     * Abstract method that targets Entities and performs actions based off of subclass's code.
+     * @param group ArrayList&lt;Entity&gt; to be the target of special attack.
+     * @require group != null &amp;&amp; group.size() &gt; 0
      */
     public abstract void multiTarget(ArrayList<Entity> group);
     

@@ -15,8 +15,8 @@ public class Entity implements EntityADT{
     private ArrayList<Usable> itemList;
     private ArrayList<SpecAttack> specAttackList;
     
-    private Armor wornArmor;
-    private Weapon usedWeapon;
+    private Equipable_Armor wornArmor;
+    private Equipable_Weapon usedWeapon;
     
     Random rng = new Random();
     
@@ -74,19 +74,19 @@ public class Entity implements EntityADT{
         this.teamId = teamId;
     }
 
-    public Armor getWornArmor() {
+    public Equipable_Armor getWornArmor() {
         return wornArmor;
     }
 
-    public void setWornArmor(Armor wornArmor) {
+    public void setWornArmor(Equipable_Armor wornArmor) {
         this.wornArmor = wornArmor;
     }
 
-    public Weapon getUsedWeapon() {
+    public Equipable_Weapon getUsedWeapon() {
         return usedWeapon;
     }
 
-    public void setUsedWeapon(Weapon usedWeapon) {
+    public void setUsedWeapon(Equipable_Weapon usedWeapon) {
         this.usedWeapon = usedWeapon;
     }
     
