@@ -1,13 +1,19 @@
 
-/**
- *
- * @author Jason Richter, Samuel Fiscus
- */
-
 import java.util.ArrayList;
 
-public abstract class Usable {
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
+/**
+ *
+ * @author qn4795oh
+ */
+public abstract class SpecAttack {
+    
+    
     //data members
     protected int potency;
     private String name;
@@ -16,15 +22,15 @@ public abstract class Usable {
     //private Player user = new Player();
 
     //constructors
-    public Usable() {
+    public SpecAttack() {
     }
     
-    public Usable(int potency, String name) {
+    public SpecAttack(int potency, String name) {
         this.potency = potency;
         this.name = name;
     }
 
-    public Usable(int potency, String name, String description) {
+    public SpecAttack(int potency, String name, String description) {
         this.potency = potency;
         this.name = name;
         this.description = description;
@@ -50,8 +56,8 @@ public abstract class Usable {
 
     //class methods
        
-    public boolean useItem(ArrayList<Entity> group, Player user){
-        if(this instanceof Usable_SingleTarget){
+    public boolean useSpecAttack(ArrayList<Entity> group, Player user){
+        if(this instanceof SpecAttack_SingleTarget){
             Entity target = user.selectEntity(group);
             
             if(target != null){
@@ -59,7 +65,7 @@ public abstract class Usable {
                 return true;
             }
         }
-        else if(this instanceof Usable_MultiTarget){
+        else if(this instanceof SpecAttack_MultiTarget){
             ArrayList<Entity> targetList = user.selectTeam(group);
             
             if(targetList != null){
@@ -73,6 +79,6 @@ public abstract class Usable {
     
     public abstract void singleTarget(Entity target);
     
-    public abstract void multiTarget(ArrayList<Entity> group);     
+    public abstract void multiTarget(ArrayList<Entity> group);   
     
-}//end Item
+}

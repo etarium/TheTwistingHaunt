@@ -8,16 +8,16 @@
  *
  * @author qn4795oh
  */
-public class SingleTargetUsable_HP extends SingleTargetUsable{
+public class Usable_SingleTarget_HP extends Usable_SingleTarget{
 
-    public SingleTargetUsable_HP() {
+    public Usable_SingleTarget_HP() {
     }
 
-    public SingleTargetUsable_HP(int potency, String name) {
+    public Usable_SingleTarget_HP(int potency, String name) {
         super(potency, name);
     }
 
-    public SingleTargetUsable_HP(int potency, String name, String description) {
+    public Usable_SingleTarget_HP(int potency, String name, String description) {
         super(potency, name, description);
     }
 

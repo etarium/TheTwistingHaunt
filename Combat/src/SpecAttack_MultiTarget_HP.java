@@ -11,21 +11,27 @@ import java.util.ArrayList;
  *
  * @author qn4795oh
  */
-public class MultiTargetUsable_HP extends MultiTargetUsable{
+public class SpecAttack_MultiTarget_HP extends SpecAttack_MultiTarget{
 
-    public MultiTargetUsable_HP() {
+    
+    //constructors
+    public SpecAttack_MultiTarget_HP() {
     }
 
-    public MultiTargetUsable_HP(int potency, String name) {
+    public SpecAttack_MultiTarget_HP(int potency, String name) {
         super(potency, name);
     }
 
-    public MultiTargetUsable_HP(int potency, String name, String description) {
+    public SpecAttack_MultiTarget_HP(int potency, String name, String description) {
         super(potency, name, description);
     }
+
     
+    //class methods
+
     @Override
     public void multiTarget(ArrayList<Entity> group) {
+        
         for (int i = 0; i < group.size(); i++) {
             int oldHP = group.get(i).getStats().getCurrentHealth();
             int maxHP = group.get(i).getStats().getMaxHealth();
@@ -40,7 +46,6 @@ public class MultiTargetUsable_HP extends MultiTargetUsable{
         }
         
     }
-    
     
     
 }

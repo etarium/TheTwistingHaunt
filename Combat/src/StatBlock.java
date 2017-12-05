@@ -15,11 +15,16 @@ public class StatBlock {
     
     protected int currentHealth;
     private int maxHealth;
+    
+    protected int specPoints;
+    
     protected int physDef;
-    protected int evasion;
-    //private int specDef;   //to be added later
     protected int physAtt;
+    
+    //private int specDef;   //to be added later
     //private int specAtt;   //to be added later
+    
+    protected int evasion;
     protected int initiative;
 
     
@@ -28,10 +33,11 @@ public class StatBlock {
     public StatBlock() {
     }
 
-    public StatBlock(int currentHealth, int maxHealth, int physDef, 
+    public StatBlock(int currentHealth, int maxHealth, int specPoints, int physDef, 
                         int evasion, int physAtt, int initiative) {
         this.currentHealth = currentHealth;
         this.maxHealth = maxHealth;
+        this.specPoints = specPoints;
         this.physDef = physDef;
         this.evasion = evasion;
         this.physAtt = physAtt;
@@ -52,6 +58,16 @@ public class StatBlock {
     public int getMaxHealth() {
         return maxHealth;
     }
+
+    public int getSpecPoints() {
+        return specPoints;
+    }
+
+    public void setSpecPoints(int specialPoints) {
+        this.specPoints = specialPoints;
+    }
+    
+    
 
     public void setMaxHealth(int maxHealth) {
         this.maxHealth = maxHealth;
@@ -97,6 +113,10 @@ public class StatBlock {
     
     public boolean isAlive() {
         return currentHealth > 0;
+    }
+    
+    public void decrementSpecPoints(){
+        this.setSpecPoints(specPoints - 1);
     }
     
 }

@@ -13,7 +13,7 @@ public class Entity implements EntityADT{
     private String name;
     private int teamId; //id of entity's team
     private ArrayList<Usable> itemList;
-    //private ArrayList<SpecialAttack> specAttList;
+    private ArrayList<SpecAttack> specAttackList;
     
     private Armor wornArmor;
     private Weapon usedWeapon;
@@ -27,6 +27,7 @@ public class Entity implements EntityADT{
         this.name = name;
         this.teamId = teamId;
         this.itemList = new ArrayList<>();
+        this.specAttackList = new ArrayList<>();
     }
     
 
@@ -54,6 +55,16 @@ public class Entity implements EntityADT{
     public void setItemList(ArrayList<Usable> itemList) {
         this.itemList = itemList;
     }
+
+    public ArrayList<SpecAttack> getSpecAttackList() {
+        return specAttackList;
+    }
+
+    public void setSpecAttackList(ArrayList<SpecAttack> specAttackList) {
+        this.specAttackList = specAttackList;
+    }
+    
+    
 
     public int getTeamId() {
         return teamId;

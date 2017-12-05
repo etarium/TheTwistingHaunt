@@ -55,17 +55,36 @@ public class Player extends Entity{
                     }
                     break;
                 case "2":   //special attacks
-                    
+                    if (this.getStats().getSpecPoints() > 0) {
+                        if (!this.getSpecAttackList().isEmpty()) {
+                            SpecAttack spec = selectSpecAttack();
+                            if (spec != null) {
+
+                                if (spec.useSpecAttack(enc.getCombatants(), this)) {
+                                    this.getStats().decrementSpecPoints();
+                                    run = false;
+                                }
+                            }
+                        }
+                        else
+                            System.out.println("No special attacks.");
+                    }
+                    else 
+                        System.out.println("No Special Attack Points left!");
                     break;
                 case "3":   //items
-                    Usable item = selectUsable();
-                    if(item != null){
-                        
-                        if(item.useItem(enc.getCombatants(), this)){
-                            this.getItemList().remove(item);
-                            run = false;
+                    if (!this.getItemList().isEmpty()) {
+                        Usable item = selectUsable();
+                        if (item != null) {
+
+                            if (item.useItem(enc.getCombatants(), this)) {
+                                this.getItemList().remove(item);
+                                run = false;
+                            }
                         }
                     }
+                    else
+                        System.out.println("No items.");
                     break;
                     
                 case "0":
@@ -222,6 +241,36 @@ public class Player extends Entity{
         }
     }
     
+    public SpecAttack selectSpecAttack(){
+        
+        SpecAttack spec = null;
+        
+        if(this.getItemList().isEmpty()){
+            return spec;
+        }
+        
+        while(true){
+            try{
+                printSpecAttacks();
+                System.out.print("Select a special attack to use (or 0 to exit) :\n"
+                               + ">");
+                int selection = console.nextInt() -1;
+                
+                if(selection == -1){
+                    return spec;
+                }
+                
+                spec = this.getSpecAttackList().get(selection);
+                return spec;
+                
+                
+            }catch(Exception e){
+                System.out.println("Invalid input. Try again.");
+                console.next();
+            }
+        }
+    }
+    
     public void printCombatants(ArrayList<Entity> list){
         String output = 
                       "Combatants:\n"
@@ -247,6 +296,23 @@ public class Player extends Entity{
             
             for(int i = 0; i < this.getItemList().size(); i++){
                 Usable temp = this.getItemList().get(i);
+                output += "| " + (i+1) + " --- " + temp.getName();
+                output += "\n";
+            }
+            output += "-----------------\n";
+            
+            System.out.println(output);
+    }
+    
+    public void printSpecAttacks(){
+        String output = 
+                      
+                      "Special Attack Points left: " + this.getStats().getSpecPoints() + "\n"
+                    + this.getName() + "'s Special Attacks:\n"
+                    + "-----------------\n";
+            
+            for(int i = 0; i < this.getSpecAttackList().size(); i++){
+                SpecAttack temp = this.getSpecAttackList().get(i);
                 output += "| " + (i+1) + " --- " + temp.getName();
                 output += "\n";
             }
