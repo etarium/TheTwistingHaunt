@@ -6,13 +6,27 @@ public class SpecAttack_SingleTarget_HP extends SpecAttack_SingleTarget{
 
     
     //constructors
+    /**
+     * Empty constructor for SpecAttack_SingleTarget_HP item.
+     */
     public SpecAttack_SingleTarget_HP() {
     }
 
+    /**
+     * Partial constructor for SpecAttack_SingleTarget_HP item.
+     * @param potency Integer representing potency of SpecAttack_SingleTarget_HP
+     * @param name String representing name of SpecAttack_SingleTarget_HP
+     */
     public SpecAttack_SingleTarget_HP(int potency, String name) {
         super(potency, name);
     }
 
+    /**
+     * Filled constructor for SpecAttack_SingleTarget_HP item.
+     * @param potency Integer representing potency of SpecAttack_SingleTarget_HP
+     * @param name String representing name of SpecAttack_SingleTarget_HP
+     * @param description String representing description of SpecAttack_SingleTarget_HP
+     */
     public SpecAttack_SingleTarget_HP(int potency, String name, String description) {
         super(potency, name, description);
     }

@@ -6,24 +6,36 @@
 
 import java.util.ArrayList;
 
-public abstract class Usable {
+public abstract class Usable implements UsableADT{
 
     //data members
     protected int potency;
     private String name;
     private String description;
     
-    //private Player user = new Player();
-
     //constructors
+    /**
+     * Empty constructor for Usable item.
+     */
     public Usable() {
     }
     
+    /**
+     * Partial constructor for Usable item.
+     * @param potency Integer representing potency of Usable
+     * @param name String representing name of Usable
+     */
     public Usable(int potency, String name) {
         this.potency = potency;
         this.name = name;
     }
 
+    /**
+     * Filled constructor for Usable item.
+     * @param potency Integer representing potency of Usable
+     * @param name String representing name of Usable
+     * @param description String representing description of Usable
+     */
     public Usable(int potency, String name, String description) {
         this.potency = potency;
         this.name = name;
@@ -31,18 +43,22 @@ public abstract class Usable {
     }
 
     //getters
+    @Override
     public int getPotency() {
         return potency;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
@@ -50,6 +66,7 @@ public abstract class Usable {
 
     //class methods
        
+    @Override
     public boolean useItem(Encounter enc, Player user){
         if(this instanceof Usable_SingleTarget){
             Entity target = user.selectEntity(enc);
@@ -71,8 +88,10 @@ public abstract class Usable {
     }
     
     
+    @Override
     public abstract void singleTarget(Entity target);
     
+    @Override
     public abstract void multiTarget(ArrayList<Entity> group);     
     
 }//end Item

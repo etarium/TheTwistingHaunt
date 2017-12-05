@@ -10,13 +10,28 @@
  */
 public class Usable_SingleTarget_HP extends Usable_SingleTarget{
 
+    //constructors
+    /**
+     * Empty constructor for Usable_SingleTarget_HP item.
+     */
     public Usable_SingleTarget_HP() {
     }
 
+    /**
+     * Partial constructor for Usable_SingleTarget_HP item.
+     * @param potency Integer representing potency of Usable_SingleTarget_HP
+     * @param name String representing name of Usable_SingleTarget_HP
+     */
     public Usable_SingleTarget_HP(int potency, String name) {
         super(potency, name);
     }
 
+    /**
+     * Filled constructor for Usable_SingleTarget_HP item.
+     * @param potency Integer representing potency of Usable_SingleTarget_HP
+     * @param name String representing name of Usable_SingleTarget_HP
+     * @param description String representing description of Usable_SingleTarget_HP
+     */
     public Usable_SingleTarget_HP(int potency, String name, String description) {
         super(potency, name, description);
     }

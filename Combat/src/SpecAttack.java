@@ -16,14 +16,28 @@ public abstract class SpecAttack implements SpecAttackADT{
     //private Player user = new Player();
 
     //constructors
+    /**
+     * Empty constructor for SpecAttack item.
+     */
     public SpecAttack() {
     }
     
+    /**
+     * Partial constructor for SpecAttack item.
+     * @param potency Integer representing potency of SpecAttack
+     * @param name String representing name of SpecAttack
+     */
     public SpecAttack(int potency, String name) {
         this.potency = potency;
         this.name = name;
     }
 
+    /**
+     * Filled constructor for SpecAttack item.
+     * @param potency Integer representing potency of SpecAttack
+     * @param name String representing name of SpecAttack
+     * @param description String representing description of SpecAttack
+     */
     public SpecAttack(int potency, String name, String description) {
         this.potency = potency;
         this.name = name;

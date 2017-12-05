@@ -9,13 +9,28 @@ import java.util.ArrayList;
 public abstract class Usable_MultiTarget extends Usable {
 
     //constructors
+    /**
+     * Empty constructor for Usable_MultiTarget item.
+     */
     public Usable_MultiTarget() {
     }
 
+    /**
+     * Partial constructor for Usable_MultiTarget item.
+     * @param potency Integer representing potency of Usable_MultiTarget
+     * @param name String representing name of Usable_MultiTarget
+     */
     public Usable_MultiTarget(int potency, String name) {
         super(potency, name);
     }
 
+    
+    /**
+     * Filled constructor for Usable_MultiTarget item.
+     * @param potency Integer representing potency of Usable_MultiTarget
+     * @param name String representing name of Usable_MultiTarget
+     * @param description String representing description of Usable_MultiTarget
+     */
     public Usable_MultiTarget(int potency, String name, String description) {
         super(potency, name, description);
     }

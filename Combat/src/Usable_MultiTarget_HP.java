@@ -15,13 +15,27 @@ public class Usable_MultiTarget_HP extends Usable_MultiTarget{
 
     
     //constructors
+    /**
+     * Empty constructor for Equipable item.
+     */
     public Usable_MultiTarget_HP() {
     }
 
+    /**
+     * Partial constructor for Usable_MultiTarget_HP item.
+     * @param potency Integer representing potency of Usable_MultiTarget_HP
+     * @param name String representing name of Usable_MultiTarget_HP
+     */
     public Usable_MultiTarget_HP(int potency, String name) {
         super(potency, name);
     }
 
+    /**
+     * Filled constructor for Usable_MultiTarget_HP item.
+     * @param potency Integer representing potency of Usable_MultiTarget_HP
+     * @param name String representing name of Usable_MultiTarget_HP
+     * @param description String representing description of Usable_MultiTarget_HP
+     */
     public Usable_MultiTarget_HP(int potency, String name, String description) {
         super(potency, name, description);
     }
