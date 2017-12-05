@@ -16,7 +16,7 @@ public interface EncounterADT {
      * This method should be automatically called by runCombat()
      * @return a boolean representing whether the combat turn is valid(at least 2 sides are present for combat)
      */
-    public boolean runQueue();
+    public boolean turnSetup();
     
     
     

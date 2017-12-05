@@ -36,25 +36,13 @@ public class Encounter implements EncounterADT {
 
     //Encounter methods
     public void runCombat() {
-        boolean valid = runQueue(); //initial enqueue, never runs combat if failed
+        boolean valid = turnSetup(); //initial enqueue, never runs combat if failed
         if (valid) {
             //populate tree sorted by initiative
             for (Entity temp : combatants) {
                 combQueue.put(0 - temp.getStats().getInitiative(), temp);
             }
 
-            /*
-            
-            //test print
-            for(Map.Entry<Integer,Entity> entry: combQueue.entrySet()){
-            System.out.println(entry.getValue());
-            }
-            System.out.println("\n\nDefeated:");
-            for(Entity dead : rekt){
-            System.out.println("\t" + dead.getName());
-            }
-            
-            */
             for (Map.Entry<Integer, Entity> entry : combQueue.entrySet()) {
                 Entity actor = entry.getValue();
 
@@ -84,7 +72,7 @@ public class Encounter implements EncounterADT {
         }
     } //end RunCombat()
 
-    public boolean runQueue() {
+    public boolean turnSetup() {
         boolean teamCheck = false; //boolean to check team compositions
         
         if (!combatants.isEmpty()) {

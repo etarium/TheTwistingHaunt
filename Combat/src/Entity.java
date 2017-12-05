@@ -95,7 +95,10 @@ public class Entity implements EntityADT{
         
         if(modifiedRoll >= enemy.stats.evasion){
             int randAtt = rng.nextInt(20) + 1;
-            int damageValue = this.stats.physAtt + randAtt + usedWeapon.getPotency();
+            int damageValue = this.stats.physAtt + randAtt;
+            if(this.getUsedWeapon() != null){
+                damageValue += usedWeapon.getPotency();
+            }
             totalDamage = enemy.defend(damageValue);
         }
         
@@ -103,7 +106,10 @@ public class Entity implements EntityADT{
     }//end attack
     
     public int defend(int damageValue) {
-        int modifiedDamage = damageValue - (this.stats.physDef + wornArmor.getPotency());
+        int modifiedDamage = damageValue - this.stats.physDef;
+        if(this.getWornArmor() != null){
+            modifiedDamage -= wornArmor.getPotency();
+        }
         
         if(modifiedDamage > 0){
             this.stats.setCurrentHealth(this.stats.currentHealth - modifiedDamage);
