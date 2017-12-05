@@ -25,11 +25,20 @@ public class TestClient {
         Entity opp4 = new Entity(statBlock5, "Helpless Cripple4", 1);
         
         SingleTargetUsable_HP potion = new SingleTargetUsable_HP(50,"Potion");
-        potion.setDescription("This potion heals " + potion.getPotency() + " HP");
+        potion.setDescription("This potion heals " + Math.abs(potion.getPotency()) + " HP");
+        
+        SingleTargetUsable_HP dart = new SingleTargetUsable_HP(-25, "Throwing Dart");
+        dart.setDescription("This potion hits for  " + Math.abs(dart.getPotency()) + " HP");
+        
+        
         player.getItemList().add(potion);
         player.getItemList().add(potion);
+        player.getItemList().add(dart);
         player.getItemList().add(potion);
         player.getItemList().add(potion);
+        player.getItemList().add(dart);
+        
+        
         
         
         ArrayList<Entity> fighters = new ArrayList<>();

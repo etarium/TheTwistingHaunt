@@ -30,7 +30,8 @@ public class Player extends Entity{
     //Player methods
     public void displayMenu(){
         
-        String menu = "Select choice for " + getName() + ":\n"
+        String menu = "You are at " + getStats().getCurrentHealth() + " HP...\n"
+                    + "Select choice for " + getName() + ":\n"
                     + "&----------------------------&\n"
                     + "| 1 --- Attack               |\n"
                     + "| 2 --- Special Attack       |\n"
