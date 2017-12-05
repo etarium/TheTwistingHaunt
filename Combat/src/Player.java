@@ -287,6 +287,7 @@ public class Player extends Entity{
                 if(temp.getTeamId() == this.getTeamId()){
                     output += "(friendly)";
                 }
+                output += " [" + temp.getStats().currentHealth+"/"+temp.getStats().getMaxHealth()+"]1";
                 output += "\n";
             }
             output += "-----------------\n";
