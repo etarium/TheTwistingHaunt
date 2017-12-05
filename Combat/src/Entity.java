@@ -15,6 +15,9 @@ public class Entity implements EntityADT{
     private ArrayList<Usable> itemList;
     //private ArrayList<SpecialAttack> specAttList;
     
+    private Armor wornArmor;
+    private Weapon usedWeapon;
+    
     Random rng = new Random();
     
     public Entity(){
@@ -25,6 +28,7 @@ public class Entity implements EntityADT{
         this.teamId = teamId;
         this.itemList = new ArrayList<>();
     }
+    
 
     //getters and setters
     public StatBlock getStats() {
@@ -58,6 +62,24 @@ public class Entity implements EntityADT{
     public void setTeamId(int teamId) {
         this.teamId = teamId;
     }
+
+    public Armor getWornArmor() {
+        return wornArmor;
+    }
+
+    public void setWornArmor(Armor wornArmor) {
+        this.wornArmor = wornArmor;
+    }
+
+    public Weapon getUsedWeapon() {
+        return usedWeapon;
+    }
+
+    public void setUsedWeapon(Weapon usedWeapon) {
+        this.usedWeapon = usedWeapon;
+    }
+    
+    
     
     
     
@@ -73,7 +95,7 @@ public class Entity implements EntityADT{
         
         if(modifiedRoll >= enemy.stats.evasion){
             int randAtt = rng.nextInt(20) + 1;
-            int damageValue = this.stats.physAtt + randAtt;
+            int damageValue = this.stats.physAtt + randAtt + usedWeapon.getPotency();
             totalDamage = enemy.defend(damageValue);
         }
         
@@ -81,7 +103,7 @@ public class Entity implements EntityADT{
     }//end attack
     
     public int defend(int damageValue) {
-        int modifiedDamage = damageValue - this.stats.physDef;
+        int modifiedDamage = damageValue - (this.stats.physDef + wornArmor.getPotency());
         
         if(modifiedDamage > 0){
             this.stats.setCurrentHealth(this.stats.currentHealth - modifiedDamage);
