@@ -65,9 +65,11 @@ public class Player extends Entity{
                 case "3":   //items
                     Usable item = selectUsable();
                     if(item != null){
-                        item.useItem(enc.getCombatants());
-                        this.getItemList().remove(item);
-                        run = false;
+                        
+                        if(item.useItem(enc.getCombatants())){
+                            this.getItemList().remove(item);
+                            run = false;
+                        }
                     }
                     break;
             }
@@ -82,14 +84,17 @@ public class Player extends Entity{
     }
     
     public Entity selectEntity(ArrayList<Entity> list) {
-        int selection = -1;
-        Entity target;
-
         while (true) {
             try {
+                
+                Entity target = null;
                 printCombatants(list);
-                System.out.print("Choose a combatant to select:\n>");
-                selection = console.nextInt() - 1; //account for indexing
+                System.out.print("Choose a combatant to select (or 0 to exit) :\n>");
+                int selection = console.nextInt() - 1; //account for indexing
+                
+                if(selection == -1){
+                    return target;
+                }
 
                 target = list.get(selection);
                 

@@ -57,10 +57,16 @@ public abstract class Usable {
     
     //public abstract void useHP(Entity[] targetList);
     
-    public void useItem(ArrayList<Entity> group){
+    public boolean useItem(ArrayList<Entity> group){
         if(this instanceof SingleTargetUsable){
-            singleTarget(user.selectEntity(group));
+            Entity target = user.selectEntity(group);
+            
+            if(target != null){
+                singleTarget(target);
+                return true;
+            }
         }
+        return false;
     }
     public abstract void singleTarget(Entity x);
     
