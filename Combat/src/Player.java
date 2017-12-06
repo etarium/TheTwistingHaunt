@@ -6,16 +6,25 @@
 
 import java.util.ArrayList;
 import java.util.Scanner;
-public class Player extends Entity{
+
+public class Player extends Entity implements PlayerADT{
     
     Scanner console = new Scanner(System.in);
     
     
     //constructor
-    
+    /**
+     * Empty constructor for Player
+     */
     public Player() {
     }
 
+    /**
+     * Filled constructor for Player
+     * @param stats StatBlock with core values that represent Player's attributes.
+     * @param name String representing Player's name
+     * @param teamId Integer representing Player's team
+     */
     public Player(StatBlock stats, String name, int teamId) {
         super(stats, name, teamId);
     }
@@ -23,8 +32,10 @@ public class Player extends Entity{
     
        
     //Player methods
+    @Override
     public void displayMenu(){
         
+        //outputs player's current health
         String menu = "You are at " + getStats().getCurrentHealth() + " HP...\n"
                     + "Select choice for " + getName() + ":\n"
                     + "&----------------------------&\n"
@@ -38,29 +49,38 @@ public class Player extends Entity{
                     + "Make your selection: \n"
                     + ">";
         System.out.print(menu);
-    }
+    }//end displayMenu()
     
+    @Override
     public void playerRun(Encounter enc){
+        
+        //becomes false on conditions where player's turn has concluded
         boolean run = true;
         while(run){
             displayMenu();
+            //menu-driven selection
             String selection = console.next();
             
             switch(selection){
                 case "1":   //attack
                     Entity target = selectEntity(enc);
+                    //may be null if exited
                     if(target != null){
-                        this.attackEntity(target);
+                        int damage = this.attack(target);
+                        this.combatDialog(damage, target);
                         run = false;
                     }
                     break;
                 case "2":   //special attacks
+                    //must have specPoints in order to use specAttacks
                     if (this.getStats().getSpecPoints() > 0) {
                         if (!this.getSpecAttackList().isEmpty()) {
                             SpecAttack spec = selectSpecAttack();
+                            //may be null if exited
                             if (spec != null) {
 
                                 if (spec.useSpecAttack(enc, this)) {
+                                    //specPoints--
                                     this.getStats().decrementSpecPoints();
                                     run = false;
                                 }
@@ -75,9 +95,11 @@ public class Player extends Entity{
                 case "3":   //items
                     if (!this.getItemList().isEmpty()) {
                         Usable item = selectUsable();
+                        //may be null if exited
                         if (item != null) {
 
                             if (item.useItem(enc, this)) {
+                                //item is consumed
                                 this.getItemList().remove(item);
                                 run = false;
                             }
@@ -87,7 +109,7 @@ public class Player extends Entity{
                         System.out.println("No items.");
                     break;
                     
-                case "0":
+                case "0":   //do nothing
                     run = false;
                     break;
                     
@@ -97,15 +119,12 @@ public class Player extends Entity{
         
         }
         
-    }
+    }//end playerRun()
     
-    public void attackEntity(Entity target){
-        int damage = this.attack(target);
-        this.combatDialog(damage, target);
-    }
-    
+    @Override
     public Entity selectEntity(Encounter enc) {
         ArrayList<Entity> list = enc.getCombatants();
+        //runs until some selection is made, even if null
         while (true) {
             try {
                 
@@ -114,12 +133,14 @@ public class Player extends Entity{
                 System.out.print("Choose a combatant to select (or 0 to exit) :\n>");
                 int selection = console.nextInt() - 1; //account for indexing
                 
+                //exit, return null
                 if(selection == -1){
                     return target;
                 }
 
                 target = list.get(selection);
                 
+                //target self?
                 if(target instanceof Player){
                     while(true){
                         System.out.print("Are you sure you want to choose yourself (Y or N)?\n"
@@ -137,7 +158,8 @@ public class Player extends Entity{
                             System.out.println("Invalid input.\n");
                         }
                     }//end loop
-                }
+                }//end self-targetting
+                //target ally?
                 else if (target.getTeamId() == this.getTeamId()) {        
                     while(true){
                         System.out.print("Are you sure you want to choose a friendly target (Y or N)?\n"
@@ -166,10 +188,9 @@ public class Player extends Entity{
                 console.next();
             }
         }//end while
-        
-        
-    }
+    }//end selectEntity()
     
+    @Override
     public ArrayList<Entity> selectTeam(Encounter enc){
         ArrayList<Entity> list = enc.getCombatants();
         while(true){
@@ -194,7 +215,7 @@ public class Player extends Entity{
                         }
                     }
                     return targetList;
-                case "2":
+                case "2":   //enemies
                     targetList = new ArrayList<>();
                     for(Entity enemy : list){
                         if(enemy.getTeamId() != this.getTeamId()){
@@ -203,7 +224,7 @@ public class Player extends Entity{
                     }
                     return targetList;
                     
-                case "0":
+                case "0":   //exit, return null
                     return targetList;
                     
                 default:
@@ -213,10 +234,12 @@ public class Player extends Entity{
         }//end while
     }//end selectTeam()
     
+    @Override
     public Usable selectUsable(){
         
         Usable item = null;
         
+        //return null if empty, same as exit
         if(this.getItemList().isEmpty()){
             return item;
         }
@@ -228,6 +251,7 @@ public class Player extends Entity{
                                + ">");
                 int selection = console.nextInt() -1;
                 
+                //exit, return null
                 if(selection == -1){
                     return item;
                 }
@@ -240,13 +264,15 @@ public class Player extends Entity{
                 System.out.println("Invalid input. Try again.");
                 console.next();
             }
-        }
-    }
+        }//end while
+    }//end selectUsable()
     
+    @Override
     public SpecAttack selectSpecAttack(){
         
         SpecAttack spec = null;
         
+        //return null if empty, same as exit
         if(this.getItemList().isEmpty()){
             return spec;
         }
@@ -258,6 +284,7 @@ public class Player extends Entity{
                                + ">");
                 int selection = console.nextInt() -1;
                 
+                //exit, return null
                 if(selection == -1){
                     return spec;
                 }
@@ -270,12 +297,12 @@ public class Player extends Entity{
                 System.out.println("Invalid input. Try again.");
                 console.next();
             }
-        }
-    }
+        }//end while
+    }//end selectSpecAttack()
     
+    @Override
     public void printCombatants(Encounter enc){
         ArrayList<Entity> list = enc.getCombatants();
-
         
         String output = 
                       "Combatants:\n"
@@ -284,17 +311,20 @@ public class Player extends Entity{
             for(int i = 0; i < list.size(); i++){
                 Entity temp = list.get(i);
                 output += "| " + (i+1) + " --- " + temp.getName();
+                //adds "(friendly)" to output if on the same team as Player
                 if(temp.getTeamId() == this.getTeamId()){
                     output += "(friendly)";
                 }
+                //tags on combatant's current health status
                 output += " [" + temp.getStats().currentHealth+"/"+temp.getStats().getMaxHealth()+"]";
                 output += "\n";
             }
             output += "-----------------\n";
             
             System.out.println(output);
-    }
+    }//end printCombatants()
     
+    @Override
     public void printUsables(){
         String output = 
                       this.getName() + "'s Items:\n"
@@ -308,8 +338,9 @@ public class Player extends Entity{
             output += "-----------------\n";
             
             System.out.println(output);
-    }
+    }//end printUsables()
     
+    @Override
     public void printSpecAttacks(){
         String output = 
                       
@@ -325,9 +356,6 @@ public class Player extends Entity{
             output += "-----------------\n";
             
             System.out.println(output);
-    }
-    
-    
-    
+    }//end printSpecAttacks()
     
 }//end player
