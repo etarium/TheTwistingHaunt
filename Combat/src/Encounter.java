@@ -15,9 +15,16 @@ public class Encounter implements EncounterADT {
 
     
     //constructors
+    /**
+     * Empty constructor
+     */
     public Encounter() {
     }
 
+    /**
+     * Filled Encounter constructor
+     * @param combatants ArrayList&lt;Entity&gt; containing list of Entities to participate in Encounter
+     */
     public Encounter(ArrayList<Entity> combatants) {
         
         this.rekt = new ArrayList<>();
@@ -26,15 +33,17 @@ public class Encounter implements EncounterADT {
        
 
     //getters
+    @Override
     public ArrayList<Entity> getCombatants() {
         return combatants;
     }
+    @Override
     public ArrayList<Entity> getRekt() {
         return rekt;
-
     } 
 
     //Encounter methods
+    @Override
     public void runCombat() {
         boolean valid = turnSetup(); //initial enqueue, never runs combat if failed
         if (valid) {
@@ -72,6 +81,7 @@ public class Encounter implements EncounterADT {
         }
     } //end RunCombat()
 
+    @Override
     public boolean turnSetup() {
         boolean teamCheck = false; //boolean to check team compositions
         

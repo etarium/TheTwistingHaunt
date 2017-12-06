@@ -20,8 +20,18 @@ public class Entity implements EntityADT{
     
     Random rng = new Random();
     
+    /**
+     * Empty Entity constructor
+     */
     public Entity(){
     }
+    
+    /**
+     * Filled Entity constructor
+     * @param stats StatBlock representing Entity's core attributes
+     * @param name String representing Entity's name
+     * @param teamId  Integer representing Entity's team
+     */
     public Entity(StatBlock stats, String name, int teamId){
         this.stats = stats;
         this.name = name;
@@ -32,60 +42,74 @@ public class Entity implements EntityADT{
     
 
     //getters and setters
+    @Override
     public StatBlock getStats() {
         return stats;
     }
 
+    @Override
     public void setStats(StatBlock stats) {
         this.stats = stats;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    @Override
     public ArrayList<Usable> getItemList() {
         return itemList;
     }
 
+    @Override
     public void setItemList(ArrayList<Usable> itemList) {
         this.itemList = itemList;
     }
 
+    @Override
     public ArrayList<SpecAttack> getSpecAttackList() {
         return specAttackList;
     }
 
+    @Override
     public void setSpecAttackList(ArrayList<SpecAttack> specAttackList) {
         this.specAttackList = specAttackList;
     }
     
     
 
+    @Override
     public int getTeamId() {
         return teamId;
     }
 
+    @Override
     public void setTeamId(int teamId) {
         this.teamId = teamId;
     }
 
+    @Override
     public Equipable_Armor getWornArmor() {
         return wornArmor;
     }
 
+    @Override
     public void setWornArmor(Equipable_Armor wornArmor) {
         this.wornArmor = wornArmor;
     }
 
+    @Override
     public Equipable_Weapon getUsedWeapon() {
         return usedWeapon;
     }
 
+    @Override
     public void setUsedWeapon(Equipable_Weapon usedWeapon) {
         this.usedWeapon = usedWeapon;
     }
@@ -96,6 +120,7 @@ public class Entity implements EntityADT{
     
     
     //class methods
+    @Override
     public int attack(Entity enemy){
         
         int attackRoll = rng.nextInt(100) + 1;
@@ -116,6 +141,7 @@ public class Entity implements EntityADT{
         return totalDamage;
     }//end attack
     
+    @Override
     public int defend(int damageValue) {
         int modifiedDamage = damageValue - this.stats.physDef;
         if(this.getWornArmor() != null){
@@ -131,6 +157,7 @@ public class Entity implements EntityADT{
         return modifiedDamage;
     }//end defend()
     
+    @Override
     public ArrayList<Entity> getTargetList(ArrayList<Entity> list){
         ArrayList<Entity> targetList = new ArrayList<>();
         for(Entity targ : list){
@@ -143,6 +170,7 @@ public class Entity implements EntityADT{
         return targetList;
     }
         
+    @Override
     public Entity chooseTarget(ArrayList<Entity> targetList){
         int size = targetList.size();
         Entity target = null;
@@ -155,6 +183,7 @@ public class Entity implements EntityADT{
     }
     
     //dialog methods
+    @Override
     public void combatDialog(int damageValue, Entity target){
         
        String targName = target.name; 
