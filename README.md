@@ -16,7 +16,7 @@ Current Goals:
 -(Completed)Implement equipable item list for entities to enhance stats ie. armor, weapons
 
 
--(WIP)Implement an Player subclass of entity, implementing a unique PlayerADT
+-(Completed??)Implement an Player subclass of entity, implementing a unique PlayerADT
 
 
 -(NOT STARTED)Implement other subclasses of Entity ie. creature, undead, humaniod, etc
