@@ -201,6 +201,14 @@ public class Entity implements EntityADT{
         }
     }
     
+    public void printEntityInfo(){  //method formatted for an "inspect" command of some type
+        String output =             //or player looking at their stats
+                this.getName()+"\n"+
+                "***********************************\n"+
+                this.getStats().toString();
+        System.out.println(output);
+    }
+    
     @Override
     public String toString(){
         return String.format("%s%n"

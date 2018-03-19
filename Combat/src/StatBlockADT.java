@@ -113,4 +113,10 @@ public interface StatBlockADT {
      */
     public void decrementSpecPoints();
     
+    /**
+     * Provides a string representing the stats of an Entity formatted for output
+     * @return String of all stats contained in the StatBlock object
+     */
+    public String toString();
+    
 }
