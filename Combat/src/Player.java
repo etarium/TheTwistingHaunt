@@ -25,8 +25,8 @@ public class Player extends Entity implements PlayerADT{
      * @param name String representing Player's name
      * @param teamId Integer representing Player's team
      */
-    public Player(StatBlock stats, String name, String teamId) {
-        super(stats, name, teamId);
+    public Player(StatBlock stats, String name, String description, String teamId) {
+        super(stats, name, description, teamId);
     }
     
     

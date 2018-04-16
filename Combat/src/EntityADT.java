@@ -33,6 +33,18 @@ public interface EntityADT {
      * @require name != null
      */
     public void setName(String name);
+    
+    /**
+     * 
+     * @return 
+     */
+    public String getDescription();
+    
+    /**
+     * 
+     * @param description 
+     */
+    public void setDescription(String description);
 
     /**
      * Returns ArrayList of Usables belonging to Entity.
