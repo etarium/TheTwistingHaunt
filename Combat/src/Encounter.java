@@ -86,12 +86,12 @@ public class Encounter implements EncounterADT {
         boolean teamCheck = false; //boolean to check team compositions
         
         if (!combatants.isEmpty()) {
-            int firstTeam = combatants.get(0).getTeamId();
+            String firstTeam = combatants.get(0).getTeamId();
             
 
             for (Entity temp : combatants) {
                 if (temp.getStats().isAlive()) {
-                    if (temp.getTeamId() != firstTeam && teamCheck == false) {
+                    if (!firstTeam.equals(temp.getTeamId()) && teamCheck == false) {
                         teamCheck = true;
                     }
                 } else { //can remove Entity from combat and add to rekt

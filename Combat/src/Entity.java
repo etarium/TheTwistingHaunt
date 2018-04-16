@@ -11,7 +11,7 @@ public class Entity implements EntityADT{
     
     private StatBlock stats;
     private String name;
-    private int teamId; //id of entity's team
+    private String teamId; //id of entity's team
     private ArrayList<Usable> itemList;
     private ArrayList<SpecAttack> specAttackList;
     
@@ -32,7 +32,7 @@ public class Entity implements EntityADT{
      * @param name String representing Entity's name
      * @param teamId  Integer representing Entity's team
      */
-    public Entity(StatBlock stats, String name, int teamId){
+    public Entity(StatBlock stats, String name, String teamId){
         this.stats = stats;
         this.name = name;
         this.teamId = teamId;
@@ -85,12 +85,12 @@ public class Entity implements EntityADT{
     
 
     @Override
-    public int getTeamId() {
+    public String getTeamId() {
         return teamId;
     }
 
     @Override
-    public void setTeamId(int teamId) {
+    public void setTeamId(String teamId) {
         this.teamId = teamId;
     }
 

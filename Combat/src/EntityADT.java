@@ -66,13 +66,13 @@ public interface EntityADT {
      * Returns Integer representing Entity's team
      * @return Integer representing Entity's team
      */
-    public int getTeamId();
+    public String getTeamId();
 
     /**
      * Assigns Integer representing Entity's team to teamID field
      * @param teamId Integer representing Entity's team
      */
-    public void setTeamId(int teamId);
+    public void setTeamId(String teamId);
 
     /**
      * Returns Equipable_Armor object representing Entity's worn armor.
