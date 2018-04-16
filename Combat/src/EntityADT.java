@@ -35,13 +35,13 @@ public interface EntityADT {
     public void setName(String name);
     
     /**
-     * 
-     * @return 
+     * Gets the entity's description
+     * @return String representing description
      */
     public String getDescription();
     
     /**
-     * 
+     * Sets the entity's description
      * @param description 
      */
     public void setDescription(String description);
