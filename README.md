@@ -15,13 +15,13 @@ Current Goals:
 
 -(Completed)Implement equipable item list for entities to enhance stats ie. armor, weapons
 
-
--(Completed??)Implement an Player subclass of entity, implementing a unique PlayerADT
-
+-(Completed)Implement an Player subclass of entity, implementing a unique PlayerADT
 
 -(NOT STARTED)Implement other subclasses of Entity ie. creature, undead, humaniod, etc
 
 -(NOT STARTED)Implement smarter ai specific to entity type and based off intelligence to give players a greater challenge
 
--(NOT STARTED)Implement an advanced client to play a short game using the combat project
+-(Completed)Implement a basic DB to store masterlists
+
+-(Near completion)Implement an advanced client to play a short game using the combat project
 
