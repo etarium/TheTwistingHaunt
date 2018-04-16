@@ -1,5 +1,5 @@
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 /**
  *
@@ -8,6 +8,12 @@ import java.util.ArrayList;
 public class TestClient {
 
     public static void main(String[] args) {
+        
+        Client client = new Client();
+        
+        // <editor-fold defaultstate="collapsed" desc=" Old code to test the combat project. Pending removal... ">
+        
+        /*
         // currentHealth,  maxHealth,  physDef,  evasion,  physAtt,  initiative
         //initiative must currently be different
         StatBlock statBlock1 = new StatBlock(100, 100, 3, 50, 60, 50, 15);
@@ -72,6 +78,9 @@ public class TestClient {
         fighters2.add(ogre);
         Encounter fight2 = new Encounter(fighters2);
         fight2.runCombat();
+
+         */
+// </editor-fold>
 
     }//end main
 }//end class
