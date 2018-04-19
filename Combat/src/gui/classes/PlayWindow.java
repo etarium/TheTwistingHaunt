@@ -40,9 +40,9 @@ public class PlayWindow extends GameWindow{
 	Container con;
 	JPanel bounds;
 	JPanel map, out, in;
-	JTextArea output;
-	//JTextPane output;
-	JTextField input;
+	static JTextArea output;
+	//static JTextPane output;
+	static JTextField input;
 	//how the fuck even am I going to do the map???
 	
 	
@@ -249,6 +249,28 @@ public class PlayWindow extends GameWindow{
 		
 		
 		in.add(box);
+	}
+	
+	public JTextArea getOutputBox() {
+		return output;
+	}
+	
+	public JTextField getInputBox() {
+		return input;
+	}
+	
+	public void outGUI(String outputString) {
+		JTextArea outputBox = getOutputBox();
+		outputBox.setText(outputString);
+	}
+	
+	
+	public String inGUI() {
+		JTextField inputBox = getInputBox();
+		String response = inputBox.getText();
+		inputBox.setText("");
+		
+		return response;
 	}
 	
 	

@@ -1,3 +1,10 @@
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import gui.classes.GUI_Client;
+import gui.classes.PlayWindow;
+
+import java.util.Scanner;
 
 //import java.util.ArrayList;
 
@@ -7,10 +14,44 @@
  */
 public class TestClient {
 
+	static JTextArea output;
+	static JTextField input;
+	static PlayWindow play;
+	
+	
+	
     public static void main(String[] args) {
         
         Client client = new Client();
         
+        try {
+        		GUI_Client.main(null);
+        		//output = GUI_Client.getPlayWindow().getOutputBox();
+        		//input = GUI_Client.getPlayWindow().getInputBox();
+        		//play = GUI_Client.getPlayWindow();
+        		
+        		
+        		Scanner console = new Scanner(System.in);
+        		
+        		//
+        		String fieldString = "";
+        		String outputString = "";
+        		
+        		while(!outputString.equals("/exit")) {
+        			
+        			
+        			System.out.print(play.inGUI());
+        			play.outGUI(console.nextLine());
+        			System.out.println();
+        			
+        		}
+        		
+        		console.close();
+        		
+        		
+        } catch(Exception e) {
+        	
+        }
         // <editor-fold defaultstate="collapsed" desc=" Old code to test the combat project. Pending removal... ">
         
         /*
