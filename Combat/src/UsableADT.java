@@ -56,4 +56,6 @@ public interface UsableADT {
      * @require group != null &amp;&amp; group.size() &gt; 0
      */
     public abstract void multiTarget(ArrayList<Entity> group);
+
+	String getID();
 }

@@ -61,7 +61,7 @@ public class Usable_SingleTarget_HP extends Usable_SingleTarget{
         System.out.println("HP[  " + oldHP + " --> " + val + "  ]");
         
     }
-    
+
     /*
      * @Override toString
      */

@@ -78,6 +78,12 @@ public abstract class Usable implements UsableADT{
         this.description = description;
     }
     
+    @Override
+    public String getID()
+    {
+    		return id;
+    }
+    
 
     //class methods
        

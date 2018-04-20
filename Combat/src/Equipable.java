@@ -71,5 +71,10 @@ public abstract class Equipable implements EquipableADT{
     public String getDescription() {
         return description;
     }
+    
+    public String getID()
+    {
+    		return id;
+    }
 
 }
