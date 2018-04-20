@@ -1,9 +1,12 @@
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import gui.classes.CommandListener;
 import gui.classes.GUI_Client;
 import gui.classes.PlayWindow;
 
+import java.io.BufferedInputStream;
+import java.io.InputStream;
 import java.util.Scanner;
 
 //import java.util.ArrayList;
@@ -14,9 +17,9 @@ import java.util.Scanner;
  */
 public class TestClient {
 
-	static JTextArea output;
-	static JTextField input;
-	static PlayWindow play;
+	//static JTextArea output;
+	//static JTextField input;
+	//static PlayWindow play;
 
 	
 	
@@ -30,27 +33,23 @@ public class TestClient {
         		GUI_Client.main(null);
         		//output = GUI_Client.getPlayWindow().getOutputBox();
         		//input = GUI_Client.getPlayWindow().getInputBox();
-        		play = GUI_Client.getPlayWindow();
+        		PlayWindow play = GUI_Client.getPlayWindow();
+        		
+        		
+        		
+        		System.out.println("test");
+
         		
         		
         		Scanner console = new Scanner(System.in);
-        		
-        		//
-        		String fieldString = "";
-        		String outputString = "";
-        		
+               		
         		boolean run = true;
+        		int count = 0;
         		
         		while(run) {
         			
-        			System.out.println("Enter text here: ");
-        			
-        			console.next();
-        			
-        			String userInput = play.inGUI();
-        			System.out.println(userInput);
-        			
-        			commandListener(play ,userInput, run);
+        			System.out.println("Iteration " + ++count);        			
+        			CommandListener.listen(play , run);
         		}
         		
         		console.close();
@@ -132,87 +131,6 @@ public class TestClient {
 
     }//end main
     
-    public static void commandListener(PlayWindow play, String selection, boolean run) {
-    	
-    		selection = selection.toLowerCase().trim();
-    		String firstParse = selection;
-    		
-    		if (selection.contains(" ")){
-    			firstParse = selection.substring(0, selection.indexOf(' '));
-    		}
-    		
-    		
-    		switch(firstParse) {
-    		
-    		case "/look":
-    			
-    			break;
-    		case "/take":
-    			
-    			break;
-    		case "/drop":
-    			
-    			break;
-    		case "/use":
-    			
-    			break;
-    		case "/equip":
-    			
-    			break;
-    		case "/inventory": case "/inv":
-    			
-    			break;
-    		case "/equipment":
-    			
-    			break;
-    		case "/status":
-    			
-    			break;
-    			
-    			
-    		case "/north": case "/n":
-    			
-    			break;
-    		case "/south": case "/s":
-    			
-    			break;
-    		case "/east": case "/e":
-    			
-    			break;
-    		case "/west": case "/w":
-    			
-    			break;
-    			
-    			
-    		case "/help":
-    			new gui.classes.HelpWindow();
-    			play.outGUI("Oh, help me!");
-    			break;
-    			
-    		case "/quit":
-    			run = false;
-    			play.exitGame();
-    			new gui.classes.MainMenu();
-    			break;
-    			
-    		case "/save":
-    			
-    			break;
-    			
-    			
-    		default:
-    			String errorMessage = "Your mutterings echo softly, but go answered.\n"
-    								+ "[try again, or type '/help' for assistance]";
-    			play.outGUI(errorMessage);
-    			break;
-    			
-    			
-    			
-
-
-    		}//end switch
-    		
-
-    }//end commandListener()
+    
     
 }//end class

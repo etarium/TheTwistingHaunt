@@ -7,12 +7,17 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,6 +26,8 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
+
+import java.io.*;
 
 public class PlayWindow extends GameWindow{
 
@@ -44,6 +51,8 @@ public class PlayWindow extends GameWindow{
 	//static JTextPane output;
 	static JTextField input;
 	//how the fuck even am I going to do the map???
+	
+	static boolean enterPressed = false;
 	
 	
 	
@@ -135,6 +144,8 @@ public class PlayWindow extends GameWindow{
 		addOutputBox(out, output);
 		addInputBox(in,input);
 		
+
+		
 		
 		
 		
@@ -143,7 +154,7 @@ public class PlayWindow extends GameWindow{
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				input.requestFocus();
+				//input.requestFocus();
 				
 			}
 
@@ -181,6 +192,7 @@ public class PlayWindow extends GameWindow{
 		window.pack();
 		//input.requestFocus();
 		window.setVisible(true);
+		input.requestFocus();
 		
 		
 		
@@ -248,6 +260,38 @@ public class PlayWindow extends GameWindow{
 		box.setHighlighter(null);
 		box.setPreferredSize(in.getSize());
 		
+		/*
+		window.getRootPane().setDefaultButton(new JButton() );
+		window.getRootPane().getDefaultButton().addActionListener( new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				enterPressed = true;
+			}
+			
+		});
+		*/
+		box.setFocusTraversalKeysEnabled(false);
+		box.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == e.VK_ENTER) {
+					enterPressed = true;
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}});
 		
 		
 		in.add(box);
@@ -273,6 +317,21 @@ public class PlayWindow extends GameWindow{
 		inputBox.setText("");
 		
 		return response;
+	}
+	
+	public String requestInput() {
+		
+		while(!enterPressed) {
+			try {
+				Thread.sleep(300);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		enterPressed = false;
+		return inGUI();
+		
 	}
 	
 	public void exitGame() {
