@@ -37,11 +37,6 @@ public class PlayWindow extends GameWindow{
 	protected float gameFontSize = 0.5625f * SCREEN_WIDTH / 50;
 	protected Font gameFont = defaultFont.deriveFont(gameFontSize);
 
-
-	
-
-	
-	
 	
 	JFrame window;
 	Container con;
@@ -50,10 +45,9 @@ public class PlayWindow extends GameWindow{
 	static JTextArea output;
 	//static JTextPane output;
 	static JTextField input;
-	//how the fuck even am I going to do the map???
+
 	
 	static boolean enterPressed = false;
-	
 	
 	
 	public PlayWindow() {
@@ -70,7 +64,8 @@ public class PlayWindow extends GameWindow{
 		window.setSize(SCREEN_DIM);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setLayout(null);
-		
+		window.setMaximumSize(window.getSize());
+			
 		
 		con = window.getContentPane();
 		con.setLayout(null);
@@ -144,54 +139,11 @@ public class PlayWindow extends GameWindow{
 		addOutputBox(out, output);
 		addInputBox(in,input);
 		
-
-		
-		
-		
-		
-		
-		window.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				//input.requestFocus();
-				
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-
-			
-		});
-		
-		
-		
 		
 		window.pack();
-		//input.requestFocus();
 		window.setVisible(true);
+		
+
 		input.requestFocus();
 		
 		
@@ -210,7 +162,7 @@ public class PlayWindow extends GameWindow{
 		box.setFont(gameFont);
 		int margin = BUFFER/2;
 		box.setSize(out.getSize());
-		box.setMaximumSize(out.getSize());
+		//box.setMaximumSize(out.getSize());
 		box.setMargin(new Insets(margin,margin,margin, margin));
 		box.setEditable(false);
 		box.setHighlighter(null);
@@ -220,6 +172,7 @@ public class PlayWindow extends GameWindow{
 		
 		
 		//sample text
+		/*
 		box.setText("Márgarét, áre you gríeving \n" + 
 				"Over Goldengrove unleaving? \n" + 
 				"Leáves like the things of man, you\n" + 
@@ -235,24 +188,24 @@ public class PlayWindow extends GameWindow{
 				"What heart heard of, ghost guessed: \n" + 
 				"It ís the blight man was born for, \n" + 
 				"It is Margaret you mourn for.");
+			*/
 		
 		
 		//testing lineWrap
-		/*
+		
 		box.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "
 				+ "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud "
 				+ "exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure "
 				+ "dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "
 				+ "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt "
 				+ "mollit anim id est laborum.");
-		*/
+		
 		
 		
 		out.add(box);
 	}
 	
 	private void addInputBox(Container in, JTextField box) {
-		//in.setLayout(new GridBagLayout());
 		box.setOpaque(false);
 		box.setBorder(null);
 		box.setForeground(textColor);
@@ -260,17 +213,7 @@ public class PlayWindow extends GameWindow{
 		box.setHighlighter(null);
 		box.setPreferredSize(in.getSize());
 		
-		/*
-		window.getRootPane().setDefaultButton(new JButton() );
-		window.getRootPane().getDefaultButton().addActionListener( new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				enterPressed = true;
-			}
-			
-		});
-		*/
+		
 		box.setFocusTraversalKeysEnabled(false);
 		box.addKeyListener(new KeyListener() {
 
