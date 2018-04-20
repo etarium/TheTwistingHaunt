@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /**
  *
  * @author jason
@@ -16,6 +19,8 @@ public class Cell {
     private boolean south;
     private boolean east;
     private boolean west;
+    private ArrayList<Equipable> cellEq;
+    private ArrayList<Equipable> cellkey;
 
     public Cell() {
     }
