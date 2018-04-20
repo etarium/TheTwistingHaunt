@@ -17,6 +17,53 @@ public class QueryDB {
 		 return query;
 	}
 	
+	public String getCellInst()
+	{
+		String query = "SELECT * \n"
+				+ "FROM thaunt_test.Cell\n"
+				+ "WHERE Instance = ? ;";
+		return query;
+	}
+	
+	public String getEncounterInst()
+	{
+		String query = "SELECT * \n" + 
+				"\n" + 
+				"FROM\n" + 
+				"( \n" + 
+				"	SELECT *\n" + 
+				"    FROM thaunt_test.Encounters\n" + 
+				"    JOIN\n" + 
+				"	(\n" + 
+				"		SELECT *\n" + 
+				"        FROM thaunt_test.Entities\n" + 
+				"	) as entityList USING (EntID)\n" + 
+				"    JOIN\n" + 
+				"    (\n" + 
+				"		SELECT *\n" + 
+				"        FROM thaunt_test.BaseStats\n" + 
+				"	) as entityState USING (BaseStats)\n" + 
+				") as EntityObject \n"
+				+ "WHERE EncounterID = ? ;";
+		return query;
+	}
+	
+	public String getHPUseableInst()
+	{
+		String query = "SELECT *\n" + 
+				"FROM thaunt_test.Useables\n" + 
+				"WHERE ItemID = ? AND StatAffected = 'HP' ;";
+		
+		return query;
+	}
+	
+	public String getEquipableInst()
+	{
+		String query = "SELECT *\n" + 
+				"FROM thaunt_test.Useables\n" + 
+				"WHERE ItemID = ?;";
+		return query;
+	}
 	//get Cell items query stored as string
 	public String getUseable()
 	{

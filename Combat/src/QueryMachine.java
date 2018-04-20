@@ -32,6 +32,143 @@ public class QueryMachine implements QueryMachineADT
     	//empty constructor
     }
     
+    public ArrayList<Cell> getCellInstance(String instance) throws SQLException, IOException
+    {
+    		ArrayList<Cell> cellInst = new ArrayList<Cell>();
+    		
+		varOne = instance;
+		PreparedStatement pstmt = dbReader.Connect(credIO.getUser(), credIO.getPass()).prepareStatement(generator.getCellInst());
+		pstmt.setString( 1, varOne);
+
+		resultSet = pstmt.executeQuery();
+		while(resultSet.next())
+		{
+			// this part here will allow items that query lists to populate
+			
+			String xString = resultSet.getString("XCoord");
+			String yString = resultSet.getString("YCoord");
+			String zString = resultSet.getString("ZCoord");
+			String instanceID = resultSet.getString("Instance");
+			String description = resultSet.getString("Description");
+			String encounters = resultSet.getString("Encounters");
+			String items = resultSet.getString("Items");
+			String keyItems = resultSet.getString("KeyItems");
+			String reqItem = resultSet.getString("ReqItem");
+			String canN = resultSet.getString("N");
+			String canS = resultSet.getString("S");
+			String canE = resultSet.getString("E");
+			String canW = resultSet.getString("W");
+			
+			int x = Integer.parseInt(xString);
+			int y = Integer.parseInt(yString);
+			int z = Integer.parseInt(zString);
+			boolean tempN = Boolean.parseBoolean(canN);
+			boolean tempS = Boolean.parseBoolean(canS);
+			boolean tempE = Boolean.parseBoolean(canE);
+			boolean tempW = Boolean.parseBoolean(canW);
+			Cell tempCell = new Cell(x, y, z, description, instanceID, encounters, items, keyItems, reqItem, tempN, tempS, tempE, tempW );
+			cellInst.add(tempCell);
+			System.out.print(".");
+			
+		}//end while
+		
+		return cellInst;
+    	
+    }
+    
+    public ArrayList<Encounter> getEncounterInstance(ArrayList<Cell> cellobj) throws SQLException, IOException
+    {
+    		ArrayList<Encounter> encounterInst = new ArrayList<Encounter>();
+    		ArrayList<Entity> battleList = new ArrayList<Entity>();
+    		Encounter tempEnc = new Encounter();
+    		//loops. connects to database multiple times.
+    		for(int i=0; i<cellobj.size(); i++)
+    		{
+    			
+    		varOne = cellobj.get(i).getEncounter();
+    		if(varOne.equalsIgnoreCase(""))
+    		{
+    			//do nothing but iterate one more in loop
+    		}
+    		else
+    		{
+		
+		PreparedStatement pstmt = dbReader.Connect(credIO.getUser(), credIO.getPass()).prepareStatement(generator.getEncounterInst());
+		pstmt.setString( 1, varOne);
+
+		resultSet = pstmt.executeQuery();
+		while(resultSet.next())
+		{
+			// this part here will allow items that query lists to populate
+			int curhp = Integer.parseInt(resultSet.getString("CURHP"));
+	 		int hp = Integer.parseInt(resultSet.getString("HP"));
+	 		int mp = Integer.parseInt(resultSet.getString("MP"));
+	 		int def = Integer.parseInt(resultSet.getString("DEF"));
+	 		int eva = Integer.parseInt(resultSet.getString("EVA"));
+	 		int atk = Integer.parseInt(resultSet.getString("ATK"));
+	 		int init = Integer.parseInt(resultSet.getString("INIT"));
+	 		StatBlock tempSB = new StatBlock(curhp, hp, mp, def, eva, atk, init);
+	 		String name = resultSet.getString("EntName");
+			String description = resultSet.getString("EntDescription");
+			String teamID = resultSet.getString("EncounterID");
+			
+			Entity tempEntity = new Entity(tempSB, name, description, teamID);
+			battleList.add(tempEntity);
+			
+			System.out.print(".");
+		}//end while
+			tempEnc = new Encounter(battleList);
+			encounterInst.add(tempEnc);
+			battleList.clear();
+			System.out.print("...");
+    		}
+    		
+    		
+    		} //end for loop
+		return encounterInst;
+    	
+    }
+
+    public ArrayList<Usable> getHPUsableInstance(ArrayList<Cell> cellobj) throws SQLException, IOException
+	{
+    		ArrayList<Usable> usableInst = new ArrayList<Usable>();
+    		Usable_SingleTarget_HP tempUsable = new Usable_SingleTarget_HP();
+		//loops. connects to database multiple times.
+		for(int i=0; i<cellobj.size(); i++)
+		{
+			varOne = cellobj.get(i).getItem();
+			
+			if(varOne.equalsIgnoreCase(""))
+			{
+				//do nothing but iterate one more in loop
+			}
+			else
+			{
+	
+				PreparedStatement pstmt = dbReader.Connect(credIO.getUser(), credIO.getPass()).prepareStatement(generator.getHPUseableInst());
+				pstmt.setString( 1, varOne);
+
+				resultSet = pstmt.executeQuery();
+				while(resultSet.next())
+				{
+					// this part here will allow items that query lists to populate
+					
+					String potencyString = resultSet.getString("Potency");
+					String name = resultSet.getString("ItemName");
+					String description = resultSet.getString("ItemDescription");
+					String itemID = resultSet.getString("ItemID");
+			
+					int potency = Integer.parseInt(potencyString);
+			
+					tempUsable = new Usable_SingleTarget_HP(potency, name, description);
+					usableInst.add(tempUsable);
+					System.out.print(".");
+				}
+			}
+		}
+		return usableInst;
+	}
+    
     /**
 	 * Gets all parameters necessary to create a Cell object and returns parameters as array.
 	 * @param int x
