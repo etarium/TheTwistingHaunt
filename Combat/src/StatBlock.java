@@ -1,6 +1,6 @@
 /**
  *
- * @author Jason Richter, Samuel Fiscus
+ * @author Jason Richter, Samuel Fiscus, Emily Clark
  */
 public class StatBlock implements StatBlockADT{
     
@@ -11,6 +11,7 @@ public class StatBlock implements StatBlockADT{
     private int maxHealth;
     
     protected int specPoints;
+    private int currentSP;
     
     protected int physDef;
     protected int physAtt;
@@ -41,10 +42,11 @@ public class StatBlock implements StatBlockADT{
      * @param initiative Integer representing initiative value
      */
     public StatBlock(int currentHealth, int maxHealth, int specPoints, int physDef, 
-                        int evasion, int physAtt, int initiative) {
+                        int evasion, int physAtt, int initiative, int currentSP) {
         this.currentHealth = currentHealth;
         this.maxHealth = maxHealth;
         this.specPoints = specPoints;
+        this.currentSP = currentSP;
         this.physDef = physDef;
         this.evasion = evasion;
         this.physAtt = physAtt;
@@ -79,6 +81,15 @@ public class StatBlock implements StatBlockADT{
         this.specPoints = specialPoints;
     }
     
+    public int getCurrentSP()
+    {
+    		return currentSP;
+    }
+    
+    public void setCurrentSP(int currentSP)
+    {
+    		this.currentSP = currentSP;
+    }
     
 
     @Override

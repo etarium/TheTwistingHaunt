@@ -23,12 +23,33 @@ public interface QueryMachineADT
 	
 	/**
 	 * Generates the entire instance of cells as an arraylist of completed objects.
-	* @param ArrayList<Cell>
+	 * @param ArrayList<Cell>
 	 * @param Cell Instance MUST be created prior to searching for any items within the instance!
 	 * Once both have been received, please use comparator logic to appropriately utilize objects "within" the cells.
 	 * @return ArrayList<Usable>
 	 */
 	public ArrayList<Usable> getHPUsableInstance(ArrayList<Cell> cellobj) throws SQLException, IOException;
+	
+	/**
+	 * Generates the entire instance of cells as an arraylist of completed objects.
+	 * @param ArrayList<Cell>
+	 * @param ArrayList<Usable>
+	 * @param Cell Instance MUST be created prior to searching for any items within the instance!
+	 * @param HP Usables MUST be created prior to searching for any SP Usables!
+	 * Once both have been received, please use comparator logic to appropriately utilize objects "within" the cells.
+	 * @return ArrayList<Usable>
+	 */
+	public ArrayList<Usable> getSPUsableInstance(ArrayList<Cell> cellobj, ArrayList<Usable> usableobj) throws SQLException, IOException;
+	
+	/**
+	 * Generates the entire instance of cells as an arraylist of completed objects.
+	 * @param ArrayList<Cell>
+	 * @param Cell Instance MUST be created prior to searching for any items within the instance!
+	 * Once both have been received, please use comparator logic to appropriately utilize objects "within" the cells.
+	 * @return ArrayList<Equipable>
+	 */
+	public ArrayList<Equipable> getArmorInstance(ArrayList<Cell> cellobj) throws SQLException, IOException;
+	
 	
 	/**
 	 * Generates the entire instance of cells as an arraylist of completed objects.

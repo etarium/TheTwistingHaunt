@@ -1,7 +1,7 @@
 
 /**
  *
- * @author Jason Richter, Samuel Fiscus
+ * @author Jason Richter, Samuel Fiscus, Emily Clark
  */
 
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ public abstract class Usable implements UsableADT{
     protected int potency;
     private String name;
     private String description;
+    private String id;
     
     //constructors
     /**
@@ -40,6 +41,20 @@ public abstract class Usable implements UsableADT{
         this.potency = potency;
         this.name = name;
         this.description = description;
+    }
+    
+    /**
+     * Filled constructor for Usable item.
+     * @param potency Integer representing potency of Usable
+     * @param name String representing name of Usable
+     * @param description String representing description of Usable
+     * @param id String representing the primary key within the database for Usable object.
+     */
+    public Usable(int potency, String name, String description, String id) {
+        this.potency = potency;
+        this.name = name;
+        this.description = description;
+        this.id = id;
     }
 
     //getters

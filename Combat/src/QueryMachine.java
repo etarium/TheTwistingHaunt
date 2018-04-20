@@ -119,7 +119,8 @@ public class QueryMachine implements QueryMachineADT
 	 		int eva = Integer.parseInt(resultSet.getString("EVA"));
 	 		int atk = Integer.parseInt(resultSet.getString("ATK"));
 	 		int init = Integer.parseInt(resultSet.getString("INIT"));
-	 		StatBlock tempSB = new StatBlock(curhp, hp, mp, def, eva, atk, init);
+	 		int currentsp = mp;
+	 		StatBlock tempSB = new StatBlock(curhp, hp, mp, def, eva, atk, init, currentsp);
 	 		String name = resultSet.getString("EntName");
 			String description = resultSet.getString("EntDescription");
 			String teamID = resultSet.getString("EncounterID");
@@ -158,6 +159,7 @@ public class QueryMachine implements QueryMachineADT
 		for(int i=0; i<cellobj.size(); i++)
 		{
 			varOne = cellobj.get(i).getItem();
+			System.out.print(".");
 			
 			if(varOne.equalsIgnoreCase(""))
 			{
@@ -166,7 +168,7 @@ public class QueryMachine implements QueryMachineADT
 			else
 			{
 	
-				PreparedStatement pstmt = dbReader.Connect(credIO.getUser(), credIO.getPass()).prepareStatement(generator.getHPUseableInst());
+				PreparedStatement pstmt = dbReader.Connect(credIO.getUser(), credIO.getPass()).prepareStatement(generator.getHPUsableInst());
 				pstmt.setString( 1, varOne);
 
 				resultSet = pstmt.executeQuery();
@@ -177,18 +179,128 @@ public class QueryMachine implements QueryMachineADT
 					String potencyString = resultSet.getString("Potency");
 					String name = resultSet.getString("ItemName");
 					String description = resultSet.getString("ItemDescription");
-					String itemID = resultSet.getString("ItemID");
+					String id = resultSet.getString("ItemID");
 			
 					int potency = Integer.parseInt(potencyString);
 			
-					tempUsable = new Usable_SingleTarget_HP(potency, name, description);
+					tempUsable = new Usable_SingleTarget_HP(potency, name, description, id);
 					usableInst.add(tempUsable);
-					System.out.print(".");
+					
 				}
 			}
 		}
 		return usableInst;
 	}
-
+    
+    /**
+	 * Generates the entire instance of cells as an arraylist of completed objects.
+	 * @param ArrayList<Cell>
+	 * @param ArrayList<Usable>
+	 * @param Cell Instance MUST be created prior to searching for any items within the instance!
+	 * @param HP Usables MUST be created prior to searching for any SP Usables!
+	 * Once both have been received, please use comparator logic to appropriately utilize objects "within" the cells.
+	 * @return ArrayList<Usable>
+     * @throws IOException 
+     * @throws SQLException 
+	 */
+   public ArrayList<Usable> getSPUsableInstance(ArrayList<Cell> cellobj, ArrayList<Usable> usableInst) throws SQLException, IOException
+   {
+    
+	Usable_SingleTarget_SP tempUsable = new Usable_SingleTarget_SP();
+	//loops. connects to database multiple times.
+	for(int i=0; i<cellobj.size(); i++)
+	{
+		
+		varOne = cellobj.get(i).getItem();
+		System.out.print(".");
 	
+		if(varOne.equalsIgnoreCase(""))
+		{
+		//do nothing but iterate one more in loop
+		}
+		else if(varOne.startsWith("HP"))
+		{
+			//do nothing but iterate one more. This is to prevent connections to db for anything other than SP.
+		}
+		else
+		{
+
+			PreparedStatement pstmt = dbReader.Connect(credIO.getUser(), credIO.getPass()).prepareStatement(generator.getSPUsableInst());
+			pstmt.setString( 1, varOne);
+
+			resultSet = pstmt.executeQuery();
+			while(resultSet.next())
+			{
+				// this part here will allow items that query lists to populate
+			
+				String potencyString = resultSet.getString("Potency");
+				String name = resultSet.getString("ItemName");
+				String description = resultSet.getString("ItemDescription");
+				String id = resultSet.getString("ItemID");
+	
+				int potency = Integer.parseInt(potencyString);
+	
+				tempUsable = new Usable_SingleTarget_SP(potency, name, description, id);
+				usableInst.add(tempUsable);
+				
+			}
+		}
+	}
+	return usableInst;
+   }
+	/**
+	 * Generates the entire instance of cells as an arraylist of completed objects.
+	 * @param ArrayList<Cell>
+	 * @param Cell Instance MUST be created prior to searching for any items within the instance!
+	 * Once both have been received, please use comparator logic to appropriately utilize objects "within" the cells.
+	 * @return ArrayList<Equipable>
+	 */
+	public ArrayList<Equipable> getArmorInstance(ArrayList<Cell> cellobj) throws SQLException, IOException
+	{
+		ArrayList<Equipable> equipInst = new ArrayList<Equipable>();
+		Equipable_Armor tempEquipable = new Equipable_Armor();
+		//loops. connects to database multiple times.
+		for(int i=0; i<cellobj.size(); i++)
+		{
+			varOne = cellobj.get(i).getItem();
+			System.out.print(".");
+		
+			if(varOne.equalsIgnoreCase(""))
+			{
+			//do nothing but iterate one more in loop
+			}
+			else if(varOne.startsWith("HP"))
+			{
+				//do nothing but iterate one more. This is to prevent connections to db for anything other than armor.
+			}
+			else if(varOne.startsWith("MP"))
+			{
+				//do nothing but iterate one more. This is to prevent connections to db for anything other than armor.
+			}
+			else
+			{
+
+				PreparedStatement pstmt = dbReader.Connect(credIO.getUser(), credIO.getPass()).prepareStatement(generator.getEquipableInst());
+				pstmt.setString( 1, varOne);
+
+				resultSet = pstmt.executeQuery();
+				while(resultSet.next())
+				{
+					// this part here will allow items that query lists to populate
+				
+					String potencyString = resultSet.getString("Potency");
+					String name = resultSet.getString("ItemName");
+					String description = resultSet.getString("ItemDescription");
+					String id = resultSet.getString("ItemID");
+		
+					int potency = Integer.parseInt(potencyString);
+		
+					tempEquipable = new Equipable_Armor(potency, name, description, id);
+					equipInst.add(tempEquipable);
+					
+				}
+			}
+		}
+		return equipInst;
+	}
 }//end class

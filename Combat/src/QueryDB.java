@@ -48,11 +48,20 @@ public class QueryDB {
 		return query;
 	}
 	
-	public String getHPUseableInst()
+	public String getHPUsableInst()
 	{
-		String query = "SELECT *\n" + 
+		String query = "SELECT Potency, ItemName, ItemDescription, ItemID\n" + 
 				"FROM thaunt_test.Useables\n" + 
 				"WHERE ItemID = ? AND StatAffected = 'HP' ;";
+		
+		return query;
+	}
+	
+	public String getSPUsableInst()
+	{
+		String query = "SELECT Potency, ItemName, ItemDescription, ItemID\n" + 
+				"FROM thaunt_test.Useables\n" + 
+				"WHERE ItemID = ? AND StatAffected = 'MP' ;";
 		
 		return query;
 	}
@@ -60,7 +69,7 @@ public class QueryDB {
 	public String getEquipableInst()
 	{
 		String query = "SELECT *\n" + 
-				"FROM thaunt_test.Useables\n" + 
+				"FROM thaunt_test.Equipables\n" + 
 				"WHERE ItemID = ?;";
 		return query;
 	}

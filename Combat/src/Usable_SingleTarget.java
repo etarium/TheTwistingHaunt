@@ -1,7 +1,7 @@
 
 /**
  *
- * @author Jason Richter, Samuel Fiscus
+ * @author Jason Richter, Samuel Fiscus, Emily Clark
  */
 
 import java.util.ArrayList;
@@ -34,7 +34,17 @@ public abstract class Usable_SingleTarget extends Usable{
         super(potency, name, description);
     }
 
-    
+    /**
+     * Filled constructor for Usable_SingleTarget item.
+     * @param potency Integer representing potency of Usable_SingleTarget
+     * @param name String representing name of Usable_SingleTarget
+     * @param description String representing description of Usable_SingleTarget
+     * @param id String representing the primary key within the database for Usable object.
+     */
+    public Usable_SingleTarget(int potency, String name, String description, String id) {
+        super(potency, name, description, id);
+    }
+
 
     
     
