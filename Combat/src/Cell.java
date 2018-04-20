@@ -6,9 +6,7 @@ import java.util.ArrayList;
  * @author jason
  */
 public class Cell {
-    private int x;
-    private int y;
-    private int z;
+    private Location location;
     private String desc;
     private String terrain;
     private String encounter;
@@ -20,15 +18,14 @@ public class Cell {
     private boolean east;
     private boolean west;
     private ArrayList<Equipable> cellEq;
-    private ArrayList<Equipable> cellkey;
+    private ArrayList<KeyItems> cellkey;
+    private ArrayList<Usable> cellUse;
 
     public Cell() {
     }
 
     public Cell(int x, int y, int z, String desc, String terrain, String encounter, String item, String keyItem, String reqItem, boolean north, boolean south, boolean east, boolean west) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this.location = new Location(x, y, z);
         this.desc = desc;
         this.terrain = terrain;
         this.encounter = encounter;
@@ -41,17 +38,10 @@ public class Cell {
         this.west = west;
     }
 
-    public int getX() {
-        return x;
+    public Location getLocation() {
+        return location;
     }
 
-    public int getY() {
-        return y;
-    }
-
-    public int getZ() {
-        return z;
-    }
 
     public String getDesc() {
         return desc;
