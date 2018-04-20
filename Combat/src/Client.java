@@ -26,8 +26,15 @@ public class Client {
     }
     
     public void runGame(){
+        String input = "placeholder";
+        input.toLowerCase();
         while(true){
-            
+            switch(input){
+                case "/look":
+                    break;
+                case "/north":
+                case "/n":
+            }
         }
         
     }
