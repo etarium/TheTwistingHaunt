@@ -59,12 +59,13 @@ public class HelpWindow extends GameWindow{
 		
 		
 		
-		
+		String dir = "src/gui/resources/";
 		String fileName = "help_instructions.txt";
+		String filePath = dir + fileName + "";
 		JTextPane helpText = new JTextPane();
 		
 		try {
-		    FileReader fr = new FileReader(fileName);
+		    FileReader fr = new FileReader(filePath);
 		    BufferedReader reader = new BufferedReader(fr);
 		    while(reader.ready()) {
 		    		helpText.read(reader,null);
@@ -90,5 +91,6 @@ public class HelpWindow extends GameWindow{
 	private void exitButtonPressed(AWTEvent evt, JFrame window) {
 		window.dispose();
 	}
+	
 
 }

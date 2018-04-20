@@ -40,18 +40,20 @@ public class PlayWindow extends GameWindow{
 	Container con;
 	JPanel bounds;
 	JPanel map, out, in;
-	JTextArea output;
-	//JTextPane output;
-	JTextField input;
+	static JTextArea output;
+	//static JTextPane output;
+	static JTextField input;
 	//how the fuck even am I going to do the map???
 	
 	
 	
 	public PlayWindow() {
+		/*
 		System.out.println("SCREEN : " + SCREEN_WIDTH + "," + SCREEN_HEIGHT);
 		System.out.println("WINDOW : " + WINDOW_WIDTH + "," + WINDOW_HEIGHT);
 		System.out.println("Width Ratio: " + (double)WINDOW_WIDTH/SCREEN_WIDTH);
 		System.out.println("Height Ratio: " + (double)WINDOW_HEIGHT/SCREEN_HEIGHT);
+		*/
 
 		
 		window = new JFrame("The Twisted Haunt");
@@ -249,6 +251,32 @@ public class PlayWindow extends GameWindow{
 		
 		
 		in.add(box);
+	}
+	
+	public JTextArea getOutputBox() {
+		return output;
+	}
+	
+	public JTextField getInputBox() {
+		return input;
+	}
+	
+	public void outGUI(String outputString) {
+		JTextArea outputBox = getOutputBox();
+		outputBox.setText(outputString);
+	}
+	
+	
+	public String inGUI() {
+		JTextField inputBox = getInputBox();
+		String response = inputBox.getText();
+		inputBox.setText("");
+		
+		return response;
+	}
+	
+	public void exitGame() {
+		window.dispose();
 	}
 	
 	
