@@ -16,14 +16,12 @@ import databaseconnector.DBConnect;
 
 public class QueryMachine implements QueryMachineADT
 {
-	DBConnect dbReader = new DBConnect();
-    CredentialIOConfig credIO = new CredentialIOConfig();
-    QueryDB generator = new QueryDB();
-    ResultSet resultSet = null;
-    String res = "";
-    String varOne = "";
-    String varTwo = "";
-    String varThree = "";
+	protected DBConnect dbReader = new DBConnect();
+    protected CredentialIOConfig credIO = new CredentialIOConfig();
+    protected QueryDB generator = new QueryDB();
+    protected ResultSet resultSet = null;
+    private String varOne = "";
+
 
     
     public QueryMachine()
@@ -302,5 +300,50 @@ public class QueryMachine implements QueryMachineADT
 			}
 		}
 		return equipInst;
+	}
+
+	/**
+	 * Generates the entire instance of Key Items as an arraylist of completed objects.
+	 * @param ArrayList<Cell>
+	 * @param Cell Instance MUST be created prior to searching for any items within the instance!
+	 * Once both have been received, please use comparator logic to appropriately utilize objects "within" the cells.
+	 * @return ArrayList<KeyITems>
+	 */
+	public ArrayList<KeyItems> getKeyItemsInstance(ArrayList<Cell> cellobj) throws SQLException, IOException
+	{
+		ArrayList<KeyItems> keyItemsInst = new ArrayList<KeyItems>();
+		KeyItems tempKeyItem = new KeyItems();
+	//loops. connects to database multiple times.
+	for(int i=0; i<cellobj.size(); i++)
+	{
+		varOne = cellobj.get(i).getKeyItem();
+		System.out.print(".");
+		
+		if(varOne.equalsIgnoreCase(""))
+		{
+			//do nothing but iterate one more in loop
+		}
+		else
+		{
+
+			PreparedStatement pstmt = dbReader.Connect(credIO.getUser(), credIO.getPass()).prepareStatement(generator.getKeyItems());
+			pstmt.setString( 1, varOne);
+
+			resultSet = pstmt.executeQuery();
+			while(resultSet.next())
+			{
+				// this part here will allow items that query lists to populate
+				
+				String name = resultSet.getString("ItemName");
+				String description = resultSet.getString("ItemDescription");
+				String id = resultSet.getString("KeyItemID");
+		
+				tempKeyItem = new KeyItems(name, description, id);
+				keyItemsInst.add(tempKeyItem);
+				
+			}
+		}
+	}
+	return keyItemsInst;
 	}
 }//end class

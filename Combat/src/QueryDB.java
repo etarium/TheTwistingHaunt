@@ -7,11 +7,12 @@
  */
 public class QueryDB {
 
+	private String query;
 	
 	//get cell description query stored as string
 	public String getCell()
 	{
-		 String query = "SELECT Xcoord, YCoord, ZCoord, Description, Encounters, Items, KeyItems, ReqItem\n"
+		 query = "SELECT Xcoord, YCoord, ZCoord, Description, Encounters, Items, KeyItems, ReqItem\n"
 		    		+ "FROM thaunt_test.Cell\n"
 		    		+ "WHERE XCoord = ? AND YCoord = ? AND ZCoord = ? ; ";
 		 return query;
@@ -19,7 +20,7 @@ public class QueryDB {
 	
 	public String getCellInst()
 	{
-		String query = "SELECT * \n"
+		query = "SELECT * \n"
 				+ "FROM thaunt_test.Cell\n"
 				+ "WHERE Instance = ? ;";
 		return query;
@@ -27,7 +28,7 @@ public class QueryDB {
 	
 	public String getEncounterInst()
 	{
-		String query = "SELECT * \n" + 
+		query = "SELECT * \n" + 
 				"\n" + 
 				"FROM\n" + 
 				"( \n" + 
@@ -50,7 +51,7 @@ public class QueryDB {
 	
 	public String getHPUsableInst()
 	{
-		String query = "SELECT Potency, ItemName, ItemDescription, ItemID\n" + 
+		query = "SELECT Potency, ItemName, ItemDescription, ItemID\n" + 
 				"FROM thaunt_test.Useables\n" + 
 				"WHERE ItemID = ? AND StatAffected = 'HP' ;";
 		
@@ -59,7 +60,7 @@ public class QueryDB {
 	
 	public String getSPUsableInst()
 	{
-		String query = "SELECT Potency, ItemName, ItemDescription, ItemID\n" + 
+		query = "SELECT Potency, ItemName, ItemDescription, ItemID\n" + 
 				"FROM thaunt_test.Useables\n" + 
 				"WHERE ItemID = ? AND StatAffected = 'MP' ;";
 		
@@ -68,7 +69,7 @@ public class QueryDB {
 	
 	public String getEquipableInst()
 	{
-		String query = "SELECT *\n" + 
+		query = "SELECT *\n" + 
 				"FROM thaunt_test.Equipables\n" + 
 				"WHERE ItemID = ?;";
 		return query;
@@ -76,7 +77,7 @@ public class QueryDB {
 	//get Cell items query stored as string
 	public String getUseable()
 	{
-		 String query = "SELECT Potency, ItemName, ItemDescription\n"
+		 query = "SELECT Potency, ItemName, ItemDescription\n"
 		    		+ "FROM thaunt_test.Useables\n"
 		    		+ "WHERE ItemID = ? ";
 		 return query;
@@ -84,7 +85,7 @@ public class QueryDB {
 	
 	public String getEquipable()
 	{
-		 String query = "SELECT Potency, ItemName, ItemDescription\n"
+		 query = "SELECT Potency, ItemName, ItemDescription\n"
 		    		+ "FROM thaunt_test.Equipables\n"
 		    		+ "WHERE ItemID = ? ";
 		 return query;
@@ -92,7 +93,7 @@ public class QueryDB {
 	
 	public String getKeyItems()
 	{
-		String query = "SELECT ItemName, ItemDescription\n"
+		query = "SELECT ItemName, ItemDescription, KeyItemID\n"
 	    		+ "FROM thaunt_test.KeyItems\n"
 	    		+ "WHERE KeyItemID = ? ";
 		
@@ -101,7 +102,7 @@ public class QueryDB {
 	
 	public String getEncounterTeam()
 	{
-		String query = "SELECT NPC1, NPC2, NPC3, NPC4, NPC5\n"
+		query = "SELECT NPC1, NPC2, NPC3, NPC4, NPC5\n"
 	    		+ "FROM thaunt_test.Encounters\n"
 	    		+ "WHERE EncounterID = ? ";
 		
@@ -134,6 +135,5 @@ public class QueryDB {
 		
 		return query;
 	}
-	
 
 }
