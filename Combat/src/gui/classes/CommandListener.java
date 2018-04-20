@@ -2,22 +2,23 @@ package gui.classes;
 
 public class CommandListener {
 
-	public static void listen(PlayWindow play,  boolean run) {
-
-		String selection = play.requestInput();
+	public CommandListener() {
 		
-		
-		selection = selection.toLowerCase().trim();
-		String firstParse = selection;
+	}
+	public  void listen(PlayWindow play,  boolean run) {
 
-		if (selection.contains(" ")){
-			firstParse = selection.substring(0, selection.indexOf(' '));
-		}
+			
+		String[] stringArray = inputParser(play.requestInput());
 
 
-		switch(firstParse) {
+		switch(stringArray[0]) {
 
 		case "/look":
+			if(stringArray[1] == null) {
+				//NEED TO INSTANTIATE
+				String cellDescription = "";
+				play.outGUI(cellDescription);
+			}
 
 			break;
 		case "/take":
@@ -44,16 +45,11 @@ public class CommandListener {
 
 
 		case "/north": case "/n":
-
-			break;
 		case "/south": case "/s":
-
-			break;
 		case "/east": case "/e":
-
-			break;
 		case "/west": case "/w":
 
+			char direction = stringArray[0].charAt(1);
 			break;
 
 
@@ -65,13 +61,13 @@ public class CommandListener {
 		case "/quit":
 			run = false;
 			play.exitGame();
+			play = null;
 			new gui.classes.MainMenu();
 			break;
 
 		case "/save":
 
 			break;
-
 
 		default:
 			String errorMessage = "Your mutterings echo softly, but go answered.\n"
@@ -87,5 +83,33 @@ public class CommandListener {
 
 
 	}//end commandListener()
+	
+	
+	/**
+	 * Parses input into an array with the format {verb},{object}. If no parameter is present, that
+	 * field will be null.
+	 * 
+	 * @param input
+	 * @return String array with command and parameter.
+	 */
+	public String[] inputParser(String input) {
+		
+		String[] stringArray = new String[2];
+		
+		input = input.trim().toLowerCase();
+		
+		boolean containsSpace = input.contains(" ");
+		
+		//will be -1 if no space present
+		int indexOfSpace = input.indexOf(" ");
+		
+		stringArray[0] = (containsSpace) ? input.substring(0, input.indexOf(" ")) : input;
+		stringArray[1] = (containsSpace) ? input.substring(indexOfSpace + 1) : null;
+		
+		return stringArray;
+		
+			
+		
+	}
 
 }

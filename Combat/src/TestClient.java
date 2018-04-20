@@ -34,6 +34,7 @@ public class TestClient {
         		//output = GUI_Client.getPlayWindow().getOutputBox();
         		//input = GUI_Client.getPlayWindow().getInputBox();
         		PlayWindow play = GUI_Client.getPlayWindow();
+        		CommandListener ear = new CommandListener();
         		
         		
         		
@@ -49,7 +50,7 @@ public class TestClient {
         		while(run) {
         			
         			System.out.println("Iteration " + ++count);        			
-        			CommandListener.listen(play , run);
+        			ear.listen(play , run);
         		}
         		
         		console.close();
