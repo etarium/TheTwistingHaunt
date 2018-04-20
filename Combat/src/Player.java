@@ -11,9 +11,7 @@ public class Player extends Entity implements PlayerADT{
     
     Scanner console = new Scanner(System.in);
     
-    private int x;
-    private int y;
-    private int z;
+    private Location location;
     
     //constructor
     /**
@@ -328,21 +326,15 @@ public class Player extends Entity implements PlayerADT{
     }//end printCombatants()
     
     public void setLocation(int x, int y, int z){
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this.location = new Location(x,y,z);
+    }
+    
+    public void setLocation(Location location){
+        this.location = location;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getZ() {
-        return z;
+    public Location getLocation(){
+        return location;
     }
     
     @Override
