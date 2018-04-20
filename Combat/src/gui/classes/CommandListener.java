@@ -50,6 +50,7 @@ public class CommandListener {
 		case "/west": case "/w":
 
 			char direction = stringArray[0].charAt(1);
+			play.outGUI("You'd like to go that way, wouldn't you?");
 			break;
 
 
@@ -60,9 +61,9 @@ public class CommandListener {
 
 		case "/quit":
 			run = false;
+			new gui.classes.MainMenu();
 			play.exitGame();
 			play = null;
-			new gui.classes.MainMenu();
 			break;
 
 		case "/save":
