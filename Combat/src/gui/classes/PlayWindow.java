@@ -48,10 +48,12 @@ public class PlayWindow extends GameWindow{
 	
 	
 	public PlayWindow() {
+		/*
 		System.out.println("SCREEN : " + SCREEN_WIDTH + "," + SCREEN_HEIGHT);
 		System.out.println("WINDOW : " + WINDOW_WIDTH + "," + WINDOW_HEIGHT);
 		System.out.println("Width Ratio: " + (double)WINDOW_WIDTH/SCREEN_WIDTH);
 		System.out.println("Height Ratio: " + (double)WINDOW_HEIGHT/SCREEN_HEIGHT);
+		*/
 
 		
 		window = new JFrame("The Twisted Haunt");
@@ -271,6 +273,10 @@ public class PlayWindow extends GameWindow{
 		inputBox.setText("");
 		
 		return response;
+	}
+	
+	public void exitGame() {
+		window.dispose();
 	}
 	
 	

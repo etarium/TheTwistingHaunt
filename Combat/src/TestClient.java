@@ -17,6 +17,8 @@ public class TestClient {
 	static JTextArea output;
 	static JTextField input;
 	static PlayWindow play;
+
+	
 	
 	
 	
@@ -28,7 +30,7 @@ public class TestClient {
         		GUI_Client.main(null);
         		//output = GUI_Client.getPlayWindow().getOutputBox();
         		//input = GUI_Client.getPlayWindow().getInputBox();
-        		//play = GUI_Client.getPlayWindow();
+        		play = GUI_Client.getPlayWindow();
         		
         		
         		Scanner console = new Scanner(System.in);
@@ -37,13 +39,18 @@ public class TestClient {
         		String fieldString = "";
         		String outputString = "";
         		
-        		while(!outputString.equals("/exit")) {
+        		boolean run = true;
+        		
+        		while(run) {
         			
+        			System.out.println("Enter text here: ");
         			
-        			System.out.print(play.inGUI());
-        			play.outGUI(console.nextLine());
-        			System.out.println();
+        			console.next();
         			
+        			String userInput = play.inGUI();
+        			System.out.println(userInput);
+        			
+        			commandListener(play ,userInput, run);
         		}
         		
         		console.close();
@@ -124,4 +131,88 @@ public class TestClient {
 // </editor-fold>
 
     }//end main
+    
+    public static void commandListener(PlayWindow play, String selection, boolean run) {
+    	
+    		selection = selection.toLowerCase().trim();
+    		String firstParse = selection;
+    		
+    		if (selection.contains(" ")){
+    			firstParse = selection.substring(0, selection.indexOf(' '));
+    		}
+    		
+    		
+    		switch(firstParse) {
+    		
+    		case "/look":
+    			
+    			break;
+    		case "/take":
+    			
+    			break;
+    		case "/drop":
+    			
+    			break;
+    		case "/use":
+    			
+    			break;
+    		case "/equip":
+    			
+    			break;
+    		case "/inventory": case "/inv":
+    			
+    			break;
+    		case "/equipment":
+    			
+    			break;
+    		case "/status":
+    			
+    			break;
+    			
+    			
+    		case "/north": case "/n":
+    			
+    			break;
+    		case "/south": case "/s":
+    			
+    			break;
+    		case "/east": case "/e":
+    			
+    			break;
+    		case "/west": case "/w":
+    			
+    			break;
+    			
+    			
+    		case "/help":
+    			new gui.classes.HelpWindow();
+    			play.outGUI("Oh, help me!");
+    			break;
+    			
+    		case "/quit":
+    			run = false;
+    			play.exitGame();
+    			new gui.classes.MainMenu();
+    			break;
+    			
+    		case "/save":
+    			
+    			break;
+    			
+    			
+    		default:
+    			String errorMessage = "Your mutterings echo softly, but go answered.\n"
+    								+ "[try again, or type '/help' for assistance]";
+    			play.outGUI(errorMessage);
+    			break;
+    			
+    			
+    			
+
+
+    		}//end switch
+    		
+
+    }//end commandListener()
+    
 }//end class

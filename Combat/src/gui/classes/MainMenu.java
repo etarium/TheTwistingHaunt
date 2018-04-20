@@ -71,6 +71,7 @@ public class MainMenu extends GameWindow{
 
 		menuPanel = new JPanel();
 		menuPanel.setBounds(menuBufferWidth,menuBufferHeight,menuWidth,menuHeight);
+		menuPanel.setBackground(backgroundColor);
 
 		JPanel opt1 = new JPanel();
 		JPanel opt2 = new JPanel();
@@ -206,11 +207,14 @@ public class MainMenu extends GameWindow{
 
 		readmeWindow.setSize(readmeDimension);
 
+		String dir = "src/gui/resources/";
 		String fileName = "readme.txt";
+		String filePath = dir + fileName + "";
+		
 		JTextArea readmeText = new JTextArea();
 
 		try {
-			FileReader fr = new FileReader(fileName);
+			FileReader fr = new FileReader(filePath);
 			BufferedReader reader = new BufferedReader(fr);
 			while((reader.readLine()) != null) {
 				readmeText.read(reader, "Readme Text");

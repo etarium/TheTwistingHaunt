@@ -9,15 +9,15 @@ public class GUI_Client {
 	public static void main(String [] args) throws Exception {
 
 
-		//new MainMenu();
 		//new HelpWindow();
-		//play = new PlayWindow();
-		mainMenu = new MainMenu();
+		play = new PlayWindow();
+		//mainMenu = new MainMenu();
 
 	}
 	
 	public static PlayWindow getPlayWindow() {
 		return play;
 	}
+	
 
 }
