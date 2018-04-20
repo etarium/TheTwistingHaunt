@@ -110,7 +110,17 @@ public class Cell {
     }
     
     
-
+/*
+ * @override toString
+ */
+    public String toString()
+    {
+    		String formatString = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n\n"
+	    		+ this.getDesc() + "\n\n"
+	    		+ "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
+		
+		return formatString;
+    }
     
 
     

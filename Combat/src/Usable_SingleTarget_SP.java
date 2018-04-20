@@ -60,4 +60,21 @@ public class Usable_SingleTarget_SP extends Usable_SingleTarget{
         
     }
     
+    /*
+     * @Override toString
+     */
+    public String toString()
+    {
+    		String stat = "Stat: MP";
+    	    String formatString = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n\n"
+    	    		+ "   " + this.getName() + "             " + stat + "\n"
+    	    		+ "\n"
+    	    		+ this.getDescription() + "\n\n"
+    	    		+ "   Potency: " + this.getPotency() + "\n"
+    	    		+ "\n"
+    	    		+ "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
+    		
+    		return formatString;
+    			
+    }
 }

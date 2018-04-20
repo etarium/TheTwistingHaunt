@@ -40,4 +40,22 @@ public class Equipable_Armor extends Equipable{
     public Equipable_Armor(int potency, String name, String description, String id) {
         super(potency, name, description, id);
     }
+    
+    /*
+     * @Override toString
+     */
+    public String toString()
+    {
+    		String stat = "Stat: DEF";
+    	    String formatString = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n\n"
+    	    		+ "   " + this.getName() + "             " + stat + "\n"
+    	    		+ "\n"
+    	    		+ this.getDescription() + "\n\n"
+    	    		+ "   Potency: " + this.getPotency() + "\n"
+    	    		+ "\n"
+    	    		+ "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
+    		
+    		return formatString;
+    			
+    }
 }

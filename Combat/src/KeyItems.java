@@ -49,4 +49,18 @@ public class KeyItems implements KeyItemsADT {
 	{
 		return id;
 	}
+	
+	/*
+	 * @override toString
+	 */
+	public String toString()
+	{
+	    String formatString = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n\n"
+	    		+ "   " + this.getName() + "\n"
+	    		+ "\n"
+	    		+ this.getDescription() + "\n\n"
+	    		+ "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
+		
+		return formatString;
+	}
 }//end class

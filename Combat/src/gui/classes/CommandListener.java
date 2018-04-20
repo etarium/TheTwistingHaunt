@@ -71,7 +71,7 @@ public class CommandListener {
 			break;
 
 		default:
-			String errorMessage = "Your mutterings echo softly, but go answered.\n"
+			String errorMessage = "Your mutterings echo softly, but go unanswered.\n"
 					+ "[try again, or type '/help' for assistance]";
 			play.outGUI(errorMessage);
 			break;

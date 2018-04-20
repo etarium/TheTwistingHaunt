@@ -23,7 +23,6 @@ public class DBConnect {
  				"&requireSSL=true";
          Class.forName ("com.mysql.jdbc.Driver");
          conn = DriverManager.getConnection (url, user, pass);
-         System.out.println ("Database connection established");
      }
      catch (Exception e)
      {

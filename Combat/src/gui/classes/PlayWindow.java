@@ -192,14 +192,22 @@ public class PlayWindow extends GameWindow{
 		
 		
 		//testing lineWrap
+	
+		/**
+		 * 
+		 *
 		
-		box.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "
+		  box.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "
+		 
 				+ "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud "
 				+ "exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure "
 				+ "dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "
 				+ "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt "
 				+ "mollit anim id est laborum.");
 		
+			*/
+		
+		box.setText("The room is warm. Uncomfortably warm. You could take your skin off and not be cool enough. The thought has crossed your mind. Judging by the half-rotted corpse lying on the far wall, with his hands outstretched at his neck with dirty fingernails, you weren't the only one. Never before has such a strong sense of evil purveyed itself so thoroughly. Beyond this door must be the Overlord.\n");
 		
 		
 		out.add(box);

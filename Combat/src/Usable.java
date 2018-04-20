@@ -11,7 +11,7 @@ public abstract class Usable implements UsableADT{
     //data members
     protected int potency;
     private String name;
-    private String description;
+    protected String description;
     private String id;
     
     //constructors
