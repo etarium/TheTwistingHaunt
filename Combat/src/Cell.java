@@ -5,7 +5,9 @@ import java.util.ArrayList;
  *
  * @author jason
  */
+
 public class Cell {
+    
     private Location location;
     private String desc;
     private String terrain;

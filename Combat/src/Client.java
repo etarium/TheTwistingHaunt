@@ -7,6 +7,8 @@ import java.util.ArrayList;
  */
 public class Client {
     
+    final String INSTANCE = "DN1";
+    
     private Player player;
     private ArrayList<Cell> cellList;
     
@@ -18,7 +20,7 @@ public class Client {
         // create new instance of the game for the player using the input from the creator
         //save player
         this.player = player;
-        loadInstance("placeholder");
+        loadInstance(INSTANCE);
     }
     
     public void loadGame(){
