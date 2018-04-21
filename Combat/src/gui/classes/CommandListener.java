@@ -9,38 +9,51 @@ public class CommandListener {
 
 			
 		String[] stringArray = inputParser(play.requestInput());
+		String output = "";
 
 
 		switch(stringArray[0]) {
 
 		case "/look":
+			//inspect room
 			if(stringArray[1] == null) {
-				//NEED TO INSTANTIATE
-				String cellDescription = "";
-				play.outGUI(cellDescription);
+				//TO_DO
+				output = "TEST CELL DESC";
 			}
-
+			//inspect object of command
+			else {
+				//TO_DO
+				output = "TEST ITEM/ENTITY/ETC";
+				
+			}
 			break;
+			
 		case "/take":
-
+			output = "TEST TAKE";
 			break;
+			
 		case "/drop":
-
+			output = "TEST DROP";
 			break;
+			
 		case "/use":
-
+			output = "TEST USE";
 			break;
+			
 		case "/equip":
-
+			output = "TEST EQUIP";
 			break;
+			
 		case "/inventory": case "/inv":
-
+			output = "TEST INVENTORY";
 			break;
+			
 		case "/equipment":
-
+			output = "TEST EQUIPMENT";
 			break;
+			
 		case "/status":
-
+			output = "TEST STATUS";
 			break;
 
 
@@ -50,16 +63,17 @@ public class CommandListener {
 		case "/west": case "/w":
 
 			char direction = stringArray[0].charAt(1);
-			play.outGUI("You'd like to go that way, wouldn't you?");
+			output = "You'd like to go that way, wouldn't you?";
 			break;
 
 
 		case "/help":
+			output = "Oh, help me!";
 			new gui.classes.HelpWindow();
-			play.outGUI("Oh, help me!");
 			break;
 
 		case "/quit":
+			output = "Next time, hero.";
 			run = false;
 			new gui.classes.MainMenu();
 			play.exitGame();
@@ -68,12 +82,12 @@ public class CommandListener {
 
 		case "/save":
 
+			output = "TEST SAVE";
 			break;
 
 		default:
-			String errorMessage = "Your mutterings echo softly, but go unanswered.\n"
+			output = "Your mutterings echo softly, but go unanswered.\n"
 					+ "[try again, or type '/help' for assistance]";
-			play.outGUI(errorMessage);
 			break;
 
 
@@ -81,6 +95,7 @@ public class CommandListener {
 
 
 		}//end switch
+		play.outGUI(output);
 
 
 	}//end commandListener()

@@ -43,7 +43,6 @@ public class PlayWindow extends GameWindow{
 	JPanel bounds;
 	JPanel map, out, in;
 	static JTextArea output;
-	//static JTextPane output;
 	static JTextField input;
 
 	
@@ -51,13 +50,6 @@ public class PlayWindow extends GameWindow{
 	
 	
 	public PlayWindow() {
-		/*
-		System.out.println("SCREEN : " + SCREEN_WIDTH + "," + SCREEN_HEIGHT);
-		System.out.println("WINDOW : " + WINDOW_WIDTH + "," + WINDOW_HEIGHT);
-		System.out.println("Width Ratio: " + (double)WINDOW_WIDTH/SCREEN_WIDTH);
-		System.out.println("Height Ratio: " + (double)WINDOW_HEIGHT/SCREEN_HEIGHT);
-		*/
-
 		
 		window = new JFrame("The Twisted Haunt");
 		window.setPreferredSize(SCREEN_DIM);
@@ -139,7 +131,7 @@ public class PlayWindow extends GameWindow{
 		addOutputBox(out, output);
 		addInputBox(in,input);
 		
-		
+		window.setResizable(false);
 		window.pack();
 		window.setVisible(true);
 		
@@ -207,7 +199,12 @@ public class PlayWindow extends GameWindow{
 		
 			*/
 		
-		box.setText("The room is warm. Uncomfortably warm. You could take your skin off and not be cool enough. The thought has crossed your mind. Judging by the half-rotted corpse lying on the far wall, with his hands outstretched at his neck with dirty fingernails, you weren't the only one. Never before has such a strong sense of evil purveyed itself so thoroughly. Beyond this door must be the Overlord.\n");
+		//intro text
+		box.setText("The room is warm. Uncomfortably warm. You could take your skin off and not be cool "
+				+ "enough. The thought has crossed your mind. Judging by the half-rotted corpse lying on "
+				+ "the far wall, with his hands outstretched at his neck with dirty fingernails, you "
+				+ "weren't the only one. Never before has such a strong sense of evil purveyed itself "
+				+ "so thoroughly. Beyond this door must be the Overlord.\n");
 		
 		
 		out.add(box);

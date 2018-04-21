@@ -38,11 +38,6 @@ public class TestClient {
         		
         		
         		
-        		System.out.println("test");
-
-        		
-        		
-        		Scanner console = new Scanner(System.in);
                		
         		boolean run = true;
         		int count = 0;
@@ -53,7 +48,6 @@ public class TestClient {
         			ear.listen(play , run);
         		}
         		
-        		console.close();
         		
         		
         } catch(Exception e) {

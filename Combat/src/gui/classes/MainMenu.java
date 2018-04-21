@@ -184,7 +184,7 @@ public class MainMenu extends GameWindow{
 
 
 
-
+		window.setResizable(false);
 		window.setVisible(true);
 
 

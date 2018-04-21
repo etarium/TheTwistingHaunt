@@ -83,10 +83,11 @@ public class HelpWindow extends GameWindow{
 		help.add(helpText);
 		
 		
+		help.setResizable(false);
 		help.setVisible(true);
 		help.setFocusable(true);
 		
-	}
+	}//end constructor
 		
 	private void exitButtonPressed(AWTEvent evt, JFrame window) {
 		window.dispose();
