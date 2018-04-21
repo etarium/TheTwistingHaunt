@@ -13,7 +13,7 @@ public class CommandListener {
 
 
 		switch(stringArray[0]) {
-
+		
 		case "/look":
 			//inspect room
 			if(stringArray[1] == null) {
