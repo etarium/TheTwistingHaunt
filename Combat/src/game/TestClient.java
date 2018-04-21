@@ -22,10 +22,7 @@ public class TestClient {
 	//static JTextField input;
 	//static PlayWindow play;
 
-	
-	
-	
-	
+
     public static void main(String[] args) {
         
         Client client = new Client();

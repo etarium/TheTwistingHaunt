@@ -90,6 +90,21 @@ public class QueryMachine implements QueryMachineADT
     	
     }
     
+    public Cell[][][] getCellArray(ArrayList<Cell> cellobj)
+    {
+    		Cell[][][] cellArray = new Cell[10][10][10];
+	    for(int i=0; i<cellobj.size(); i++)
+	    	{
+	    		System.out.print(".");
+	    		int x = cellobj.get(i).getLocation().getX();
+	    		int y = cellobj.get(i).getLocation().getY();
+	    		int z = cellobj.get(i).getLocation().getZ();
+	    		cellArray [x][y][z] = cellobj.get(i);
+	    }
+	    
+	    return cellArray;
+    }
+    
     /**
 	 * Generates the entire instance of cells as an arraylist of completed objects.
 	 * @param ArrayList<Cell>
