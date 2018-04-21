@@ -1,4 +1,4 @@
-package game;
+package querymachine;
 /*
  * The Twisting Haunt
  * Emily Clark
@@ -14,6 +14,16 @@ import java.sql.SQLException;
 
 import databaseconnector.CredentialIOConfig;
 import databaseconnector.DBConnect;
+import game.Cell;
+import game.Encounter;
+import game.Entity;
+import game.Equipable;
+import game.Equipable_Armor;
+import game.KeyItems;
+import game.StatBlock;
+import game.Usable;
+import game.Usable_SingleTarget_HP;
+import game.Usable_SingleTarget_SP;
 
 public class QueryMachine implements QueryMachineADT
 {

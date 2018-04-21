@@ -1,4 +1,4 @@
-package game;
+package querymachine;
 
 /*
  * The Twisting Haunt

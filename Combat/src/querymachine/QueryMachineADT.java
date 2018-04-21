@@ -1,7 +1,13 @@
-package game;
+package querymachine;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import game.Cell;
+import game.Encounter;
+import game.Equipable;
+import game.KeyItems;
+import game.Usable;
 
 /*
  * QueryMachineADT
