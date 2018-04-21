@@ -89,20 +89,25 @@ public class QueryMachine implements QueryMachineADT
 		return cellInst;
     	
     }
-    
+   
+    /*
+     * Parses the Cell ArrayList from the DB into a 3D array for navigational purposes.
+     * @param ArrayList<Cell>
+     * @return Cell[][][]
+     */
     public Cell[][][] getCellArray(ArrayList<Cell> cellobj)
     {
-    		Cell[][][] cellArray = new Cell[10][10][10];
-	    for(int i=0; i<cellobj.size(); i++)
-	    	{
-	    		System.out.print(".");
-	    		int x = cellobj.get(i).getLocation().getX();
-	    		int y = cellobj.get(i).getLocation().getY();
-	    		int z = cellobj.get(i).getLocation().getZ();
-	    		cellArray [x][y][z] = cellobj.get(i);
-	    }
-	    
-	    return cellArray;
+            Cell[][][] cellArray = new Cell[10][10][10];
+        for(int i=0; i<cellobj.size(); i++)
+            {
+                System.out.print(".");
+                int x = cellobj.get(i).getLocation().getX();
+                int y = cellobj.get(i).getLocation().getY();
+                int z = cellobj.get(i).getLocation().getZ();
+                cellArray [x][y][z] = cellobj.get(i);
+        }
+        
+        return cellArray;
     }
     
     /**
@@ -166,6 +171,7 @@ public class QueryMachine implements QueryMachineADT
     	
     }
 
+    
     /**
 	 * Generates the entire instance of cells as an arraylist of completed objects.
 	 * @param ArrayList<Cell>
@@ -175,6 +181,7 @@ public class QueryMachine implements QueryMachineADT
 	 * Additional methods will need to be run for all additional objects located within map.
 	 * @return ArrayList<Usable>
 	 */
+ 
     public ArrayList<Usable> getHPUsableInstance(ArrayList<Cell> cellobj) throws SQLException, IOException
 	{
     		ArrayList<Usable> usableInst = new ArrayList<Usable>();
@@ -372,4 +379,5 @@ public class QueryMachine implements QueryMachineADT
 	}
 	return keyItemsInst;
 	}
+	
 }//end class
