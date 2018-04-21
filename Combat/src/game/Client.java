@@ -11,7 +11,7 @@ public class Client {
     final String INSTANCE = "DN1";
     
     private Player player;
-    private ArrayList<Cell> cellList;
+    private Cell[][][] cellList;
     
     
     public Client() {
