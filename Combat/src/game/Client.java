@@ -1,7 +1,5 @@
 package game;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author jason
@@ -31,10 +29,30 @@ public class Client {
     
     public void move(char input){
         
+        
+        switch(input){
+            case 'n':
+                if(cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].isNorth()){
+                    
+                }
+                break;
+            case 's':
+                
+                break;
+            case 'e':
+                
+                break;
+            case 'w':
+                
+                break;
+            
+        }
+        
     }
     
     public void loadInstance(String instance){
         //execute query for cells in instance
+        
         
     }
     
