@@ -1,11 +1,17 @@
 package game;
 
+import java.io.Serializable;
+
 /**
  *
  * @author jason
  */
-public class Location {
-    private int x;
+public class Location implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4499966935819183424L;
+	private int x;
     private int y;
     private int z;
 

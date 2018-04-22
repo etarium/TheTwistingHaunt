@@ -6,11 +6,16 @@ package game;
  */
 
 import java.util.Random;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Entity implements EntityADT{
+public class Entity implements EntityADT, Serializable{
     
-    private StatBlock stats;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 87412221688282868L;
+	private StatBlock stats;
     private String name;
     private String description;
     private String teamId; //id of entity's team

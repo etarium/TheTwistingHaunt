@@ -1,14 +1,21 @@
 package game;
+
+import java.io.Serializable;
+
 /**
  *
  * @author Jason Richter, Samuel Fiscus, Emily Clark
  */
-public class StatBlock implements StatBlockADT{
+public class StatBlock implements StatBlockADT, Serializable{
     
     
     //data members
     
-    protected int currentHealth;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1951221622187747227L;
+	protected int currentHealth;
     private int maxHealth;
     
     protected int specPoints;

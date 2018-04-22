@@ -1,5 +1,7 @@
 package game;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jason Richter, Samuel Fiscus
@@ -8,9 +10,16 @@ package game;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Player extends Entity implements PlayerADT{
+public class Player extends Entity implements PlayerADT, Serializable{
     
-    Scanner console = new Scanner(System.in);
+    
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5644858544197164093L;
+
+	
     
     private Location location;
     
@@ -56,6 +65,8 @@ public class Player extends Entity implements PlayerADT{
     @Override
     public void playerRun(Encounter enc){
         
+    		Scanner console = new Scanner(System.in);
+    	
         //becomes false on conditions where player's turn has concluded
         boolean run = true;
         while(run){
@@ -120,11 +131,13 @@ public class Player extends Entity implements PlayerADT{
             }
         
         }
+        console.close();
         
     }//end playerRun()
     
     @Override
     public Entity selectEntity(Encounter enc) {
+    		Scanner console = new Scanner(System.in);
         ArrayList<Entity> list = enc.getCombatants();
         //runs until some selection is made, even if null
         while (true) {
@@ -137,6 +150,7 @@ public class Player extends Entity implements PlayerADT{
                 
                 //exit, return null
                 if(selection == -1){
+                		console.close();
                     return target;
                 }
 
@@ -152,6 +166,7 @@ public class Player extends Entity implements PlayerADT{
                         val += input.charAt(0);
                         
                         if (val.toLowerCase().equals("y")) {
+                        		console.close();
                             return target;
                         } else if (val.toLowerCase().equals("n")) {
                             break;
@@ -171,7 +186,8 @@ public class Player extends Entity implements PlayerADT{
                         val += input.charAt(0);
                         
                         if (val.toLowerCase().equals("y")) {
-                            return target;
+                        		console.close();
+                        		return target;
                         } else if (val.toLowerCase().equals("n")) {
                             break;
                         } else
@@ -182,7 +198,8 @@ public class Player extends Entity implements PlayerADT{
 
                 }//end friendly target
                 else{
-                    return target;
+                		console.close();
+                		return target;
                 }
 
             } catch (Exception e) {
@@ -194,7 +211,8 @@ public class Player extends Entity implements PlayerADT{
     
     @Override
     public ArrayList<Entity> selectTeam(Encounter enc){
-        ArrayList<Entity> list = enc.getCombatants();
+    		Scanner console = new Scanner(System.in);
+    		ArrayList<Entity> list = enc.getCombatants();
         while(true){
             ArrayList<Entity> targetList = null;
             System.out.println
@@ -216,6 +234,7 @@ public class Player extends Entity implements PlayerADT{
                             targetList.add(ally);
                         }
                     }
+                    console.close();
                     return targetList;
                 case "2":   //enemies
                     targetList = new ArrayList<>();
@@ -224,10 +243,12 @@ public class Player extends Entity implements PlayerADT{
                             targetList.add(enemy);
                         }
                     }
+                    console.close();
                     return targetList;
                     
                 case "0":   //exit, return null
-                    return targetList;
+                		console.close();
+                		return targetList;
                     
                 default:
                     System.out.println("Invalid input. Try again.");
@@ -238,12 +259,13 @@ public class Player extends Entity implements PlayerADT{
     
     @Override
     public Usable selectUsable(){
-        
+    		Scanner console = new Scanner(System.in);
         Usable item = null;
         
         //return null if empty, same as exit
         if(this.getItemList().isEmpty()){
-            return item;
+            console.close();
+        		return item;
         }
         
         while(true){
@@ -255,10 +277,12 @@ public class Player extends Entity implements PlayerADT{
                 
                 //exit, return null
                 if(selection == -1){
+                    console.close();
                     return item;
                 }
                 
                 item = this.getItemList().get(selection);
+                console.close();
                 return item;
                 
                 
@@ -271,12 +295,13 @@ public class Player extends Entity implements PlayerADT{
     
     @Override
     public SpecAttack selectSpecAttack(){
-        
+    		Scanner console = new Scanner(System.in);
         SpecAttack spec = null;
         
         //return null if empty, same as exit
         if(this.getItemList().isEmpty()){
-            return spec;
+            console.close();
+        		return spec;
         }
         
         while(true){
@@ -288,10 +313,12 @@ public class Player extends Entity implements PlayerADT{
                 
                 //exit, return null
                 if(selection == -1){
+                		console.close();
                     return spec;
                 }
                 
                 spec = this.getSpecAttackList().get(selection);
+                console.close();
                 return spec;
                 
                 
