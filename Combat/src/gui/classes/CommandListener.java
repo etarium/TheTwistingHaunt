@@ -5,6 +5,24 @@ public class CommandListener {
 	public CommandListener() {
 		
 	}
+	
+	
+	/**
+	 * Uses parsed input in a {command}{parameter} format in order to filter user input based on help file commands
+	 * Input comes from JTextField and output goes to JTextArea, both in PlayWindow class.
+	 * 
+	 * Every /command should generate some sort of output for the user to see the effect of their actions.
+	 * If no command is recognized, then output warns user of an invalid input, referencing the help file
+	 * 	for more instructions.
+	 * 
+	 * Case-switch determines which methods or blocks of code are run, and which output is to be sent to the
+	 * 	JTextArea for the user to see.
+	 * 
+	 * 
+	 * 
+	 * @param play Instance of play window in which the input/output can be found
+	 * @param run Boolean representing whether or not the listener loop should still run after current iteration
+	 */
 	public  void listen(PlayWindow play,  boolean run) {
 
 			
@@ -14,6 +32,11 @@ public class CommandListener {
 
 		switch(stringArray[0]) {
 		
+		
+		//if no parameter is present in the {command}{parameter} structure, then output is set
+		//	to current room's description
+		//otherwise, parameter may fall into entity, item, equipment, etc., and should be output
+		//	based upon that
 		case "/look":
 			//inspect room
 			if(stringArray[1] == null) {
@@ -57,6 +80,11 @@ public class CommandListener {
 			break;
 
 
+		//determines if movement can be made in the direction sent by the user
+		//direction is parsed from /command and streamlined into a single character: n, s, e, or w
+		//	so the input for applicable methods should rely on that passed char
+		//if player can move that direction, sets new current cell and outputs that cell's description
+		//if not, outputs some sort of error to user
 		case "/north": case "/n":
 		case "/south": case "/s":
 		case "/east": case "/e":
@@ -66,9 +94,10 @@ public class CommandListener {
 			output = "You'd like to go that way, wouldn't you?";
 			break;
 
-
+			
+		
 		case "/help":
-			output = "Oh, help me!";
+			output = "\"Oh, help me!\"";
 			new gui.classes.HelpWindow();
 			break;
 
@@ -85,6 +114,8 @@ public class CommandListener {
 			output = "TEST SAVE";
 			break;
 
+			
+		//if command is not recognized, outputs a flavorful error and references the /help command for assistance
 		default:
 			output = "Your mutterings echo softly, but go unanswered.\n"
 					+ "[try again, or type '/help' for assistance]";
@@ -95,6 +126,8 @@ public class CommandListener {
 
 
 		}//end switch
+		
+		//sends output generated from user selection to the GUI window
 		play.outGUI(output);
 
 
