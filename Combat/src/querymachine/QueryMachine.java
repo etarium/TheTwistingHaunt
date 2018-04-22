@@ -7,6 +7,8 @@ package querymachine;
  */
 import java.util.ArrayList;
 
+import javax.swing.JTextArea;
+
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,12 +34,14 @@ public class QueryMachine implements QueryMachineADT
     protected QueryDB generator = new QueryDB();
     protected ResultSet resultSet = null;
     private String varOne = "";
+    protected JTextArea output;
 
 
     
-    public QueryMachine()
+    public QueryMachine(JTextArea output)
     {
     	//empty constructor
+    	this.output = output;
     }
     
     /**
@@ -82,7 +86,8 @@ public class QueryMachine implements QueryMachineADT
 			boolean tempW = Boolean.parseBoolean(canW);
 			Cell tempCell = new Cell(x, y, z, description, instanceID, encounters, items, keyItems, reqItem, tempN, tempS, tempE, tempW );
 			cellInst.add(tempCell);
-			System.out.print(".");
+			//System.out.print(".");
+			output.append(".");
 			
 		}//end while
 		

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JTextArea;
+
 import querymachine.QueryMachine;
 
 /**
@@ -21,11 +23,11 @@ public class Client {
     public Client() {
     }
     
-    public void newGame(Player player) throws SQLException, IOException{
+    public void newGame(Player player, JTextArea output) throws SQLException, IOException{
         // create new instance of the game for the player using the input from the creator
         //save player
         this.player = player;
-        loadInstance(INSTANCE);
+        loadInstance(INSTANCE, output);
     }
     
     public void loadGame(){
@@ -56,9 +58,9 @@ public class Client {
         
     }
     
-    public void loadInstance(String instance) throws SQLException, IOException{
+    public void loadInstance(String instance, JTextArea output) throws SQLException, IOException{
         //execute query for cells in instance
-    		QueryMachine theDestroyer = new QueryMachine();
+    		QueryMachine theDestroyer = new QueryMachine(output);
     		ArrayList<Cell> cellobj;
 		cellobj = theDestroyer.getCellInstance(instance);
 		ArrayList<Usable> usableobj;

@@ -1,3 +1,4 @@
+
 package gui.classes;
 
 import java.awt.Container;
@@ -6,6 +7,10 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,16 +33,10 @@ public class NewGameWindow extends GameWindow{
 	
 	static Player newPlayer;
 	
-	//static Player mage, warrior, thief;
 	
 	public NewGameWindow() {
 		
 		playerClass = new PlayerClass();
-		/*
-		mage = playerClass.Mage();
-		warrior = playerClass.Warrior();
-		thief = playerClass.Thief();
-		*/
 		
 		window = new JFrame("New Game");
 		window.setSize(WINDOW_DIM);
@@ -49,7 +48,6 @@ public class NewGameWindow extends GameWindow{
 		Container con = window.getContentPane();
 		JPanel windowBorder = new JPanel();
 		windowBorder.setSize(WINDOW_DIM);
-		//windowBorder.setBackground(backgroundColor);
 		windowBorder.setOpaque(false);
 		windowBorder.setBorder(thiccLineBorder);
 		con.add(windowBorder);
@@ -285,9 +283,18 @@ public class NewGameWindow extends GameWindow{
 	
 	private void startButtonPressed(JPanel panel, JLabel label) {
 		
-		panel.setBackground(textColor);
-		label.setForeground(backgroundColor);
+		//panel.setBackground(textColor);
+		//label.setForeground(backgroundColor);
 		System.out.println(newPlayer);
+		
+		try {
+			game.Client client = new game.Client();
+			client.newGame(newPlayer, output);
+		} catch(IOException ioe) {
+
+		} catch(SQLException sqle) {
+
+		}
 	}
 	
 	private void bsSetup(JButton back, JPanel panelB, JLabel labelB, JButton start, JPanel panelS, JLabel labelS) {
@@ -300,14 +307,48 @@ public class NewGameWindow extends GameWindow{
 			
 		});
 		
-		start.addActionListener(new ActionListener() {
+		start.addMouseListener(new MouseListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				panelS.setBackground(textColor);
+				labelS.setForeground(backgroundColor);
+				
+				String loadText = "Ah, " + playerClass.getName() + ", I'm afraid I cannot hold you much longer... "
+						+ "Prepare yourself! Don't give up against the ---\n\n ";
+				output.setText(loadText);				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
 				startButtonPressed(panelS, labelS);
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
 			}
 			
 		});
+		
+	}
+	
+	public JTextArea getOutputBox() {
+		return output;
 	}
 	
 	

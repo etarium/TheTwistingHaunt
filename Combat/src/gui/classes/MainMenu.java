@@ -45,7 +45,13 @@ public class MainMenu extends GameWindow{
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getContentPane().setBackground(backgroundColor);
 		window.setLayout(null);
+		
 		con = window.getContentPane();
+		JPanel windowBorder = new JPanel();
+		windowBorder.setSize(WINDOW_DIM);
+		windowBorder.setOpaque(false);
+		windowBorder.setBorder(thiccLineBorder);
+		con.add(windowBorder);
 
 		titleNamePanel = new JPanel();
 		titleSetter(titleNamePanel, "The Twisting Haunt");
