@@ -1,9 +1,16 @@
 package game;
+
+import java.io.Serializable;
+
 /*
  * authors: Emily Clark
  */
-public class KeyItems implements KeyItemsADT {
+public class KeyItems implements KeyItemsADT, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1167088786121038693L;
 	private String name;
 	private String description;
 	private String id;

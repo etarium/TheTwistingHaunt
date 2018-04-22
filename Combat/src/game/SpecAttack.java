@@ -1,15 +1,20 @@
 package game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Jason Richter, Samuel Fiscus
  */
-public abstract class SpecAttack implements SpecAttackADT{
+public abstract class SpecAttack implements SpecAttackADT, Serializable{
     
     
-    //data members
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7687367579063267006L;
+	//data members
     protected int potency;
     private String name;
     private String description;

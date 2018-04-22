@@ -1,13 +1,19 @@
 package game;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jason Richter, Samuel Fiscus, Emily Clark
  */
-public abstract class Equipable implements EquipableADT{
+public abstract class Equipable implements EquipableADT, Serializable{
     //data members
 
-    protected int potency;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1920797598959219426L;
+	protected int potency;
     private String name;
     private String description;
     private String id;

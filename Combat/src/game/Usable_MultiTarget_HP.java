@@ -52,4 +52,22 @@ public class Usable_MultiTarget_HP extends Usable_MultiTarget{
         }
         
     }
+    
+    /*
+     * @Override toString
+     */
+    public String toString()
+    {
+    		String stat = "Stat: HP";
+    	    String formatString = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n\n"
+    	    		+ "   " + this.getName() + "             " + stat + "\n"
+    	    		+ "\n"
+    	    		+ this.getDescription() + "\n\n"
+    	    		+ "   Potency: " + this.getPotency() + "\n"
+    	    		+ "\n"
+    	    		+ "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
+    		
+    		return formatString;
+    			
+    }
 }

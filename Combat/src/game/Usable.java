@@ -1,5 +1,7 @@
 package game;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jason Richter, Samuel Fiscus, Emily Clark
@@ -7,9 +9,13 @@ package game;
 
 import java.util.ArrayList;
 
-public abstract class Usable implements UsableADT{
+public abstract class Usable implements UsableADT, Serializable{
 
-    //data members
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -463963664850379027L;
+	//data members
     protected int potency;
     private String name;
     protected String description;

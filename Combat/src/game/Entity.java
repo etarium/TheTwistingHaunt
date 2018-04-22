@@ -21,6 +21,7 @@ public class Entity implements EntityADT, Serializable{
     private String teamId; //id of entity's team
     private ArrayList<Usable> itemList;
     private ArrayList<SpecAttack> specAttackList;
+    private ArrayList<KeyItems> keyItemsList;
     
     private Equipable_Armor wornArmor;
     private Equipable_Weapon usedWeapon;
@@ -45,6 +46,7 @@ public class Entity implements EntityADT, Serializable{
         this.teamId = teamId;
         this.itemList = new ArrayList<>();
         this.specAttackList = new ArrayList<>();
+        this.keyItemsList = new ArrayList<>();
     }
     
 
@@ -89,7 +91,15 @@ public class Entity implements EntityADT, Serializable{
         this.specAttackList = specAttackList;
     }
 
-    @Override
+    public ArrayList<KeyItems> getKeyItemsList() {
+		return keyItemsList;
+	}
+
+	public void setKeyItemsList(ArrayList<KeyItems> keyItemsList) {
+		this.keyItemsList = keyItemsList;
+	}
+
+	@Override
     public String getDescription() {
         return description;
     }

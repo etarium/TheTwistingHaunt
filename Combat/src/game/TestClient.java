@@ -75,7 +75,7 @@ public class TestClient {
 
         SpecAttack_SingleTarget_HP heal = new SpecAttack_SingleTarget_HP(75, "Heal");
         SpecAttack_MultiTarget_HP fireball = new SpecAttack_MultiTarget_HP(-75, "Fireball");
-        player.getSpecAttackList().add(heal);
+        
         player.getSpecAttackList().add(fireball);
 
         Equipable_Weapon axe = new Equipable_Weapon(15, "Axe");
