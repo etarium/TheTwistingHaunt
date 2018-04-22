@@ -51,4 +51,17 @@ public class SpecAttack_SingleTarget_HP extends SpecAttack_SingleTarget{
         System.out.println("HP[  " + oldHP + " --> " + val + "  ]");
     }
     
+    public String toString()
+    {
+    	String stat = "Stat: HP";
+	    String formatString = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n\n"
+	    		+ "   " + this.getName() + "             " + stat + "\n"
+	    		+ "\n"
+	    		+ this.getDescription() + "\n\n"
+	    		+ "   Potency: " + this.getPotency() + "\n"
+	    		+ "\n"
+	    		+ "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
+	    return formatString;
+    }
+    
 }

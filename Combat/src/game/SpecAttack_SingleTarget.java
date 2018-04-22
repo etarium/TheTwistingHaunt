@@ -33,7 +33,16 @@ public abstract class SpecAttack_SingleTarget extends SpecAttack{
         super(potency, name, description);
     }
     
-    
+    @Override
+    public String toString()
+    {
+    		return "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n\n" 
+    	 		+ this.getName() + "\n" 
+    			+ "\n" + 
+    	 		this.getDescription() +  "\n\n" 
+    	 		+ 
+    	 		"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
+    }
 
     @Override
     public abstract void singleTarget(Entity target);
