@@ -1,5 +1,11 @@
 package game;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import querymachine.QueryMachine;
+
 /**
  *
  * @author jason
@@ -15,7 +21,7 @@ public class Client {
     public Client() {
     }
     
-    public void newGame(Player player){
+    public void newGame(Player player) throws SQLException, IOException{
         // create new instance of the game for the player using the input from the creator
         //save player
         this.player = player;
@@ -50,9 +56,20 @@ public class Client {
         
     }
     
-    public void loadInstance(String instance){
+    public void loadInstance(String instance) throws SQLException, IOException{
         //execute query for cells in instance
-        
+    		QueryMachine theDestroyer = new QueryMachine();
+    		ArrayList<Cell> cellobj;
+		cellobj = theDestroyer.getCellInstance(instance);
+		ArrayList<Usable> usableobj;
+		usableobj = theDestroyer.getHPUsableInstance(cellobj);
+		usableobj = theDestroyer.getSPUsableInstance(cellobj, usableobj);
+		ArrayList<Equipable> equipableobj;
+		equipableobj = theDestroyer.getArmorInstance(cellobj);
+		ArrayList<Encounter> encounterobj;
+		encounterobj = theDestroyer.getEncounterInstance(cellobj);
+		Cell [][][]	cellArray = theDestroyer.getCellArray(cellobj);
+		 
         
     }
     
