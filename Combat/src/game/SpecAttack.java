@@ -90,6 +90,16 @@ public abstract class SpecAttack implements SpecAttackADT, Serializable{
         return false;
     }
     
+    @Override
+    public String toString()
+    {
+    	 return "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n\n" 
+    	 		+ this.getName() + "\n" 
+    			+ "\n" + 
+    	 		this.getDescription() +  "\n\n" 
+    	 		+ 
+    	 		"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
+    }
     
     public abstract void singleTarget(Entity target);
     

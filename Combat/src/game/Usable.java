@@ -115,11 +115,23 @@ public abstract class Usable implements UsableADT, Serializable{
         return false;
     }
     
+    @Override
+    public String toString()
+    {
+    		return "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n\n"
+    	
+		+ "   " + this.getName() + "\n"
+		+ "\n"
+		+ this.getDescription() + "\n\n"
+		+ "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
+    }
     
     @Override
     public abstract void singleTarget(Entity target);
     
     @Override
     public abstract void multiTarget(ArrayList<Entity> group);     
+    
+    
     
 }//end Item

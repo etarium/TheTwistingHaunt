@@ -35,7 +35,19 @@ public class SpecAttack_MultiTarget_HP extends SpecAttack_MultiTarget{
         super(potency, name, description);
     }
 
-    
+    @Override
+    public String toString()
+    {
+    	String stat = "Stat: HP";
+	    String formatString = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n\n"
+	    		+ "   " + this.getName() + "             " + stat + "\n"
+	    		+ "\n"
+	    		+ this.getDescription() + "\n\n"
+	    		+ "   Potency: " + this.getPotency() + "\n"
+	    		+ "\n"
+	    		+ "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
+	    return formatString;
+    }
     //class methods
 
     @Override
