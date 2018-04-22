@@ -12,8 +12,8 @@ public class GUI_Client {
 
 
 		//new HelpWindow();
-		//play = new PlayWindow();
-		mainMenu = new MainMenu();
+		play = new PlayWindow();
+		//mainMenu = new MainMenu();
 		//newGame = new NewGameWindow();
 		//loadGame = new LoadGameWindow();
 		

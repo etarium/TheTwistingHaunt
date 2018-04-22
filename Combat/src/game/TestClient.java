@@ -32,7 +32,7 @@ public class TestClient {
         		//output = GUI_Client.getPlayWindow().getOutputBox();
         		//input = GUI_Client.getPlayWindow().getInputBox();
         		
-        		PlayWindow play = GUI_Client.getPlayWindow();
+        		play = GUI_Client.getPlayWindow();
         		CommandListener ear = new CommandListener();
         		
         		
