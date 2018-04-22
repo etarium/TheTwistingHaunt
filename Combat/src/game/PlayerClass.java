@@ -2,10 +2,10 @@ package game;
 
 public class PlayerClass {
 
-	private String desc = "";
-	private String name = "";
-	private StatBlock selectClass = new StatBlock();
-	private String teamId = "0";
+	protected String desc = "";
+	protected String name = "";
+	protected StatBlock selectClass = new StatBlock();
+	protected String teamId = "0";
 	
 	public PlayerClass()
 	{
@@ -14,10 +14,11 @@ public class PlayerClass {
 	
 	public Player Mage()
 	{
-		selectClass = new StatBlock(80, 80, 80, 25, 20, 20, 40, 80);
 		name = "Mage";
-		desc = "A skilled caster. Fast and versatile. Wandering the countryside with a worn staff, the Mage is a force to be reckoned with.";
-   		Player player = new Player(selectClass, name, desc, teamId );
+		desc = "A skilled caster. Fast and versatile. Wandering the countryside with a worn staff,"
+				+ " the Mage is a force to be reckoned with.";
+		selectClass = new StatBlock(80, 80, 80, 25, 20, 20, 40, 80);
+		Player player = new Player(selectClass, name, desc, teamId );
    		
    		return player;
 	}

@@ -51,7 +51,7 @@ public class PlayWindow extends GameWindow{
 	
 	public PlayWindow() {
 		
-		window = new JFrame("The Twisted Haunt");
+		window = new JFrame("The Twisting Haunt");
 		window.setPreferredSize(SCREEN_DIM);
 		window.setSize(SCREEN_DIM);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -200,11 +200,7 @@ public class PlayWindow extends GameWindow{
 			*/
 		
 		//intro text
-		box.setText("The room is warm. Uncomfortably warm. You could take your skin off and not be cool "
-				+ "enough. The thought has crossed your mind. Judging by the half-rotted corpse lying on "
-				+ "the far wall, with his hands outstretched at his neck with dirty fingernails, you "
-				+ "weren't the only one. Never before has such a strong sense of evil purveyed itself "
-				+ "so thoroughly. Beyond this door must be the Overlord.\n");
+		box.setText(" placeholder text");
 		
 		
 		out.add(box);
