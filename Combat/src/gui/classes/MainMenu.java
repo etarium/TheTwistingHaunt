@@ -143,6 +143,15 @@ public class MainMenu extends GameWindow{
 			
 		});
 		
+		lgButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				loadGameButtonPressed();				
+			}
+			
+		});
+		
 		exitButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent evt) {
@@ -187,6 +196,11 @@ public class MainMenu extends GameWindow{
 
 
 	}//end Game initializer
+	
+	private void loadGameButtonPressed() {
+		new LoadGameWindow();
+		window.dispose();
+	}
 	
 	private void newGameButtonPressed() {
 		new NewGameWindow();
