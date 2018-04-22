@@ -20,7 +20,7 @@ public class TestClient {
 
 	//static JTextArea output;
 	//static JTextField input;
-	//static PlayWindow play;
+	static PlayWindow play;
 
 
     public static void main(String[] args) {

@@ -43,4 +43,12 @@ public class PlayerClass {
    		return player;
 	}
 	
+	public String getDesc() {
+		return desc;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
 }

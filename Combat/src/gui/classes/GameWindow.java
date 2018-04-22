@@ -40,6 +40,7 @@ public class GameWindow{
 	protected Color backgroundColor = new Color(26,23,1);
 	protected Color textColor = new Color(107,93,3);
 	
+	protected float gameFontSize = 0.5625f * SCREEN_WIDTH / 50;
 	protected float titleFontSize = WINDOW_WIDTH/25;
 	protected float menuFontSize = (float)(titleFontSize * (.8));
 	protected float helpFontSize = (float)(titleFontSize / 3.5);
@@ -50,13 +51,10 @@ public class GameWindow{
 	
 	protected Font defaultFont = this.defineFont(fontPath);
 	
-	
+	protected Font gameFont = defaultFont.deriveFont(gameFontSize);
 	protected Font titleFont = defaultFont.deriveFont(titleFontSize);
 	protected Font menuFont = defaultFont.deriveFont(menuFontSize);
 	protected Font helpFont = defaultFont.deriveFont(helpFontSize);
-	
-	//protected Font titleFont = new Font(fontFamily, Font.PLAIN, titleFontSize);
-	//protected Font menuFont = new Font(fontFamily, Font.BOLD, normalFontSize);
 	
 	
 	protected final int THICC = 4;

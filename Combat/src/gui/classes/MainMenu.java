@@ -31,7 +31,7 @@ public class MainMenu extends GameWindow{
 
 	Container con;
 	JFrame window;
-	JPanel titleNamePanel, startButtonPanel, menuPanel;
+	JPanel titleNamePanel, startButtonPanel;
 	JLabel titleNameLabel, outputLabel;
 	JButton ngButton, lgButton, helpButton, readButton, exitButton;
 
@@ -49,30 +49,13 @@ public class MainMenu extends GameWindow{
 
 		titleNamePanel = new JPanel();
 		titleSetter(titleNamePanel, "The Twisting Haunt");
-		/*
-		int titleWidth = (int)(WINDOW_WIDTH * .75);
-		int titleHeight = (int)(WINDOW_HEIGHT * .2);
-		int titleBufferWidth = (WINDOW_WIDTH - titleWidth)/2;
-
-		titleNamePanel.setBounds(titleBufferWidth,20,titleWidth, titleHeight);
-		titleNamePanel.setBackground(textColor);
-		titleNamePanel.setLayout(new GridBagLayout());
-		titleNameLabel = new JLabel("The Twisting Haunt");
-		titleNameLabel.setForeground(backgroundColor);
-		titleNameLabel.setFont(titleFont);
-
-		titleNamePanel.add(titleNameLabel);	
-		*/
+		
 
 		int titleHeight = (int)(WINDOW_HEIGHT * .2);
 		int menuWidth = (int)(WINDOW_WIDTH / 3);
 		int menuHeight = (int)(WINDOW_HEIGHT / 2);
 		int menuBufferWidth = menuWidth;
 		int menuBufferHeight = menuHeight - titleHeight;
-
-		menuPanel = new JPanel();
-		menuPanel.setBounds(menuBufferWidth,menuBufferHeight,menuWidth,menuHeight);
-		menuPanel.setBackground(backgroundColor);
 
 		JPanel opt1 = new JPanel();
 		JPanel opt2 = new JPanel();
@@ -95,6 +78,7 @@ public class MainMenu extends GameWindow{
 		int optWidth = menuWidth;
 		int optHeight= (menuHeight / 5);
 
+		//programmatic menu button generation
 		for( int i = 0; i < menuPanels.length; i++) {
 			menuPanels[i].setBounds
 			(menuBufferWidth, menuBufferHeight + (i * optHeight), optWidth, optHeight);
@@ -142,7 +126,7 @@ public class MainMenu extends GameWindow{
 
 			con.add(menuPanels[i]);
 			con.add(buttons[i]);
-		}
+		}//end menu button generation
 
 		exitButton.addActionListener(new ActionListener(){
 			@Override
@@ -179,10 +163,6 @@ public class MainMenu extends GameWindow{
 
 
 		con.add(titleNamePanel);
-		con.add(menuPanel);
-
-
-
 
 		window.setResizable(false);
 		window.setVisible(true);

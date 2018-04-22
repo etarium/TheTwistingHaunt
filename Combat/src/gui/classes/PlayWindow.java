@@ -32,12 +32,6 @@ import java.io.*;
 public class PlayWindow extends GameWindow{
 
 	
-	
-
-	protected float gameFontSize = 0.5625f * SCREEN_WIDTH / 50;
-	protected Font gameFont = defaultFont.deriveFont(gameFontSize);
-
-	
 	JFrame window;
 	Container con;
 	JPanel bounds;
@@ -148,13 +142,11 @@ public class PlayWindow extends GameWindow{
 	}
 	*/
 	private void addOutputBox(Container out, JTextArea box) {
-	//private void addOutputBox(Container out, JTextPane box) {
 		box.setOpaque(false);
 		box.setForeground(textColor);
 		box.setFont(gameFont);
-		int margin = BUFFER/2;
-		box.setSize(out.getSize());
-		//box.setMaximumSize(out.getSize());
+		int margin = BUFFER/2 + MED;
+		box.setSize(out.getWidth() - BUFFER, out.getHeight());
 		box.setMargin(new Insets(margin,margin,margin, margin));
 		box.setEditable(false);
 		box.setHighlighter(null);
@@ -185,9 +177,7 @@ public class PlayWindow extends GameWindow{
 		
 		//testing lineWrap
 	
-		/**
-		 * 
-		 *
+		
 		
 		  box.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "
 		 
@@ -197,10 +187,10 @@ public class PlayWindow extends GameWindow{
 				+ "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt "
 				+ "mollit anim id est laborum.");
 		
-			*/
+			
 		
 		//intro text
-		box.setText(" placeholder text");
+		//box.setText(" placeholder text");
 		
 		
 		out.add(box);
