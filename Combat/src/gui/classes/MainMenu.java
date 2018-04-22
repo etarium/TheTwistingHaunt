@@ -48,7 +48,8 @@ public class MainMenu extends GameWindow{
 		con = window.getContentPane();
 
 		titleNamePanel = new JPanel();
-
+		titleSetter(titleNamePanel, "The Twisting Haunt");
+		/*
 		int titleWidth = (int)(WINDOW_WIDTH * .75);
 		int titleHeight = (int)(WINDOW_HEIGHT * .2);
 		int titleBufferWidth = (WINDOW_WIDTH - titleWidth)/2;
@@ -61,9 +62,9 @@ public class MainMenu extends GameWindow{
 		titleNameLabel.setFont(titleFont);
 
 		titleNamePanel.add(titleNameLabel);	
-		//titleNamePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		*/
 
-
+		int titleHeight = (int)(WINDOW_HEIGHT * .2);
 		int menuWidth = (int)(WINDOW_WIDTH / 3);
 		int menuHeight = (int)(WINDOW_HEIGHT / 2);
 		int menuBufferWidth = menuWidth;
@@ -177,7 +178,6 @@ public class MainMenu extends GameWindow{
 		});
 
 
-		//menuPanel.add(outputLabel);
 		con.add(titleNamePanel);
 		con.add(menuPanel);
 

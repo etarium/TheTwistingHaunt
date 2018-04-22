@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.io.BufferedInputStream;
@@ -13,6 +14,8 @@ import java.io.FileNotFoundException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 public class GameWindow{
@@ -86,6 +89,24 @@ public class GameWindow{
 		
 		return defaultFont;
 	}
+	
+public void titleSetter(JPanel panel, String text) {
+		
+		int titleWidth = (int)(WINDOW_WIDTH * .75);
+		int titleHeight = (int)(WINDOW_HEIGHT * .2);
+		int titleBufferWidth = (WINDOW_WIDTH - titleWidth)/2;
+
+		panel.setBounds(titleBufferWidth,BUFFER,titleWidth, titleHeight);
+		panel.setBackground(textColor);
+		panel.setLayout(new GridBagLayout());
+		
+		JLabel panelLabel = new JLabel(text);
+		panelLabel.setForeground(backgroundColor);
+		panelLabel.setFont(titleFont);
+
+		panel.add(panelLabel);
+	}
+
 	
 }//end GameWindow class
 

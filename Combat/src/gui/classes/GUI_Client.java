@@ -5,13 +5,16 @@ public class GUI_Client {
 	static PlayWindow play;
 	static MainMenu mainMenu;
 	static HelpWindow help;
+	static NewGameWindow newGame;
 
 	public static void main(String [] args) throws Exception {
 
 
 		//new HelpWindow();
-		play = new PlayWindow();
+		//play = new PlayWindow();
 		//mainMenu = new MainMenu();
+		newGame = new NewGameWindow();
+		
 
 	}
 	
