@@ -98,13 +98,13 @@ public class CommandListener {
 		
 		case "/help":
 			output = "\"Oh, help me!\"";
-			new gui.classes.HelpWindow();
+			new HelpWindow();
 			break;
 
 		case "/quit":
 			output = "Next time, hero.";
 			run = false;
-			new gui.classes.MainMenu();
+			new MainMenu();
 			play.exitGame();
 			play = null;
 			break;

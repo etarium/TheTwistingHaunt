@@ -128,6 +128,15 @@ public class MainMenu extends GameWindow{
 			con.add(buttons[i]);
 		}//end menu button generation
 
+		ngButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				newGameButtonPressed();				
+			}
+			
+		});
+		
 		exitButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent evt) {
@@ -172,6 +181,11 @@ public class MainMenu extends GameWindow{
 
 
 	}//end Game initializer
+	
+	private void newGameButtonPressed() {
+		new NewGameWindow();
+		window.dispose();
+	}
 
 	private void exitButtonPressed(ActionEvent evt) {
 		window.dispose();

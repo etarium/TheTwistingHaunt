@@ -1,6 +1,5 @@
 package gui.classes;
 
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -16,7 +15,6 @@ import javax.swing.JTextArea;
 
 import game.Player;
 import game.PlayerClass;
-import javafx.scene.layout.Border;
 
 public class NewGameWindow extends GameWindow{
 
@@ -27,6 +25,8 @@ public class NewGameWindow extends GameWindow{
 	static JTextArea output;
 	
 	static PlayerClass playerClass;
+	
+	static Player newPlayer;
 	
 	//static Player mage, warrior, thief;
 	
@@ -73,8 +73,8 @@ public class NewGameWindow extends GameWindow{
 		JPanel backButtonPanel = new JPanel();
 		JPanel startButtonPanel = new JPanel();
 		
-		JLabel startLabel = new JLabel("Start");
 		JLabel backLabel = new JLabel("Back");
+		JLabel startLabel = new JLabel("Start");
 		
 		
 		//buttons to be placed in panels
@@ -113,6 +113,17 @@ public class NewGameWindow extends GameWindow{
 		
 		con.add(outputPanel);
 		
+		int buttonsBufferHeight = outputBufferHeight + outputHeight + BUFFER;
+		int backButtonBuffer = BUFFER * 2;
+		int startButtonBuffer = WINDOW_WIDTH - (int)(WINDOW_WIDTH/7) - backButtonBuffer;
+		
+		
+		buttonSetup(con, backButtonPanel, backLabel, backButton, backButtonBuffer, buttonsBufferHeight);
+		buttonSetup(con, startButtonPanel, startLabel, startButton, startButtonBuffer, buttonsBufferHeight);
+
+		bsSetup(backButton, backButtonPanel, backLabel, startButton, startButtonPanel, startLabel);
+
+		
 		
 		
 		
@@ -122,6 +133,34 @@ public class NewGameWindow extends GameWindow{
 		
 		
 	}//end constructor
+	
+	private void buttonSetup(Container con, JPanel panel, JLabel label, JButton button, int wBuffer, int hBuffer) {
+		
+		int buttonWidth = (int)(WINDOW_WIDTH/7);
+		int buttonHeight = BUFFER * 2;
+		
+		panel.setBounds(wBuffer, hBuffer, buttonWidth, buttonHeight);
+		Rectangle bounds = panel.getBounds();
+		panel.setLayout(new GridBagLayout());
+		panel.setBackground(backgroundColor);
+		panel.setBorder(thinLineBorder);
+
+		
+		label.setBounds(bounds);
+		label.setForeground(textColor);
+		label.setFont(gameFont);		
+		
+		button.setBounds(bounds);
+		button.setOpaque(false);
+		
+		
+		panel.add(label);		
+		
+		con.add(panel);
+		con.add(button);
+		
+		
+	}
 	
 	private void playerSelectionAdder(Container con, JPanel panel, String labelText, JButton button, int position) {
 		
@@ -139,9 +178,7 @@ public class NewGameWindow extends GameWindow{
 		JLabel label = new JLabel(labelText);
 		label.setBounds(bounds);
 		label.setForeground(backgroundColor);
-		label.setFont(menuFont);
-		label.setSize(panel.getSize());
-		
+		label.setFont(menuFont);		
 		
 		button.setBounds(bounds);
 		
@@ -189,7 +226,7 @@ public class NewGameWindow extends GameWindow{
 		warriorPanel.setBackground(textColor);
 		thiefPanel.setBackground(textColor);
 		
-		playerClass.Mage();
+		newPlayer = playerClass.Mage();
 		updateText();
 	}
 	
@@ -198,7 +235,7 @@ public class NewGameWindow extends GameWindow{
 		warriorPanel.setBackground(textColor.darker());
 		thiefPanel.setBackground(textColor);
 		
-		playerClass.Warrior();
+		newPlayer = playerClass.Warrior();
 		updateText();
 	}
 	
@@ -207,15 +244,14 @@ public class NewGameWindow extends GameWindow{
 		warriorPanel.setBackground(textColor);
 		thiefPanel.setBackground(textColor.darker());
 		
-		playerClass.Thief();
+		newPlayer = playerClass.Thief();
 		updateText();
 	}
 	
 	private void updateText() {
 		output.setText(playerClass.getDesc());
 	}
-	
-	
+		
 	private void addOutputBox(Container out, JTextArea box) {
 			box.setOpaque(false);
 			box.setForeground(textColor);
@@ -238,6 +274,41 @@ public class NewGameWindow extends GameWindow{
 			
 			out.add(box);
 		}
+	
+	private void backButtonPressed(JPanel panel, JLabel label) {
+		
+		panel.setBackground(textColor);
+		label.setForeground(backgroundColor);
+		new MainMenu();
+		window.dispose();
+	}
+	
+	private void startButtonPressed(JPanel panel, JLabel label) {
+		
+		panel.setBackground(textColor);
+		label.setForeground(backgroundColor);
+		System.out.println(newPlayer);
+	}
+	
+	private void bsSetup(JButton back, JPanel panelB, JLabel labelB, JButton start, JPanel panelS, JLabel labelS) {
+		back.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				backButtonPressed(panelB, labelB);
+			}
+			
+		});
+		
+		start.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				startButtonPressed(panelS, labelS);
+			}
+			
+		});
+	}
 	
 	
 }//end NewGameWindow
