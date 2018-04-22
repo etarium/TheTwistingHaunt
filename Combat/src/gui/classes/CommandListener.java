@@ -1,7 +1,11 @@
 package gui.classes;
 
+import game.Player;
+
 public class CommandListener {
 
+	static Player player;
+	
 	public CommandListener() {
 		
 	}
@@ -110,7 +114,9 @@ public class CommandListener {
 			break;
 
 		case "/save":
-
+			play.outGUI("Enter the name of your save file.\n)"
+					  + "WARNING: Duplicating a save file name will override the original save.");
+			String fileName = play.requestInput();
 			output = "TEST SAVE";
 			break;
 

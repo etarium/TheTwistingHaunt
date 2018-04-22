@@ -62,4 +62,7 @@ public class PlayerSaveAndLoad {
 
 	}
 	
+	public static String getSaveDirectory() {
+		return DIR;
+	}
 }

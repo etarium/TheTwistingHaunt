@@ -5,6 +5,8 @@ import java.awt.GridBagLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,13 +15,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import game.PlayerSaveAndLoad;
+
 public class LoadGameWindow extends GameWindow{
 
 	static JFrame window;
 	static JScrollPane loadListScroller;
+	static ArrayList<String> saveGameList = new ArrayList<>();;
 	
 	public LoadGameWindow() {
-		window = new JFrame("New Game");
+		window = new JFrame("Load Game");
 		window.setSize(WINDOW_DIM);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getContentPane().setBackground(backgroundColor);
@@ -55,6 +60,66 @@ public class LoadGameWindow extends GameWindow{
 		loadListScroller.setForeground(backgroundColor);
 		loadListScroller.setBorder(medLineBorder);
 		
+		
+		//individual saved games in scrollpane
+		JPanel viewport = new JPanel();
+		viewport.setBackground(backgroundColor);
+		viewport.setLayout(null);
+		
+		int savedGameHeight = (int)(WINDOW_HEIGHT * .2 / 2);
+		int savedGameWidth = loadListWidth;
+		
+		int viewportWidth = loadListWidth;
+		int viewportHeight = 0;
+		
+		
+		File dir = new File(PlayerSaveAndLoad.getSaveDirectory());
+		File[] directoryListing = dir.listFiles();
+		
+		if (directoryListing != null) {
+			for (File saveGame : directoryListing) {
+				String saveGameName = saveGame.getName();
+				saveGameList.add(saveGameName);
+
+
+				
+				
+				JPanel iPanel = new JPanel();
+				iPanel.setBackground(textColor);
+				iPanel.setBounds(0, viewportHeight, savedGameWidth, savedGameHeight);
+				Rectangle bounds = iPanel.getBounds();
+				iPanel.setLayout(new GridBagLayout());
+				
+				JLabel iLabel = new JLabel(saveGameName);
+				iLabel.setBounds(bounds);
+				iLabel.setForeground(backgroundColor);
+				iLabel.setFont(gameFont);
+				
+				JButton iButton = new JButton();
+				iButton.setBounds(bounds);
+				
+				
+				viewportHeight += savedGameHeight;
+				
+				
+				iPanel.add(iLabel);
+				viewport.add(iPanel);
+				viewport.add(iButton);
+				
+
+
+
+			}
+		} else {
+			// Handle the case where dir is not really a directory.
+			// Checking dir.isDirectory() above would not be sufficient
+			// to avoid race conditions with another process that deletes
+			// directories.
+		}
+		viewport.setSize(viewportWidth,viewportHeight);
+
+		//
+		loadListScroller.setViewportView(viewport);
 		con.add(loadListScroller);
 		
 		JPanel backButtonPanel = new JPanel();
