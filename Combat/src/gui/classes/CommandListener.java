@@ -95,7 +95,8 @@ public class CommandListener {
 		case "/west": case "/w":
 
 			char direction = stringArray[0].charAt(1);
-			output = "You'd like to go that way, wouldn't you?";
+                        //NEED TO ADD A CALL TO MOVE()
+			output = "";
 			break;
 
 			

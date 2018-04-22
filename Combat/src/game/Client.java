@@ -35,13 +35,13 @@ public class Client {
     }
 
     public String move(char input) {
-        
+        String output = "You'd like to go that way, wouldn't you?";
         switch (input) {
             case 'n':
                 //check to see of movement possible
                 if (cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].isNorth()) {
                     player.getLocation().setY(player.getLocation().getY()+1);
-                    return cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
+                    output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
                 }
                 
                 break;
@@ -49,28 +49,28 @@ public class Client {
                 //check to see of movement possible
                 if (cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].isSouth()) {
                     player.getLocation().setY(player.getLocation().getY()-1);
-                    return cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
+                    output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
                 }
                 break;
             case 'e':
                 //check to see of movement possible
                 if (cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].isEast()) {
                     player.getLocation().setX(player.getLocation().getX()+1);
-                    return cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
+                    output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
                 }
                 break;
             case 'w':
                 //check to see of movement possible
                 if (cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].isWest()) {
                     player.getLocation().setX(player.getLocation().getX()-1);
-                    return cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
+                    output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
                 }
                 break;
             default:
-                return "This should never happen, please contact your nearest dev.";
+                output = "This should never happen, please contact your nearest dev.";
 
         }
-        return "This should never happen, please contact your nearest dev.";
+        return output;
 
     }
 
