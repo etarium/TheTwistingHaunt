@@ -101,8 +101,8 @@ public abstract class SpecAttack implements SpecAttackADT, Serializable{
     	 		"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
     }
     
-    public abstract void singleTarget(Entity target);
+    public abstract String singleTarget(Entity target);
     
-    public abstract void multiTarget(ArrayList<Entity> group);   
+    public abstract String multiTarget(ArrayList<Entity> group);   
     
 }

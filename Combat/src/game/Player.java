@@ -331,7 +331,7 @@ public class Player extends Entity implements PlayerADT, Serializable{
     }//end selectSpecAttack()
     
     @Override
-    public void printCombatants(Encounter enc){
+    public String printCombatants(Encounter enc){
         ArrayList<Entity> list = enc.getCombatants();
         
         String output = 
@@ -352,6 +352,7 @@ public class Player extends Entity implements PlayerADT, Serializable{
             output += "-----------------\n";
             
             System.out.println(output);
+            return output;
     }//end printCombatants()
     
     public void setLocation(int x, int y, int z){
@@ -367,7 +368,7 @@ public class Player extends Entity implements PlayerADT, Serializable{
     }
     
     @Override
-    public void printUsables(){
+    public String printUsables(){
         String output = 
                       this.getName() + "'s Items:\n"
                     + "-----------------\n";
@@ -380,10 +381,11 @@ public class Player extends Entity implements PlayerADT, Serializable{
             output += "-----------------\n";
             
             System.out.println(output);
+            return output;
     }//end printUsables()
     
     @Override
-    public void printSpecAttacks(){
+    public String printSpecAttacks(){
         String output = 
                       
                       "Special Attack Points left: " + this.getStats().getSpecPoints() + "\n"
@@ -398,6 +400,7 @@ public class Player extends Entity implements PlayerADT, Serializable{
             output += "-----------------\n";
             
             System.out.println(output);
+            return output;
     }//end printSpecAttacks()
     
 }//end player

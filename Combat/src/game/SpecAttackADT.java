@@ -49,15 +49,16 @@ public interface SpecAttackADT {
     /**
      * Abstract method that targets an Entity and performs actions based off of subclass's code.
      * @param target Entity to be the target of special attack.
+     * @return 
      * @require target != null
      */
-    public abstract void singleTarget(Entity target);
+    public abstract String singleTarget(Entity target);
     
     /**
      * Abstract method that targets Entities and performs actions based off of subclass's code.
      * @param group ArrayList&lt;Entity&gt; to be the target of special attack.
      * @require group != null &amp;&amp; group.size() &gt; 0
      */
-    public abstract void multiTarget(ArrayList<Entity> group);
+    public abstract String multiTarget(ArrayList<Entity> group);
     
 }

@@ -51,8 +51,8 @@ public class SpecAttack_MultiTarget_HP extends SpecAttack_MultiTarget{
     //class methods
 
     @Override
-    public void multiTarget(ArrayList<Entity> group) {
-        
+    public String multiTarget(ArrayList<Entity> group) {
+    	String returnobj = "";
         for (int i = 0; i < group.size(); i++) {
             int oldHP = group.get(i).getStats().getCurrentHealth();
             int maxHP = group.get(i).getStats().getMaxHealth();
@@ -64,8 +64,10 @@ public class SpecAttack_MultiTarget_HP extends SpecAttack_MultiTarget{
             int val = (maxHP > newHP) ? newHP : maxHP;
 
             group.get(i).getStats().setCurrentHealth(val);
+            
         }
         
+        return returnobj;
     }
     
     
