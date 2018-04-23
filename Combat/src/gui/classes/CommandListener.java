@@ -82,6 +82,7 @@ public class CommandListener {
         
         
         String output = "";
+        //String copycat = "/" + play.getOutputBox().getText();
 
         switch (stringArray[0]) {
 
@@ -101,21 +102,54 @@ public class CommandListener {
 
                 }
                 break;
+                
 
             case "/take":
-                output = "TEST TAKE";
+            		if (stringArray[1] == null) {
+                    //TO_DO
+                    output = "Oh, come one. You've got to give me more info than that!";
+                } //inspect object of command
+                else {
+                    //TO_DO
+                    output = "You can look all day, but you still won't find it, " + this.player.getName() + ".";
+
+                }
                 break;
 
             case "/drop":
-                output = "TEST DROP";
+            		if (stringArray[1] == null) {
+                    //TO_DO
+                    output = "Stop, drop, and roll is often useful, but not here.";
+                } //inspect object of command
+                else {
+                    //TO_DO
+                    output = "You can look all day, but you still won't find it, " + this.player.getName() + ".";
+
+                }
                 break;
 
             case "/use":
-                output = "TEST USE";
+            		if (stringArray[1] == null) {
+                    //TO_DO
+                    output = "Giving more information would be ... USEful.";
+                } //inspect object of command
+                else {
+                    //TO_DO
+                    output = "You can look all day, but you still won't find it, " + this.player.getName() + ".";
+
+                }
                 break;
 
             case "/equip":
-                output = "TEST EQUIP";
+            		if (stringArray[1] == null) {
+                    //TO_DO
+                    output = "Are you sure you're equipped for this task if you can't give me more information?";
+                } //inspect object of command
+                else {
+                    //TO_DO
+                    output = "You can look all day, but you still won't find it, " + this.player.getName() + ".";
+
+                }
                 break;
 
             case "/inventory":
@@ -226,11 +260,16 @@ public class CommandListener {
                 break;
 
             case "/save":
-                play.outGUI("Enter the name of your save file.\n)"
-                        + "WARNING: Duplicating a save file name will override the original save.");
-                String fileName = play.requestInput();
-                output = "TEST SAVE";
+                		output = "You're past the point of no return.";
+            		//play.outGUI("Enter the name of your save file.\n)"
+                //       + "WARNING: Duplicating a save file name will override the original save.");
+                //String fileName = play.requestInput();
+                //output = "TEST SAVE";
                 break;
+                
+            //case copycat:
+            //		output = "HEY! Stop copying me!";
+            //		break;
 
             //if command is not recognized, outputs a flavorful error and references the /help command for assistance
             default:
