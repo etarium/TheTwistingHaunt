@@ -118,7 +118,7 @@ public class CommandListener {
                 break;
 
             case "/status":
-                output = "TEST STATUS";
+                output = this.player.printEntityInfo();
                 break;
 
             //determines if movement can be made in the direction sent by the user
