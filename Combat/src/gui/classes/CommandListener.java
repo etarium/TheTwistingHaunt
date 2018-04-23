@@ -95,8 +95,9 @@ public class CommandListener {
 		case "/west": case "/w":
 
 			char direction = stringArray[0].charAt(1);
-                        //NEED TO ADD A CALL TO MOVE()
-			output = "";
+              
+			//currently doesn't work because of static shit
+			//output = game.Client.move(direction);
 			break;
 
 			
