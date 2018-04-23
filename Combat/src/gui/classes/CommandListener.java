@@ -14,7 +14,7 @@ import querymachine.QueryMachine;
 
 public class CommandListener {
     final String INSTANCE = "DN1";
-    public PlayWindow play;
+    public static PlayWindow play;
     private Player player;
     private Cell[][][] cellList;
     private ArrayList<Usable> usableList;
@@ -32,9 +32,9 @@ public class CommandListener {
         	System.out.print("Exception");
         }
         try{
-        //newGame();
+            
         }catch(Exception e){
-            System.out.print("Hah got another one!");
+            
         }
         boolean run = true;
         int count = 0;
@@ -230,13 +230,12 @@ public class CommandListener {
 
     }
 
-    public void newGame() throws SQLException, IOException {
+    public void newGame(Player player) throws SQLException, IOException {
         // create new instance of the game for the player using the input from the creator
-        
-        player.getLocation().setX(0);
-        player.getLocation().setY(3);
-        player.getLocation().setZ(0);
-        //loadInstance(INSTANCE);
+        //save player
+        this.player = player;
+
+        loadInstance(INSTANCE);
     }
 
     public void loadInstance(String instance) throws SQLException, IOException {

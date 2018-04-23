@@ -131,6 +131,7 @@ public class NewGameWindow extends GameWindow{
 		window.setVisible(true);
 		button = true;
 		while(button){
+                    System.out.print("");
                 }
 	}//end constructor
 	
