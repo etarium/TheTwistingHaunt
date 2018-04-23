@@ -104,7 +104,7 @@ public class CommandListener {
 		
 		case "/help":
 			output = "\"Oh, help me!\"";
-			new HelpWindow();
+			new HelpWin();
 			break;
 
 		case "/quit":

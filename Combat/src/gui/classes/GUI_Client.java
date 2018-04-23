@@ -4,7 +4,7 @@ public class GUI_Client {
 
 	static PlayWindow play;
 	static MainMenu mainMenu;
-	static HelpWindow help;
+	static HelpWin help;
 	static NewGameWindow newGame;
 	static LoadGameWindow loadGame;
 

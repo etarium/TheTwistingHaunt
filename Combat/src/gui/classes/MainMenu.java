@@ -249,7 +249,7 @@ public class MainMenu extends GameWindow{
 	}
 
 	private void helpButtonPressed(ActionEvent evt) {
-		new HelpWindow();
+		new HelpWin();
 	}
 
 }//end Game class
