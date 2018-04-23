@@ -131,7 +131,6 @@ public class NewGameWindow extends GameWindow{
 		window.setVisible(true);
 		button = true;
 		while(button){
-                    //lol
                 }
 	}//end constructor
 	
@@ -286,7 +285,7 @@ public class NewGameWindow extends GameWindow{
 	
 	private void startButtonPressed(JPanel panel, JLabel label) {
 		
-		button = true;
+		button = false;
 		System.out.println(newPlayer);
                 try {
 		Thread.sleep(300);
