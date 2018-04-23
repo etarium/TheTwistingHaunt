@@ -187,8 +187,9 @@ private void backButtonPressed(JPanel panel, JLabel label) {
 	
 	panel.setBackground(textColor);
 	label.setForeground(backgroundColor);
-	new MainMenu();
+	//new MainMenu();
 	window.dispose();
+        System.exit(0);
 }
 
 	

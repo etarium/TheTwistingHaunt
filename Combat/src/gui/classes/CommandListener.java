@@ -24,8 +24,18 @@ public class CommandListener {
     private ArrayList<Encounter> encList;
 
     public CommandListener() {
-        NewGameWindow window = new NewGameWindow();
-        this.player = window.getNewPlayer();
+        MainMenu menu = new MainMenu();
+        boolean nGame = menu.getNGame();
+        if(nGame == true){//open new game window
+            NewGameWindow window = new NewGameWindow();
+            this.player = window.getNewPlayer();
+
+        }
+        else{   //load game
+            new LoadGameWindow();
+        }
+        
+        
         try{
         GUI_Client.main(null);
         play = GUI_Client.getPlayWindow();
