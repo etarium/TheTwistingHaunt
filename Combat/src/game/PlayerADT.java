@@ -51,17 +51,20 @@ public interface PlayerADT {
     /**
      * Prints out list of Entites from enc.getCombatants()
      * @param enc Encounter that combatants inhabit
+     * @return 
      */
-    public void printCombatants(Encounter enc);
+    public String printCombatants(Encounter enc);
     
     /**
      * Prints out list of usables from this.getItemList()
+     * @return 
      */
-    public void printUsables();
+    public String printUsables();
     
     /**
      * Prints out list of special attacks from this.getSpecAttackList()
+     * @return 
      */
-    public void printSpecAttacks();
+    public String printSpecAttacks();
     
 }

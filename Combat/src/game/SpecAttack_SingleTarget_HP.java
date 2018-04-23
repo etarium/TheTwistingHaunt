@@ -36,7 +36,7 @@ public class SpecAttack_SingleTarget_HP extends SpecAttack_SingleTarget{
     
     //class methods
     @Override
-    public void singleTarget(Entity target) {
+    public String singleTarget(Entity target) {
         int oldHP = target.getStats().getCurrentHealth();
         int maxHP = target.getStats().getMaxHealth();
 
@@ -48,7 +48,9 @@ public class SpecAttack_SingleTarget_HP extends SpecAttack_SingleTarget{
 
         target.getStats().setCurrentHealth(val);
         //outputs "HP [  x --> y  ]"
-        System.out.println("HP[  " + oldHP + " --> " + val + "  ]");
+        String result = "HP[  " + oldHP + " --> " + val + "  ]";
+        
+        return result;
     }
     
     public String toString()

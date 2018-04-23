@@ -45,10 +45,10 @@ public abstract class SpecAttack_SingleTarget extends SpecAttack{
     }
 
     @Override
-    public abstract void singleTarget(Entity target);
+    public abstract String singleTarget(Entity target);
 
     @Override
-    public void multiTarget(ArrayList<Entity> group) {
+    public String multiTarget(ArrayList<Entity> group) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

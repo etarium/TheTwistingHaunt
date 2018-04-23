@@ -14,7 +14,7 @@ import querymachine.QueryMachine;
 
 public class CommandListener {
     final String INSTANCE = "DN1";
-    public PlayWindow play;
+    public static PlayWindow play;
     private Player player;
     private Cell[][][] cellList;
     private ArrayList<Usable> usableList;
