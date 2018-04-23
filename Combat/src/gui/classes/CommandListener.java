@@ -213,7 +213,7 @@ public class CommandListener {
                 break;
 
             case "/help":
-                output = "\"Oh, help me!\"";
+                output = "Your cries for help go answered, and text appears before your eyes.";
                 new HelpWin();
                 break;
 
