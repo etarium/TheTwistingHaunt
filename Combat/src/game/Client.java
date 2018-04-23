@@ -89,6 +89,8 @@ public class Client {
         usableobj = theDestroyer.getSPUsableInstance(cellobj, usableobj);
         ArrayList<Equipable> equipableobj;
         equipableobj = theDestroyer.getArmorInstance(cellobj);
+        ArrayList<KeyItems> keyitemobj;
+        keyitemobj = theDestroyer.getKeyItemsInstance(cellobj);
         ArrayList<Encounter> encounterobj;
         encounterobj = theDestroyer.getEncounterInstance(cellobj);
         Cell[][][] cellArray = theDestroyer.getCellArray(cellobj);
@@ -96,6 +98,7 @@ public class Client {
         usableList = usableobj;
         equipList = equipableobj;
         encList = encounterobj;
+        keyList = keyitemobj;
         
     }
 
