@@ -12,8 +12,9 @@ public interface PlayerADT {
     
     /**
      * Prints menu of allowable Player actions.
+     * @return 
      */ 
-    public void displayMenu();
+    public String displayMenu();
     
     /**
      * Selection structure method for non-automated Player input and control during Encounter.

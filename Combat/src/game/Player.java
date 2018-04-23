@@ -44,7 +44,7 @@ public class Player extends Entity implements PlayerADT, Serializable{
        
     //Player methods
     @Override
-    public void displayMenu(){
+    public String displayMenu(){
         
         //outputs player's current health
         String menu = "You are at " + getStats().getCurrentHealth() + " HP...\n"
@@ -60,6 +60,7 @@ public class Player extends Entity implements PlayerADT, Serializable{
                     + "Make your selection: \n"
                     + ">";
         System.out.print(menu);
+        return menu;
     }//end displayMenu()
     
     @Override

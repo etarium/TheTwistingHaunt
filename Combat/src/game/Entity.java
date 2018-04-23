@@ -212,29 +212,36 @@ public class Entity implements EntityADT, Serializable{
     
     //dialog methods
     @Override
-    public void combatDialog(int damageValue, Entity target){
+    public String combatDialog(int damageValue, Entity target){
         
        String targName = target.name; 
-        
+       String combatDialog;
        if (damageValue < 0) {
+    	   		combatDialog = name + "'s attack fails to connect. Miss!";
             System.out.println(name + "'s attack fails to connect. Miss!");
         }
         else if (damageValue == 0){
+        		combatDialog = name + "'s attack glances off, dealing " + damageValue
+                        + " damage to " + targName + ".";
             System.out.println(name + "'s attack glances off, dealing " + damageValue
                              + " damage to " + targName + ".");
         }
         else {
+        	combatDialog = name + "'s attack deals " + damageValue 
+                    + " damage to " + targName + ".";
             System.out.println(name + "'s attack deals " + damageValue 
                              + " damage to " + targName + ".");
         }
+        return combatDialog;
     }
     
-    public void printEntityInfo(){  //method formatted for an "inspect" command of some type
+    public String printEntityInfo(){  //method formatted for an "inspect" command of some type
         String output =             //or player looking at their stats
                 this.getName()+"\n"+
                 "***********************************\n"+
                 this.getStats().toString();
         System.out.println(output);
+        return output;
     }
     
     @Override

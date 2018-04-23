@@ -148,13 +148,15 @@ public interface EntityADT {
      * Generates String output from selection structure based off of passed damage.
      * @param damageValue Integer representing damage dealt to target Entity
      * @param target Entity receiving damage
+     * @return String
      */
-    public void combatDialog(int damageValue, Entity target);
+    public String combatDialog(int damageValue, Entity target);
     
     /**
      * Method tasked with printing an Entity's stats, intended for use with an inspect command or a player looking at their stats
+     * @return 
      */
-    public void printEntityInfo();
+    public String printEntityInfo();
     
     @Override
     public String toString();
