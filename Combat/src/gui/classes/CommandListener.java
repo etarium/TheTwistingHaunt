@@ -87,7 +87,7 @@ public class CommandListener {
                 } //inspect object of command
                 else {
                     //TO_DO
-                    output = "There's nothing of interest there.";
+                    output = "You can look all day, but you still won't find it, " + this.player.getName() + ".";
 
                 }
                 break;
@@ -110,11 +110,38 @@ public class CommandListener {
 
             case "/inventory":
             case "/inv":
-                output = "TEST INVENTORY";
+            	
+            		if(this.player.getItemList() == null) {
+            			output = "Nothing to see here.";
+            		}
+            		else if(this.player.getItemList().isEmpty()) {
+            			output = "You don't have anything in your backpack. Poor you.";
+            		}
+            		else {
+            			for(Usable item : player.getItemList()) {
+            				output += item.getName() + "\n";
+            			}
+            		}
+            		
+            	
                 break;
 
             case "/equipment":
-                output = "TEST EQUIPMENT";
+            		Equipable armor = this.player.getWornArmor();
+            		Equipable weapon = this.player.getUsedWeapon();
+            		
+	            	if(armor == null && weapon == null) {
+	        			output = "You might as well be naked! Maybe that's why the villagers ushered you into this cave...\n\nHmmmm.....";
+	        		}
+	        		else {
+	        			if(armor != null) {
+	        				output += "You are wearing " + armor.getName() + ".\n";
+	        			}
+	        			if(weapon != null) {
+	        				output += "You are wielding " + weapon.getName() + ".\n";
+	        			}
+	        		}
+            	
                 break;
 
             case "/status":
