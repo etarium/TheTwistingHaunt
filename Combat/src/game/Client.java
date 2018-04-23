@@ -18,6 +18,11 @@ public class Client {
 
     private Player player;
     private Cell[][][] cellList;
+    private ArrayList<Usable> usableList;
+    private ArrayList<Equipable> equipList;
+    private ArrayList<KeyItems> keyList;
+    private ArrayList<Encounter> encList;
+    
 
     public Client() {
     }
@@ -87,7 +92,11 @@ public class Client {
         ArrayList<Encounter> encounterobj;
         encounterobj = theDestroyer.getEncounterInstance(cellobj);
         Cell[][][] cellArray = theDestroyer.getCellArray(cellobj);
-
+        cellList = cellArray;
+        usableList = usableobj;
+        equipList = equipableobj;
+        encList = encounterobj;
+        
     }
 
     public void saveGame() {
