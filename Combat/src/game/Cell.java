@@ -1,5 +1,6 @@
 package game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,9 +8,13 @@ import java.util.ArrayList;
  * @author jason
  */
 
-public class Cell {
+public class Cell implements Serializable{
     
-    private Location location;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6891627105178688717L;
+	private Location location;
     private String desc;
     private String terrain;
     private String encounter;

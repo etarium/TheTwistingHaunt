@@ -4,6 +4,7 @@ import game.Cell;
 import game.Encounter;
 import game.Equipable;
 import game.KeyItems;
+import game.Location;
 import game.Player;
 import game.Usable;
 import java.io.IOException;
@@ -233,6 +234,9 @@ public class CommandListener {
     public void newGame() throws SQLException, IOException {
         // create new instance of the game for the player using the input from the creator
         //save player
+    		Location tempLoc = new Location();
+    		player.setLocation(tempLoc);
+    	
         player.getLocation().setX(0);
         player.getLocation().setY(3);
         player.getLocation().setZ(0);
