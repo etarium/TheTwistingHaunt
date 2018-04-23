@@ -179,13 +179,12 @@ public class PlayWindow extends GameWindow{
 	
 		
 		
-		  box.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "
-		 
-				+ "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud "
-				+ "exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure "
-				+ "dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "
-				+ "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt "
-				+ "mollit anim id est laborum.");
+		  box.setText("A group of scared villagers begged for your help. They circled you, crying about "
+		  		+ "their deceased. Scared of their deceased -- It seems that this cave you're now in front "
+		  		+ "of is home to the undead. The villagers called the evil lurking within 'The Overlord'. "
+		  		+ "You had also heard of it as the 'Blue Lich' before. Truly, a "
+		  		+ "fearsome beast lies ahead...");
+		  
 		
 			
 		
