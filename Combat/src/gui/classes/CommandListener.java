@@ -32,9 +32,9 @@ public class CommandListener {
         	System.out.print("Exception");
         }
         try{
-            
+            newGame();
         }catch(Exception e){
-            
+            System.out.print("Hah got one!");
         }
         boolean run = true;
         int count = 0;
@@ -230,10 +230,12 @@ public class CommandListener {
 
     }
 
-    public void newGame(Player player) throws SQLException, IOException {
+    public void newGame() throws SQLException, IOException {
         // create new instance of the game for the player using the input from the creator
         //save player
-        this.player = player;
+        player.getLocation().setX(0);
+        player.getLocation().setY(3);
+        player.getLocation().setZ(0);
 
         loadInstance(INSTANCE);
     }
