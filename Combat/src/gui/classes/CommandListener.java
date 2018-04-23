@@ -236,7 +236,7 @@ public class CommandListener {
         player.getLocation().setX(0);
         player.getLocation().setY(3);
         player.getLocation().setZ(0);
-
+        System.out.print("ayylmao");
         loadInstance(INSTANCE);
     }
 

@@ -28,6 +28,7 @@ public class Player extends Entity implements PlayerADT, Serializable{
      * Empty constructor for Player
      */
     public Player() {
+        location = new Location();
     }
 
     /**
