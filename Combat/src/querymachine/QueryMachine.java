@@ -34,7 +34,7 @@ public class QueryMachine implements QueryMachineADT
     protected QueryDB generator = new QueryDB();
     protected ResultSet resultSet = null;
     private String varOne = "";
-    protected JTextArea output;
+    //protected JTextArea output;
 
 
     
@@ -87,7 +87,7 @@ public class QueryMachine implements QueryMachineADT
 			Cell tempCell = new Cell(x, y, z, description, instanceID, encounters, items, keyItems, reqItem, tempN, tempS, tempE, tempW );
 			cellInst.add(tempCell);
 			//System.out.print(".");
-			output.append(".");
+			//output.append(".");
 			
 		}//end while
 		
