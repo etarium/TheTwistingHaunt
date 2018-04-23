@@ -220,7 +220,7 @@ public class CommandListener {
             case "/quit":
                 output = "Next time, hero.";
                 run = false;
-                new MainMenu();
+                //new MainMenu();
                 play.exitGame();
                 play = null;
                 break;
