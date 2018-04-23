@@ -47,7 +47,7 @@ public class Client {
                 //check to see of movement possible
                 if (cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].isNorth()) {
                     player.getLocation().setY(player.getLocation().getY()+1);
-                    output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
+                    output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].toString();
                 }
                 
                 break;
@@ -55,21 +55,21 @@ public class Client {
                 //check to see of movement possible
                 if (cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].isSouth()) {
                     player.getLocation().setY(player.getLocation().getY()-1);
-                    output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
+                    output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].toString();
                 }
                 break;
             case 'e':
                 //check to see of movement possible
                 if (cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].isEast()) {
                     player.getLocation().setX(player.getLocation().getX()+1);
-                    output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
+                    output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].toString();
                 }
                 break;
             case 'w':
                 //check to see of movement possible
                 if (cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].isWest()) {
                     player.getLocation().setX(player.getLocation().getX()-1);
-                    output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
+                    output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].toString();
                 }
                 break;
             default:
