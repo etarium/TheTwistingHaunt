@@ -69,6 +69,8 @@ public class CommandListener {
     public void listen(PlayWindow play, boolean run) {
 
         String[] stringArray = inputParser(play.requestInput());
+        
+        
         String output = "";
 
         switch (stringArray[0]) {
@@ -81,11 +83,11 @@ public class CommandListener {
                 //inspect room
                 if (stringArray[1] == null) {
                     //TO_DO
-                    output = "TEST CELL DESC";
+                    output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
                 } //inspect object of command
                 else {
                     //TO_DO
-                    output = "TEST ITEM/ENTITY/ETC";
+                    output = "There's nothing of interest there.";
 
                 }
                 break;
@@ -116,7 +118,7 @@ public class CommandListener {
                 break;
 
             case "/status":
-                output = "TEST STATUS";
+                output = this.player.printEntityInfo();
                 break;
 
             //determines if movement can be made in the direction sent by the user
