@@ -31,8 +31,8 @@ public class NewGameWindow extends GameWindow{
 	
 	static PlayerClass playerClass;
 	
-	static Player newPlayer;
-        public Bridge bridge;
+	private Player newPlayer;
+        private boolean button;
 	
 	
 	public NewGameWindow() {
@@ -129,8 +129,10 @@ public class NewGameWindow extends GameWindow{
 		
 		window.setResizable(false);
 		window.setVisible(true);
-		
-		
+		button = true;
+		while(button){
+                    //lol
+                }
 	}//end constructor
 	
 	private void buttonSetup(Container con, JPanel panel, JLabel label, JButton button, int wBuffer, int hBuffer) {
@@ -284,12 +286,17 @@ public class NewGameWindow extends GameWindow{
 	
 	private void startButtonPressed(JPanel panel, JLabel label) {
 		
-		
+		button = true;
 		System.out.println(newPlayer);
+                try {
+		Thread.sleep(300);
+                } catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
-		
-			bridge = new Bridge(newPlayer);
-                 window.dispose();
+			
+                window.dispose();
 
 	}
 	
@@ -346,6 +353,15 @@ public class NewGameWindow extends GameWindow{
 	public JTextArea getOutputBox() {
 		return output;
 	}
+
+    public Player getNewPlayer() {
+        return newPlayer;
+    }
+        
+        
+    
+        
+        
 	
 	
 }//end NewGameWindow

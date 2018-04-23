@@ -26,7 +26,7 @@ public class TestClient {
     public static void main(String[] args) {
         
         
-        try {
+
         		//GUI_Client.main(null);
         		//output = GUI_Client.getPlayWindow().getOutputBox();
         		//input = GUI_Client.getPlayWindow().getInputBox();
@@ -44,9 +44,7 @@ public class TestClient {
         		
         		
         		
-        } catch(Exception e) {
-        	
-        }
+
         // <editor-fold defaultstate="collapsed" desc=" Old code to test the combat project. Pending removal... ">
         
         /*

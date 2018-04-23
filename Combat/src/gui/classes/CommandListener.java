@@ -14,7 +14,7 @@ import querymachine.QueryMachine;
 
 public class CommandListener {
     
-    static PlayWindow play;
+    private PlayWindow play;
     private Player player;
     private Cell[][][] cellList;
     private ArrayList<Usable> usableList;
@@ -24,12 +24,12 @@ public class CommandListener {
 
     public CommandListener() {
         NewGameWindow window = new NewGameWindow();
-        this.player = window.bridge.getPlayer();
+        this.player = window.getNewPlayer();
         try{
         GUI_Client.main(null);
         play = GUI_Client.getPlayWindow();
         } catch(Exception e) {
-        	
+        	System.out.print("Exception");
         }
         boolean run = true;
         int count = 0;
