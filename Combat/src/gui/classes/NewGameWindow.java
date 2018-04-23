@@ -283,8 +283,7 @@ public class NewGameWindow extends GameWindow{
 	
 	private void startButtonPressed(JPanel panel, JLabel label) {
 		
-		//panel.setBackground(textColor);
-		//label.setForeground(backgroundColor);
+		
 		System.out.println(newPlayer);
 		
 		try {
