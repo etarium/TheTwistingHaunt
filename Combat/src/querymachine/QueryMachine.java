@@ -38,10 +38,10 @@ public class QueryMachine implements QueryMachineADT
 
 
     
-    public QueryMachine(JTextArea output)
+    public QueryMachine()
     {
     	//empty constructor
-    	this.output = output;
+    	//this.output = output;
     }
     
     /**

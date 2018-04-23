@@ -31,7 +31,8 @@ public class Client {
         // create new instance of the game for the player using the input from the creator
         //save player
         this.player = player;
-        loadInstance(INSTANCE, output);
+        
+        //loadInstance(INSTANCE, output);
     }
 
     public void loadGame() {
@@ -81,7 +82,7 @@ public class Client {
 
     public void loadInstance(String instance, JTextArea output) throws SQLException, IOException {
         //execute query for cells in instance
-        QueryMachine theDestroyer = new QueryMachine(output);
+        QueryMachine theDestroyer = new QueryMachine();
         ArrayList<Cell> cellobj;
         cellobj = theDestroyer.getCellInstance(instance);
         ArrayList<Usable> usableobj;

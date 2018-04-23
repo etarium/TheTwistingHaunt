@@ -32,6 +32,7 @@ public class NewGameWindow extends GameWindow{
 	static PlayerClass playerClass;
 	
 	static Player newPlayer;
+        public Bridge bridge;
 	
 	
 	public NewGameWindow() {
@@ -286,14 +287,10 @@ public class NewGameWindow extends GameWindow{
 		
 		System.out.println(newPlayer);
 		
-		try {
-			game.Client client = new game.Client();
-			client.newGame(newPlayer, output);
-		} catch(IOException ioe) {
+		
+			bridge = new Bridge(newPlayer);
+                 window.dispose();
 
-		} catch(SQLException sqle) {
-
-		}
 	}
 	
 	private void bsSetup(JButton back, JPanel panelB, JLabel labelB, JButton start, JPanel panelS, JLabel labelS) {

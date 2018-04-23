@@ -25,27 +25,22 @@ public class TestClient {
 
     public static void main(String[] args) {
         
-        Client client = new Client();
         
         try {
-        		GUI_Client.main(null);
+        		//GUI_Client.main(null);
         		//output = GUI_Client.getPlayWindow().getOutputBox();
         		//input = GUI_Client.getPlayWindow().getInputBox();
         		
-        		play = GUI_Client.getPlayWindow();
+        		//play = GUI_Client.getPlayWindow();
         		CommandListener ear = new CommandListener();
         		
         		
         		
                		
-        		boolean run = true;
-        		int count = 0;
+        		//boolean run = true;
+        		//int count = 0;
         		
-        		while(run) {
-        			
-        			System.out.println("Iteration " + ++count);        			
-        			ear.listen(play , run);
-        		}
+        		
         		
         		
         		

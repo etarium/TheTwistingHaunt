@@ -254,10 +254,11 @@ public class PlayWindow extends GameWindow{
 	}
 	
 	public String requestInput() {
-		
+		System.out.print("before");
 		while(!enterPressed) {
 			try {
 				Thread.sleep(300);
+                                System.out.print("after");
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
