@@ -288,16 +288,28 @@ public class CommandListener {
                 				Equipable old = player.getWornArmor();
             					player.setWornArmor(armor);
             					
-            					output = "As soon as you finish donning " + armor.getName() + ", "
-            							+old.getName() + " crumbles to dust. How convenient.";
+            					if(old != null) {
+            						output = "As soon as you finish donning " + armor.getName() + ", "
+            								+old.getName() + " crumbles to dust. How convenient.";
+            					}
+            					else {
+            						output = "You don " + armor.getName() + ". You feel much more protected.";
+            					}
             			}
                 		else if (equipped instanceof Equipable_Weapon) {
                 				Equipable_Weapon weapon = (Equipable_Weapon)equipped;
                 				Equipable old = player.getUsedWeapon();
             					player.setUsedWeapon(weapon);
             					
-            					output = "As soon as you pick up " + weapon.getName() + ", "
-            							+ old.getName() + " crumbles to dust. How convenient.";
+            					if(old != null) {
+            						output = "As soon as you pick up " + weapon.getName() + ", "
+            								+ old.getName() + " crumbles to dust. How convenient.";
+            					}
+            					else {
+            						output = "You equip " + weapon.getName() + ". This will work so much better "
+            								+ "than your fists, huh?.";
+            					}
+            					
             			}
                 		
                 		else {
