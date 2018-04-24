@@ -23,7 +23,7 @@ public class ObjectComparator implements ObjectComparatorADT {
 	 * @return integer listing the index location in Array of desired object.
 	 * @return will return -1 if item is not found.
 	 */
-	public int IsPresentUsable(String item, ArrayList<Usable> usableobj)
+	public int isPresentUsable(String item, ArrayList<Usable> usableobj)
 	{
 		for(int i=0; i<usableobj.size(); i++)
 		{
@@ -45,7 +45,7 @@ public class ObjectComparator implements ObjectComparatorADT {
 	 * @return integer listing the index location in Array of desired object.
 	 * @return will return -1 if item is not found.
 	 */
-	public int IsPresentEquipable(String item, ArrayList<Equipable> equipobj)
+	public int isPresentEquipable(String item, ArrayList<Equipable> equipobj)
 	{
 		
 		for(int i=0; i<equipobj.size(); i++)
@@ -69,7 +69,7 @@ public class ObjectComparator implements ObjectComparatorADT {
 	 * @return integer listing the index location in Array of desired object.
 	 * @return will return -1 if item is not found.
 	 */
-	public int IsPresentKeyItem(String item, ArrayList<KeyItems> keyitemobj)
+	public int isPresentKeyItem(String item, ArrayList<KeyItems> keyitemobj)
 	{
 		for(int i=0; i<keyitemobj.size(); i++)
 		{
@@ -82,16 +82,38 @@ public class ObjectComparator implements ObjectComparatorADT {
 		}
 		return itemLoc;
 	}
-
+	
+	/**
+	 * Searches the Encounter ArrayList for an encounter listed in Cell at a current location.
+	 * @param String cellEnc
+	 * @param ArrayList encobj
+	 * @return integer listing the index location in Array of desired encounter.
+	 * @return will return -1 if encounter is not found.
+	 */
+	/*
+	public int isPresentEntity(String cellEnc, ArrayList<Encounter> encobj)
+	{
+		for(int i=0; i<encobj.size(); i++)
+		{
+			if(cellEnc.equals(encobj.get(i).getCombatants().get()))
+			{
+				itemLoc = i;
+				return itemLoc;
+			}
+			
+		}
+		return itemLoc;
+	}
+	*/
 	/**
 	 * Returns a KeyItems object
 	 * @param String item
 	 * @param ArrayList keyitemobj
 	 * @return KeyItems object
 	 */
-	public KeyItems KeyItemFound(String item, ArrayList<KeyItems >keyitemobj)
+	public KeyItems keyItemFound(String item, ArrayList<KeyItems >keyitemobj)
 	{
-		KeyItems newItem = keyitemobj.get(IsPresentKeyItem(item, keyitemobj));
+		KeyItems newItem = keyitemobj.get(isPresentKeyItem(item, keyitemobj));
 		
 		return newItem;
 	}
@@ -102,9 +124,9 @@ public class ObjectComparator implements ObjectComparatorADT {
 	 * @param ArrayList usableobj
 	 * @return Usable object
 	 */
-	public Usable UsableItemFound(String item, ArrayList<Usable> usableobj)
+	public Usable usableItemFound(String item, ArrayList<Usable> usableobj)
 	{
-		Usable newItem = (Usable) usableobj.get(IsPresentUsable(item, usableobj));
+		Usable newItem = (Usable) usableobj.get(isPresentUsable(item, usableobj));
 		return newItem;
 	}
 	
@@ -114,9 +136,9 @@ public class ObjectComparator implements ObjectComparatorADT {
 	 * @param ArrayList equipobj
 	 * @return Equipable object
 	 */
-	public Equipable EquipableItemFound(String item, ArrayList<Equipable> equipobj)
+	public Equipable equipableItemFound(String item, ArrayList<Equipable> equipobj)
 	{
-		Equipable_Armor newItem = (Equipable_Armor) equipobj.get(IsPresentEquipable(item, equipobj));
+		Equipable_Armor newItem = (Equipable_Armor) equipobj.get(isPresentEquipable(item, equipobj));
 		
 		return newItem;
 	}

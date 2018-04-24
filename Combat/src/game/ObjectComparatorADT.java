@@ -14,7 +14,7 @@ public interface ObjectComparatorADT {
 	 * @return integer listing the index location in Array of desired object.
 	 * @return will return -1 if item is not found.
 	 */
-	public int IsPresentUsable(String item, ArrayList<Usable> usableobj);
+	public int isPresentUsable(String item, ArrayList<Usable> usableobj);
 	
 	
 	/**
@@ -24,7 +24,7 @@ public interface ObjectComparatorADT {
 	 * @return integer listing the index location in Array of desired object.
 	 * @return will return -1 if item is not found.
 	 */
-	public int IsPresentEquipable(String item, ArrayList<Equipable> equipobj);
+	public int isPresentEquipable(String item, ArrayList<Equipable> equipobj);
 	
 	
 	/**
@@ -34,7 +34,7 @@ public interface ObjectComparatorADT {
 	 * @return integer listing the index location in Array of desired object.
 	 * @return will return -1 if item is not found.
 	 */
-	public int IsPresentKeyItem(String item, ArrayList<KeyItems> keyitemobj);
+	public int isPresentKeyItem(String item, ArrayList<KeyItems> keyitemobj);
 	
 	/**
 	 * Returns a Equipable object
@@ -42,7 +42,7 @@ public interface ObjectComparatorADT {
 	 * @param ArrayList equipobj
 	 * @return Equipable object
 	 */
-	public Equipable EquipableItemFound(String item, ArrayList<Equipable> equipobj);
+	public Equipable equipableItemFound(String item, ArrayList<Equipable> equipobj);
 	
 	/**
 	 * Returns a Usable object
@@ -50,7 +50,7 @@ public interface ObjectComparatorADT {
 	 * @param ArrayList usableobj
 	 * @return Usable object
 	 */
-	public Usable UsableItemFound(String item, ArrayList<Usable> usableobj);
+	public Usable usableItemFound(String item, ArrayList<Usable> usableobj);
 	
 	/**
 	 * Returns a KeyItems object
@@ -58,6 +58,6 @@ public interface ObjectComparatorADT {
 	 * @param ArrayList keyitemobj
 	 * @return KeyItems object
 	 */
-	public KeyItems KeyItemFound(String item, ArrayList<KeyItems >keyitemobj);
+	public KeyItems keyItemFound(String item, ArrayList<KeyItems> keyitemobj);
 	
 }

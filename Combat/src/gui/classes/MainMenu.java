@@ -119,6 +119,8 @@ public class MainMenu extends GameWindow {
                 }
             });
 
+            lgButton.setEnabled(false);
+            
             con.add(menuPanels[i]);
             con.add(buttons[i]);
         }//end menu button generation

@@ -25,9 +25,11 @@ public class Cell implements Serializable{
     private boolean south;
     private boolean east;
     private boolean west;
+    /*
     private ArrayList<Equipable> cellEq;
     private ArrayList<KeyItems> cellkey;
     private ArrayList<Usable> cellUse;
+    */
 
     public Cell() {
     }
@@ -44,6 +46,7 @@ public class Cell implements Serializable{
         this.south = south;
         this.east = east;
         this.west = west;
+        
     }
 
     public Location getLocation() {

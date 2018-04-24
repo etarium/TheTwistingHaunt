@@ -5,11 +5,14 @@ import game.Encounter;
 import game.Equipable;
 import game.KeyItems;
 import game.Location;
+import game.ObjectComparator;
 import game.Player;
 import game.Usable;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
+
 import javax.swing.JTextArea;
 import querymachine.QueryMachine;
 
@@ -80,11 +83,14 @@ public class CommandListener {
 
         String[] stringArray = inputParser(play.requestInput());
         
+        String command = stringArray[0];
+        String parameter = stringArray[1];
+        
         
         String output = "";
         //String copycat = "/" + play.getOutputBox().getText();
 
-        switch (stringArray[0]) {
+        switch (command) {
 
             //if no parameter is present in the {command}{parameter} structure, then output is set
             //	to current room's description
@@ -92,7 +98,7 @@ public class CommandListener {
             //	based upon that
             case "/look":
                 //inspect room
-                if (stringArray[1] == null) {
+                if (parameter == null) {
                     //TO_DO
                     output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
                 } //inspect object of command
@@ -105,7 +111,7 @@ public class CommandListener {
                 
 
             case "/take":
-            		if (stringArray[1] == null) {
+            		if (parameter == null) {
                     //TO_DO
                     output = "Oh, come one. You've got to give me more info than that!";
                 } //inspect object of command
@@ -117,7 +123,7 @@ public class CommandListener {
                 break;
 
             case "/drop":
-            		if (stringArray[1] == null) {
+            		if (parameter == null) {
                     //TO_DO
                     output = "Stop, drop, and roll is often useful, but not here.";
                 } //inspect object of command
@@ -129,7 +135,7 @@ public class CommandListener {
                 break;
 
             case "/use":
-            		if (stringArray[1] == null) {
+            		if (parameter == null) {
                     //TO_DO
                     output = "Giving more information would be ... USEful.";
                 } //inspect object of command
@@ -141,7 +147,7 @@ public class CommandListener {
                 break;
 
             case "/equip":
-            		if (stringArray[1] == null) {
+            		if (parameter == null) {
                     //TO_DO
                     output = "Are you sure you're equipped for this task if you can't give me more information?";
                 } //inspect object of command
@@ -189,6 +195,7 @@ public class CommandListener {
                 break;
 
             case "/status":
+            case "/stats":
                 output = this.player.printEntityInfo();
                 break;
 
@@ -206,7 +213,7 @@ public class CommandListener {
             case "/west":
             case "/w":
 
-                char direction = stringArray[0].charAt(1);
+                char direction = command.charAt(1);
 
                 output = "You'd like to go that way, wouldn't you?";
                 switch (direction) {
@@ -283,6 +290,45 @@ public class CommandListener {
         play.outGUI(output);
 
     }//end commandListener()
+    
+    
+    //WIP
+    private Object parseParameter(String parameter) {
+    	
+    		Object someObject = null;
+    	
+    		Cell currentCell = player.getCurrentCell(cellList);
+    		
+    		ObjectComparator comp = new ObjectComparator();
+    		
+    		
+
+    	    //private ArrayList<Usable> usableList;
+    	    //private ArrayList<Equipable> equipList;
+    	    //private ArrayList<KeyItems> keyList;
+    	    //private ArrayList<Encounter> encList;
+    		String test = currentCell.getEncounter();
+    		
+    		int usableIndex = comp.isPresentUsable(currentCell.getItem(), usableList);
+    		int equipIndex = comp.isPresentEquipable(currentCell.getItem(), equipList);
+    		int keyIndex = comp.isPresentKeyItem(currentCell.getKeyItem(), keyList);
+    		//int entityIndex = equipIndex;
+    		
+    		/*
+    		Encounter enc = currentCell.getEncounter()
+    		if( index > -1) {
+    			if equipList.get(index).getName().equals(parameter){
+    				return
+    			}
+    			
+    		}
+    		*/
+    		
+    		
+    
+    		return someObject;
+    }
+    
 
     /**
      * Parses input into an array with the format {verb},{object}. If no

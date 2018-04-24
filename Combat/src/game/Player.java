@@ -41,6 +41,11 @@ public class Player extends Entity implements PlayerADT, Serializable{
         super(stats, name, description, teamId);
     }
     
+    public Cell getCurrentCell(Cell[][][] cellList) {
+    		Location temp = this.getLocation();
+    		return cellList[temp.getX()][temp.getY()][temp.getZ()];
+    }
+    
     
        
     //Player methods
