@@ -84,28 +84,6 @@ public class ObjectComparator implements ObjectComparatorADT {
 	}
 	
 	/**
-	 * Searches the Encounter ArrayList for an encounter listed in Cell at a current location.
-	 * @param String cellEnc
-	 * @param ArrayList encobj
-	 * @return integer listing the index location in Array of desired encounter.
-	 * @return will return -1 if encounter is not found.
-	 */
-	/*
-	public int isPresentEntity(String cellEnc, ArrayList<Encounter> encobj)
-	{
-		for(int i=0; i<encobj.size(); i++)
-		{
-			if(cellEnc.equals(encobj.get(i).getCombatants().get()))
-			{
-				itemLoc = i;
-				return itemLoc;
-			}
-			
-		}
-		return itemLoc;
-	}
-	*/
-	/**
 	 * Returns a KeyItems object
 	 * @param String item
 	 * @param ArrayList keyitemobj
@@ -162,6 +140,16 @@ public class ObjectComparator implements ObjectComparatorADT {
 				entityList.add(encounterobj.get(i).getCombatants().get(i));
 				return entityList;			
 			}
+			/*
+			if(teamID.equals(encounterobj.get(i).getRekt().get(i).getTeamId()))
+			{
+				
+				itemLoc = i;
+				entityList.add(encounterobj.get(i).getRekt().get(i));
+				return entityList;
+			
+			}
+			*/
 			
 		}
 		

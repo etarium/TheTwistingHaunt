@@ -1,6 +1,6 @@
 
 &------*
-| Help |
+| Help |            XXX signals currently not implemented
 &------*
 
 &--------------------------------------------------------------------------*
@@ -8,12 +8,13 @@
 | /look              | Displays information about current room             |
 | /look {item}       | Displays information about targeted item            |
 |                    |    currently in player's inventory                  |
-| /look {entity}     | Displays information about targeted entity          |
+| XXX/look {entity}  | Displays information about targeted entity          |
 | /look {equipment}  | Displays information about targeted                 |
 |                    |    piece of equipment                               |
 |                    |                                                     |
+| /inspect           | Search the room thoroughly                          |
+|                    |                                                     |
 | /take {item}       | Add takeable object to inventory                    |
-| /take {equipment}  | Add targeted equipment to equipment list            |
 |                    |                                                     |
 | /drop {item}       | Drop targeted item to floor of current room         |
 |                    |    WARNING: Will be lost upon game reset            |

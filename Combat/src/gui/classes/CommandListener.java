@@ -3,6 +3,8 @@ package gui.classes;
 import game.Cell;
 import game.Encounter;
 import game.Equipable;
+import game.Equipable_Armor;
+import game.Equipable_Weapon;
 import game.KeyItems;
 import game.Location;
 import game.ObjectComparator;
@@ -103,11 +105,36 @@ public class CommandListener {
                     output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
                 } //inspect object of command
                 else {
-                    //TO_DO
-                    output = "You can look all day, but you still won't find it, " + this.player.getName() + ".";
+                    Object looked = parseParameter(parameter);
+                    
+                    if (looked == null) {
+                    		output = "You can look all day, but you still won't find it, " + this.player.getName() + ".";
+                    }
+                    else if(looked instanceof Usable) {
+                    		output = ((Usable) looked).getDescription();
+                    }
+                    else if(looked instanceof Equipable ) {
+                    		output = ((Equipable) looked).getDescription();
+                    }
+                    else if(looked instanceof KeyItems) {
+                    		output = ((KeyItems) looked).getDescription();
+                    
+                    }
 
                 }
                 break;
+                
+            case "/inspect":
+            		String name = inspectCell();
+            		
+            		if(name == null) {
+            			output = "You search long and hard, but your effort turns up nothing of interest.";
+            		}
+            		else {
+            			output = "By your sharp eyes or by good fortune, you find " + name + "!";
+            		}
+            		
+            		break;
                 
 
             case "/take":
@@ -116,12 +143,36 @@ public class CommandListener {
                     output = "Oh, come one. You've got to give me more info than that!";
                 } //inspect object of command
                 else {
-                    //TO_DO
-                    output = "You can look all day, but you still won't find it, " + this.player.getName() + ".";
+                    Object taken = parseParameter(parameter);
+                    
+                    if(taken == null) {
+                    		output = "I'm not sure what you were expecting to take...";
+                    }
+                    else if(taken instanceof Usable) {
+                    		Usable item = (Usable)taken;
+                    		usableList.remove(item);
+                    		
+                    		player.getItemList().add(item);
+                    		
+                    		output = "You have added " + item.getName() + " to your inventory.";
+                    }
+                    else if (taken instanceof KeyItems) {
+                    		KeyItems item = (KeyItems)taken;
+                    		keyList.remove(item);
+                    		
+                    		player.getKeyItemsList().add(item);
+                    		
+                    		output = "Hm. This looks interesting. You add " + item.getName() + " to your pack.";
+                    }
+                    
+                    else {
+                    		output = "That looks awkward to just carry around.";
+                    }
 
                 }
                 break;
-
+                
+            
             case "/drop":
             		if (parameter == null) {
                     //TO_DO
@@ -129,8 +180,49 @@ public class CommandListener {
                 } //inspect object of command
                 else {
                     //TO_DO
-                    output = "You can look all day, but you still won't find it, " + this.player.getName() + ".";
-
+                		Object dropped = searchInventory(parameter);
+                		
+                		if(dropped == null) {
+                			output = "You must first HAVE that in order to drop it.";
+                		}
+                		
+                		else {
+                			if (dropped instanceof KeyItems) {
+                				KeyItems item = (KeyItems)dropped;
+                				output = "You have a feeling that you may need " + item.getName() + ". It wouldn't be wise to drop it.";
+                			}
+                			
+                			else if(dropped instanceof Usable) {
+                        		Usable item = (Usable)dropped;
+                        		player.getItemList().remove(item);
+                        		                        		
+                        		output = "You have removed " + item.getName() + " from your inventory.";
+                        }
+                			
+                			else if(dropped instanceof Equipable) {
+                				Equipable item = (Equipable)dropped;
+                				
+                				if(item.getName().equals(player.getWornArmor().getName())) {
+                					player.setWornArmor(null);
+                				}
+                				if(item.getName().equals(player.getUsedWeapon().getName())) {
+                					player.setUsedWeapon(null);
+                				}
+                				
+                				output = "Well, you've dropped " + item.getName() + ", and it crumbles to dust "
+                					   + "when it hits the floor.\n\n Happy now?";
+                				
+                			}
+                			
+                			else {
+                        		output = "However you managed to get your hands on that thing, it's gone now...";
+                        }
+                			
+                		}
+                		
+                
+                    
+                    
                 }
                 break;
 
@@ -141,8 +233,40 @@ public class CommandListener {
                 } //inspect object of command
                 else {
                     //TO_DO
-                    output = "You can look all day, but you still won't find it, " + this.player.getName() + ".";
-
+                		Object used = searchInventory(parameter);
+                		
+                		if (used == null) {
+                			output = "I could use my weight in gold. You could use a" + parameter  
+                				+    ". Not everyone can get what they want, though, can they, " + player.getName()
+                				+    "?";	
+                		}
+                		else {
+                			if (used instanceof KeyItems) {
+                				KeyItems item = (KeyItems)used;
+                				output = "You twirl " + item.getName() + " around in your fingers."
+                						+"While fun, you're not entirely sure how or where to use it..."
+                						+"\n\nIt's best to keep looking.";
+                			}
+                			
+                			else if(used instanceof Usable) {
+                        		Usable item = (Usable)used;
+                        		item.useItem(null, player);
+                        		                        		
+                        		output = "You have used " + item.getName() + ".";
+                        }
+                			
+                			else if(used instanceof Equipable) {                				
+                			
+                				output = "You really need to find a better time for sparring.";
+                				
+                			}
+                			
+                			else {
+                        		output = "You can't use that.";
+                        }
+                			
+                		}
+                		
                 }
                 break;
 
@@ -153,8 +277,34 @@ public class CommandListener {
                 } //inspect object of command
                 else {
                     //TO_DO
-                    output = "You can look all day, but you still won't find it, " + this.player.getName() + ".";
-
+                		Object equipped = parseParameter(parameter);
+                		
+                		if(equipped == null) {
+                			output = "You'll have no such luck equipping that.";
+                		}
+                		
+                		else if (equipped instanceof Equipable_Armor) {
+                				Equipable_Armor armor = (Equipable_Armor)equipped;
+                				Equipable old = player.getWornArmor();
+            					player.setWornArmor(armor);
+            					
+            					output = "As soon as you finish donning " + armor.getName() + ", "
+            							+old.getName() + " crumbles to dust. How convenient.";
+            			}
+                		else if (equipped instanceof Equipable_Weapon) {
+                				Equipable_Weapon weapon = (Equipable_Weapon)equipped;
+                				Equipable old = player.getUsedWeapon();
+            					player.setUsedWeapon(weapon);
+            					
+            					output = "As soon as you pick up " + weapon.getName() + ", "
+            							+ old.getName() + " crumbles to dust. How convenient.";
+            			}
+                		
+                		else {
+                			output = "Yeah, good luck fighting with that.";
+                		}
+                				
+                		
                 }
                 break;
 
@@ -169,7 +319,7 @@ public class CommandListener {
             		}
             		else {
             			for(Usable item : player.getItemList()) {
-            				output += item.getName() + "\n";
+            				output += item +  "\n";
             			}
             		}
             		
@@ -274,9 +424,6 @@ public class CommandListener {
                 //output = "TEST SAVE";
                 break;
                 
-            //case copycat:
-            //		output = "HEY! Stop copying me!";
-            //		break;
 
             //if command is not recognized, outputs a flavorful error and references the /help command for assistance
             default:
@@ -291,42 +438,132 @@ public class CommandListener {
 
     }//end commandListener()
     
+    private Object searchInventory(String search) {
+    	
+    		ArrayList<Usable> itemList = player.getItemList();
+		ArrayList<KeyItems> keyItemList = player.getKeyItemsList();
+		ArrayList<Equipable> equipmentList = new ArrayList<>();
+		equipmentList.add(player.getUsedWeapon());
+		equipmentList.add(player.getWornArmor());
+		
+		for(Usable item : itemList) {
+			if (item.getName().equalsIgnoreCase(search)){
+				return item;
+			}
+		}
+		
+		for(KeyItems item : keyItemList) {
+			if (item.getName().equalsIgnoreCase(search)){
+				return item;
+			}
+		}
+		
+		for(Equipable item : equipmentList) {
+			if (item.getName().equalsIgnoreCase(search)){
+				return item;
+			}
+		}
+		
+		return null;
+		
+		
+    }
+    
     
     //WIP
     private Object parseParameter(String parameter) {
-    	
-    		Object someObject = null;
-    	
-    		Cell currentCell = player.getCurrentCell(cellList);
-    		
-    		ObjectComparator comp = new ObjectComparator();
-    		
-    		
 
-    	    //private ArrayList<Usable> usableList;
-    	    //private ArrayList<Equipable> equipList;
-    	    //private ArrayList<KeyItems> keyList;
-    	    //private ArrayList<Encounter> encList;
-    		String test = currentCell.getEncounter();
-    		
-    		int usableIndex = comp.isPresentUsable(currentCell.getItem(), usableList);
-    		int equipIndex = comp.isPresentEquipable(currentCell.getItem(), equipList);
-    		int keyIndex = comp.isPresentKeyItem(currentCell.getKeyItem(), keyList);
-    		//int entityIndex = equipIndex;
-    		
-    		/*
-    		Encounter enc = currentCell.getEncounter()
-    		if( index > -1) {
-    			if equipList.get(index).getName().equals(parameter){
-    				return
-    			}
+	
+	    	Cell currentCell = player.getCurrentCell(cellList);
+	    	parameter = parameter.toLowerCase();
+	
+	    	ObjectComparator comp = new ObjectComparator();
+	    	int notFound = -1;
+	
+	    	//private ArrayList<Usable> usableList;
+	    	//private ArrayList<Equipable> equipList;
+	    	//private ArrayList<KeyItems> keyList;
+	    	//private ArrayList<Encounter> encList;
+
+	    	//ArrayList<Entity>
+	    	
+	    	
+	    	int usableIndex = comp.isPresentUsable(currentCell.getItem(), usableList);
+	    	int equipIndex = comp.isPresentEquipable(currentCell.getItem(), equipList);
+	    	int keyIndex = comp.isPresentKeyItem(currentCell.getKeyItem(), keyList);
+	    	//int entityIndex = equipIndex;
+	
+	    	if(usableIndex == notFound && equipIndex == notFound && keyIndex == notFound ) {
+	    		// parameter not found
+	    	}
+	    	else {
+	    		if (usableIndex > notFound) {
+	
+	    			Usable item = usableList.get(usableIndex);
+	    			if (item.getName().toLowerCase().equals(parameter)){
+	    				return item;
+	    			}
+	    		}
+	    		if (equipIndex > notFound) {
+	
+	    			Equipable item = equipList.get(equipIndex);
+	    			if (item.getName().toLowerCase().equals(parameter)){
+	    				return item;
+	    			}
+	    		}
+	    		if (keyIndex > notFound) {
+	
+	    			KeyItems item = keyList.get(keyIndex);
+	    			if (item.getName().toLowerCase().equals(parameter)){
+	    				return item;
+	    			}
+	    		}
+	    	}
+	
+	    	return null;
+
+
+    }
+    
+    private String inspectCell() {
+    	
+    	ObjectComparator comp = new ObjectComparator();
+    	Cell currentCell = player.getCurrentCell(cellList);
+    	
+    	int notFound = -1;
+    	
+    	int usableIndex = comp.isPresentUsable(currentCell.getItem(), usableList);
+    	int equipIndex = comp.isPresentEquipable(currentCell.getItem(), equipList);
+    	int keyIndex = comp.isPresentKeyItem(currentCell.getKeyItem(), keyList);
+    	
+    	if(usableIndex == notFound && equipIndex == notFound && keyIndex == notFound ) {
+    		// parameter not found
+    	}
+    	else 
+    	{
+    		if (usableIndex > notFound) {
+
+    			Usable item = usableList.get(usableIndex);
+    				return item.getName();
     			
     		}
-    		*/
-    		
-    		
-    
-    		return someObject;
+    		if (equipIndex > notFound) {
+
+    			Equipable item = equipList.get(equipIndex);
+    			return item.getName();
+    			
+    		}
+    		if (keyIndex > notFound) {
+
+    			KeyItems item = keyList.get(keyIndex);
+    			return item.getName();
+    			
+    		}
+    	}
+    	
+
+    	return null;
+    	
     }
     
 
