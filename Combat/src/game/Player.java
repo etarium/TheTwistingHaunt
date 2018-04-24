@@ -29,6 +29,7 @@ public class Player extends Entity implements PlayerADT, Serializable{
      */
     public Player() {
         location = new Location();
+        this.instantiateEmptyLists();
     }
 
     /**
@@ -39,6 +40,13 @@ public class Player extends Entity implements PlayerADT, Serializable{
      */
     public Player(StatBlock stats, String name, String description, String teamId) {
         super(stats, name, description, teamId);
+        this.instantiateEmptyLists();
+    }
+    
+    private void instantiateEmptyLists() {
+    		this.setItemList(new ArrayList<Usable>());
+    		this.setKeyItemsList(new ArrayList<KeyItems>());
+    		this.setSpecAttackList(new ArrayList<SpecAttack>());
     }
     
     public Cell getCurrentCell(Cell[][][] cellList) {

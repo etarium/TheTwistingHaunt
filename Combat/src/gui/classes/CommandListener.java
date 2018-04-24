@@ -236,7 +236,7 @@ public class CommandListener {
                 		Object used = searchInventory(parameter);
                 		
                 		if (used == null) {
-                			output = "I could use my weight in gold. You could use a" + parameter  
+                			output = "I could use my weight in gold. You could use that" + parameter  
                 				+    ". Not everyone can get what they want, though, can they, " + player.getName()
                 				+    "?";	
                 		}
@@ -443,8 +443,16 @@ public class CommandListener {
     		ArrayList<Usable> itemList = player.getItemList();
 		ArrayList<KeyItems> keyItemList = player.getKeyItemsList();
 		ArrayList<Equipable> equipmentList = new ArrayList<>();
-		equipmentList.add(player.getUsedWeapon());
-		equipmentList.add(player.getWornArmor());
+		
+		Equipable weapon = player.getUsedWeapon();
+		Equipable armor = player.getWornArmor();
+		
+		if(weapon != null) {
+			equipmentList.add(weapon);
+		}
+		if(armor != null) {
+			equipmentList.add(armor);
+		}
 		
 		for(Usable item : itemList) {
 			if (item.getName().equalsIgnoreCase(search)){
