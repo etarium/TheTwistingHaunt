@@ -142,4 +142,30 @@ public class ObjectComparator implements ObjectComparatorADT {
 		
 		return newItem;
 	}
+	
+	/*
+	 * Searches the Usable ArrayList for the object listed in Cell at a current location.
+	 * @param String teamID
+	 * @param teamID should be pulled from Cell.getEncounter();
+	 * @param ArrayList usableobj
+	 * @return integer listing the index location in Array of desired object.
+	 * @return will return -1 if item is not found.
+	 */
+	public ArrayList<Entity> isEncounterPresent(String teamID, ArrayList<Encounter> encounterobj)
+	{
+		ArrayList<Entity> entityList = new ArrayList<Entity>();
+		for(int i=0; i<encounterobj.size(); i++)
+		{
+			if(teamID.equals(encounterobj.get(i).getCombatants().get(i).getTeamId()))
+			{
+				itemLoc = i;
+				entityList.add(encounterobj.get(i).getCombatants().get(i));
+				return entityList;			
+			}
+			
+		}
+		
+		return entityList;
+		
+	}
 }
