@@ -22,6 +22,8 @@ Completed Tasks:
 
 Current Goals:
 
+  -<CONSTANT>Documentation, especially with commonly used interfacing methods
+  
   -<WIP>Implement an advanced client to play a short game using the combat project
   
     -Subtasks:
