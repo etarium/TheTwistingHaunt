@@ -57,7 +57,7 @@ Future Iterations:
 
   -<COMBAT>Expanding Equipables to allow for dual-wielding, two-handed, and implementation of enitities with arms > 2
 
-  -<GUI>Addition of character/entity artwork done in same style of GUI
+  -<GUI>Addition of character/entity artwork done in same style of GUI.
 
   -<GUI>Option menu to change GUI theme (colors, window sizes, etc.)
   
