@@ -9,6 +9,8 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 
+import gui.classes.GUI_Client;
+
 public abstract class Usable implements UsableADT, Serializable{
 
     /**
@@ -20,6 +22,7 @@ public abstract class Usable implements UsableADT, Serializable{
     private String name;
     protected String description;
     private String id;
+    private String[] statsAffected;
     
     //constructors
     /**
@@ -115,6 +118,49 @@ public abstract class Usable implements UsableADT, Serializable{
         return false;
     }
     
+    public boolean useItem_OOC(Entity user) {
+    		gui.classes.PlayWindow play = GUI_Client.getPlayWindow();
+    	
+    		if(this.potency < 0 && user instanceof Player) {
+    			String warning = "Are you really sure you want to use this?  [y/n]";
+    			
+    			String response = "";
+    			
+    			while(!response.equals("y") || !response.equals("n")) {
+    				play.outGUI(warning);
+    				response = play.requestInput();
+    				response = response.toLowerCase().charAt(0) + "";
+    	
+    			}
+    			
+    			if(response.equals("n")) {
+    				return false;
+    			}
+    		}
+    		
+    		
+    		if(this instanceof Usable_SingleTarget ) {
+    			String output = singleTarget(user);
+    			play.outGUI(output);
+    			play.requestInput();
+    			
+    			return true;
+    		}
+    		else if(this instanceof Usable_MultiTarget) {
+    			ArrayList<Entity> target = new ArrayList<>();
+    			target.add(user);
+    			
+    			String output = multiTarget(target);
+    			play.outGUI(output);
+    			play.requestInput();
+    			
+    			return true;
+    		}
+    		
+    		return false;
+    	
+    }
+    
     @Override
     public String toString()
     {
@@ -127,10 +173,10 @@ public abstract class Usable implements UsableADT, Serializable{
     }
     
     @Override
-    public abstract void singleTarget(Entity target);
+    public abstract String singleTarget(Entity target);
     
     @Override
-    public abstract void multiTarget(ArrayList<Entity> group);     
+    public abstract String multiTarget(ArrayList<Entity> group);     
     
     
     

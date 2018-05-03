@@ -38,11 +38,11 @@ public abstract class Usable_MultiTarget extends Usable {
 
     //class methods
     @Override
-    public void singleTarget(Entity target) {
+    public String singleTarget(Entity target) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public abstract void multiTarget(ArrayList<Entity> group);
+    public abstract String multiTarget(ArrayList<Entity> group);
      
 }

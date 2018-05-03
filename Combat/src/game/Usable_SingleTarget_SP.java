@@ -46,8 +46,9 @@ public class Usable_SingleTarget_SP extends Usable_SingleTarget{
     
     
     @Override
-    public void singleTarget(Entity target) {
-        int oldSP = target.getStats().getCurrentSP();
+    public String singleTarget(Entity target) {
+        String userName = target.getName();
+    		int oldSP = target.getStats().getCurrentSP();
         int maxSP = target.getStats().getSpecPoints();
         int newSP = oldSP + potency;
 
@@ -57,7 +58,11 @@ public class Usable_SingleTarget_SP extends Usable_SingleTarget{
 
         target.getStats().setCurrentHealth(val);
         //outputs "HP [  x --> y  ]"
-        System.out.println("MP[  " + oldSP + " --> " + val + "  ]");
+        String output = userName + " MP[  " + oldSP + " --> " + val + "  ]\n"
+                                 + "   Press [ENTER] to continue...";
+        //System.out.println(output);
+        
+        return output;
         
     }
     

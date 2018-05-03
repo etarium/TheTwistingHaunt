@@ -37,9 +37,11 @@ public class Usable_MultiTarget_HP extends Usable_MultiTarget{
     
     //class methods
     @Override
-    public void multiTarget(ArrayList<Entity> group) {
-        for (int i = 0; i < group.size(); i++) {
-            int oldHP = group.get(i).getStats().getCurrentHealth();
+    public String multiTarget(ArrayList<Entity> group) {
+        String output = "";
+    		for (int i = 0; i < group.size(); i++) {
+            String userName = group.get(i).getName();
+    			int oldHP = group.get(i).getStats().getCurrentHealth();
             int maxHP = group.get(i).getStats().getMaxHealth();
 
             int newHP = oldHP + potency;
@@ -49,7 +51,10 @@ public class Usable_MultiTarget_HP extends Usable_MultiTarget{
             int val = (maxHP > newHP) ? newHP : maxHP;
 
             group.get(i).getStats().setCurrentHealth(val);
+            output += userName + " HP[  " + oldHP + " --> " + val + "  ]\n";
         }
+    		output +=  "\n\n   Press [ENTER] to continue...";
+    		return output;
         
     }
     

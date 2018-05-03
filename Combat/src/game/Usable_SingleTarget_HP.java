@@ -47,8 +47,9 @@ public class Usable_SingleTarget_HP extends Usable_SingleTarget{
     
     
     @Override
-    public void singleTarget(Entity target) {
-        int oldHP = target.getStats().getCurrentHealth();
+    public String singleTarget(Entity target) {
+        String userName = target.getName();
+    		int oldHP = target.getStats().getCurrentHealth();
         int maxHP = target.getStats().getMaxHealth();
 
         int newHP = oldHP + potency;
@@ -59,7 +60,11 @@ public class Usable_SingleTarget_HP extends Usable_SingleTarget{
 
         target.getStats().setCurrentHealth(val);
         //outputs "HP [  x --> y  ]"
-        System.out.println("HP[  " + oldHP + " --> " + val + "  ]");
+        String output = userName + " HP[  " + oldHP + " --> " + val + "  ]\n"
+        		                     + "   Press [ENTER] to continue...";
+        //System.out.println();
+        
+        return output;
         
     }
 

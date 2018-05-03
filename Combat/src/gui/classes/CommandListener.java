@@ -154,6 +154,7 @@ public class CommandListener {
                     		
                     		player.getItemList().add(item);
                     		
+                    		
                     		output = "You have added " + item.getName() + " to your inventory.";
                     }
                     else if (taken instanceof KeyItems) {
@@ -250,7 +251,7 @@ public class CommandListener {
                 			
                 			else if(used instanceof Usable) {
                         		Usable item = (Usable)used;
-                        		item.useItem(null, player);
+                        		item.useItem_OOC(player);
                         		                        		
                         		output = "You have used " + item.getName() + ".";
                         }
