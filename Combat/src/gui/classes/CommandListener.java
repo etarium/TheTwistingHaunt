@@ -499,20 +499,11 @@ public class CommandListener {
 	    	parameter = parameter.toLowerCase();
 	
 	    	ObjectComparator comp = new ObjectComparator();
-	    	int notFound = -1;
-	
-	    	//private ArrayList<Usable> usableList;
-	    	//private ArrayList<Equipable> equipList;
-	    	//private ArrayList<KeyItems> keyList;
-	    	//private ArrayList<Encounter> encList;
-
-	    	//ArrayList<Entity>
-	    	
+	    	int notFound = -1;	    	
 	    	
 	    	int usableIndex = comp.isPresentUsable(currentCell.getItem(), usableList);
 	    	int equipIndex = comp.isPresentEquipable(currentCell.getItem(), equipList);
 	    	int keyIndex = comp.isPresentKeyItem(currentCell.getKeyItem(), keyList);
-	    	//int entityIndex = equipIndex;
 	
 	    	if(usableIndex == notFound && equipIndex == notFound && keyIndex == notFound ) {
 	    		// parameter not found
