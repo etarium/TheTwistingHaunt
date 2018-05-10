@@ -150,7 +150,9 @@ public class CommandListener {
                     }
                     else if(taken instanceof Usable) {
                     		Usable item = (Usable)taken;
+                    		
                     		usableList.remove(item);
+                    		player.getCurrentCell(cellList).setItem("");
                     		
                     		player.getItemList().add(item);
                     		
@@ -160,6 +162,8 @@ public class CommandListener {
                     else if (taken instanceof KeyItems) {
                     		KeyItems item = (KeyItems)taken;
                     		keyList.remove(item);
+                    		player.getCurrentCell(cellList).setKeyItem("");
+
                     		
                     		player.getKeyItemsList().add(item);
                     		
@@ -237,7 +241,7 @@ public class CommandListener {
                 		Object used = searchInventory(parameter);
                 		
                 		if (used == null) {
-                			output = "I could use my weight in gold. You could use that" + parameter  
+                			output = "I could use my weight in gold. You could use that " + parameter  
                 				+    ". Not everyone can get what they want, though, can they, " + player.getName()
                 				+    "?";	
                 		}
@@ -286,6 +290,9 @@ public class CommandListener {
                 		
                 		else if (equipped instanceof Equipable_Armor) {
                 				Equipable_Armor armor = (Equipable_Armor)equipped;
+                				this.equipList.remove(armor);
+                				player.getCurrentCell(cellList).setItem("");
+                				
                 				Equipable old = player.getWornArmor();
             					player.setWornArmor(armor);
             					
@@ -299,6 +306,8 @@ public class CommandListener {
             			}
                 		else if (equipped instanceof Equipable_Weapon) {
                 				Equipable_Weapon weapon = (Equipable_Weapon)equipped;
+                				this.equipList.remove(weapon);
+                				player.getCurrentCell(cellList).setItem("");
                 				Equipable old = player.getUsedWeapon();
             					player.setUsedWeapon(weapon);
             					
@@ -382,7 +391,7 @@ public class CommandListener {
                 switch (direction) {
                     case 'n':
                         //check to see of movement possible
-                        if (cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].isNorth()) {
+                    		if(player.getCurrentCell(cellList).isNorth()) {
                             player.getLocation().setY(player.getLocation().getY() + 1);
                             output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
                         }
@@ -390,21 +399,22 @@ public class CommandListener {
                         break;
                     case 's':
                         //check to see of movement possible
-                        if (cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].isSouth()) {
+                			if(player.getCurrentCell(cellList).isSouth()) {
                             player.getLocation().setY(player.getLocation().getY() - 1);
                             output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
                         }
                         break;
                     case 'e':
                         //check to see of movement possible
-                        if (cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].isEast()) {
+                		
+                    		if(player.getCurrentCell(cellList).isEast()) {
                             player.getLocation().setX(player.getLocation().getX() + 1);
                             output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
                         }
                         break;
                     case 'w':
                         //check to see of movement possible
-                        if (cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].isWest()) {
+                			if(player.getCurrentCell(cellList).isWest()) {
                             player.getLocation().setX(player.getLocation().getX() - 1);
                             output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
                         }
