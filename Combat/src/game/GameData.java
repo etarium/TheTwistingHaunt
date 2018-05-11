@@ -36,8 +36,11 @@ public class GameData implements Serializable{
     		ArrayList<KeyItems> keyList, ArrayList<Encounter> encList) {
     	
     		this.player = player;
-    		this. cellList = cellList;
+    		this.cellList = cellList;
+    		this.equipList = equipList;
     		this.usableList = usableList;
+    		this.keyList = keyList;
+    		this.encList = encList;
     		
     }
     

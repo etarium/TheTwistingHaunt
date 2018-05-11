@@ -27,6 +27,9 @@ public class CommandListener {
     private ArrayList<Equipable> equipList;
     private ArrayList<KeyItems> keyList;
     private ArrayList<Encounter> encList;
+    
+    final boolean DEBUG_LOAD = true;
+    final boolean DEBUG_SAVE = false;
 
     public CommandListener() {
         MainMenu menu = new MainMenu();
@@ -624,7 +627,13 @@ public class CommandListener {
         player.getLocation().setY(3);
         player.getLocation().setZ(0);
         System.out.print("ayylmao");
-        loadInstance(INSTANCE);
+        
+        if(!DEBUG_LOAD) {
+        		loadInstance(INSTANCE);
+        }
+        else {
+        		loadGameTest();
+        }
     }
 
     public void loadInstance(String instance) throws SQLException, IOException {
@@ -647,7 +656,24 @@ public class CommandListener {
         equipList = equipableobj;
         encList = encounterobj;
         keyList = keyitemobj;
+        
+        if(DEBUG_SAVE) {
+        		game.GameData newgame = new game.GameData(player, cellArray, usableobj, equipableobj, keyitemobj, encounterobj);
+        		newgame.serializeGameData(newgame);
+        }
 
+    }
+    
+    public void loadGameTest() {
+    		game.GameData newgame = new game.GameData();
+    		newgame = newgame.returnWarriorInstance();
+    		
+    		cellList = newgame.getCellList();
+    		usableList = newgame.getUsableList();
+        equipList = newgame.getEquipList();
+        encList = newgame.getEncList();
+        keyList = newgame.getKeyList();
+    		
     }
 
 }
