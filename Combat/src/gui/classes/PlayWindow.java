@@ -35,9 +35,12 @@ public class PlayWindow extends GameWindow{
 	JFrame window;
 	Container con;
 	JPanel bounds;
-	JPanel map, out, in;
+	JPanel mapArea, out, in;
 	static JTextArea output;
 	static JTextField input;
+	
+	private game.Cell[][][] cellList;
+	public JPanel[][] map;
 
 	
 	static boolean enterPressed = false;
@@ -76,17 +79,17 @@ public class PlayWindow extends GameWindow{
 		
 		
 		
-		map = new JPanel();
-		bounds.add(map);
+		mapArea = new JPanel();
+		bounds.add(mapArea);
 
 		int mapWidth = (int)(bounds_WIDTH * .75);
 		int mapHeight = (int)(bounds_HEIGHT * .375);
 		int mapBufferWidth = (int)((bounds_WIDTH - mapWidth)/2);
 		int mapBufferHeight = 0;
 
-		map.setBounds(mapBufferWidth,mapBufferHeight, mapWidth, mapHeight);
-		map.setBackground(backgroundColor);
-		map.setBorder(thiccLineBorder);
+		mapArea.setBounds(mapBufferWidth,mapBufferHeight, mapWidth, mapHeight);
+		mapArea.setBackground(backgroundColor);
+		mapArea.setBorder(thiccLineBorder);
 		
 		out = new JPanel();
 		bounds.add(out);
@@ -114,7 +117,6 @@ public class PlayWindow extends GameWindow{
 		
 		
 		output = new JTextArea();
-		//output = new JTextPane();
 		input = new JTextField("Begin your quest by typing here, hero.");
 		
 		out.setLayout(new FlowLayout(FlowLayout.LEADING));
@@ -136,11 +138,102 @@ public class PlayWindow extends GameWindow{
 		
 	}//end PlayWindow initializer
 	
-	/*
-	private void addMap(Container map,) {
+	
+	public void addMap() {
+		JPanel grid = new JPanel();
+		
+		int cellSize = mapArea.getX() / 4;
+		grid = generateGrid(cellSize);
+		
+		mapArea.add(grid);
+		testMap();
+		
+		window.pack();
 		
 	}
-	*/
+	
+	
+	public void setCellList(game.Cell[][][] cellList) {
+		this.cellList = cellList;
+	}
+	
+	private void setMap(JPanel[][] map) {
+		this.map = map;
+	}
+	
+	public JPanel[][] getMap(){
+		return this.map;
+	}
+	
+	private void testMap() {
+		JFrame mapWindow = new JFrame("Map");
+		
+		int gridSize = cellList.length + 4;
+		int cellSize = mapArea.getX()/4;
+		int gridWidth = gridSize * cellSize;
+		Dimension mapDim = new Dimension(gridWidth, gridWidth);
+		
+		mapWindow.setPreferredSize(mapDim);
+		mapWindow.setSize(mapDim);
+		mapWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mapWindow.setLayout(null);
+		mapWindow.setMaximumSize(window.getSize());
+		
+		Container container = mapWindow.getContentPane();
+		container.setLayout(null);
+		
+		//JPanel grid = generateGrid(cellSize);
+		//container.add(grid);
+		
+		for(JPanel[] row : map) {
+			for(JPanel cell : row) {
+				container.add(cell);
+			}
+		}
+		
+		mapWindow.pack();
+		mapWindow.setVisible(true);
+	}
+	
+	private JPanel generateGrid(int cellSize) {
+		JPanel grid = new JPanel();
+		
+		int mapBufferWidth = 0;
+		int mapBufferHeight = 0;
+		
+		int cellBuffer = 2;
+		int gridSize = cellBuffer + cellList.length + cellBuffer;
+		
+		int gridWidth = gridSize * cellSize;
+		
+		grid.setBounds(mapBufferWidth, mapBufferHeight, gridWidth,gridWidth);
+		grid.setBackground(backgroundColor);
+		grid.setLayout(new java.awt.GridBagLayout());
+		//grid.setLayout(new FlowLayout(FlowLayout.LEADING));
+		
+		JPanel[][] map = new JPanel[gridSize][gridSize];
+		
+		for(int i = 0; i < map.length; i ++) {
+			for(int j = 0; j < map.length; j ++) {
+				
+				JPanel cell = new JPanel();
+				cell.setBounds(mapBufferWidth + (j * cellSize) , mapBufferHeight + (i * cellSize) , cellSize, cellSize);
+				cell.setBackground(backgroundColor);
+				cell.setBorder(thinLineBorder);
+				cell.setPreferredSize(new Dimension(cellSize,cellSize));
+				
+				grid.add(cell);
+				map[j][i] = cell;
+				
+			}
+		}
+		
+		this.setMap(map);
+		
+		return grid;
+	}
+	
+	
 	private void addOutputBox(Container out, JTextArea box) {
 		box.setOpaque(false);
 		box.setForeground(textColor);

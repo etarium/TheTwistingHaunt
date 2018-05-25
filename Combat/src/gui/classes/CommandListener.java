@@ -210,11 +210,15 @@ public class CommandListener {
                 			else if(dropped instanceof Equipable) {
                 				Equipable item = (Equipable)dropped;
                 				
-                				if(item.getName().equals(player.getWornArmor().getName())) {
-                					player.setWornArmor(null);
+                				if(player.hasWornArmor()) {
+                					if(item.getName().equals(player.getWornArmor().getName())) {
+                						player.setWornArmor(null);
+                					}
                 				}
-                				if(item.getName().equals(player.getUsedWeapon().getName())) {
-                					player.setUsedWeapon(null);
+                				if(player.hasUsedWeapon()) {
+                					if(item.getName().equals(player.getUsedWeapon().getName())) {
+                						player.setUsedWeapon(null);
+                				}
                 				}
                 				
                 				output = "Well, you've dropped " + item.getName() + ", and it crumbles to dust "
@@ -673,6 +677,9 @@ public class CommandListener {
         equipList = newgame.getEquipList();
         encList = newgame.getEncList();
         keyList = newgame.getKeyList();
+        
+        play.setCellList(cellList);
+        play.addMap();
     		
     }
 
