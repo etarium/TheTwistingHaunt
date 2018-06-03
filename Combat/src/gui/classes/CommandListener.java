@@ -28,8 +28,8 @@ public class CommandListener {
     private ArrayList<KeyItems> keyList;
     private ArrayList<Encounter> encList;
     
-    final boolean DEBUG_LOAD = true;
-    final boolean DEBUG_SAVE = false;
+    final boolean DEBUG_LOAD = false;
+    final boolean DEBUG_SAVE = true;
 
     public CommandListener() {
         MainMenu menu = new MainMenu();
@@ -54,12 +54,15 @@ public class CommandListener {
             newGame();
         }catch(Exception e){
             System.out.print("Hah got one!");
+            System.out.println(e);
         }
         boolean run = true;
         int count = 0;
         while(run) {
         			
-        			System.out.println("Iteration " + ++count);        			
+        			System.out.println("Iteration " + ++count);        	
+        			MapCell tempMapCell = new MapCell();
+        			tempMapCell.updateMap(player, play.getMap());
         			listen(play , run);
         		}
     }
@@ -85,7 +88,9 @@ public class CommandListener {
      * still run after current iteration
      */
     public void listen(PlayWindow play, boolean run) {
-
+    		
+    	
+    	
         String[] stringArray = inputParser(play.requestInput());
         
         String command = stringArray[0];
@@ -638,6 +643,9 @@ public class CommandListener {
         else {
         		loadGameTest();
         }
+        
+        play.setCellList(cellList);
+        play.addMap();
     }
 
     public void loadInstance(String instance) throws SQLException, IOException {
@@ -678,8 +686,7 @@ public class CommandListener {
         encList = newgame.getEncList();
         keyList = newgame.getKeyList();
         
-        play.setCellList(cellList);
-        play.addMap();
+        
     		
     }
 

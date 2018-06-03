@@ -32,6 +32,7 @@ import java.io.*;
 public class PlayWindow extends GameWindow{
 
 	
+	private static final boolean TESTING = true;
 	JFrame window;
 	Container con;
 	JPanel bounds;
@@ -40,7 +41,7 @@ public class PlayWindow extends GameWindow{
 	static JTextField input;
 	
 	private game.Cell[][][] cellList;
-	public JPanel[][] map;
+	public MapCell[][] map;
 
 	
 	static boolean enterPressed = false;
@@ -140,13 +141,17 @@ public class PlayWindow extends GameWindow{
 	
 	
 	public void addMap() {
-		JPanel grid = new JPanel();
 		
+		if(!TESTING) {
 		int cellSize = mapArea.getX() / 4;
-		grid = generateGrid(cellSize);
-		
+		JPanel grid = generateGrid(cellSize);
+		grid.setLayout(null);
+		populateGrid(grid);
 		mapArea.add(grid);
-		testMap();
+		}
+		else {
+			testMap();
+		}
 		
 		window.pack();
 		
@@ -157,11 +162,11 @@ public class PlayWindow extends GameWindow{
 		this.cellList = cellList;
 	}
 	
-	private void setMap(JPanel[][] map) {
+	private void setMap(MapCell[][] map) {
 		this.map = map;
 	}
 	
-	public JPanel[][] getMap(){
+	public MapCell[][] getMap(){
 		return this.map;
 	}
 	
@@ -175,25 +180,22 @@ public class PlayWindow extends GameWindow{
 		
 		mapWindow.setPreferredSize(mapDim);
 		mapWindow.setSize(mapDim);
-		mapWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mapWindow.setLayout(null);
 		mapWindow.setMaximumSize(window.getSize());
 		
 		Container container = mapWindow.getContentPane();
 		container.setLayout(null);
 		
-		//JPanel grid = generateGrid(cellSize);
-		//container.add(grid);
-		
-		for(JPanel[] row : map) {
-			for(JPanel cell : row) {
-				container.add(cell);
-			}
-		}
+		JPanel grid = generateGrid(cellSize);
+		grid.setLayout(null);
+		container.add(grid);
+		populateGrid(grid);
 		
 		mapWindow.pack();
 		mapWindow.setVisible(true);
 	}
+	
+	
 	
 	private JPanel generateGrid(int cellSize) {
 		JPanel grid = new JPanel();
@@ -202,36 +204,82 @@ public class PlayWindow extends GameWindow{
 		int mapBufferHeight = 0;
 		
 		int cellBuffer = 2;
-		int gridSize = cellBuffer + cellList.length + cellBuffer;
+		int gridSize = 2 * cellBuffer + cellList.length ;
 		
 		int gridWidth = gridSize * cellSize;
+		Dimension gridDimension = new Dimension(gridWidth, gridWidth);
 		
 		grid.setBounds(mapBufferWidth, mapBufferHeight, gridWidth,gridWidth);
+		grid.setPreferredSize(gridDimension);
 		grid.setBackground(backgroundColor);
 		grid.setLayout(new java.awt.GridBagLayout());
-		//grid.setLayout(new FlowLayout(FlowLayout.LEADING));
 		
-		JPanel[][] map = new JPanel[gridSize][gridSize];
+		setupMap(gridSize, cellSize, grid);
+		
+		return grid;
+	}
+	
+	private void setupMap(int gridSize, int cellSize, JPanel grid) {
+		
+		MapCell[][] map = new MapCell[gridSize][gridSize];
+		int cellBuffer = (gridSize - cellList.length) / 2;
+		int mapBufferWidth = grid.getX();
+		int mapBufferHeight = grid.getY();
+		
+		//int mapMax = gridSize - (cellBuffer * 2) -1;
+		int mapMax = gridSize - (cellBuffer * 2);
+		int tempMax = mapMax - 1;
+
+		//int cellMax = mapMax + cellBuffer;
 		
 		for(int i = 0; i < map.length; i ++) {
 			for(int j = 0; j < map.length; j ++) {
+			//for(int j = map.length; j > 0; j--) {
 				
-				JPanel cell = new JPanel();
-				cell.setBounds(mapBufferWidth + (j * cellSize) , mapBufferHeight + (i * cellSize) , cellSize, cellSize);
-				cell.setBackground(backgroundColor);
-				cell.setBorder(thinLineBorder);
-				cell.setPreferredSize(new Dimension(cellSize,cellSize));
+				JPanel cellPanel = new JPanel();
+				cellPanel.setBounds(mapBufferWidth + (j * cellSize) , mapBufferHeight + (i * cellSize) , cellSize, cellSize);
+				cellPanel.setBackground(backgroundColor);
+				cellPanel.setBorder(thinLineBorder);
+				cellPanel.setPreferredSize(new Dimension(cellSize,cellSize));
 				
-				grid.add(cell);
-				map[j][i] = cell;
+				map[j][i] = new MapCell(cellPanel);
+				
+				int cellY = j - cellBuffer;
+				int cellX = i - cellBuffer;
+				
+				
+				if(cellY >= 0 && cellY < mapMax) {
+					if(cellX >= 0 && cellX < mapMax) {
+						
+						map[j][i].setCell(cellList[cellY][tempMax - cellX][0]);
+					}
+				}
+				
+				
 				
 			}
 		}
 		
 		this.setMap(map);
-		
-		return grid;
 	}
+	
+	
+	
+	private void populateGrid(Container grid) {
+		
+		for(MapCell[] row : map) {
+			for(MapCell cell : row) {
+				/*//TESTING outlines cells in map that aren't null
+				if(cell.getCell() != null) {
+					cell.getCellPanel().setBackground(textColor.brighter());
+				}
+				*/
+				grid.add(cell.getCellPanel());
+			}
+		}
+	}
+	
+	
 	
 	
 	private void addOutputBox(Container out, JTextArea box) {
@@ -246,33 +294,10 @@ public class PlayWindow extends GameWindow{
 		box.setLineWrap(true);
 		box.setWrapStyleWord(true);
 				
-		
-		
-		//sample text
-		/*
-		box.setText("Márgarét, áre you gríeving \n" + 
-				"Over Goldengrove unleaving? \n" + 
-				"Leáves like the things of man, you\n" + 
-				"With your fresh thoughts care for, can you? \n" + 
-				"Ah! ás the heart grows older \n" + 
-				"It will come to such sights colder \n" + 
-				"By and by, nor spare a sigh \n" + 
-				"Though worlds of wanwood leafmeal lie; \n" + 
-				"And yet you wíll weep and know why. \n" + 
-				"Now no matter, child, the name: \n" + 
-				"Sórrow’s spríngs áre the same. \n" + 
-				"Nor mouth had, no nor mind, expressed \n" + 
-				"What heart heard of, ghost guessed: \n" + 
-				"It ís the blight man was born for, \n" + 
-				"It is Margaret you mourn for.");
-			*/
-		
-		
-		//testing lineWrap
 	
 		
-		
-		  box.setText("A group of scared villagers begged for your help. They circled you, crying about "
+		//initial text while database is loading
+		box.setText("A group of scared villagers begged for your help. They circled you, crying about "
 		  		+ "their deceased. Scared of their deceased -- It seems that this cave you're now in front "
 		  		+ "of is home to the undead. The villagers called the evil lurking within 'The Overlord'. "
 		  		+ "You had also heard of it as the 'Blue Lich' before. Truly, a "
