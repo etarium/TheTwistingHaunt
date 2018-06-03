@@ -28,8 +28,8 @@ public class CommandListener {
     private ArrayList<KeyItems> keyList;
     private ArrayList<Encounter> encList;
     
-    final boolean DEBUG_LOAD = false;
-    final boolean DEBUG_SAVE = true;
+    final boolean DEBUG_LOAD = true;
+    final boolean DEBUG_SAVE = false;
 
     public CommandListener() {
         MainMenu menu = new MainMenu();
