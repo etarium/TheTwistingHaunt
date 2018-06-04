@@ -11,8 +11,8 @@ public class MapCell{
 	private JPanel cellPanel;
 	private game.Cell cell;
 	private final int CELL_BUFFER = 2;
-	//private final int Y_OFFSET = 3;
 	private final int MAP_HEIGHT = 9;
+	private WallOverlay walls;
 	
 	 
 	
@@ -56,13 +56,24 @@ public class MapCell{
 		this.cell = cell;
 	}
 	
+	public void setWallOverlay() {
+		this.walls = new WallOverlay(this);
+	}
+	
+	public WallOverlay getWalls() {
+		return walls;
+	}
+	
 	
 	
 	
 	//class methods
 
 	public void highlightCurrentPosition(MapCell currentMapCell) {
-		currentMapCell.getCellPanel().setBackground(Color.YELLOW);		
+		currentMapCell.getCellPanel().setBackground(Color.YELLOW);
+		currentMapCell.setWallOverlay();
+		currentMapCell.paintWalls();
+		currentMapCell.getCellPanel().setBorder(GameWindow.thinLineBorder);
 	}
 	
 	public void unHighlightPreviousPosition(MapCell previousCell) {
@@ -166,13 +177,26 @@ public class MapCell{
 		
 	}
 	
+	private void paintWalls() {
+			for (JPanel wall : this.walls.getWalls()) {
+				if(wall != null) {
+					this.cellPanel.add(wall);
+				}
+			}
+			
+			for(JPanel column : this.walls.getColumns()) {
+				if(column != null) {
+					this.cellPanel.add(column);
+				}
+			}
+	}
+	
 	private int getMapCellX(Location loc) {
 		return loc.getX() + CELL_BUFFER;
 	}
 	
 	private int getMapCellY(Location loc) {
 		return (MAP_HEIGHT - loc.getY()) + CELL_BUFFER;
-		//return loc.getY() + CELL_BUFFER
 	}
 	
 

@@ -57,13 +57,13 @@ public class GameWindow{
 	public Font helpFont = defaultFont.deriveFont(helpFontSize);
 	
 	
-	protected final int THICC = 4;
-	protected final int MED = 2;
-	protected final int THIN = 1;
+	protected static final int THICC = 4;
+	protected static final int MED = 2;
+	protected static final int THIN = 1;
 	
-	protected Border thiccLineBorder = BorderFactory.createLineBorder(textColor, THICC);
-	protected Border medLineBorder = BorderFactory.createLineBorder(textColor, MED);
-	protected Border thinLineBorder = BorderFactory.createLineBorder(textColor, THIN);	
+	public static Border thiccLineBorder = BorderFactory.createLineBorder(textColor, THICC);
+	public static Border medLineBorder = BorderFactory.createLineBorder(textColor, MED);
+	public static Border thinLineBorder = BorderFactory.createLineBorder(textColor, THIN);	
 	
 	
 	private Font defineFont(String filePath) {

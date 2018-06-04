@@ -213,6 +213,7 @@ public class PlayWindow extends GameWindow{
 		grid.setPreferredSize(gridDimension);
 		grid.setBackground(backgroundColor);
 		grid.setLayout(new java.awt.GridBagLayout());
+		//grid.setBorder(medLineBorder);
 		
 		setupMap(gridSize, cellSize, grid);
 		
@@ -226,21 +227,19 @@ public class PlayWindow extends GameWindow{
 		int mapBufferWidth = grid.getX();
 		int mapBufferHeight = grid.getY();
 		
-		//int mapMax = gridSize - (cellBuffer * 2) -1;
 		int mapMax = gridSize - (cellBuffer * 2);
 		int tempMax = mapMax - 1;
 
-		//int cellMax = mapMax + cellBuffer;
 		
 		for(int i = 0; i < map.length; i ++) {
 			for(int j = 0; j < map.length; j ++) {
-			//for(int j = map.length; j > 0; j--) {
 				
 				JPanel cellPanel = new JPanel();
 				cellPanel.setBounds(mapBufferWidth + (j * cellSize) , mapBufferHeight + (i * cellSize) , cellSize, cellSize);
 				cellPanel.setBackground(backgroundColor);
 				cellPanel.setBorder(thinLineBorder);
 				cellPanel.setPreferredSize(new Dimension(cellSize,cellSize));
+				cellPanel.setLayout(null);
 				
 				map[j][i] = new MapCell(cellPanel);
 				
@@ -251,11 +250,11 @@ public class PlayWindow extends GameWindow{
 				if(cellY >= 0 && cellY < mapMax) {
 					if(cellX >= 0 && cellX < mapMax) {
 						
-						map[j][i].setCell(cellList[cellY][tempMax - cellX][0]);
+						game.Cell presentCell = cellList[cellY][tempMax - cellX][0];
+						map[j][i].setCell(presentCell);
+						map[j][i].getCellPanel().setBorder(thinLineBorder);
 					}
 				}
-				
-				
 				
 			}
 		}
@@ -302,13 +301,6 @@ public class PlayWindow extends GameWindow{
 		  		+ "of is home to the undead. The villagers called the evil lurking within 'The Overlord'. "
 		  		+ "You had also heard of it as the 'Blue Lich' before. Truly, a "
 		  		+ "fearsome beast lies ahead...");
-		  
-		
-			
-		
-		//intro text
-		//box.setText(" placeholder text");
-		
 		
 		out.add(box);
 	}
