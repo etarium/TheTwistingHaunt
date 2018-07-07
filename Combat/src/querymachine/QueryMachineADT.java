@@ -1,6 +1,4 @@
 package querymachine;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import game.Cell;
@@ -24,7 +22,7 @@ public interface QueryMachineADT
 	 * @param above values is the primary key for the instance within the DB.
 	 * @return ArrayList<Cell>
 	 */	
-	public ArrayList<Cell> getCellInstance(String instance) throws SQLException, IOException;
+	public ArrayList<Cell> getCellInstance(String instance);
 	
 	
 	/**
@@ -34,7 +32,7 @@ public interface QueryMachineADT
 	 * Once both have been received, please use comparator logic to appropriately utilize objects "within" the cells.
 	 * @return ArrayList<Usable>
 	 */
-	public ArrayList<Usable> getHPUsableInstance(ArrayList<Cell> cellobj) throws SQLException, IOException;
+	public ArrayList<Usable> getHPUsableInstance(ArrayList<Cell> cellobj);
 	
 	/**
 	 * Generates the entire instance of SP Usables as an arraylist of completed objects.
@@ -46,7 +44,7 @@ public interface QueryMachineADT
 	 * Once both have been received, please use comparator logic to appropriately utilize objects "within" the cells.
 	 * @return ArrayList<Usable>
 	 */
-	public ArrayList<Usable> getSPUsableInstance(ArrayList<Cell> cellobj, ArrayList<Usable> usableobj) throws SQLException, IOException;
+	public ArrayList<Usable> getSPUsableInstance(ArrayList<Cell> cellobj, ArrayList<Usable> usableobj);
 	
 	/**
 	 * Generates the entire instance of Equipable Armor as an arraylist of completed objects.
@@ -55,7 +53,7 @@ public interface QueryMachineADT
 	 * Once both have been received, please use comparator logic to appropriately utilize objects "within" the cells.
 	 * @return ArrayList<Equipable>
 	 */
-	public ArrayList<Equipable> getArmorInstance(ArrayList<Cell> cellobj) throws SQLException, IOException;
+	public ArrayList<Equipable> getArmorInstance(ArrayList<Cell> cellobj);
 	
 	
 	/**
@@ -65,7 +63,7 @@ public interface QueryMachineADT
 	 * Once both have been received, please use comparator logic to appropriately utilize objects "within" the cells.
 	 * @return ArrayList<Encounter>
 	 */
-	public ArrayList<Encounter> getEncounterInstance(ArrayList<Cell> cellobj) throws SQLException, IOException;
+	public ArrayList<Encounter> getEncounterInstance(ArrayList<Cell> cellobj);
 	
 	/**
 	 * Generates the entire instance of Key Items as an arraylist of completed objects.
@@ -74,7 +72,7 @@ public interface QueryMachineADT
 	 * Once both have been received, please use comparator logic to appropriately utilize objects "within" the cells.
 	 * @return ArrayList<KeyITems>
 	 */
-	public ArrayList<KeyItems> getKeyItemsInstance(ArrayList<Cell> cellobj) throws SQLException, IOException;
+	public ArrayList<KeyItems> getKeyItemsInstance(ArrayList<Cell> cellobj);
 
 }//end interface
 

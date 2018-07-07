@@ -1,6 +1,6 @@
 Cell {
   'xyzcoord': [INT],
-  'instance': String,
+  'instance_id': String,
   'desc': String,
   'encounter': [String],
   'items': [String],
@@ -9,13 +9,13 @@ Cell {
   		'item_id': String,
   		'name': String,
   		'desc': String,
-  		'reqQuantity': INT,
+  		'reqQuantity': INT
   		},
   'inspectable':
     {
       'inspName': String,
       'inspDescription': String,
-      'inspObj': [String],
+      'inspObj': [String]
     },
   		
   'terrain': String,

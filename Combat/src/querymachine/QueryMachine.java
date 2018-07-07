@@ -7,13 +7,6 @@ package querymachine;
  */
 import java.util.ArrayList;
 
-import javax.swing.JTextArea;
-
-import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import databaseconnector.CredentialIOConfig;
 import databaseconnector.DBConnect;
 import game.Cell;
@@ -29,19 +22,10 @@ import game.Usable_SingleTarget_SP;
 
 public class QueryMachine implements QueryMachineADT
 {
-	protected DBConnect dbReader = new DBConnect();
-    protected CredentialIOConfig credIO = new CredentialIOConfig();
-    protected QueryDB generator = new QueryDB();
-    protected ResultSet resultSet = null;
-    private String varOne = "";
-    //protected JTextArea output;
 
-
-    
     public QueryMachine()
     {
     	//empty constructor
-    	//this.output = output;
     }
     
     /**
@@ -50,7 +34,7 @@ public class QueryMachine implements QueryMachineADT
 	 * @param above values is the primary key for the instance within the DB.
 	 * @return ArrayList<Cell>
 	 */	
-    public ArrayList<Cell> getCellInstance(String instance) throws SQLException, IOException
+    public ArrayList<Cell> getCellInstance(String instance)
     {
     		ArrayList<Cell> cellInst = new ArrayList<Cell>();
     		

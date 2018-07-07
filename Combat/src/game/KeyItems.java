@@ -14,6 +14,7 @@ public class KeyItems implements KeyItemsADT, Serializable {
 	private String name;
 	private String description;
 	private String id;
+	private int reqQuantity;
 	
 	public KeyItems()
 	{
@@ -23,11 +24,12 @@ public class KeyItems implements KeyItemsADT, Serializable {
 	/*
 	 * @overload constructor
 	 */
-	public KeyItems(String name, String description, String id)
+	public KeyItems(String name, String description, String id, int reqQuantity)
 	{
 		this.name = name;
 		this.description = description;
 		this.id = id;
+		reqQuantity = 0;
 	}
 	
 	/* get Name of important game item

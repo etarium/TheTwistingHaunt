@@ -2,9 +2,9 @@ Item {
   'item_id': String,
   'name': String,
   'desc': String,
-  'type': INT
+  'type': INT,
   'armorType': String
-  'statblock':
+  'statBlock':
   	{
   		'hp': INT,
   		'sp': INT,
