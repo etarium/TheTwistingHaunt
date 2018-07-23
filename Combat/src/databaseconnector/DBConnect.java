@@ -3,114 +3,112 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.bson.Document;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.codecs.pojo.PojoCodecProvider;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
+
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+
+import querymachine.QueryMachine;
+
+import static com.mongodb.client.model.Filters.*;
+
+import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
+import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
+
+import com.mongodb.client.MongoCursor;
+
 import static com.mongodb.client.model.Filters.eq;
 
- 
+
 public class DBConnect {
 	public DBConnect() {
 		//empty constructor
 	}
-	
-	private MongoClient connect;
-	private MongoDatabase tth;
-	private MongoCollection<Document> cellCollection;
-	private MongoCollection<Document> instanceCollection;
-	private MongoCollection<Document> entityCollection;
-	private MongoCollection<Document> itemCollection;
-	
+
+	public QueryMachine objectCreator = new QueryMachine();
+	public MongoClient connect;
+	public MongoDatabase tth;
+	public MongoCollection<Document> instanceCollection;
+	public MongoCollection<Document> entityCollection;
+	public MongoCollection<Document> itemCollection;
+
+
+	private ArrayList<String> itemStringArray = new ArrayList<String>();
+	private ArrayList<String> requiredItemStringArray = new ArrayList<String>();
+	private ArrayList<String> encounterStringArray = new ArrayList<String>();
+	private ArrayList<String> inspectableStringArray = new ArrayList<String>();
+
+
 	public MongoClient connectToDB() throws IOException {
+		CodecRegistry pojoCodecRegistry = fromRegistries(MongoClient.getDefaultCodecRegistry(),
+				fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+
 		CredentialIOConfig cfgRead = new CredentialIOConfig();	
 		String url = "";
 		int port = 0;
 		String user = "";
-		String pass = "";		
+		String pass = "";	
+		String host = "";
 		url = cfgRead.getURL();
 		port = cfgRead.getPort();
 		user = cfgRead.getUser();
 		pass = cfgRead.getPass();
-		connect = new MongoClient(url, port);
-		System.out.println(user + " this was a connection test.");
-		
+		host = url+port;
+		connect = new MongoClient(url, MongoClientOptions.builder().codecRegistry(pojoCodecRegistry).build());
+
 		return connect;
 	}
-	
+
 	public MongoDatabase enterDB() throws IOException {
+		if(connect == null) {
+			connect = connectToDB();
+		}
 		tth = connect.getDatabase("TTH_Local");
-		System.out.println(tth);
-		
+
 		return tth;
 	}
-	
-	public Document getInstance(String instanceID) throws IOException {
+
+	public String getInstance(String instanceID) throws IOException {
 		instanceCollection = tth.getCollection("Instance");
 		Document instance = instanceCollection.find(eq("instance_id", instanceID)).first();
-		System.out.println("for");
-		System.out.print(instance);
-		return instance;
+		String instanceString = "" + instance;
+		return instanceString;
 	}
-	
+
 	public ArrayList<Document> getAllInstances() throws IOException {
 		instanceCollection = tth.getCollection("Instance");
 		ArrayList<Document> instanceArray = new ArrayList<Document>();
 		MongoCursor<Document> cursor = instanceCollection.find().iterator();
 		try {
-		    while (cursor.hasNext()) {
-		    		Document tempDoc = instanceCollection.find().first();
-		    		cursor.next();
-		    		instanceArray.add(tempDoc);
-		    }
+			while (cursor.hasNext()) {
+				Document tempDoc = instanceCollection.find().first();
+				cursor.next();
+				instanceArray.add(tempDoc);
+			}
 		} finally {
-		    cursor.close();
+			cursor.close();
 		}
 		for(int i = 0; i<instanceArray.size(); i++) {
 			System.out.println("for");
 			System.out.print(instanceArray.get(i));
 		}
 		return instanceArray;
-	
-}
-	
+
+	}
+
 	public void getEntity() throws IOException {
-		
+
+	}
+
+	public ArrayList<String> getItem() throws IOException {
+		return itemStringArray;
 	}
 	
-	public ArrayList<Document> getCells() throws IOException {
-			cellCollection = tth.getCollection("Cell");
-			ArrayList<Document> cellArray = new ArrayList<Document>();
-			MongoCursor<Document> cursor = cellCollection.find().iterator();
-			try {
-			    while (cursor.hasNext()) {
-			    		Document tempDoc = cellCollection.find(eq("instance_id", "DN001")).first();
-			    		cursor.next();
-			    		cellArray.add(tempDoc);
-			    }
-			} finally {
-			    cursor.close();
-			}
-			for(int i = 0; i<cellArray.size(); i++) {
-				System.out.println("for");
-				System.out.print(cellArray.get(i));
-			}
-			return cellArray;
-		
-	}
-	
-	public void getItem() throws IOException {
-		
-	}
-	
-	public void loadInstance(String instanceID) throws IOException {
-		connectToDB();
-		enterDB();
-		getInstance(instanceID);
-		getCells();
-		getEntity();
-		getItem();
+	public void closeDB() {
 		
 	}
 }
