@@ -1,0 +1,18 @@
+Instance {
+    'instance_id': String,
+    'description': String,
+    'updated': Date,
+    'isCompleted': boolean
+}
+
+/**
+* Design Notes
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* instance_id and isCompleted will be indexed.
+* The Instance document is meant to be loaded first, with the instance_id being
+* a consumable object to begin querying cell arrays.
+* updated is to be compared with a local updated object on "load", if they
+* do not match, then a new query to the database should be loaded.
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* -- Emily Clark
+*/
