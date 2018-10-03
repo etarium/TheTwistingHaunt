@@ -1,5 +1,6 @@
 package game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
@@ -7,9 +8,13 @@ import java.util.TreeMap;
 /**
  * @author Jason Richter, Samuel Fiscus
  */
-public class Encounter implements EncounterADT {
+public class Encounter implements EncounterADT, Serializable {
 
-    private ArrayList<Entity> rekt;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3752422130862725630L;
+	private ArrayList<Entity> rekt;
     private ArrayList<Entity> combatants;
     
     private TreeMap<Integer, Entity> combQueue = new TreeMap<>();

@@ -13,13 +13,14 @@ import items.Usable;
 //this contains methods to compare objects to determine if they are present within a cell.
 public class ObjectComparator implements ObjectComparatorADT {
 	
+	final int NOT_FOUND = -1;
+	
 	public ObjectComparator()
 	{
 		//empty constructor
 	}
 
 	boolean isPresent = false;
-	int itemLoc = -1;
 	
 	/**
 	 * Searches the Usable ArrayList for the object listed in Cell at a current location.
@@ -30,6 +31,9 @@ public class ObjectComparator implements ObjectComparatorADT {
 	 */
 	public int isPresentUsable(String item, ArrayList<Usable> usableobj)
 	{
+		
+		int itemLoc = NOT_FOUND;
+		
 		for(int i=0; i<usableobj.size(); i++)
 		{
 			if(item.equals(usableobj.get(i).getID()))
@@ -52,7 +56,8 @@ public class ObjectComparator implements ObjectComparatorADT {
 	 */
 	public int isPresentEquipable(String item, ArrayList<Equipable> equipobj)
 	{
-		
+		int itemLoc = NOT_FOUND;
+
 		for(int i=0; i<equipobj.size(); i++)
 		{
 			if(item.equals(equipobj.get(i).getID()))
@@ -76,6 +81,9 @@ public class ObjectComparator implements ObjectComparatorADT {
 	 */
 	public int isPresentKeyItem(String item, ArrayList<KeyItems> keyitemobj)
 	{
+		int itemLoc = NOT_FOUND;
+
+		
 		for(int i=0; i<keyitemobj.size(); i++)
 		{
 			if(item.equals(keyitemobj.get(i).getID()))
@@ -141,7 +149,7 @@ public class ObjectComparator implements ObjectComparatorADT {
 		{
 			if(teamID.equals(encounterobj.get(i).getCombatants().get(i).getTeamId()))
 			{
-				itemLoc = i;
+				//itemLoc = i;
 				entityList.add(encounterobj.get(i).getCombatants().get(i));
 				return entityList;			
 			}

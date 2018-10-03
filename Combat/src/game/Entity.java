@@ -128,6 +128,10 @@ public class Entity implements EntityADT, Serializable{
         this.teamId = teamId;
     }
 
+    public boolean hasWornArmor() {
+    		return !(wornArmor == null);
+    }
+    
     @Override
     public Equipable_Armor getWornArmor() {
         return wornArmor;
@@ -138,6 +142,10 @@ public class Entity implements EntityADT, Serializable{
         this.wornArmor = wornArmor;
     }
 
+    public boolean hasUsedWeapon() {
+    		return !(usedWeapon == null);
+    }
+    
     @Override
     public Equipable_Weapon getUsedWeapon() {
         return usedWeapon;

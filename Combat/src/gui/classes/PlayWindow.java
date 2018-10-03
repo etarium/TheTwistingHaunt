@@ -32,12 +32,16 @@ import java.io.*;
 public class PlayWindow extends GameWindow{
 
 	
+	private static final boolean TESTING = true;
 	JFrame window;
 	Container con;
 	JPanel bounds;
-	JPanel map, out, in;
+	JPanel mapArea, out, in;
 	static JTextArea output;
 	static JTextField input;
+	
+	private game.Cell[][][] cellList;
+	public MapCell[][] map;
 
 	
 	static boolean enterPressed = false;
@@ -76,17 +80,17 @@ public class PlayWindow extends GameWindow{
 		
 		
 		
-		map = new JPanel();
-		bounds.add(map);
+		mapArea = new JPanel();
+		bounds.add(mapArea);
 
 		int mapWidth = (int)(bounds_WIDTH * .75);
 		int mapHeight = (int)(bounds_HEIGHT * .375);
 		int mapBufferWidth = (int)((bounds_WIDTH - mapWidth)/2);
 		int mapBufferHeight = 0;
 
-		map.setBounds(mapBufferWidth,mapBufferHeight, mapWidth, mapHeight);
-		map.setBackground(backgroundColor);
-		map.setBorder(thiccLineBorder);
+		mapArea.setBounds(mapBufferWidth,mapBufferHeight, mapWidth, mapHeight);
+		mapArea.setBackground(backgroundColor);
+		mapArea.setBorder(thiccLineBorder);
 		
 		out = new JPanel();
 		bounds.add(out);
@@ -114,7 +118,6 @@ public class PlayWindow extends GameWindow{
 		
 		
 		output = new JTextArea();
-		//output = new JTextPane();
 		input = new JTextField("Begin your quest by typing here, hero.");
 		
 		out.setLayout(new FlowLayout(FlowLayout.LEADING));
@@ -136,11 +139,148 @@ public class PlayWindow extends GameWindow{
 		
 	}//end PlayWindow initializer
 	
-	/*
-	private void addMap(Container map,) {
+	
+	public void addMap() {
+		
+		if(!TESTING) {
+		int cellSize = mapArea.getX() / 4;
+		JPanel grid = generateGrid(cellSize);
+		grid.setLayout(null);
+		populateGrid(grid);
+		mapArea.add(grid);
+		}
+		else {
+			testMap();
+		}
+		
+		window.pack();
 		
 	}
-	*/
+	
+	
+	public void setCellList(game.Cell[][][] cellList) {
+		this.cellList = cellList;
+	}
+	
+	private void setMap(MapCell[][] map) {
+		this.map = map;
+	}
+	
+	public MapCell[][] getMap(){
+		return this.map;
+	}
+	
+	private void testMap() {
+		JFrame mapWindow = new JFrame("Map");
+		
+		int gridSize = cellList.length + 4;
+		int cellSize = mapArea.getX()/4;
+		int gridWidth = gridSize * cellSize;
+		Dimension mapDim = new Dimension(gridWidth, gridWidth);
+		
+		mapWindow.setPreferredSize(mapDim);
+		mapWindow.setSize(mapDim);
+		mapWindow.setLayout(null);
+		mapWindow.setMaximumSize(window.getSize());
+		
+		Container container = mapWindow.getContentPane();
+		container.setLayout(null);
+		
+		JPanel grid = generateGrid(cellSize);
+		grid.setLayout(null);
+		container.add(grid);
+		populateGrid(grid);
+		
+		mapWindow.pack();
+		mapWindow.setVisible(true);
+	}
+	
+	
+	
+	private JPanel generateGrid(int cellSize) {
+		JPanel grid = new JPanel();
+		
+		int mapBufferWidth = 0;
+		int mapBufferHeight = 0;
+		
+		int cellBuffer = 2;
+		int gridSize = 2 * cellBuffer + cellList.length ;
+		
+		int gridWidth = gridSize * cellSize;
+		Dimension gridDimension = new Dimension(gridWidth, gridWidth);
+		
+		grid.setBounds(mapBufferWidth, mapBufferHeight, gridWidth,gridWidth);
+		grid.setPreferredSize(gridDimension);
+		grid.setBackground(backgroundColor);
+		grid.setLayout(new java.awt.GridBagLayout());
+		//grid.setBorder(medLineBorder);
+		
+		setupMap(gridSize, cellSize, grid);
+		
+		return grid;
+	}
+	
+	private void setupMap(int gridSize, int cellSize, JPanel grid) {
+		
+		MapCell[][] map = new MapCell[gridSize][gridSize];
+		int cellBuffer = (gridSize - cellList.length) / 2;
+		int mapBufferWidth = grid.getX();
+		int mapBufferHeight = grid.getY();
+		
+		int mapMax = gridSize - (cellBuffer * 2);
+		int tempMax = mapMax - 1;
+
+		
+		for(int i = 0; i < map.length; i ++) {
+			for(int j = 0; j < map.length; j ++) {
+				
+				JPanel cellPanel = new JPanel();
+				cellPanel.setBounds(mapBufferWidth + (j * cellSize) , mapBufferHeight + (i * cellSize) , cellSize, cellSize);
+				cellPanel.setBackground(backgroundColor);
+				cellPanel.setBorder(thinLineBorder);
+				cellPanel.setPreferredSize(new Dimension(cellSize,cellSize));
+				cellPanel.setLayout(null);
+				
+				map[j][i] = new MapCell(cellPanel);
+				
+				int cellY = j - cellBuffer;
+				int cellX = i - cellBuffer;
+				
+				
+				if(cellY >= 0 && cellY < mapMax) {
+					if(cellX >= 0 && cellX < mapMax) {
+						
+						game.Cell presentCell = cellList[cellY][tempMax - cellX][0];
+						map[j][i].setCell(presentCell);
+						map[j][i].getCellPanel().setBorder(thinLineBorder);
+					}
+				}
+				
+			}
+		}
+		
+		this.setMap(map);
+	}
+	
+	
+	
+	private void populateGrid(Container grid) {
+		
+		for(MapCell[] row : map) {
+			for(MapCell cell : row) {
+				/*//TESTING outlines cells in map that aren't null
+				if(cell.getCell() != null) {
+					cell.getCellPanel().setBackground(textColor.brighter());
+				}
+				*/
+				grid.add(cell.getCellPanel());
+			}
+		}
+	}
+	
+	
+	
+	
 	private void addOutputBox(Container out, JTextArea box) {
 		box.setOpaque(false);
 		box.setForeground(textColor);
@@ -153,44 +293,14 @@ public class PlayWindow extends GameWindow{
 		box.setLineWrap(true);
 		box.setWrapStyleWord(true);
 				
-		
-		
-		//sample text
-		/*
-		box.setText("Márgarét, áre you gríeving \n" + 
-				"Over Goldengrove unleaving? \n" + 
-				"Leáves like the things of man, you\n" + 
-				"With your fresh thoughts care for, can you? \n" + 
-				"Ah! ás the heart grows older \n" + 
-				"It will come to such sights colder \n" + 
-				"By and by, nor spare a sigh \n" + 
-				"Though worlds of wanwood leafmeal lie; \n" + 
-				"And yet you wíll weep and know why. \n" + 
-				"Now no matter, child, the name: \n" + 
-				"Sórrow’s spríngs áre the same. \n" + 
-				"Nor mouth had, no nor mind, expressed \n" + 
-				"What heart heard of, ghost guessed: \n" + 
-				"It ís the blight man was born for, \n" + 
-				"It is Margaret you mourn for.");
-			*/
-		
-		
-		//testing lineWrap
 	
 		
-		
-		  box.setText("A group of scared villagers begged for your help. They circled you, crying about "
+		//initial text while database is loading
+		box.setText("A group of scared villagers begged for your help. They circled you, crying about "
 		  		+ "their deceased. Scared of their deceased -- It seems that this cave you're now in front "
 		  		+ "of is home to the undead. The villagers called the evil lurking within 'The Overlord'. "
 		  		+ "You had also heard of it as the 'Blue Lich' before. Truly, a "
 		  		+ "fearsome beast lies ahead...");
-		  
-		
-			
-		
-		//intro text
-		//box.setText(" placeholder text");
-		
 		
 		out.add(box);
 	}

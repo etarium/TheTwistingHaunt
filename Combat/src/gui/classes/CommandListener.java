@@ -2,27 +2,24 @@ package gui.classes;
 
 import game.Cell;
 import game.Encounter;
+import game.Equipable;
+import game.Equipable_Armor;
+import game.Equipable_Weapon;
+import game.KeyItems;
 import game.Location;
 import game.ObjectComparator;
 import game.Player;
-import items.Equipable;
-import items.Equipable_Armor;
-import items.Equipable_Weapon;
-import items.KeyItems;
-import items.Usable;
-
+import game.Usable;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
 import javax.swing.JTextArea;
-
-import querymachine.GetCells;
 import querymachine.QueryMachine;
 
 public class CommandListener {
-    final String INSTANCE = "DN001";
+    final String INSTANCE = "DN1";
     public static PlayWindow play;
     private Player player;
     private Cell[][][] cellList;
@@ -30,6 +27,9 @@ public class CommandListener {
     private ArrayList<Equipable> equipList;
     private ArrayList<KeyItems> keyList;
     private ArrayList<Encounter> encList;
+    
+    final boolean DEBUG_LOAD = true;
+    final boolean DEBUG_SAVE = false;
 
     public CommandListener() {
         MainMenu menu = new MainMenu();
@@ -54,12 +54,15 @@ public class CommandListener {
             newGame();
         }catch(Exception e){
             System.out.print("Hah got one!");
+            System.out.println(e);
         }
         boolean run = true;
         int count = 0;
         while(run) {
         			
-        			System.out.println("Iteration " + ++count);        			
+        			System.out.println("Iteration " + ++count);        	
+        			MapCell tempMapCell = new MapCell();
+        			tempMapCell.updateMap(player, play.getMap());
         			listen(play , run);
         		}
     }
@@ -85,7 +88,9 @@ public class CommandListener {
      * still run after current iteration
      */
     public void listen(PlayWindow play, boolean run) {
-
+    		
+    	
+    	
         String[] stringArray = inputParser(play.requestInput());
         
         String command = stringArray[0];
@@ -153,7 +158,9 @@ public class CommandListener {
                     }
                     else if(taken instanceof Usable) {
                     		Usable item = (Usable)taken;
+                    		
                     		usableList.remove(item);
+                    		player.getCurrentCell(cellList).setItem("");
                     		
                     		player.getItemList().add(item);
                     		
@@ -163,6 +170,8 @@ public class CommandListener {
                     else if (taken instanceof KeyItems) {
                     		KeyItems item = (KeyItems)taken;
                     		keyList.remove(item);
+                    		player.getCurrentCell(cellList).setKeyItem("");
+
                     		
                     		player.getKeyItemsList().add(item);
                     		
@@ -206,11 +215,15 @@ public class CommandListener {
                 			else if(dropped instanceof Equipable) {
                 				Equipable item = (Equipable)dropped;
                 				
-                				if(item.getName().equals(player.getWornArmor().getName())) {
-                					player.setWornArmor(null);
+                				if(player.hasWornArmor()) {
+                					if(item.getName().equals(player.getWornArmor().getName())) {
+                						player.setWornArmor(null);
+                					}
                 				}
-                				if(item.getName().equals(player.getUsedWeapon().getName())) {
-                					player.setUsedWeapon(null);
+                				if(player.hasUsedWeapon()) {
+                					if(item.getName().equals(player.getUsedWeapon().getName())) {
+                						player.setUsedWeapon(null);
+                				}
                 				}
                 				
                 				output = "Well, you've dropped " + item.getName() + ", and it crumbles to dust "
@@ -240,7 +253,7 @@ public class CommandListener {
                 		Object used = searchInventory(parameter);
                 		
                 		if (used == null) {
-                			output = "I could use my weight in gold. You could use that" + parameter  
+                			output = "I could use my weight in gold. You could use that " + parameter  
                 				+    ". Not everyone can get what they want, though, can they, " + player.getName()
                 				+    "?";	
                 		}
@@ -289,6 +302,9 @@ public class CommandListener {
                 		
                 		else if (equipped instanceof Equipable_Armor) {
                 				Equipable_Armor armor = (Equipable_Armor)equipped;
+                				this.equipList.remove(armor);
+                				player.getCurrentCell(cellList).setItem("");
+                				
                 				Equipable old = player.getWornArmor();
             					player.setWornArmor(armor);
             					
@@ -302,6 +318,8 @@ public class CommandListener {
             			}
                 		else if (equipped instanceof Equipable_Weapon) {
                 				Equipable_Weapon weapon = (Equipable_Weapon)equipped;
+                				this.equipList.remove(weapon);
+                				player.getCurrentCell(cellList).setItem("");
                 				Equipable old = player.getUsedWeapon();
             					player.setUsedWeapon(weapon);
             					
@@ -385,7 +403,7 @@ public class CommandListener {
                 switch (direction) {
                     case 'n':
                         //check to see of movement possible
-                        if (cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].isNorth()) {
+                    		if(player.getCurrentCell(cellList).isNorth()) {
                             player.getLocation().setY(player.getLocation().getY() + 1);
                             output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
                         }
@@ -393,21 +411,22 @@ public class CommandListener {
                         break;
                     case 's':
                         //check to see of movement possible
-                        if (cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].isSouth()) {
+                			if(player.getCurrentCell(cellList).isSouth()) {
                             player.getLocation().setY(player.getLocation().getY() - 1);
                             output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
                         }
                         break;
                     case 'e':
                         //check to see of movement possible
-                        if (cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].isEast()) {
+                		
+                    		if(player.getCurrentCell(cellList).isEast()) {
                             player.getLocation().setX(player.getLocation().getX() + 1);
                             output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
                         }
                         break;
                     case 'w':
                         //check to see of movement possible
-                        if (cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].isWest()) {
+                			if(player.getCurrentCell(cellList).isWest()) {
                             player.getLocation().setX(player.getLocation().getX() - 1);
                             output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
                         }
@@ -502,20 +521,11 @@ public class CommandListener {
 	    	parameter = parameter.toLowerCase();
 	
 	    	ObjectComparator comp = new ObjectComparator();
-	    	int notFound = -1;
-	
-	    	//private ArrayList<Usable> usableList;
-	    	//private ArrayList<Equipable> equipList;
-	    	//private ArrayList<KeyItems> keyList;
-	    	//private ArrayList<Encounter> encList;
-
-	    	//ArrayList<Entity>
-	    	
+	    	int notFound = -1;	    	
 	    	
 	    	int usableIndex = comp.isPresentUsable(currentCell.getItem(), usableList);
 	    	int equipIndex = comp.isPresentEquipable(currentCell.getItem(), equipList);
 	    	int keyIndex = comp.isPresentKeyItem(currentCell.getKeyItem(), keyList);
-	    	//int entityIndex = equipIndex;
 	
 	    	if(usableIndex == notFound && equipIndex == notFound && keyIndex == notFound ) {
 	    		// parameter not found
@@ -626,12 +636,20 @@ public class CommandListener {
         player.getLocation().setY(3);
         player.getLocation().setZ(0);
         System.out.print("ayylmao");
-        loadInstance(INSTANCE);
+        
+        if(!DEBUG_LOAD) {
+        		loadInstance(INSTANCE);
+        }
+        else {
+        		loadGameTest();
+        }
+        
+        play.setCellList(cellList);
+        play.addMap();
     }
 
-    public void loadInstance(String instance) throws IOException {
+    public void loadInstance(String instance) throws SQLException, IOException {
         //execute query for cells in instance
-    	/**
         QueryMachine theDestroyer = new QueryMachine();
         ArrayList<Cell> cellobj;
         cellobj = theDestroyer.getCellInstance(instance);
@@ -650,10 +668,26 @@ public class CommandListener {
         equipList = equipableobj;
         encList = encounterobj;
         keyList = keyitemobj;
-        */
-    		GetCells cellCompiler = new GetCells();
-    		cellCompiler.arrangeCells(cellCompiler.getCellArray(INSTANCE));
+        
+        if(DEBUG_SAVE) {
+        		game.GameData newgame = new game.GameData(player, cellArray, usableobj, equipableobj, keyitemobj, encounterobj);
+        		newgame.serializeGameData(newgame);
+        }
 
+    }
+    
+    public void loadGameTest() {
+    		game.GameData newgame = new game.GameData();
+    		newgame = newgame.returnWarriorInstance();
+    		
+    		cellList = newgame.getCellList();
+    		usableList = newgame.getUsableList();
+        equipList = newgame.getEquipList();
+        encList = newgame.getEncList();
+        keyList = newgame.getKeyList();
+        
+        
+    		
     }
 
 }
