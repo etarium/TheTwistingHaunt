@@ -1,4 +1,6 @@
-package game;
+package items;
+
+import game.Entity;
 
 /**
  *

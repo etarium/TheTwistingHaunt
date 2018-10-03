@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.util.JSON.*;
 
 import databaseconnector.DBConnect;
 import game.Cell;
@@ -24,9 +25,12 @@ public class GetCells {
 	private Gson gson = new Gson();
 	private MongoDatabase tth;
 	private MongoCollection<Document> cellCollection;
-	private ArrayList<String> cellStringArray = new ArrayList<String>();
+	private Cell tempCell = new Cell();
+	private ArrayList<Cell> cellArray = new ArrayList<Cell>();
+	private Utils utils = new Utils();
 
-	private ArrayList<String> getCellStringArray(String instance_id) throws IOException {
+
+	public ArrayList<Cell> getCellArray(String instance_id) throws IOException {
 		if(tth == null) {
 			tth = connect.enterDB();
 		}
@@ -34,58 +38,37 @@ public class GetCells {
 		MongoCursor<Document> cursor = cellCollection.find().iterator();
 		try {
 			while (cursor.hasNext()) {
-				String tempDoc = "" + cellCollection.find(eq("instance_id", instance_id)).first();
+				Document tempDoc = cellCollection.find(eq("instance_id", instance_id)).first();
+				String json = com.mongodb.util.JSON.serialize(tempDoc);
+				json = utils.removeID(json);
+				tempCell = gson.fromJson(json, Cell.class);
+				cellArray.add(tempCell);
 				cursor.next();
-				cellStringArray.add(tempDoc);
+				
 
-				return cellStringArray;
+				return cellArray;
 			}
 		} finally {
 			cursor.close();
 		}
+		
 
-		return cellStringArray;
+		return cellArray;
 	}
-
-	private ArrayList<Cell> getAllCellsFromInstance(ArrayList<String> cellStringArray)
-	{
-		ArrayList<Cell> cellObjArray = new ArrayList<Cell>();
-		for(int i=0; i < cellStringArray.size(); i++) {
-			Cell tempCellObj = gson.fromJson(cellStringArray.get(i), Cell.class);
-			cellObjArray.add(tempCellObj);
-			System.out.println( cellStringArray.get(i).toString() );
-		}
-		return cellObjArray;
-	}
-
-	private Cell[][][] getCellMovementArray(ArrayList<Cell> cellObjArray)
-	{
-		Cell[][][] cellMovementArray = new Cell[10][10][4];
-		for(int i=0; i<cellObjArray.size(); i++)
-		{
-			System.out.print(".");
-			int x = cellObjArray.get(i).getLocation().getX();
-			int y = cellObjArray.get(i).getLocation().getY();
-			int z = cellObjArray.get(i).getLocation().getZ();
-			cellMovementArray [x][y][z] = cellObjArray.get(i);
-		}
-
-		return cellMovementArray;
-	}
-
-	public Cell[][][] getCells (String instance_id) throws IOException {
-		ArrayList<String> param1 = new ArrayList<String>();
-		ArrayList<Cell> param2 = new ArrayList<Cell>();
-		Cell[][][] output = new Cell[10][10][4];
-		param1 = getCellStringArray(instance_id);
-		param2 = getAllCellsFromInstance(param1);
-		output = getCellMovementArray(param2);
-
-		//test console log pls delete//
-		for(int i = 0; i < param2.size(); i++) {
-			System.out.println(param2.get(i));
-		}
-		return output;
+	
+	public Cell[][][] arrangeCells(ArrayList<Cell> cellArray) {
+		
+		Cell[][][] arrangedCells = new Cell[10][10][4];
+        for(int i=0; i<cellArray.size(); i++)
+            {
+                System.out.print(".");
+                int x = cellArray.get(i).getLocation().getX();
+                int y = cellArray.get(i).getLocation().getY();
+                int z = cellArray.get(i).getLocation().getZ();
+                arrangedCells [x][y][z] = cellArray.get(i);
+        }
+        
+        return arrangedCells;
 	}
 }
 

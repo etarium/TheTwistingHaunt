@@ -1,6 +1,11 @@
 package game;
 import java.util.ArrayList;
 
+import items.Equipable;
+import items.Equipable_Armor;
+import items.KeyItems;
+import items.Usable;
+
 /*
  * @author Emily Clark
  */

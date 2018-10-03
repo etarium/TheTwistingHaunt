@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 import javax.swing.JTextArea;
 
+import items.Equipable;
+import items.KeyItems;
+import items.Usable;
 import querymachine.QueryMachine;
 
 /**

@@ -1,4 +1,4 @@
-package game;
+package items;
 
 /**
  *
@@ -6,6 +6,8 @@ package game;
  */
 
 import java.util.ArrayList;
+
+import game.Entity;
 
 public abstract class Usable_MultiTarget extends Usable {
 

@@ -1,12 +1,12 @@
 import java.io.IOException;
 
-import querymachine.InstanceCompiler;
+import gui.classes.CommandListener;
 
 public class clientest {
 	public static void main(String args[]) throws IOException {
-		InstanceCompiler compile = new InstanceCompiler();
+		CommandListener compile = new CommandListener();
 		String instance_id = "DN001";
-		compile.loadGameDataFromDB(instance_id);
+		compile.loadInstance(instance_id);
 		
 	}
 }

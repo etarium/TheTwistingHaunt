@@ -1,4 +1,4 @@
-package game;
+package items;
 
 import java.io.Serializable;
 
@@ -9,6 +9,9 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 
+import game.Encounter;
+import game.Entity;
+import game.Player;
 import gui.classes.GUI_Client;
 
 public abstract class Usable implements UsableADT, Serializable{

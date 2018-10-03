@@ -2,6 +2,10 @@ package game;
 
 import java.util.ArrayList;
 
+import items.Equipable_Armor;
+import items.Equipable_Weapon;
+import items.Usable;
+
 /**
  *
  * @author Jason Richter, Samuel Fiscus

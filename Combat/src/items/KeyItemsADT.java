@@ -1,4 +1,4 @@
-package game;
+package items;
 /*
  * authors: Emily Clark
  */

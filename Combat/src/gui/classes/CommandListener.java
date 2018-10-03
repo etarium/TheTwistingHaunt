@@ -2,24 +2,27 @@ package gui.classes;
 
 import game.Cell;
 import game.Encounter;
-import game.Equipable;
-import game.Equipable_Armor;
-import game.Equipable_Weapon;
-import game.KeyItems;
 import game.Location;
 import game.ObjectComparator;
 import game.Player;
-import game.Usable;
+import items.Equipable;
+import items.Equipable_Armor;
+import items.Equipable_Weapon;
+import items.KeyItems;
+import items.Usable;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
 import javax.swing.JTextArea;
+
+import querymachine.GetCells;
 import querymachine.QueryMachine;
 
 public class CommandListener {
-    final String INSTANCE = "DN1";
+    final String INSTANCE = "DN001";
     public static PlayWindow play;
     private Player player;
     private Cell[][][] cellList;
@@ -626,8 +629,9 @@ public class CommandListener {
         loadInstance(INSTANCE);
     }
 
-    public void loadInstance(String instance) throws SQLException, IOException {
+    public void loadInstance(String instance) throws IOException {
         //execute query for cells in instance
+    	/**
         QueryMachine theDestroyer = new QueryMachine();
         ArrayList<Cell> cellobj;
         cellobj = theDestroyer.getCellInstance(instance);
@@ -646,6 +650,9 @@ public class CommandListener {
         equipList = equipableobj;
         encList = encounterobj;
         keyList = keyitemobj;
+        */
+    		GetCells cellCompiler = new GetCells();
+    		cellCompiler.arrangeCells(cellCompiler.getCellArray(INSTANCE));
 
     }
 

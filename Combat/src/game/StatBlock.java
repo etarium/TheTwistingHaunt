@@ -6,6 +6,10 @@ import java.io.Serializable;
  *
  * @author Jason Richter, Samuel Fiscus, Emily Clark
  */
+/**
+ * @author emilyclark
+ *
+ */
 public class StatBlock implements StatBlockADT, Serializable{
     
     
@@ -29,6 +33,14 @@ public class StatBlock implements StatBlockADT, Serializable{
     
     protected int evasion;
     protected int initiative;
+    
+    int hp;
+    int sp;
+    int def;
+    int eva;
+    int atk;
+    int init;
+    int intel;
 
     
     //constructors
@@ -38,8 +50,10 @@ public class StatBlock implements StatBlockADT, Serializable{
      */
     public StatBlock() {
     }
-
+    
+    @Deprecated
     /**
+     * Entity-Owned StatBlock
      * Filled constructor for StatBlock.
      * @param currentHealth Integer representing current health
      * @param maxHealth Integer representing maximum health value
@@ -60,7 +74,51 @@ public class StatBlock implements StatBlockADT, Serializable{
         this.physAtt = physAtt;
         this.initiative = initiative;
     }
+ 
+    /**
+     * Entity-Owned StatBlock
+     * Filled constructor for StatBlock.
+     * @param currentHealth Integer representing current health
+     * @param maxHealth Integer representing maximum health value
+     * @param specPoints Integer representing current special attack points
+     * @param physDef Integer representing physical defense value
+     * @param evasion Integer representing evasion value
+     * @param physAtt Integer representing physical attack value
+     * @param initiative Integer representing initiative value
+     */
+    public StatBlock(int currentHealth, int maxHealth, int specPoints, int physDef, 
+                        int evasion, int physAtt, int initiative, int currentSP, int intel) {
+        this.currentHealth = currentHealth;
+        this.maxHealth = maxHealth;
+        this.specPoints = specPoints;
+        this.currentSP = currentSP;
+        this.physDef = physDef;
+        this.evasion = evasion;
+        this.physAtt = physAtt;
+        this.initiative = initiative;
+        this.intel = intel;
+    }
     
+    
+    /**
+     * Item-Owned StatBlock
+     * @param hp
+     * @param sp
+     * @param def
+     * @param eva
+     * @param atk
+     * @param init
+     * @param intel
+     */
+    public StatBlock ( int hp, int sp, int def, int eva, int atk, int init, int intel) {
+    		this.hp = hp;
+    		this.sp = sp;
+    		this.def = def;
+    		this.eva = eva;
+    		this.atk = atk;
+    		this.init = init;
+    		this.intel = intel;
+    }
     
     //getters and setters
 

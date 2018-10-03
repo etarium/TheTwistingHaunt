@@ -10,6 +10,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import items.KeyItems;
+import items.Usable;
+
 public class Player extends Entity implements PlayerADT, Serializable{
     
     

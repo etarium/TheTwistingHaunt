@@ -1,4 +1,4 @@
-package game;
+package items;
 /**
  *
  * @author Jason Richter, Samuel Fiscus

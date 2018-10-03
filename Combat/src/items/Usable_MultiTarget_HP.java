@@ -1,6 +1,8 @@
-package game;
+package items;
 
 import java.util.ArrayList;
+
+import game.Entity;
 
 /**
  *

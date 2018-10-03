@@ -1,6 +1,10 @@
-package game;
+package items;
 
 import java.util.ArrayList;
+
+import game.Encounter;
+import game.Entity;
+import game.Player;
 
 /**
  *

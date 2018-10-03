@@ -26,6 +26,7 @@ Item {
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * index on isUsable, item_id. If we require searching in the future, index duration, numHand, and numTarget.
 * 'type' is a String. Options are "USABLE", "ARMOR", "WEAPON".
+* WEAPON can only be single target.
 * Statblock should be considered the equivalent to RDB 'potency'
 * Statblock values can be negative for poisons/attack/status effect items
 * This change allows multi-attribute items

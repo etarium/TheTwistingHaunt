@@ -9,6 +9,10 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import items.Equipable;
+import items.KeyItems;
+import items.Usable;
+
 public class GameData implements Serializable{
 
 	/**

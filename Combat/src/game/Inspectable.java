@@ -5,6 +5,8 @@ package game;
  */
 import java.util.ArrayList;
 
+import items.Item;
+
 public class Inspectable {
 
 	private String inspDescription;

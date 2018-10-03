@@ -12,12 +12,9 @@ import com.google.gson.Gson;
 
 import game.Cell;
 import game.Encounter;
-
-import game.Equipable;
-
-import game.KeyItems;
-
-import game.Usable;
+import items.Equipable;
+import items.KeyItems;
+import items.Usable;
 
 
 public class QueryMachine

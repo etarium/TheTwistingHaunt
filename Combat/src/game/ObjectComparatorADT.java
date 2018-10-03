@@ -1,6 +1,10 @@
 package game;
 import java.util.ArrayList;
 
+import items.Equipable;
+import items.KeyItems;
+import items.Usable;
+
 /*
  * @author Emily Clark
  */

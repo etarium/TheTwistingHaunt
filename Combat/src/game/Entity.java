@@ -6,6 +6,12 @@ package game;
  */
 
 import java.util.Random;
+
+import items.Equipable_Armor;
+import items.Equipable_Weapon;
+import items.KeyItems;
+import items.Usable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 

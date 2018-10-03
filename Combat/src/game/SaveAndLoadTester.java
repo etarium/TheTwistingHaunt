@@ -1,5 +1,11 @@
 package game;
 
+import items.Equipable_Armor;
+import items.Equipable_Weapon;
+import items.KeyItems;
+import items.Usable_MultiTarget_HP;
+import items.Usable_SingleTarget_HP;
+
 //import java.util.Scanner;
 
 public class SaveAndLoadTester {
