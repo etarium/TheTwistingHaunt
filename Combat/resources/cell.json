@@ -2,8 +2,8 @@ Cell {
   'xyzcoord': [INT],
   'instance_id': String,
   'desc': String,
-  'encounter': [String],
-  'items': [String],
+  'encounter': [Object],
+  'items': [Object],
   'requiredItem':
   		{
   		'item_id': String,

@@ -38,9 +38,7 @@ public class DBConnect {
 
 
 	private ArrayList<String> itemStringArray = new ArrayList<String>();
-	private ArrayList<String> requiredItemStringArray = new ArrayList<String>();
-	private ArrayList<String> encounterStringArray = new ArrayList<String>();
-	private ArrayList<String> inspectableStringArray = new ArrayList<String>();
+
 
 
 	public MongoClient connectToDB() throws IOException {

@@ -16,10 +16,13 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import javax.swing.JTextArea;
+
+import querymachine.GetCells;
+import querymachine.InstanceCompiler;
 import querymachine.QueryMachine;
 
 public class CommandListener {
-    final String INSTANCE = "DN1";
+    final String INSTANCE = "DN001";
     public static PlayWindow play;
     private Player player;
     private Cell[][][] cellList;
@@ -28,7 +31,10 @@ public class CommandListener {
     private ArrayList<KeyItems> keyList;
     private ArrayList<Encounter> encList;
     
-    final boolean DEBUG_LOAD = true;
+    /*
+     * these are test flags
+     */
+    final boolean DEBUG_LOAD = false;
     final boolean DEBUG_SAVE = false;
 
     public CommandListener() {
@@ -474,13 +480,13 @@ public class CommandListener {
     }//end commandListener()
     
     private Object searchInventory(String search) {
-    	
-    		ArrayList<Usable> itemList = player.getItemList();
-		ArrayList<KeyItems> keyItemList = player.getKeyItemsList();
+
+    		ArrayList<items.Usable> itemList = player.getItemList();
+		ArrayList<items.KeyItems> keyItemList = player.getKeyItemsList();
 		ArrayList<Equipable> equipmentList = new ArrayList<>();
 		
-		Equipable weapon = player.getUsedWeapon();
-		Equipable armor = player.getWornArmor();
+		items.Equipable_Weapon weapon = player.getUsedWeapon();
+		items.Equipable_Armor armor = player.getWornArmor();
 		
 		if(weapon != null) {
 			equipmentList.add(weapon);
@@ -489,13 +495,13 @@ public class CommandListener {
 			equipmentList.add(armor);
 		}
 		
-		for(Usable item : itemList) {
+		for(items.Usable item : itemList) {
 			if (item.getName().equalsIgnoreCase(search)){
 				return item;
 			}
 		}
 		
-		for(KeyItems item : keyItemList) {
+		for(items.KeyItems item : keyItemList) {
 			if (item.getName().equalsIgnoreCase(search)){
 				return item;
 			}
@@ -637,45 +643,31 @@ public class CommandListener {
         player.getLocation().setZ(0);
         System.out.print("ayylmao");
         
+        loadInstance(INSTANCE);
+        /*
         if(!DEBUG_LOAD) {
         		loadInstance(INSTANCE);
         }
         else {
         		loadGameTest();
         }
-        
+        */
         play.setCellList(cellList);
         play.addMap();
     }
 
-    public void loadInstance(String instance) throws SQLException, IOException {
-        //execute query for cells in instance
-        QueryMachine theDestroyer = new QueryMachine();
-        ArrayList<Cell> cellobj;
-        cellobj = theDestroyer.getCellInstance(instance);
-        ArrayList<Usable> usableobj;
-        usableobj = theDestroyer.getHPUsableInstance(cellobj);
-        usableobj = theDestroyer.getSPUsableInstance(cellobj, usableobj);
-        ArrayList<Equipable> equipableobj;
-        equipableobj = theDestroyer.getArmorInstance(cellobj);
-        ArrayList<KeyItems> keyitemobj;
-        keyitemobj = theDestroyer.getKeyItemsInstance(cellobj);
-        ArrayList<Encounter> encounterobj;
-        encounterobj = theDestroyer.getEncounterInstance(cellobj);
-        Cell[][][] cellArray = theDestroyer.getCellArray(cellobj);
-        cellList = cellArray;
-        usableList = usableobj;
-        equipList = equipableobj;
-        encList = encounterobj;
-        keyList = keyitemobj;
+    public void loadInstance(String instance) throws IOException {
+    	InstanceCompiler compiler = new InstanceCompiler();
+        compiler.loadGameDataFromDB(INSTANCE);
         
-        if(DEBUG_SAVE) {
+       /*
+        
         		game.GameData newgame = new game.GameData(player, cellArray, usableobj, equipableobj, keyitemobj, encounterobj);
         		newgame.serializeGameData(newgame);
         }
-
+        */
     }
-    
+   /* 
     public void loadGameTest() {
     		game.GameData newgame = new game.GameData();
     		newgame = newgame.returnWarriorInstance();
@@ -689,5 +681,6 @@ public class CommandListener {
         
     		
     }
+    */
 
 }

@@ -9,15 +9,16 @@ import javax.swing.JTextArea;
 import items.Equipable;
 import items.KeyItems;
 import items.Usable;
+import querymachine.InstanceCompiler;
 import querymachine.QueryMachine;
 
 /**
  *
- * @author jason
+ * @author jason, Emily Clark
  */
 public class Client {
 
-    final String INSTANCE = "DN1";
+    final String INSTANCE = "DN001";
 
     private Player player;
     private Cell[][][] cellList;
@@ -30,7 +31,7 @@ public class Client {
     public Client() {
     }
 
-    public void newGame(Player player, JTextArea output) throws SQLException, IOException {
+    public void newGame(Player player, JTextArea output) throws IOException {
         // create new instance of the game for the player using the input from the creator
         //save player
         this.player = player;
@@ -85,24 +86,8 @@ public class Client {
 
     public void loadInstance(String instance, JTextArea output) throws SQLException, IOException {
         //execute query for cells in instance
-        QueryMachine theDestroyer = new QueryMachine();
-        ArrayList<Cell> cellobj;
-        cellobj = theDestroyer.getCellInstance(instance);
-        ArrayList<Usable> usableobj;
-        usableobj = theDestroyer.getHPUsableInstance(cellobj);
-        usableobj = theDestroyer.getSPUsableInstance(cellobj, usableobj);
-        ArrayList<Equipable> equipableobj;
-        equipableobj = theDestroyer.getArmorInstance(cellobj);
-        ArrayList<KeyItems> keyitemobj;
-        keyitemobj = theDestroyer.getKeyItemsInstance(cellobj);
-        ArrayList<Encounter> encounterobj;
-        encounterobj = theDestroyer.getEncounterInstance(cellobj);
-        Cell[][][] cellArray = theDestroyer.getCellArray(cellobj);
-        cellList = cellArray;
-        usableList = usableobj;
-        equipList = equipableobj;
-        encList = encounterobj;
-        keyList = keyitemobj;
+        InstanceCompiler compiler = new InstanceCompiler();
+        compiler.loadGameDataFromDB(INSTANCE);
         
     }
 
