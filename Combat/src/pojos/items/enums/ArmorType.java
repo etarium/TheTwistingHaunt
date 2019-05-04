@@ -2,7 +2,7 @@ package pojos.items.enums;
 
 public enum ArmorType {
 	HEAD,
-	TORSO,
+	CHEST,
 	LEGS,
 	SHOULDERS,
 	HANDS,

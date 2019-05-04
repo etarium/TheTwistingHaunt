@@ -1,4 +1,4 @@
-package pojos;
+package pojos.environment;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import pojos.items.Item;
 
 @JsonIgnoreProperties
 public class Cell {
- int[][][] coordinates;
- String instance;
+ Location coordinates;
+ Instance instance;
  String description;
  String terrain;
  InspectableObjects inspectableObjects;
@@ -19,6 +19,7 @@ public class Cell {
  List<NPCEntity> npcs;
  List<EnemyEntity> enemies;
  boolean isLocked;
+ List<Item> requiredItems; //used for places that require certain triggers to be able to enter, locked doors, etc
  boolean north;
  boolean south;
  boolean east;

@@ -10,5 +10,5 @@ public enum Species {
 	UNDEAD,
 	CENTAUR,
 	TROLL,
-	
+	MONSTER
 }
