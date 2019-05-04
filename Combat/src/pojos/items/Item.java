@@ -1,8 +1,9 @@
-package pojos;
+package pojos.items;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import pojos.enums.ItemType;
+import pojos.Statblock;
+import pojos.items.enums.ItemType;
 
 @JsonIgnoreProperties
 public class Item {

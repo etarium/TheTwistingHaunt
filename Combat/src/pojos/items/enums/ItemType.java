@@ -1,4 +1,4 @@
-package pojos.enums;
+package pojos.items.enums;
 
 	public enum ItemType {
 		CONSUMABLE,

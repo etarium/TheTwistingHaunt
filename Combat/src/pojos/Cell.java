@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import pojos.entity.EnemyEntity;
+import pojos.entity.NPCEntity;
+import pojos.items.Item;
+
 @JsonIgnoreProperties
 public class Cell {
  int[][][] coordinates;
@@ -12,8 +16,8 @@ public class Cell {
  String terrain;
  InspectableObjects inspectableObjects;
  List<Item> items;
- List<NPC> npcs;
- List<Enemy> enemies;
+ List<NPCEntity> npcs;
+ List<EnemyEntity> enemies;
  boolean isLocked;
  boolean north;
  boolean south;
