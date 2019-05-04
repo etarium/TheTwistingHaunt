@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Combat/src"/>
+	<classpathentry kind="src" path="TwistingHaunt/src"/>
+	<classpathentry kind="lib" path="Combat/mysql-connector-java-5.1.45-bin.jar"/>
+	<classpathentry kind="lib" path="Combat/TTH.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
