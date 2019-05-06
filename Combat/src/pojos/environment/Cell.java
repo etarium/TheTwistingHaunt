@@ -12,143 +12,141 @@ import pojos.items.Item;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Cell {
-	
- Location location;
- Instance instance;
- String description;
- String terrain;
- InspectableObjects inspectableObjects;
- List<Item> items;
- List<Entity> npcs;
- @JsonProperty("enemies")
- List<Entity> enemies;
- boolean isLocked;
- List<Item> requiredItems; //used for places that require certain triggers to be able to enter, locked doors, etc
- boolean north;
- boolean south;
- boolean east;
- boolean west;
- 
- 
- 
-public Location getLocation() {
-	return location;
-}
 
-public void setLocation(Location location) {
-	this.location = location;
-}
+	Location location;
+	Instance instance;
+	String description;
+	String terrain;
+	InspectableObjects inspectableObjects;
+	List<Item> items;
+	List<Entity> npcs;
+	@JsonProperty("enemies")
+	List<Entity> enemies;
+	boolean isLocked;
+	List<Item> requiredItems; //used for places that require certain triggers to be able to enter, locked doors, etc
+	boolean north;
+	boolean south;
+	boolean east;
+	boolean west;
 
-public Instance getInstance() {
-	return instance;
-}
+	public Location getLocation() {
+		return location;
+	}
 
-public void setInstance(Instance instance) {
-	this.instance = instance;
-}
+	public void setLocation(Location location) {
+		this.location = location;
+	}
 
-public String getDescription() {
-	return description;
-}
+	public Instance getInstance() {
+		return instance;
+	}
 
-public void setDescription(String description) {
-	this.description = description;
-}
+	public void setInstance(Instance instance) {
+		this.instance = instance;
+	}
 
-public String getTerrain() {
-	return terrain;
-}
+	public String getDescription() {
+		return description;
+	}
 
-public void setTerrain(String terrain) {
-	this.terrain = terrain;
-}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-public InspectableObjects getInspectableObjects() {
-	return inspectableObjects;
-}
+	public String getTerrain() {
+		return terrain;
+	}
 
-public void setInspectableObjects(InspectableObjects inspectableObjects) {
-	this.inspectableObjects = inspectableObjects;
-}
+	public void setTerrain(String terrain) {
+		this.terrain = terrain;
+	}
 
-public List<Item> getItems() {
-	return items;
-}
+	public InspectableObjects getInspectableObjects() {
+		return inspectableObjects;
+	}
 
-public void setItems(List<Item> items) {
-	this.items = items;
-}
+	public void setInspectableObjects(InspectableObjects inspectableObjects) {
+		this.inspectableObjects = inspectableObjects;
+	}
 
-public boolean isLocked() {
-	return isLocked;
-}
+	public List<Item> getItems() {
+		return items;
+	}
 
-public void setLocked(boolean isLocked) {
-	this.isLocked = isLocked;
-}
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
 
-public List<Item> getRequiredItems() {
-	return requiredItems;
-}
+	public boolean isLocked() {
+		return isLocked;
+	}
 
-public void setRequiredItems(List<Item> requiredItems) {
-	this.requiredItems = requiredItems;
-}
+	public void setLocked(boolean isLocked) {
+		this.isLocked = isLocked;
+	}
 
-public List<Entity> getNpcs() {
-	return npcs;
-}
+	public List<Item> getRequiredItems() {
+		return requiredItems;
+	}
 
-public void setNpcs(List<Entity> npcs) {
-	this.npcs = npcs;
-}
+	public void setRequiredItems(List<Item> requiredItems) {
+		this.requiredItems = requiredItems;
+	}
 
-public List<Entity> getEnemies() {
-	return enemies;
-}
+	public List<Entity> getNpcs() {
+		return npcs;
+	}
 
-public void setEnemies(List<Entity> enemies) {
-	this.enemies = enemies;
-}
+	public void setNpcs(List<Entity> npcs) {
+		this.npcs = npcs;
+	}
 
-public boolean isNorth() {
-	return north;
-}
+	public List<Entity> getEnemies() {
+		return enemies;
+	}
 
-public void setNorth(boolean north) {
-	this.north = north;
-}
+	public void setEnemies(List<Entity> enemies) {
+		this.enemies = enemies;
+	}
 
-public boolean isSouth() {
-	return south;
-}
+	public boolean isNorth() {
+		return north;
+	}
 
-public void setSouth(boolean south) {
-	this.south = south;
-}
+	public void setNorth(boolean north) {
+		this.north = north;
+	}
 
-public boolean isEast() {
-	return east;
-}
+	public boolean isSouth() {
+		return south;
+	}
 
-public void setEast(boolean east) {
-	this.east = east;
-}
+	public void setSouth(boolean south) {
+		this.south = south;
+	}
 
-public boolean isWest() {
-	return west;
-}
+	public boolean isEast() {
+		return east;
+	}
 
-public void setWest(boolean west) {
-	this.west = west;
-}
+	public void setEast(boolean east) {
+		this.east = east;
+	}
 
-@Override
-public String toString() {
-	return "Cell [location=" + location + ", instance=" + instance + ", description=" + description + ", terrain="
-			+ terrain + ", inspectableObjects=" + inspectableObjects + ", items=" + items + ", npcs=" + npcs
-			+ ", enemies=" + enemies + ", isLocked=" + isLocked + ", requiredItems=" + requiredItems + ", north="
-			+ north + ", south=" + south + ", east=" + east + ", west=" + west + "]";
-} 
- 
+	public boolean isWest() {
+		return west;
+	}
+
+	public void setWest(boolean west) {
+		this.west = west;
+	}
+
+	@Override
+	public String toString() {
+		return "Cell [location=" + location + ", instance=" + instance + ", description=" + description + ", terrain="
+				+ terrain + ", inspectableObjects=" + inspectableObjects + ", items=" + items + ", npcs=" + npcs
+				+ ", enemies=" + enemies + ", isLocked=" + isLocked + ", requiredItems=" + requiredItems + ", north="
+				+ north + ", south=" + south + ", east=" + east + ", west=" + west + "]";
+	} 
+
 }

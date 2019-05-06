@@ -17,6 +17,7 @@ public class Entity {
 	Species species;
 	List<Item> inventory;
 	int level;
+	
 	public String getName() {
 		return name;
 	}

@@ -1,23 +1,98 @@
 package pojos.entity;
 
 import java.util.List;
+import java.util.Map;
 
 import pojos.Quest;
 import pojos.Skill;
 import pojos.Statblock;
+import pojos.entity.enums.Faction;
 import pojos.items.ArmorItem;
-import pojos.items.Item;
 import pojos.items.WeaponItem;
+import pojos.items.enums.ArmorType;
+import pojos.items.enums.WeaponType;
 
-public class PlayerEntity {
+public class PlayerEntity extends Entity{
 	
 	EntityClassObject entityClass;
 	int numOfHands;
-	List<Item> inventory;
 	Statblock stats;
+	ArmorType armorType;
+	WeaponType weaponType;
 	List<Skill> skills;
 	List<Quest> quests;
-	List<ArmorItem> armor;
-	List<WeaponItem> weapons;
+	List<ArmorItem> equippedArmor;
+	List<WeaponItem> equippedWeapons;
+	Map<Faction, Integer> factionLevel;
+	
+	public EntityClassObject getEntityClass() {
+		return entityClass;
+	}
+	public void setEntityClass(EntityClassObject entityClass) {
+		this.entityClass = entityClass;
+	}
+	public int getNumOfHands() {
+		return numOfHands;
+	}
+	public void setNumOfHands(int numOfHands) {
+		this.numOfHands = numOfHands;
+	}
+	public Statblock getStats() {
+		return stats;
+	}
+	public void setStats(Statblock stats) {
+		this.stats = stats;
+	}
+	public ArmorType getArmorType() {
+		return armorType;
+	}
+	public void setArmorType(ArmorType armorType) {
+		this.armorType = armorType;
+	}
+	public WeaponType getWeaponType() {
+		return weaponType;
+	}
+	public void setWeaponType(WeaponType weaponType) {
+		this.weaponType = weaponType;
+	}
+	public List<Skill> getSkills() {
+		return skills;
+	}
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
+	public List<Quest> getQuests() {
+		return quests;
+	}
+	public void setQuests(List<Quest> quests) {
+		this.quests = quests;
+	}
+	public List<ArmorItem> getEquippedArmor() {
+		return equippedArmor;
+	}
+	public void setEquippedArmor(List<ArmorItem> equippedArmor) {
+		this.equippedArmor = equippedArmor;
+	}
+	public List<WeaponItem> getEquippedWeapons() {
+		return equippedWeapons;
+	}
+	public void setEquippedWeapons(List<WeaponItem> equippedWeapons) {
+		this.equippedWeapons = equippedWeapons;
+	}
+	public Map<Faction, Integer> getFactionLevel() {
+		return factionLevel;
+	}
+	public void setFactionLevel(Map<Faction, Integer> factionLevel) {
+		this.factionLevel = factionLevel;
+	}
+	@Override
+	public String toString() {
+		return "PlayerEntity [entityClass=" + entityClass + ", numOfHands=" + numOfHands + ", stats=" + stats
+				+ ", armorType=" + armorType + ", weaponType=" + weaponType + ", skills=" + skills + ", quests="
+				+ quests + ", equippedArmor=" + equippedArmor + ", equippedWeapons=" + equippedWeapons
+				+ ", factionLevel=" + factionLevel + ", name=" + name + ", description=" + description
+				+ ", temperament=" + temperament + ", species=" + species + ", inventory=" + inventory + ", level="
+				+ level + "]";
+	}
 	
 }
