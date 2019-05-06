@@ -24,9 +24,6 @@ public class DBConnector {
 		String user = config.getProperty("user");
 		String pass = config.getProperty("password");
 		String dbName = config.getProperty("database");
-		System.out.println(user);
-		System.out.println(pass);
-		System.out.println(dbName);
 		MongoClientURI uri = new MongoClientURI(
 				"mongodb+srv://"+user+":"+pass+"@thetwistinghaunt-shard-00-01-hh6b2.mongodb.net/admin");
 
@@ -42,8 +39,6 @@ public class DBConnector {
 		cellDocuments.forEach(cell -> {
 			try {
 				Cell tempCell = mapper.readValue(cell.toJson(), Cell.class);
-				System.out.println(cell.toJson());
-				System.out.println(tempCell);
 				activeCells.add(tempCell);
 				
 			} catch (IOException e) {
