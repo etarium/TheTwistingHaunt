@@ -18,6 +18,7 @@ public class UIMain {
 			System.out.println(cell.getTerrain());
 			System.out.println(cell.getEnemies());
 			System.out.println(cell.getLocation());
+			System.out.println(cell.getItems());
 		});
 		
 	}

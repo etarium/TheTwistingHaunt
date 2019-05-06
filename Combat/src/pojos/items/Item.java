@@ -66,7 +66,7 @@ public class Item {
 	@Override
 	public String toString() {
 		return "Item [name=" + name + ", type=" + type + ", description=" + description + ", usedDescription="
-				+ usedDescription + ", stats=" + stats + ", minLevel=" + minLevel + "]";
+				+ usedDescription + ", \nstats=" + stats + ", \nminLevel=" + minLevel + "]";
 	}
 	
 }
