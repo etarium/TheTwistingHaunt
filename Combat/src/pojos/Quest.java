@@ -3,6 +3,7 @@ package pojos;
 import java.util.List;
 
 import pojos.entity.Entity;
+import pojos.entity.enums.Faction;
 import pojos.environment.Location;
 import pojos.items.Item;
 
@@ -20,6 +21,11 @@ public class Quest {
 	String npcDialogueForQuestCompletion;
 	String npcDialogueForQuestAbandonment;
 	int minLevel;
+	Faction faction;
+	int minFactionLevel;
+	int factionEarnedWithCompletion;
+	int factionLostWithAbandon;
+	int xpEarnedWithCompletion;
 	
 	public String get_id() {
 		return _id;
@@ -94,13 +100,50 @@ public class Quest {
 		this.minLevel = minLevel;
 	}
 	
+	
+	public Faction getFaction() {
+		return faction;
+	}
+	public void setFaction(Faction faction) {
+		this.faction = faction;
+	}
+	public int getMinFactionLevel() {
+		return minFactionLevel;
+	}
+	public void setMinFactionLevel(int minFactionLevel) {
+		this.minFactionLevel = minFactionLevel;
+	}
+	public int getFactionEarnedWithCompletion() {
+		return factionEarnedWithCompletion;
+	}
+	public void setFactionEarnedWithCompletion(int factionEarnedWithCompletion) {
+		this.factionEarnedWithCompletion = factionEarnedWithCompletion;
+	}
+	public int getFactionLostWithAbandon() {
+		return factionLostWithAbandon;
+	}
+	public void setFactionLostWithAbandon(int factionLostWithAbandon) {
+		this.factionLostWithAbandon = factionLostWithAbandon;
+	}
+	public int getXpEarnedWithCompletion() {
+		return xpEarnedWithCompletion;
+	}
+	public void setXpEarnedWithCompletion(int xpEarnedWithCompletion) {
+		this.xpEarnedWithCompletion = xpEarnedWithCompletion;
+	}
+	
 	@Override
 	public String toString() {
 		return "Quest [_id=" + _id + ", name=" + name + ", description=" + description + ", questItems=" + questItems
 				+ ", questRewards=" + questRewards + ", questEntities=" + questEntities + ", coordinatesOfQuest="
 				+ coordinatesOfQuest + ", coordinatesOfNPC=" + coordinatesOfNPC + ", npcDialogueForQuest="
 				+ npcDialogueForQuest + ", npcDialogueForQuestCompletion=" + npcDialogueForQuestCompletion
-				+ ", npcDialogueForQuestAbandonment=" + npcDialogueForQuestAbandonment + ", minLevel=" + minLevel + "]";
+				+ ", npcDialogueForQuestAbandonment=" + npcDialogueForQuestAbandonment + ", minLevel=" + minLevel
+				+ ", faction=" + faction + ", minFactionLevel=" + minFactionLevel + ", factionEarnedWithCompletion="
+				+ factionEarnedWithCompletion + ", factionLostWithAbandon=" + factionLostWithAbandon
+				+ ", xpEarnedWithCompletion=" + xpEarnedWithCompletion + "]";
 	}
+	
+	
 	
 }

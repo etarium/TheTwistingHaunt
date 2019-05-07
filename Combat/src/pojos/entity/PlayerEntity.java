@@ -24,7 +24,9 @@ public class PlayerEntity extends Entity{
 	List<ArmorItem> equippedArmor;
 	List<WeaponItem> equippedWeapons;
 	Map<Faction, Integer> factionLevel;
-	
+	int xp;
+	int xpToNextLevel;
+
 	public EntityClassObject getEntityClass() {
 		return entityClass;
 	}
@@ -85,14 +87,27 @@ public class PlayerEntity extends Entity{
 	public void setFactionLevel(Map<Faction, Integer> factionLevel) {
 		this.factionLevel = factionLevel;
 	}
+	public int getXp() {
+		return xp;
+	}
+	public void setXp(int xp) {
+		this.xp = xp;
+	}
+	public int getXpToNextLevel() {
+		return xpToNextLevel;
+	}
+	public void setXpToNextLevel(int xpToNextLevel) {
+		this.xpToNextLevel = xpToNextLevel;
+	}
+	
 	@Override
 	public String toString() {
 		return "PlayerEntity [entityClass=" + entityClass + ", numOfHands=" + numOfHands + ", stats=" + stats
 				+ ", armorType=" + armorType + ", weaponType=" + weaponType + ", skills=" + skills + ", quests="
 				+ quests + ", equippedArmor=" + equippedArmor + ", equippedWeapons=" + equippedWeapons
-				+ ", factionLevel=" + factionLevel + ", name=" + name + ", description=" + description
-				+ ", temperament=" + temperament + ", species=" + species + ", inventory=" + inventory + ", level="
-				+ level + "]";
+				+ ", factionLevel=" + factionLevel + ", xp=" + xp + ", xpToNextLevel=" + xpToNextLevel + ", name="
+				+ name + ", description=" + description + ", temperament=" + temperament + ", species=" + species
+				+ ", inventory=" + inventory + ", level=" + level + "]";
 	}
 	
 }

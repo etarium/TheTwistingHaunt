@@ -9,6 +9,8 @@ public class NPCEntity extends Entity{
 
 	List<Quest> quests;
 	Faction faction;
+	int xpEarned;
+	int xpLost; //should we?
 	
 	public List<Quest> getQuests() {
 		return quests;

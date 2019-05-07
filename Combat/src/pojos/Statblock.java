@@ -2,7 +2,7 @@ package pojos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Statblock {
 
 	int hp;
@@ -17,6 +17,7 @@ public class Statblock {
 	int sta;
 	int agi;
 	int acc;
+	
 	public int getHp() {
 		return hp;
 	}
