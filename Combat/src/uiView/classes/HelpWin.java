@@ -64,7 +64,7 @@ public class HelpWin extends GameWindow{
 		
 		
 		
-		String dir = "src/gui/resources/";
+		String dir = "src/uiView/resources/";
 		String fileName = "help_instructions.txt";
 		String filePath = dir + fileName + "";
 		JTextPane helpText = new JTextPane();

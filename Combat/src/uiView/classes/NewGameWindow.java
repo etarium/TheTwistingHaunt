@@ -23,6 +23,7 @@ import pojos.entity.PlayerEntity;
 
 import pojos.entity.PlayerEntity;
 import pojos.entity.enums.EntityClassEnum;
+import pojos.environment.Location;
 public class NewGameWindow extends GameWindow{
 
 	static JFrame window;
@@ -231,6 +232,11 @@ public class NewGameWindow extends GameWindow{
 		thiefPanel.setBackground(textColor);
 		playerClass.setName(EntityClassEnum.MAGE);
 		newPlayer.setEntityClass(playerClass);
+		Location loc = new Location ();
+		loc.setX(0);
+		loc.setY(3);
+		loc.setZ(0);
+		newPlayer.setLocation(loc);
 		updateText();
 	}
 	
@@ -302,6 +308,7 @@ public class NewGameWindow extends GameWindow{
 		
 			
                 window.dispose();
+                //new PlayWindow();
 
 	}
 	
@@ -330,11 +337,20 @@ public class NewGameWindow extends GameWindow{
 				
 				String loadText = "Ah, " + playerClass.getName() + ", I'm afraid I cannot hold you much longer... "
 						+ "Prepare yourself! Don't give up against the ---\n\n ";
-				output.setText(loadText);				
+				
+				output.setText(loadText);
+								
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				try {
+					Thread.sleep(4500);
+					
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				startButtonPressed(panelS, labelS);
 				
 			}

@@ -12,6 +12,7 @@ public class CellAPI {
 	//send through the instance.name as parameter
 	public List<Cell> getCellsFromInstance(String instance) {
 		List<Cell> activeCells = db.getAllCellsFromInstance(instance);
+		System.out.println("DEBUG: db.api.CellAPI getCellsFromInstance");
 		return activeCells;
 	}
 

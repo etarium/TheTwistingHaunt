@@ -230,7 +230,7 @@ public class MainMenu extends GameWindow {
 
         readmeWindow.setSize(readmeDimension);
 
-        String dir = "src/gui/resources/";
+        String dir = "src/uiView/resources/";
         String fileName = "readme.txt";
         String filePath = dir + fileName + "";
 

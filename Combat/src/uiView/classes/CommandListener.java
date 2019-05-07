@@ -17,6 +17,7 @@ import pojos.items.ArmorItem;
 import pojos.items.ConsumableItem;
 import pojos.items.Item;
 import pojos.items.WeaponItem;
+import db.api.CellAPI;
 
 public class CommandListener {
     final String INSTANCE = "Test Instance";
@@ -27,8 +28,9 @@ public class CommandListener {
     private ArrayList<WeaponItem> equipList;
     private ArrayList<Item> keyList;
     private ArrayList<EnemyEntity> encList;
+    CellAPI cellService = new CellAPI();
     
-    final boolean DEBUG_LOAD = true;
+    final boolean DEBUG_LOAD = false;
     final boolean DEBUG_SAVE = false;
 
     public CommandListener() {
@@ -48,21 +50,21 @@ public class CommandListener {
         GUI_Client.main(null);
         play = GUI_Client.getPlayWindow();
         } catch(Exception e) {
-        	System.out.print("Exception");
+        	System.out.print("Exception when trying to play GUI_Client.getPlayWindow()");
         }
+        
         try{
             newGame();
         }catch(Exception e){
-            System.out.print("Hah got one!");
+            System.out.print("Exception when triyng to load newGame()");
             System.out.println(e);
-        }
+        } 
         boolean run = true;
         int count = 0;
         while(run) {
-        			
-        			System.out.println("Iteration " + ++count);        	
+        			       	
         			MapCell tempMapCell = new MapCell();
-        			tempMapCell.updateMap(player, play.getMap());
+        			//tempMapCell.updateMap(player, play.getMap());
         			listen(play , run);
         		}
     }
@@ -636,13 +638,13 @@ public class CommandListener {
     		player.setLocation(tempLoc);
     	
         player.getLocation().setX(0);
-        player.getLocation().setY(3);
+        player.getLocation().setY(1);
         player.getLocation().setZ(0);
-        System.out.print("ayylmao");
+        System.out.print("Player Location Initialized");
 //        
-//        if(!DEBUG_LOAD) {
-//        		loadInstance(INSTANCE);
-//        }
+        if(!DEBUG_LOAD) {
+        		loadInstance(INSTANCE);
+        }
 //        else {
 //        		loadGameTest();
 //        }
@@ -651,9 +653,9 @@ public class CommandListener {
         play.addMap();
     }
 
- // TODO: Can probably delete this entire thing.
+ // TODO: Can probably delete this entire thing. Should be in the back-end.
   
-//    public void loadInstance(String instance) throws SQLException, IOException {
+    public void loadInstance(String instance) throws SQLException, IOException {
 //        //execute query for cells in instance
 //        QueryMachine theDestroyer = new QueryMachine();
 //        ArrayList<Cell> cellobj;
@@ -681,8 +683,9 @@ public class CommandListener {
         		newgame.serializeGameData(newgame);
         }
     */
-
-    //}
+    		
+    		List<Cell> cells = cellService.getCellsFromInstance("Test Instance");
+    }
     
 
 }

@@ -2,6 +2,8 @@ package uiView.classes;
 
 import javax.swing.*;
 
+import pojos.entity.PlayerEntity;
+import pojos.environment.Cell;
 import pojos.environment.Location;
 
 import java.awt.*;
@@ -9,7 +11,7 @@ import java.awt.*;
 public class MapCell{
 	
 	private JPanel cellPanel;
-	private pojos.environment.Cell cell;
+	private Cell cell;
 	private final int CELL_BUFFER = 2;
 	private final int MAP_HEIGHT = 9;
 	private WallOverlay walls;
@@ -20,7 +22,7 @@ public class MapCell{
 	//constructors
 	public MapCell() {
 		this.cellPanel = new JPanel();
-		this.cell = new pojos.environment.Cell();
+		this.cell = new Cell();
 	}
 	
 	public MapCell(JPanel cellPanel) {
@@ -28,12 +30,12 @@ public class MapCell{
 		this.cell = null;
 	}
 	
-	public MapCell(pojos.environment.Cell cell) {
+	public MapCell(Cell cell) {
 		this.cell = cell;
 		this.cellPanel = new JPanel();
 	}
 	
-	public MapCell(JPanel cellPanel, pojos.environment.Cell cell) {
+	public MapCell(JPanel cellPanel, Cell cell) {
 		this.cellPanel = cellPanel;
 		this.cell= cell;
 	}
@@ -48,11 +50,11 @@ public class MapCell{
 		this.cellPanel = cellPanel;
 	}
 
-	public pojos.environment.Cell getCell() {
+	public Cell getCell() {
 		return cell;
 	}
 
-	public void setCell(pojos.environment.Cell cell) {
+	public void setCell(Cell cell) {
 		this.cell = cell;
 	}
 	
@@ -81,7 +83,7 @@ public class MapCell{
 	}
 	
 	public void discoverCells(MapCell currentMapCell, MapCell[][] map) {
-		pojos.environment.Cell currentCell = currentMapCell.getCell();
+		Cell currentCell = currentMapCell.getCell();
 		
 		MapCell cellNorth = null,cellSouth = null,cellWest = null, cellEast = null;
 		
@@ -108,13 +110,13 @@ public class MapCell{
 		}
 		
 	}
-	public void updateMap(pojos.entity.PlayerEntity player, MapCell[][] map) {
+	public void updateMap(PlayerEntity player, MapCell[][] map) {
 		MapCell currentMapCell = getPlayersMapCell(player, map);
 		
 		this.discoverCells(currentMapCell, map);
 		this.highlightCurrentPosition(currentMapCell);
 	}
-	private MapCell getPlayersMapCell(pojos.entity.PlayerEntity player, MapCell[][] map) {
+	private MapCell getPlayersMapCell(PlayerEntity player, MapCell[][] map) {
 		Location loc = player.getLocation();
 		
 		//initial should be [0][3]
@@ -129,7 +131,7 @@ public class MapCell{
 	}
 	
 	private MapCell getNorthCell(MapCell currentMapCell, MapCell[][] map) {
-		pojos.environment.Cell currentCell = currentMapCell.getCell();
+		Cell currentCell = currentMapCell.getCell();
 		
 		Location loc = currentCell.getLocation();
 		
@@ -141,7 +143,7 @@ public class MapCell{
 		
 	}
 	private MapCell getEastCell(MapCell currentMapCell, MapCell[][] map) {
-		pojos.environment.Cell currentCell = currentMapCell.getCell();
+		Cell currentCell = currentMapCell.getCell();
 		
 		Location loc = currentCell.getLocation();
 		
@@ -153,7 +155,7 @@ public class MapCell{
 		
 	}
 	private MapCell getSouthCell(MapCell currentMapCell, MapCell[][] map) {
-		pojos.environment.Cell currentCell = currentMapCell.getCell();
+		Cell currentCell = currentMapCell.getCell();
 		
 		Location loc = currentCell.getLocation();
 		
@@ -165,7 +167,7 @@ public class MapCell{
 		
 	}
 	private MapCell getWestCell(MapCell currentMapCell, MapCell[][] map) {
-		pojos.environment.Cell currentCell = currentMapCell.getCell();
+		Cell currentCell = currentMapCell.getCell();
 		
 		Location loc = currentCell.getLocation();
 		
