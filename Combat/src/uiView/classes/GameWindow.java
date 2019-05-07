@@ -45,7 +45,7 @@ public class GameWindow{
 	protected float menuFontSize = (float)(titleFontSize * (.8));
 	protected float helpFontSize = (float)(titleFontSize / 3.5);
 	
-	private String dir = "src/gui/resources/fonts/";
+	private String dir = "src/uiView/resources/fonts/";
 	private String fontFile = "Px437_IBM_Conv.ttf";
 	private String fontPath = dir + fontFile;
 	

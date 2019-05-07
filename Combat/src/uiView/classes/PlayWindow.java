@@ -31,7 +31,7 @@ import java.io.*;
 
 public class PlayWindow extends GameWindow{
 
-	/*
+	
 	private static final boolean TESTING = true;
 	JFrame window;
 	Container con;
@@ -40,7 +40,7 @@ public class PlayWindow extends GameWindow{
 	static JTextArea output;
 	static JTextField input;
 	
-	private game.Cell[][][] cellList;
+	private pojos.environment.Cell[][][] cellList;
 	public MapCell[][] map;
 
 	
@@ -158,7 +158,7 @@ public class PlayWindow extends GameWindow{
 	}
 	
 	
-	public void setCellList(game.Cell[][][] cellList) {
+	public void setCellList(pojos.environment.Cell[][][] cellList) {
 		this.cellList = cellList;
 	}
 	
@@ -250,7 +250,7 @@ public class PlayWindow extends GameWindow{
 				if(cellY >= 0 && cellY < mapMax) {
 					if(cellX >= 0 && cellX < mapMax) {
 						
-						game.Cell presentCell = cellList[cellY][tempMax - cellX][0];
+						pojos.environment.Cell presentCell = cellList[cellY][tempMax - cellX][0];
 						map[j][i].setCell(presentCell);
 						map[j][i].getCellPanel().setBorder(thinLineBorder);
 					}
@@ -268,7 +268,7 @@ public class PlayWindow extends GameWindow{
 		
 		for(MapCell[] row : map) {
 			for(MapCell cell : row) {
-				/* TESTING outlines cells in map that aren't null
+				/* TESTING outlines cells in map that aren't null */
 				if(cell.getCell() != null) {
 					cell.getCellPanel().setBackground(textColor.brighter());
 				}
@@ -380,5 +380,4 @@ public class PlayWindow extends GameWindow{
 		window.dispose();
 	}
 	
-	*/
 }//end class

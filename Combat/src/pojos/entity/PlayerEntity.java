@@ -6,6 +6,7 @@ import java.util.Map;
 import pojos.Quest;
 import pojos.Skill;
 import pojos.Statblock;
+import pojos.entity.enums.EntityClassEnum;
 import pojos.entity.enums.Faction;
 import pojos.environment.Location;
 import pojos.items.ArmorItem;

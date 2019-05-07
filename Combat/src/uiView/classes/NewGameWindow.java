@@ -18,26 +18,29 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-//import game.Player;
-//import game.PlayerClass;
+import pojos.entity.EntityClassObject;
+import pojos.entity.PlayerEntity;
 
+import pojos.entity.PlayerEntity;
+import pojos.entity.enums.EntityClassEnum;
 public class NewGameWindow extends GameWindow{
-/*
+
 	static JFrame window;
 	static JButton mageButton, warriorButton, thiefButton;
 	static JPanel magePanel, warriorPanel, thiefPanel;
 	static JPanel outputPanel;
 	static JTextArea output;
 	
-	static PlayerClass playerClass;
+	static EntityClassObject playerClass;
 	
-	private Player newPlayer;
+	private PlayerEntity newPlayer;
         private boolean button;
 	
 	
 	public NewGameWindow() {
 		
-		playerClass = new PlayerClass();
+		playerClass = new EntityClassObject();
+		newPlayer = new PlayerEntity();
 		
 		window = new JFrame("New Game");
 		window.setSize(WINDOW_DIM);
@@ -226,8 +229,8 @@ public class NewGameWindow extends GameWindow{
 		magePanel.setBackground(textColor.darker());
 		warriorPanel.setBackground(textColor);
 		thiefPanel.setBackground(textColor);
-		
-		newPlayer = playerClass.Mage();
+		playerClass.setName(EntityClassEnum.MAGE);
+		newPlayer.setEntityClass(playerClass);
 		updateText();
 	}
 	
@@ -236,7 +239,8 @@ public class NewGameWindow extends GameWindow{
 		warriorPanel.setBackground(textColor.darker());
 		thiefPanel.setBackground(textColor);
 		
-		newPlayer = playerClass.Warrior();
+		playerClass.setName(EntityClassEnum.WARRIOR);
+		newPlayer.setEntityClass(playerClass);;
 		updateText();
 	}
 	
@@ -245,12 +249,13 @@ public class NewGameWindow extends GameWindow{
 		warriorPanel.setBackground(textColor);
 		thiefPanel.setBackground(textColor.darker());
 		
-		newPlayer = playerClass.Thief();
+		playerClass.setName(EntityClassEnum.THIEF);
+		newPlayer.setEntityClass(playerClass);
 		updateText();
 	}
 	
 	private void updateText() {
-		output.setText(playerClass.getDesc());
+		output.setText(playerClass.getDescription());
 	}
 		
 	private void addOutputBox(Container out, JTextArea box) {
@@ -354,7 +359,7 @@ public class NewGameWindow extends GameWindow{
 		return output;
 	}
 
-    public Player getNewPlayer() {
+    public PlayerEntity getNewPlayer() {
         return newPlayer;
     }
         
@@ -362,6 +367,6 @@ public class NewGameWindow extends GameWindow{
     
         
         
-	*/
+
 	
 }//end NewGameWindow
