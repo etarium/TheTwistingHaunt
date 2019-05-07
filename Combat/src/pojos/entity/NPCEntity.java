@@ -4,6 +4,7 @@ import java.util.List;
 
 import pojos.Quest;
 import pojos.entity.enums.Faction;
+import pojos.environment.Location;
 
 public class NPCEntity extends Entity{
 

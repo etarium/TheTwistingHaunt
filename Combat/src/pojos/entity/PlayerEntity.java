@@ -7,6 +7,7 @@ import pojos.Quest;
 import pojos.Skill;
 import pojos.Statblock;
 import pojos.entity.enums.Faction;
+import pojos.environment.Location;
 import pojos.items.ArmorItem;
 import pojos.items.WeaponItem;
 import pojos.items.enums.ArmorType;
@@ -26,7 +27,14 @@ public class PlayerEntity extends Entity{
 	Map<Faction, Integer> factionLevel;
 	int xp;
 	int xpToNextLevel;
-
+	Location location;
+	
+	public Location getLocation() {
+		return location;
+	}
+	public void setLocation(Location location) {
+		this.location = location;
+	}
 	public EntityClassObject getEntityClass() {
 		return entityClass;
 	}
@@ -105,9 +113,9 @@ public class PlayerEntity extends Entity{
 		return "PlayerEntity [entityClass=" + entityClass + ", numOfHands=" + numOfHands + ", stats=" + stats
 				+ ", armorType=" + armorType + ", weaponType=" + weaponType + ", skills=" + skills + ", quests="
 				+ quests + ", equippedArmor=" + equippedArmor + ", equippedWeapons=" + equippedWeapons
-				+ ", factionLevel=" + factionLevel + ", xp=" + xp + ", xpToNextLevel=" + xpToNextLevel + ", name="
-				+ name + ", description=" + description + ", temperament=" + temperament + ", species=" + species
-				+ ", inventory=" + inventory + ", level=" + level + "]";
+				+ ", factionLevel=" + factionLevel + ", xp=" + xp + ", xpToNextLevel=" + xpToNextLevel + ", location="
+				+ location + ", name=" + name + ", description=" + description + ", temperament=" + temperament
+				+ ", species=" + species + ", inventory=" + inventory + ", level=" + level + "]";
 	}
 	
 }
