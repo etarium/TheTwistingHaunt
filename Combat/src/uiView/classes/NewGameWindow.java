@@ -96,9 +96,7 @@ public class NewGameWindow extends GameWindow{
 		
 		
 		
-		addButtonListeners();
-		
-		
+		addButtonListeners();		
 		
 		int playerSelectionHeightBuffer = (int)(WINDOW_HEIGHT/3);
 		int playerSelectionHeight = (int)(playerSelectionHeightBuffer/2);
@@ -126,11 +124,6 @@ public class NewGameWindow extends GameWindow{
 
 		bsSetup(backButton, backButtonPanel, backLabel, startButton, startButtonPanel, startLabel);
 
-		
-		
-		
-		
-		
 		window.setResizable(false);
 		window.setVisible(true);
 		button = true;
@@ -157,7 +150,6 @@ public class NewGameWindow extends GameWindow{
 		
 		button.setBounds(bounds);
 		button.setOpaque(false);
-		
 		
 		panel.add(label);		
 		
@@ -291,8 +283,15 @@ public class NewGameWindow extends GameWindow{
 		
 		panel.setBackground(textColor);
 		label.setForeground(backgroundColor);
-		new MainMenu();
-		window.dispose();
+		System.out.println("DEBUG: Back Button Pressed.");
+		
+		//MainMenu.nGame = true;
+		window.setVisible(false);
+		if(!window.isVisible()) {
+		panel.setBackground(backgroundColor);
+		label.setForeground(textColor);
+		}
+		
 	}
 	
 	private void startButtonPressed(JPanel panel, JLabel label) {

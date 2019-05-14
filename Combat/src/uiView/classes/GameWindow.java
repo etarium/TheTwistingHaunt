@@ -47,6 +47,8 @@ public class GameWindow{
 	
 	private String dir = "src/uiView/resources/fonts/";
 	private String fontFile = "Px437_IBM_Conv.ttf";
+	//TODO: create an options page that lets a user choose a highly readable font
+	//private String fontFile = "SFNSText.ttf";
 	private String fontPath = dir + fontFile;
 	
 	protected Font defaultFont = this.defineFont(fontPath);
