@@ -38,15 +38,15 @@ public class MainMenu extends GameWindow {
 		window.getContentPane().setBackground(backgroundColor);
 		window.setLayout(null);
 
-		
+
 		con = window.getContentPane();
-		
+
 		JPanel windowBorder = new JPanel();
 		windowBorder.setSize(WINDOW_DIM.width, WINDOW_DIM.height-23);
 		windowBorder.setOpaque(false);
 		windowBorder.setBorder(thiccLineBorder);
 		con.add(windowBorder);
-		
+
 
 		titleNamePanel = new JPanel();
 		titleSetter(titleNamePanel, "The Twisting Haunt");
@@ -74,9 +74,9 @@ public class MainMenu extends GameWindow {
 		JButton[] buttons = {ngButton, lgButton, helpButton, readButton, exitButton};
 		int optWidth = menuWidth;
 		int optHeight = (menuHeight / 5);
-		
+
 		//programmatic menu button generation
-		
+
 		for (int i = 0; i < menuPanels.length; i++) {
 			menuPanels[i].setBounds(menuBufferWidth, menuBufferHeight + (i * optHeight), optWidth, optHeight);
 			menuPanels[i].setBackground(textColor);
@@ -176,7 +176,7 @@ public class MainMenu extends GameWindow {
 				}
 			}
 		});
-		
+
 		con.add(titleNamePanel);
 
 		window.setResizable(false);
@@ -190,7 +190,6 @@ public class MainMenu extends GameWindow {
 	}//end Game initializer
 
 	private void loadGameButtonPressed() {
-		//new LoadGameWindow();
 		nGame = false;
 		button = false;
 
