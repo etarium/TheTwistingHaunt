@@ -138,6 +138,11 @@ public interface EntityADT {
      */
     public void combatDialog(int damageValue, Entity target);
     
+    /**
+     * Method tasked with printing an Entity's stats, intended for use with an inspect command or a player looking at their stats
+     */
+    public void printEntityInfo();
+    
     @Override
     public String toString();
     

@@ -1,0 +1,50 @@
+
+&------*
+| Help |            XXX signals currently not implemented
+&------*
+
+&--------------------------------------------------------------------------*
+|                    |                                                     |
+| /look              | Displays information about current room             |
+| /look {item}       | Displays information about targeted item            |
+|                    |    currently in player's inventory                  |
+| XXX/look {entity}  | Displays information about targeted entity          |
+| /look {equipment}  | Displays information about targeted                 |
+|                    |    piece of equipment                               |
+|                    |                                                     |
+| /inspect           | Search the room thoroughly                          |
+|                    |                                                     |
+| /take {item}       | Add takeable object to inventory                    |
+|                    |                                                     |
+| /drop {item}       | Drop targeted item to floor of current room         |
+|                    |    WARNING: Will be lost upon game reset            |
+| /drop {equipment}  | Drop targeted equipment to floor of current room    |
+|                    |    WARNING: Will be lost upon game reset            |
+|                    |                                                     |
+| /use {item}        | Use and consume item located in inventory           |
+| /equip {equipment} | Equip targeted piece of equipment and               |
+|                    |    cycles now unequipped into                       |
+|                    |    equipment list                                   |
+|                    |                                                     |
+| /inventory         | Displays list of items in player's inventory        |
+|    /inv            |                                                     |
+| /equipment         | Displays list of equipment currently                |
+|                    |    possessed by player                              |
+|                    |                                                     |
+| /status            | Displays player's status, such as                   |
+|                    |    current HP and SP                                |
+|                    |                                                     |
+|                    |                                                     |
+| /north             | If available, go to area immediately north          |
+|    /n              |                                                     |
+| /south             | If available, go to area immediately south          |
+|    /s              |                                                     |
+| /east              | If available, go to area immediately east           |
+|    /e              |                                                     |
+| /west              | If available, go to area immediately west           |
+|    /w              |                                                     |
+|                    |                                                     |
+| /save              | Save game                                           |
+| /quit              | Quit game                                           |
+|                    |                                                     |
+&--------------------------------------------------------------------------*

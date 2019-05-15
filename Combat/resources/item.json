@@ -1,0 +1,43 @@
+Item {
+  'item_id': String,
+  'name': String,
+  'desc': String,
+  'type': INT,
+  'armorType': String
+  'statBlock':
+  	{
+  		'hp': INT,
+  		'sp': INT,
+  		'def': INT,
+  		'eva': INT,
+  		'atk': INT,
+  		'init': INT,
+  		'intel': INT
+  	}
+  'duration': INT,
+  'numHands': INT,
+  'numTarget': INT,
+  'minLevel': INT
+  
+}
+
+/**
+* Design Notes
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* index on isUsable, item_id. If we require searching in the future, index duration, numHand, and numTarget.
+* 'type' is an int, 0-2. Options are "0 - USABLE", "1 - ARMOR", "2 - WEAPON".
+* WEAPON can only be single target.
+* Statblock should be considered the equivalent to RDB 'potency'
+* Statblock values can be negative for poisons/attack/status effect items
+* This change allows multi-attribute items
+* Duration will allow for DoT and HoT
+* numHands is more for equipables -- allows multi-handed entities
+* numTarget will allow for AoE
+* armorType can be 'HEAD', 'CHEST', 'ARMS', 'LEGS', 'FEET', and 'SPECIAL'.
+* if unit is not armor, null is an appropriate value. It will not be parsed anyway.
+* Within application, these values can be used to limit and personalize equipment.
+* This change will grow armor and weapon equipable possibilities.
+* minLevel can restrict items for usage. For future implementation. 
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* -- Emily Clark
+*/

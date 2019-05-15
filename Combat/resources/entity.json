@@ -1,0 +1,36 @@
+Entity {
+	'ent_id': STRING,
+	'name': STRING,
+	'desc': STRING,
+	'species': STRING,
+	'statblock':
+		{
+			'hp': INT,
+  			'sp': INT,
+  			'def': INT,
+  			'eva': INT,
+  			'atk': INT,
+  			'init': INT,
+  			'intel': INT
+		},
+	'numHands': INT,
+	'faction': STRING,
+	'level': INT,
+	'xp': INT
+	
+}
+
+/**
+* Design Notes
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* indexed on ent_id, species, and level.
+* species is to replace EntType from RDB.
+* Based on species, enter appropriate statblock. There will not be a 
+* calculation based on species to alter statblock.
+* Future combat could create species advantages, this is separate from statblock.
+* Faction created in anticipation of future friendly/aggro NPCs.
+* numHands to determine number of equipable ATK items.
+* level and xp added in anticipation of future releases.
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* -- Emily Clark
+*/

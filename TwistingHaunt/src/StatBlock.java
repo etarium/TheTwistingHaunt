@@ -141,5 +141,20 @@ public class StatBlock implements StatBlockADT{
     public void decrementSpecPoints(){
         this.setSpecPoints(specPoints - 1);
     }
+<<<<<<< HEAD:Combat/src/StatBlock.java
+=======
+
+    @Override
+    public String toString() {
+        return "Health: "+currentHealth+"/"+maxHealth+"\n"+
+               "Special Points: "+specPoints+"\n"+
+               "Initiative: "+initiative+"\n"+
+               "Physical Attack Damage: "+physAtt+"\n"+
+               "Physical Defense: "+physDef+"\n"+
+               "Evasion: "+evasion+"\n";
+    }
+    
+    
+>>>>>>> DocStore_Migration:TwistingHaunt/src/StatBlock.java
     
 }//end StatBlock class

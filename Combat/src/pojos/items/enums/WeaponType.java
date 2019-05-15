@@ -1,0 +1,19 @@
+package pojos.items.enums;
+
+public enum WeaponType {
+	STAFF,
+	DAGGER,
+	BROADSWORD,
+	SHORTSWORD,
+	CROSSBOW,
+	AXE,
+	HAMMER,
+	HALBERD,
+	SPEAR,
+	BARDICHE,
+	GLAIVE,
+	KATANA,
+	RAPIER,
+	LANCE,
+	KNIFE
+}

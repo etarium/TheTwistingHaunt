@@ -51,6 +51,9 @@ public class TestClient {
         fighters1.add(player);
         fighters1.add(gob2);
         Encounter fight1 = new Encounter(fighters1);
+        fight1.getCombatants().forEach((selected) -> {
+            selected.printEntityInfo();
+        });
         boolean combat1Complete;
         fight1.runCombat();
 

@@ -1,0 +1,45 @@
+Cell {
+  'xyzcoord': [INT],
+  'instance_id': String,
+  'desc': String,
+  'encounter': [Object],
+  'items': [Object],
+  'requiredItem':
+  		{
+  		'item_id': String,
+  		'name': String,
+  		'desc': String,
+  		'reqQuantity': INT
+  		},
+  'inspectable':
+    {
+      'inspName': String,
+      'inspDescription': String,
+      'inspObj': [String]
+    },
+  		
+  'terrain': String,
+  'moveN': boolean,
+  'moveS': boolean,
+  'moveE': boolean,
+  'moveW': boolean
+}
+
+/**
+* Design Notes
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* xyz and instance will be indexed
+* current movement algorithm supports the xyz coordinates
+* also supports the 4 boolean values
+* encounter and items will both be arrays linking to ext documents
+* requireItem will be an embedded object as no stats are needed
+* requireItem has an int value for quests that need more than one of an item.
+* example: 3 opals, 2 rubies. quantity is not used for distinct items.
+* requireItem can exist multiple times for distinct items, as cell param has ArrayList<keyItem>
+* inspectable contains an array linking to ext documents
+* inspectable can exist multiple times, as cell param has ArrayList<inspectable>
+* terrain intended for future status affects based on species and location.
+* these affects will be calculated within application if desired. 
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* -- Emily Clark
+*/
