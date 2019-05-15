@@ -18,6 +18,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
 
+import utilities.Logs;
+
 public class HelpWin extends GameWindow{
 	
 	public HelpWin() {
@@ -77,7 +79,7 @@ public class HelpWin extends GameWindow{
 		    }
 		}
 		catch (IOException ioe) {
-		    System.err.println(ioe);
+			Logs.LOGGER.severe("IOException caught in HelpWin " + ioe);
 		    System.exit(1);
 		}
 		helpText.setBackground(backgroundColor);

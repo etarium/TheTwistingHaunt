@@ -76,10 +76,7 @@ public class PlayWindow extends GameWindow{
 		
 		int bounds_WIDTH = bounds.getWidth();
 		int bounds_HEIGHT = bounds.getHeight();		
-		
-		
-		
-		
+
 		mapArea = new JPanel();
 		bounds.add(mapArea);
 

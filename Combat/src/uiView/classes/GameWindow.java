@@ -18,6 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import utilities.Logs;
+
 public class GameWindow{
 
 	protected final Dimension SCREEN_DIM = Toolkit.getDefaultToolkit().getScreenSize();
@@ -81,9 +83,10 @@ public class GameWindow{
 
 		} catch(FileNotFoundException e) {
 			System.out.println("File not found.");
+			Logs.LOGGER.severe("Font File " + defaultFont + " Not Found.");
 		}
 		catch(Exception e) {
-			System.out.println(e);
+			Logs.LOGGER.severe("Caught exception in GameWindow " + e);
 
 		}
 

@@ -1,5 +1,7 @@
 package uiView.classes;
 
+import utilities.Logs;
+
 public class Navigator {
 
 	//empty constructor
@@ -34,7 +36,8 @@ public class Navigator {
 			break;
 			
 		default:
-			System.out.println("Not implemented yet.");
+			//TODO: Not implemented yet
+			
 		}//end switch
 		
 		return available;

@@ -5,9 +5,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import pojos.entity.EnemyEntity;
 import pojos.entity.Entity;
-import pojos.entity.NPCEntity;
 import pojos.items.Item;
 
 @JsonIgnoreProperties(ignoreUnknown = true)

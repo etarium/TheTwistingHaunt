@@ -1,6 +1,5 @@
 package uiView.classes;
 
-import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;

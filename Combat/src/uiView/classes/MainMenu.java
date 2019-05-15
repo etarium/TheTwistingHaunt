@@ -19,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import utilities.Logs;
+
 public class MainMenu extends GameWindow {
 
 	Container con;
@@ -128,7 +130,6 @@ public class MainMenu extends GameWindow {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("DEBUG: actionPerformed() MainMenu.button = " + MainMenu.button);
 				newGameButtonPressed();
 				button = false;
 			}
@@ -160,7 +161,7 @@ public class MainMenu extends GameWindow {
 				try {
 					readmeButtonPressed(evt);
 				} catch (Exception e) {
-					System.out.println("File not Found");
+					Logs.LOGGER.severe("Exception caught in MainMenu.readButton " + e);
 				}
 			}
 		});
@@ -172,7 +173,7 @@ public class MainMenu extends GameWindow {
 				try {
 					helpButtonPressed(evt);
 				} catch (Exception e) {
-					System.out.println("File not Found");
+					Logs.LOGGER.severe("Exception caught in MainMenu.helpButton " + e);
 				}
 			}
 		});
@@ -196,8 +197,7 @@ public class MainMenu extends GameWindow {
 		try {
 			Thread.sleep(300);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logs.LOGGER.severe("InterruptedException caught in MainMenu.loadGameButtonPressed " + e);
 		}
 		window.dispose();
 	}
@@ -209,8 +209,7 @@ public class MainMenu extends GameWindow {
 			Thread.sleep(300);
 			NewGameWindow.window.setVisible(true);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logs.LOGGER.severe("InterruptedException caught in MainMenu.newGameButtonPressed " + e);
 		}
 		//window.dispose();
 	}

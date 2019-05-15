@@ -4,6 +4,7 @@ import java.util.List;
 
 import db.repository.DBConnector;
 import pojos.environment.Cell;
+import utilities.Logs;
 
 public class CellAPI {
 	DBConnector db = new DBConnector();
@@ -12,7 +13,7 @@ public class CellAPI {
 	//send through the instance.name as parameter
 	public List<Cell> getCellsFromInstance(String instance) {
 		List<Cell> activeCells = db.getAllCellsFromInstance(instance);
-		System.out.println("DEBUG: db.api.CellAPI getCellsFromInstance");
+		Logs.LOGGER.info(CellAPI.class + " called getCellsFromInstance("+instance+")");
 		return activeCells;
 	}
 
