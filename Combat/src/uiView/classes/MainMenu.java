@@ -3,26 +3,21 @@ package uiView.classes;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.UIManager;
 
 public class MainMenu extends GameWindow {
 
@@ -43,13 +38,15 @@ public class MainMenu extends GameWindow {
 		window.getContentPane().setBackground(backgroundColor);
 		window.setLayout(null);
 
+		
 		con = window.getContentPane();
+		
 		JPanel windowBorder = new JPanel();
-		windowBorder.setSize(WINDOW_DIM);
+		windowBorder.setSize(WINDOW_DIM.width, WINDOW_DIM.height-23);
 		windowBorder.setOpaque(false);
 		windowBorder.setBorder(thiccLineBorder);
-		
 		con.add(windowBorder);
+		
 
 		titleNamePanel = new JPanel();
 		titleSetter(titleNamePanel, "The Twisting Haunt");
@@ -77,8 +74,9 @@ public class MainMenu extends GameWindow {
 		JButton[] buttons = {ngButton, lgButton, helpButton, readButton, exitButton};
 		int optWidth = menuWidth;
 		int optHeight = (menuHeight / 5);
-
+		
 		//programmatic menu button generation
+		
 		for (int i = 0; i < menuPanels.length; i++) {
 			menuPanels[i].setBounds(menuBufferWidth, menuBufferHeight + (i * optHeight), optWidth, optHeight);
 			menuPanels[i].setBackground(textColor);
@@ -178,7 +176,7 @@ public class MainMenu extends GameWindow {
 				}
 			}
 		});
-
+		
 		con.add(titleNamePanel);
 
 		window.setResizable(false);

@@ -9,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,7 +19,6 @@ import javax.swing.JTextArea;
 import pojos.entity.EntityClassObject;
 import pojos.entity.PlayerEntity;
 
-import pojos.entity.PlayerEntity;
 import pojos.entity.enums.EntityClassEnum;
 import pojos.environment.Location;
 public class NewGameWindow extends GameWindow{
@@ -39,6 +36,8 @@ public class NewGameWindow extends GameWindow{
 	
 	
 	public NewGameWindow() {
+		//this.loadWindow();
+		//this.loadButtons();
 		
 		playerClass = new EntityClassObject();
 		newPlayer = new PlayerEntity();
@@ -52,9 +51,10 @@ public class NewGameWindow extends GameWindow{
 		
 		Container con = window.getContentPane();
 		JPanel windowBorder = new JPanel();
-		windowBorder.setSize(WINDOW_DIM);
+		windowBorder.setSize(WINDOW_DIM.width, WINDOW_DIM.height-23);
 		windowBorder.setOpaque(false);
 		windowBorder.setBorder(thiccLineBorder);
+		
 		con.add(windowBorder);
 		
 
