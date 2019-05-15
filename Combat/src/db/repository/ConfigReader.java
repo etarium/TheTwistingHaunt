@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import utilities.Logs;
+
 public class ConfigReader
 {	
 
@@ -25,9 +27,7 @@ public class ConfigReader
 			appProps = setUpConfig();
 			return appProps.getProperty(key);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Problem with setting up config.");
-			e.printStackTrace();
+			Logs.LOGGER.severe("IOException caught in ConfigReader " + e);
 		}
 		
 		return null;

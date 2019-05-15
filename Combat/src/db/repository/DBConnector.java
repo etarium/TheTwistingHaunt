@@ -14,6 +14,7 @@ import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.*;
 
 import pojos.environment.Cell;
+import utilities.Logs;
 
 public class DBConnector {
 	MongoDatabase database;
@@ -29,6 +30,7 @@ public class DBConnector {
 
 		MongoClient mongoClient = new MongoClient(uri);
 		database = mongoClient.getDatabase(dbName);
+		Logs.LOGGER.info("Connected to database " + dbName);
 		
 	}
 	
@@ -42,8 +44,7 @@ public class DBConnector {
 				activeCells.add(tempCell);
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println("Reading Cells into Cell Object failed.");
+				Logs.LOGGER.severe("Reading Cells into Cell Object failed.");
 				e.printStackTrace();
 			}
 		});
