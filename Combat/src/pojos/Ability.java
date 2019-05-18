@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import pojos.enums.Attribute;
 
 @JsonIgnoreProperties
-public class Skill {
+public class Ability {
 
 	String name;
 	String description;

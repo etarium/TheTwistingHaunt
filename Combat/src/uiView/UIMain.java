@@ -1,15 +1,10 @@
 package uiView;
 
-import java.util.List;
-
-import db.api.CellAPI;
-import pojos.environment.Cell;
 import uiView.classes.CommandListener;
 
 public class UIMain {
 
 	public static void main (String [] args) {
-		System.out.println("Main");
 		/* CellAPI apiCaller = new CellAPI();
 		
 		List<Cell> cells = apiCaller.getCellsFromInstance("Test Instance");
