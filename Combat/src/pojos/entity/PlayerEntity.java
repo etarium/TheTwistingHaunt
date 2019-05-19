@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import pojos.Quest;
-import pojos.Skill;
+import pojos.Ability;
 import pojos.Statblock;
 import pojos.entity.enums.EntityClassEnum;
 import pojos.entity.enums.Faction;
@@ -21,7 +21,7 @@ public class PlayerEntity extends Entity{
 	Statblock stats;
 	ArmorType armorType;
 	WeaponType weaponType;
-	List<Skill> skills;
+	List<Ability> skills;
 	List<Quest> quests;
 	List<ArmorItem> equippedArmor;
 	List<WeaponItem> equippedWeapons;
@@ -66,10 +66,10 @@ public class PlayerEntity extends Entity{
 	public void setWeaponType(WeaponType weaponType) {
 		this.weaponType = weaponType;
 	}
-	public List<Skill> getSkills() {
+	public List<Ability> getSkills() {
 		return skills;
 	}
-	public void setSkills(List<Skill> skills) {
+	public void setSkills(List<Ability> skills) {
 		this.skills = skills;
 	}
 	public List<Quest> getQuests() {

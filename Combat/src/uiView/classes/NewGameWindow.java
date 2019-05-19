@@ -21,6 +21,7 @@ import pojos.entity.PlayerEntity;
 
 import pojos.entity.enums.EntityClassEnum;
 import pojos.environment.Location;
+import utilities.Logs;
 public class NewGameWindow extends GameWindow{
 
 	static JFrame window;
@@ -263,9 +264,8 @@ public class NewGameWindow extends GameWindow{
 
 		panel.setBackground(textColor);
 		label.setForeground(backgroundColor);
-		System.out.println("DEBUG: Back Button Pressed.");
+		Logs.LOGGER.info("Back Button Pressed.");
 
-		//MainMenu.nGame = true;
 		window.setVisible(false);
 		if(!window.isVisible()) {
 			panel.setBackground(backgroundColor);

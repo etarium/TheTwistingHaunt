@@ -2,7 +2,7 @@ package pojos.entity;
 
 import java.util.List;
 
-import pojos.Skill;
+import pojos.Ability;
 import pojos.Statblock;
 import pojos.entity.enums.EntityClassEnum;
 import pojos.items.enums.ArmorType;
@@ -13,7 +13,7 @@ public class EntityClassObject {
 	String description;
 	List<ArmorType> armorType;
 	List<WeaponType> weaponType;
-	List<Skill> skills;
+	List<Ability> skills;
 	Statblock stats;
 	
 	public EntityClassEnum getName() {
@@ -40,10 +40,10 @@ public class EntityClassObject {
 	public void setWeaponType(List<WeaponType> weaponType) {
 		this.weaponType = weaponType;
 	}
-	public List<Skill> getSkills() {
+	public List<Ability> getSkills() {
 		return skills;
 	}
-	public void setSkills(List<Skill> skills) {
+	public void setSkills(List<Ability> skills) {
 		this.skills = skills;
 	}
 	public Statblock getStats() {

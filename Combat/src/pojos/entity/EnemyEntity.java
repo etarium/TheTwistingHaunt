@@ -2,7 +2,7 @@ package pojos.entity;
 
 import java.util.List;
 
-import pojos.Skill;
+import pojos.Ability;
 import pojos.Statblock;
 import pojos.items.Item;
 
@@ -12,7 +12,7 @@ public class EnemyEntity extends Entity{
 	String victoryCry;
 	String loserCry;
 	List<Item> loot;
-	List<Skill> skills;
+	List<Ability> skills;
 	Statblock stats;
 	int numOfHands;
 	
@@ -40,10 +40,10 @@ public class EnemyEntity extends Entity{
 	public void setLoot(List<Item> loot) {
 		this.loot = loot;
 	}
-	public List<Skill> getSkills() {
+	public List<Ability> getSkills() {
 		return skills;
 	}
-	public void setSkills(List<Skill> skills) {
+	public void setSkills(List<Ability> skills) {
 		this.skills = skills;
 	}
 	public Statblock getStats() {
