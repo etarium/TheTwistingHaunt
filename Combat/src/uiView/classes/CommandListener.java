@@ -2,12 +2,8 @@ package uiView.classes;
 
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-
-import javax.swing.JTextArea;
 
 import pojos.entity.EnemyEntity;
 import pojos.entity.PlayerEntity;
@@ -17,18 +13,20 @@ import pojos.items.ArmorItem;
 import pojos.items.ConsumableItem;
 import pojos.items.Item;
 import pojos.items.WeaponItem;
+import utilities.Logs;
 import db.api.CellAPI;
 
 public class CommandListener {
     final String INSTANCE = "Test Instance";
     public static PlayWindow play;
     private PlayerEntity player;
-    private Cell[][][] cellList;
+    private List<Cell> cells;
     private ArrayList<ConsumableItem> usableList;
     private ArrayList<WeaponItem> equipList;
     private ArrayList<Item> keyList;
     private ArrayList<EnemyEntity> encList;
     CellAPI cellService = new CellAPI();
+    private int location;
     
     final boolean DEBUG_LOAD = false;
     final boolean DEBUG_SAVE = false;
@@ -49,15 +47,17 @@ public class CommandListener {
         try{
         GUI_Client.main(null);
         play = GUI_Client.getPlayWindow();
+        Logs.LOGGER.info("Play Window launched.");
         } catch(Exception e) {
-        	System.out.print("Exception when trying to play GUI_Client.getPlayWindow()");
+        	Logs.LOGGER.severe("Exception when trying to play GUI_Client.getPlayWindow()");
         }
         
         try{
             newGame();
+            Logs.LOGGER.info("New Game started");
         }catch(Exception e){
-            System.out.print("Exception when triyng to load newGame()");
-            System.out.println(e);
+            Logs.LOGGER.severe("Exception when trying to load newGame()");
+            Logs.LOGGER.severe(e.toString());
         } 
         boolean run = true;
         int count = 0;
@@ -112,7 +112,19 @@ public class CommandListener {
                 //inspect room
                 if (parameter == null) {
                     //TO_DO
-                    output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDescription();
+                   //output = cells[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDescription();
+                for(Cell cell : cells) {
+                	Logs.LOGGER.fine("Cell "+cell.getLocation());
+        			Logs.LOGGER.fine("Player "+player.getLocation());
+                		if(cell.getLocation().getX() == player.getLocation().getX() &&
+                		   cell.getLocation().getY() == player.getLocation().getY() &&
+                		   cell.getLocation().getZ() == player.getLocation().getZ()) {
+                			location = cells.indexOf(cell);
+                			output = cells.get(location).getDescription();
+                			break;
+                		}
+                }
+                
                 } //inspect object of command
                 else {
                     Object looked = parseParameter(parameter);
@@ -631,60 +643,31 @@ public class CommandListener {
 
     }
 
-    public void newGame() throws SQLException, IOException {
+    public void newGame() throws IOException {
         // create new instance of the game for the player using the input from the creator
         //save player
-    		Location tempLoc = new Location();
-    		player.setLocation(tempLoc);
-    	
-        player.getLocation().setX(0);
-        player.getLocation().setY(1);
-        player.getLocation().setZ(0);
-        System.out.print("Player Location Initialized");
-//        
+
         if(!DEBUG_LOAD) {
+        		initializePlayer();
         		loadInstance(INSTANCE);
         }
 //        else {
 //        		loadGameTest();
 //        }
         
-        play.setCellList(cellList);
-        play.addMap();
     }
 
- // TODO: Can probably delete this entire thing. Should be in the back-end.
+ // TODO: Can probably delete everything below this point. Should be in the back-end.
   
-    public void loadInstance(String instance) throws SQLException, IOException {
-//        //execute query for cells in instance
-//        QueryMachine theDestroyer = new QueryMachine();
-//        ArrayList<Cell> cellobj;
-//        cellobj = theDestroyer.getCellInstance(instance);
-//        ArrayList<Usable> usableobj;
-//        usableobj = theDestroyer.getHPUsableInstance(cellobj);
-//        usableobj = theDestroyer.getSPUsableInstance(cellobj, usableobj);
-//        ArrayList<Equipable> equipableobj;
-//        equipableobj = theDestroyer.getArmorInstance(cellobj);
-//        ArrayList<KeyItems> keyitemobj;
-//        keyitemobj = theDestroyer.getKeyItemsInstance(cellobj);
-//        ArrayList<Encounter> encounterobj;
-//        encounterobj = theDestroyer.getEncounterInstance(cellobj);
-//        Cell[][][] cellArray = theDestroyer.getCellArray(cellobj);
-//        cellList = cellArray;
-//        usableList = usableobj;
-//        equipList = equipableobj;
-//        encList = encounterobj;
-//        keyList = keyitemobj;
-      
-      /*
-       *   if(DEBUG_SAVE) {
-       *
-        		game.GameData newgame = new game.GameData(player, cellArray, usableobj, equipableobj, keyitemobj, encounterobj);
-        		newgame.serializeGameData(newgame);
-        }
-    */
+    public void loadInstance(String instance) throws IOException {
     		
-    		List<Cell> cells = cellService.getCellsFromInstance("Test Instance");
+    		cells = cellService.getCellsFromInstance("Test Instance");
+    		
+    }
+    
+    private void initializePlayer() {
+    		player.setLocation(new Location(0,3,0));
+    		Logs.LOGGER.info("Player Location Initialized");
     }
     
 

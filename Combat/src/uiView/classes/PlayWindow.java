@@ -6,11 +6,14 @@ import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import pojos.environment.Cell;
 
 public class PlayWindow extends GameWindow{
 
@@ -23,7 +26,7 @@ public class PlayWindow extends GameWindow{
 	static JTextArea output;
 	static JTextField input;
 	
-	private pojos.environment.Cell[][][] cellList;
+	private List<Cell> cellList;
 	public MapCell[][] map;
 
 	
@@ -119,7 +122,7 @@ public class PlayWindow extends GameWindow{
 		
 	}//end PlayWindow initializer
 	
-	
+	/*
 	public void addMap() {
 		
 		if(!TESTING) {
@@ -138,8 +141,8 @@ public class PlayWindow extends GameWindow{
 	}
 	
 	
-	public void setCellList(pojos.environment.Cell[][][] cellList) {
-		this.cellList = cellList;
+	public void setCellList(List<Cell> cells) {
+		this.cellList = cells;
 	}
 	
 	private void setMap(MapCell[][] map) {
@@ -150,7 +153,9 @@ public class PlayWindow extends GameWindow{
 		return this.map;
 	}
 	
-	private void testMap() {
+	/* 
+	 * private void testMap() {
+	 *
 		JFrame mapWindow = new JFrame("Map");
 		
 		int gridSize = cellList.length + 4;
@@ -242,21 +247,22 @@ public class PlayWindow extends GameWindow{
 		this.setMap(map);
 	}
 	
-	
-	
-	private void populateGrid(Container grid) {
-		
-		for(MapCell[] row : map) {
-			for(MapCell cell : row) {
-				/* TESTING outlines cells in map that aren't null */
-				if(cell.getCell() != null) {
-					cell.getCellPanel().setBackground(textColor.brighter());
-				}
-				
-				grid.add(cell.getCellPanel());
-			}
-		}
-	}
+	*/
+//
+//	private void populateGrid(Container grid) {
+//		
+//		for(MapCell[] row : map) {
+//			for(MapCell cell : row) {
+//				/* TESTING outlines cells in map that aren't null */
+//				if(cell.getCell() != null) {
+//					cell.getCellPanel().setBackground(textColor.brighter());
+//				}
+//				
+//				grid.add(cell.getCellPanel());
+//			}
+//		}
+//	}
+
 	
 	
 	private void addOutputBox(Container out, JTextArea box) {
