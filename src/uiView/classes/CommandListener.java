@@ -114,8 +114,8 @@ public class CommandListener {
                     //TO_DO
                    //output = cells[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDescription();
                 for(Cell cell : cells) {
-                	Logs.LOGGER.fine("Cell "+cell.getLocation());
-        			Logs.LOGGER.fine("Player "+player.getLocation());
+                	Logs.LOGGER.info("Cell "+cell.getLocation());
+        			Logs.LOGGER.info("Player "+player.getLocation());
                 		if(cell.getLocation().getX() == player.getLocation().getX() &&
                 		   cell.getLocation().getY() == player.getLocation().getY() &&
                 		   cell.getLocation().getZ() == player.getLocation().getZ()) {
@@ -666,8 +666,7 @@ public class CommandListener {
     }
     
     private void initializePlayer() {
-    		player.setLocation(new Location(0,3,0));
-    		Logs.LOGGER.info("Player Location Initialized");
+    		player.setLocation(new Location(0,1,0));
     }
     
 
