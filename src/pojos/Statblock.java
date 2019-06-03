@@ -18,6 +18,38 @@ public class Statblock {
 	int agi;
 	int acc;
 	
+	public Statblock() {
+		this.hp = 0;
+		this.sp = 0;
+		this.atk = 0;
+		this.def = 0;
+		this.spatk = 0;
+		this.spdef  = 0;
+		this.eva = 0;
+		this.intel = 0;
+		this.cha = 0;
+		this.sta = 0;
+		this.agi = 0;
+		this.acc = 0;
+	}
+	
+	public Statblock(int hp, int sp, int atk, int def, int spatk, int spdef, int eva, int intel, int cha, int sta,
+			int agi, int acc) {
+		super();
+		this.hp = hp;
+		this.sp = sp;
+		this.atk = atk;
+		this.def = def;
+		this.spatk = spatk;
+		this.spdef = spdef;
+		this.eva = eva;
+		this.intel = intel;
+		this.cha = cha;
+		this.sta = sta;
+		this.agi = agi;
+		this.acc = acc;
+	}
+
 	public int getHp() {
 		return hp;
 	}

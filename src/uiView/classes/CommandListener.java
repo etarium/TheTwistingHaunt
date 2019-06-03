@@ -114,17 +114,14 @@ public class CommandListener {
                     //TO_DO
                    //output = cells[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDescription();
                 for(Cell cell : cells) {
-                	Logs.LOGGER.info("Cell "+cell.getLocation());
-        			Logs.LOGGER.info("Player "+player.getLocation());
                 		if(cell.getLocation().getX() == player.getLocation().getX() &&
                 		   cell.getLocation().getY() == player.getLocation().getY() &&
                 		   cell.getLocation().getZ() == player.getLocation().getZ()) {
                 			location = cells.indexOf(cell);
-                			output = cells.get(location).getDescription();
+                			output = cell.getDescription();
                 			break;
                 		}
-                }
-                
+                	}
                 } //inspect object of command
                 else {
                     Object looked = parseParameter(parameter);
@@ -648,7 +645,6 @@ public class CommandListener {
         //save player
 
         if(!DEBUG_LOAD) {
-        		initializePlayer();
         		loadInstance(INSTANCE);
         }
 //        else {
@@ -666,7 +662,8 @@ public class CommandListener {
     }
     
     private void initializePlayer() {
-    		player.setLocation(new Location(0,1,0));
+    		//TODO:
+    		//put all newGame player initialization here, instead of scattered throughout other methods.
     }
     
 

@@ -4,11 +4,12 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import pojos.Statblock;
 import pojos.entity.enums.Species;
 import pojos.entity.enums.Temperament;
 import pojos.items.Item;
 
-@JsonIgnoreProperties
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Entity {
 
 	String name;

@@ -82,7 +82,6 @@ public class GameWindow{
 			ge.registerFont(defaultFont);
 
 		} catch(FileNotFoundException e) {
-			System.out.println("File not found.");
 			Logs.LOGGER.severe("Font File " + defaultFont + " Not Found.");
 		}
 		catch(Exception e) {
