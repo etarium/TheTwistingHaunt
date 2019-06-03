@@ -1,4 +1,4 @@
-package CommandListener;
+package commandListener;
 
 public class Inventory {
 

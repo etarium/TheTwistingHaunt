@@ -1,7 +1,5 @@
 package uiView.classes;
 
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +11,8 @@ import pojos.items.ArmorItem;
 import pojos.items.ConsumableItem;
 import pojos.items.Item;
 import pojos.items.WeaponItem;
-import utilities.Logs;
+import utilities.InputParser;
+
 import db.api.CellAPI;
 
 public class CommandListener {
@@ -32,33 +31,6 @@ public class CommandListener {
     final boolean DEBUG_SAVE = false;
 
     public CommandListener() {
-        MainMenu menu = new MainMenu();
-        boolean nGame = menu.getNGame();
-        if(nGame == true){//open new game window
-            NewGameWindow window = new NewGameWindow();
-            this.player = window.getNewPlayer();
-
-        }
-        else{   //load game
-            new LoadGameWindow();
-        }
-        
-        
-        try{
-        GUI_Client.main(null);
-        play = GUI_Client.getPlayWindow();
-        Logs.LOGGER.info("Play Window launched.");
-        } catch(Exception e) {
-        	Logs.LOGGER.severe("Exception when trying to play GUI_Client.getPlayWindow()");
-        }
-        
-        try{
-            newGame();
-            Logs.LOGGER.info("New Game started");
-        }catch(Exception e){
-            Logs.LOGGER.severe("Exception when trying to load newGame()");
-            Logs.LOGGER.severe(e.toString());
-        } 
         boolean run = true;
         int count = 0;
         while(run) {
@@ -93,7 +65,7 @@ public class CommandListener {
     		
     	
     	
-        String[] stringArray = inputParser(play.requestInput());
+        String[] stringArray = InputParser.parse(play.requestInput());
         
         String command = stringArray[0];
         String parameter = stringArray[1];
@@ -612,58 +584,6 @@ public class CommandListener {
 
     	return null;
     	
-    }
-    
-
-    /**
-     * Parses input into an array with the format {verb},{object}. If no
-     * parameter is present, that field will be null.
-     *
-     * @param input
-     * @return String array with command and parameter.
-     */
-    public String[] inputParser(String input) {
-
-        String[] stringArray = new String[2];
-
-        input = input.trim().toLowerCase();
-
-        boolean containsSpace = input.contains(" ");
-
-        //will be -1 if no space present
-        int indexOfSpace = input.indexOf(" ");
-
-        stringArray[0] = (containsSpace) ? input.substring(0, input.indexOf(" ")) : input;
-        stringArray[1] = (containsSpace) ? input.substring(indexOfSpace + 1) : null;
-
-        return stringArray;
-
-    }
-
-    public void newGame() throws IOException {
-        // create new instance of the game for the player using the input from the creator
-        //save player
-
-        if(!DEBUG_LOAD) {
-        		loadInstance(INSTANCE);
-        }
-//        else {
-//        		loadGameTest();
-//        }
-        
-    }
-
- // TODO: Can probably delete everything below this point. Should be in the back-end.
-  
-    public void loadInstance(String instance) throws IOException {
-    		
-    		cells = cellService.getCellsFromInstance("Test Instance");
-    		
-    }
-    
-    private void initializePlayer() {
-    		//TODO:
-    		//put all newGame player initialization here, instead of scattered throughout other methods.
     }
     
 
