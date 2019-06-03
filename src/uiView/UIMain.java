@@ -8,8 +8,10 @@ import commandListener.Init;
 import uiView.classes.GUI_Client;
 import uiView.classes.LoadGameWindow;
 import uiView.classes.MainMenu;
+import uiView.classes.MapCell;
 import uiView.classes.NewGameWindow;
 import uiView.classes.PlayWindow;
+import utilities.GameCommands;
 import utilities.Logs;
 
 public class UIMain {
@@ -18,24 +20,12 @@ public class UIMain {
     public static PlayWindow play;
     private static PlayerEntity player;
     static CellAPI cellService = new CellAPI();
+    public static Init init = new Init();
     
     final static boolean DEBUG_LOAD = false;
     final boolean DEBUG_SAVE = false;
     
 	public static void main (String [] args) {
-		/* CellAPI apiCaller = new CellAPI();
-		
-		List<Cell> cells = apiCaller.getCellsFromInstance("Test Instance");
-		cells.forEach(cell -> {
-			System.out.println(cell.getDescription());
-			System.out.println(cell.getInstance());
-			System.out.println(cell.getTerrain());
-			System.out.println(cell.getEnemies());
-			System.out.println(cell.getLocation());
-			System.out.println(cell.getItems());
-		});
-		*/
-		//CommandListener ear = new CommandListener();
 
 		 MainMenu menu = new MainMenu();
 	        boolean nGame = menu.getNGame();
@@ -65,7 +55,10 @@ public class UIMain {
 	            Logs.LOGGER.severe(e.toString());
 	        } 
 	        boolean run = true;
-	        int count = 0;
+	        while(run) {
+	            GameCommands system = new GameCommands(play, run);
+    				init.initializeListeners(play, system);	
+    			}
 	    }
 	
     public static void newGame() throws IOException {
@@ -80,15 +73,5 @@ public class UIMain {
 //        }
         
     }
-
-    /*
- // TODO: Can probably delete everything below this point. Should be in the back-end.
-  
-    public void loadInstance(String instance) throws IOException {
-    		
-    		cells = cellService.getCellsFromInstance("Test Instance");
-    		
-    }
-    */
     
 }
