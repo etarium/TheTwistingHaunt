@@ -21,9 +21,16 @@ public class Init {
         
         
         String output = "";
+        String upperOutput = "";
+        //check the listeners
         
+        	Reply systemReply = systemListener.listen(command, system);
+        	Reply battleReply;
+        	Reply movementReply;
+        	
+        	
         //sends output generated from user selection to the GUI window
-        output = systemListener.systemCommandListener(command, system);
         play.outGUI(output);
+        play.outTopGUI(upperOutput);
 	}
 }
