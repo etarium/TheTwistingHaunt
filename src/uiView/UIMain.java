@@ -5,13 +5,12 @@ import java.io.IOException;
 import db.api.CellAPI;
 import pojos.entity.PlayerEntity;
 import commandListener.Init;
+import commandServices.GameService;
 import uiView.classes.GUI_Client;
 import uiView.classes.LoadGameWindow;
 import uiView.classes.MainMenu;
-import uiView.classes.MapCell;
 import uiView.classes.NewGameWindow;
 import uiView.classes.PlayWindow;
-import utilities.GameCommands;
 import utilities.Logs;
 
 public class UIMain {
@@ -19,7 +18,7 @@ public class UIMain {
     final static String INSTANCE = "Test Instance";
     public static PlayWindow play;
     private static PlayerEntity player;
-    static CellAPI cellService = new CellAPI();
+    static CellAPI cellAPI = new CellAPI();
     public static Init init = new Init();
     
     final static boolean DEBUG_LOAD = false;
@@ -56,7 +55,7 @@ public class UIMain {
 	        } 
 	        boolean run = true;
 	        while(run) {
-	            GameCommands system = new GameCommands(play, run);
+	            GameService system = new GameService(play, run);
     				init.initializeListeners(play, system);	
     			}
 	    }
@@ -66,7 +65,7 @@ public class UIMain {
         //save player
 
         if(!DEBUG_LOAD) {
-        		cellService.getCellsFromInstance(INSTANCE);
+        		cellAPI.getCellsFromInstance(INSTANCE);
         }
 //        else {
 //        		loadGameTest();

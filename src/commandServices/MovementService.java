@@ -1,4 +1,4 @@
-package gameplay;
+package commandServices;
 
 public class MovementService {
 

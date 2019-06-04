@@ -160,7 +160,7 @@ public class PlayWindow extends GameWindow{
 		box.setWrapStyleWord(true);
 				
 		//initial text while database is loading
-		//box.setText("");
+		box.setText("First Cell Description text.");
 		
 		out.add(box);
 	}

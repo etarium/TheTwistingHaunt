@@ -1,11 +1,11 @@
 package commandListener;
 
-import utilities.GameCommands;
+import commandServices.GameService;
 import utilities.Logs;
 
 public class SystemListener {
 
-	public Reply listen(String command, GameCommands system) {
+	public Reply listen(String command, GameService system) {
 		String output = "";
 		boolean success = true;
 		switch (command) {

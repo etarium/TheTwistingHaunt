@@ -1,10 +1,12 @@
 package commandListener;
 
+import commandServices.MovementService;
 import utilities.Logs;
 
 public class MovementListener {
 
-	public Reply listen(String command) {
+	MovementService system = new MovementService();
+	public Reply listen(String command, String parameter) {
 		String output = "";
 		boolean success = true;
 		switch (command) {

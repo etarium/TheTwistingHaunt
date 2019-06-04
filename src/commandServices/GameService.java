@@ -1,14 +1,14 @@
-package utilities;
+package commandServices;
 
 import uiView.classes.HelpWin;
 import uiView.classes.PlayWindow;
 
-public class GameCommands {
+public class GameService {
 
 	PlayWindow play;
 	boolean run;
 	
-	public GameCommands(PlayWindow play, boolean run) {
+	public GameService(PlayWindow play, boolean run) {
 		this.play = play;
 		this.run = run;
 	}
