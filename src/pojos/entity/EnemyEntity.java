@@ -2,10 +2,13 @@ package pojos.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import pojos.Ability;
 import pojos.Statblock;
 import pojos.items.Item;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class EnemyEntity extends Entity{
 
 	String battleCry;
@@ -15,6 +18,23 @@ public class EnemyEntity extends Entity{
 	List<Ability> skills;
 	Statblock stats;
 	int numOfHands;
+	
+	public EnemyEntity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public EnemyEntity(String battleCry, String victoryCry, String loserCry, List<Item> loot, List<Ability> skills,
+			Statblock stats, int numOfHands) {
+		super();
+		this.battleCry = battleCry;
+		this.victoryCry = victoryCry;
+		this.loserCry = loserCry;
+		this.loot = loot;
+		this.skills = skills;
+		this.stats = stats;
+		this.numOfHands = numOfHands;
+	}
 	
 	public String getBattleCry() {
 		return battleCry;

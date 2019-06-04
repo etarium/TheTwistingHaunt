@@ -5,6 +5,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import pojos.entity.EnemyEntity;
 import pojos.entity.Entity;
 import pojos.items.Item;
 
@@ -19,7 +20,7 @@ public class Cell {
 	List<Item> items;
 	List<Entity> npcs;
 	@JsonProperty("enemies")
-	List<Entity> enemies;
+	List<EnemyEntity> enemies;
 	boolean isLocked;
 	List<Item> requiredItems; //used for places that require certain triggers to be able to enter, locked doors, etc
 	boolean north;
@@ -99,11 +100,11 @@ public class Cell {
 		this.npcs = npcs;
 	}
 
-	public List<Entity> getEnemies() {
+	public List<EnemyEntity> getEnemies() {
 		return enemies;
 	}
 
-	public void setEnemies(List<Entity> enemies) {
+	public void setEnemies(List<EnemyEntity> enemies) {
 		this.enemies = enemies;
 	}
 

@@ -205,11 +205,7 @@ public class NewGameWindow extends GameWindow{
 		thiefPanel.setBackground(textColor);
 		playerClass.setName(EntityClassEnum.MAGE);
 		newPlayer.setEntityClass(playerClass);
-		Location loc = new Location ();
-		loc.setX(0);
-		loc.setY(3);
-		loc.setZ(0);
-		newPlayer.setLocation(loc);
+		newPlayer.setLocation(new Location(0,1,0));
 		updateText();
 	}
 
@@ -277,7 +273,6 @@ public class NewGameWindow extends GameWindow{
 	private void startButtonPressed(JPanel panel, JLabel label) {
 
 		button = false;
-		System.out.println(newPlayer);
 		try {
 			Thread.sleep(300);
 		} catch (InterruptedException e) {
