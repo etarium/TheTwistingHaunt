@@ -16,10 +16,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import commandListener.Init;
+import gameplay.commandServices.GameService;
 import gameplay.newGame.NewPlayerPayload;
 import gameplay.newGame.PlayerInitializer;
 import pojos.entity.PlayerEntity;
 import pojos.entity.enums.EntityClassEnum;
+import uiView.UIMain;
 import utilities.Logs;
 
 public class NewGameWindow extends GameWindow{
@@ -31,9 +34,9 @@ public class NewGameWindow extends GameWindow{
 	static JTextArea output;
 
 	private NewPlayerPayload newPlayerPayload = new NewPlayerPayload();
-	private PlayerInitializer playerInit = new PlayerInitializer();
-	//public PlayerEntity player = new PlayerEntity();
-	public PlayerEntity player;
+	private Init init = new Init();
+	private PlayerInitializer playerinit = new PlayerInitializer();
+	private GameService system;
 	private boolean button;
 
 	public NewGameWindow() {
@@ -271,21 +274,10 @@ public class NewGameWindow extends GameWindow{
 
 	private void startButtonPressed(JPanel panel, JLabel label) {
 		Logs.LOGGER.info("startButtonPressed");
-		System.out.println(newPlayerPayload.getClassName());
 		button = false;
-		player = new PlayerEntity();
-		player = playerInit.initializePlayer(true, newPlayerPayload);
-		System.out.println("After playerInit " + player.getEntityClass());
+		UIMain.player = playerinit.initializePlayer(true, newPlayerPayload);
 		try {
 			Thread.sleep(300);
-			try{
-		        //GUI_Client.main(null);
-				PlayWindow play = new PlayWindow();
-		        play = GUI_Client.getPlayWindow(player);
-		        Logs.LOGGER.info("Play Window launched.");
-		        } catch(Exception e) {
-		        	Logs.LOGGER.severe("Exception when trying to play GUI_Client.getPlayWindow() " + e);
-		        }
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -360,8 +352,7 @@ public class NewGameWindow extends GameWindow{
 
 	
 	public PlayerEntity getNewPlayer() {
-		System.out.println("NewGameWindow Player" + this.player);
-		Logs.LOGGER.info("NewGameWindow.getNewPlayer() " + this.player);
-		return player;
+		Logs.LOGGER.info("NewGameWindow.getNewPlayer() " + UIMain.player);
+		return UIMain.player;
 	} 
 }//end NewGameWindow

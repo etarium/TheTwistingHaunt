@@ -30,7 +30,7 @@ public class CellListener {
 
 			break;
 		}
-		
+		System.out.println("Reply = " + isSuccessful +" \n" + output);
 		return new Reply(isSuccessful, output);
 	}
 }

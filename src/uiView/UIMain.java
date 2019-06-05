@@ -28,22 +28,23 @@ public class UIMain {
 		 MainMenu menu = new MainMenu();
 	        boolean nGame = menu.getNGame();
 	        if(nGame == true){//open new game window
-	            NewGameWindow window = new NewGameWindow();
+	            NewGameWindow window = new NewGameWindow();	            
+	            player = window.getNewPlayer();
 	            //runGame(player);
 
 	        }
 	        else{   //load game
 	            new LoadGameWindow();
 	        }
-	        /*
+	        
+
 	        try{
 	        GUI_Client.main(null);
 	        play = GUI_Client.getPlayWindow();
 	        Logs.LOGGER.info("Play Window launched.");
 	        } catch(Exception e) {
-	        	Logs.LOGGER.severe("Exception when trying to play GUI_Client.getPlayWindow() " + e);
+	        	Logs.LOGGER.severe("Exception when trying to play GUI_Client.getPlayWindow()");
 	        }
-	        */
 	        /*
 	        try{
 	            newGame();
@@ -55,7 +56,10 @@ public class UIMain {
 	        boolean run = true;
 	        while(run) {
 	            //TODO
-	        		
+	        		GameService system = new GameService(play, run);
+	        		System.out.println("while(run) in UIMain: Player = " + player);
+
+	        		init.initializeListeners(play, system, player);
 				}
 	    }
 	/*
@@ -74,5 +78,8 @@ public class UIMain {
         
     }
     */
+	public static void runGame(PlayerEntity player) {
+
+	}
     
 }

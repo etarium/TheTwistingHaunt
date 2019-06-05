@@ -10,6 +10,7 @@ import gameplay.newGame.PlayerInitializer;
 import pojos.entity.PlayerEntity;
 import uiView.classes.PlayWindow;
 import utilities.InputParser;
+import utilities.Logs;
 
 public class Init {
 
@@ -21,10 +22,11 @@ public class Init {
 	CellListener cellListener = new CellListener();
 	
 	//declare initialization services
-	PlayerInitializer playinit = new PlayerInitializer();
+	//PlayerInitializer playinit = new PlayerInitializer();
 	
 	public void initializeListeners(PlayWindow play, GameService system, PlayerEntity player) {
-		
+		Logs.LOGGER.info("Init.initializeListeners() with player " + player);
+		System.out.println(play);
         String[] stringArray = InputParser.parse(play.requestInput());
         
         String command = stringArray[0];
@@ -48,18 +50,23 @@ public class Init {
         			output = reply.output;
         			if(reply.upperOutput != null) {
         				upperOutput = reply.upperOutput;
+        			} else {
+        				upperOutput = player.getCurrentCell().getDescription();
         			}
-        			break;
         		}
         	}
         	
         //sends output generated from user selection to the GUI window
+        	System.out.println("play.outGUI " + output);
         play.outGUI(output);
         play.outTopGUI(upperOutput);
 	}
 	
-	public void initializeGame(PlayWindow play, GameService system, boolean isNewGame, NewPlayerPayload payload) {
-		PlayerEntity player = playinit.initializePlayer(isNewGame, payload);
+	public void initializeGame(PlayWindow play, GameService system, PlayerEntity player) {
+		Logs.LOGGER.info("Init.initializeGame()");
+		
+		//PlayerEntity player = playinit.initializePlayer(isNewGame, payload);
+		System.out.println("initializeListeners: Player = " + player);
 		initializeListeners(play, system, player);
 	}
 }

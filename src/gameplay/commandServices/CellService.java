@@ -5,19 +5,19 @@ import pojos.environment.Cell;
 import pojos.items.ConsumableItem;
 import pojos.items.Item;
 import pojos.items.WeaponItem;
+import uiView.UIMain;
 import utilities.Logs;
 
 public class CellService {
 
-	PlayerEntity player = new PlayerEntity();
+	PlayerEntity player = UIMain.player;
 	
 	public CellService(PlayerEntity player) {
 		this.player = player;
 	}
 	
 	public String inspectCell() {
-		Logs.LOGGER.info(player.toString());
-		
+		Logs.LOGGER.info("Inspect Active Cell " + player.currentCell.toString());
 		String output = "";
 		
  			if(player.getCurrentCell().getInspectableObjects() == null) {

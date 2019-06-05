@@ -208,6 +208,7 @@ public class MainMenu extends GameWindow {
 		try {
 			Thread.sleep(300);
 			NewGameWindow.window.setVisible(true);
+			window.dispose();
 		} catch (InterruptedException e) {
 			Logs.LOGGER.severe("InterruptedException caught in MainMenu.newGameButtonPressed " + e);
 		}

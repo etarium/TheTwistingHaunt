@@ -31,10 +31,10 @@ public class GUI_Client {
 
 	}
 	
-	public static PlayWindow getPlayWindow(PlayerEntity player) {
+	public static PlayWindow getPlayWindow() {
 		Logs.LOGGER.info("GUI_Client.getPlayWindow()");
-		GameService system = new GameService(play, true);
-		init.initializeListeners(play, system, player);
+		//GameService system = new GameService(play, true);
+		//init.initializeListeners(play, system, player);
 		return play;
 	}
 	
