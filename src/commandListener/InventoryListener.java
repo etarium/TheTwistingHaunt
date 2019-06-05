@@ -1,6 +1,6 @@
 package commandListener;
 
-import commandServices.InventoryService;
+import gameplay.commandServices.InventoryService;
 
 public class InventoryListener {
 

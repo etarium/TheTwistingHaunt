@@ -2,10 +2,10 @@ package uiView;
 
 import java.io.IOException;
 
-import db.api.CellAPI;
+import gameplay.PlayerInitializer;
+import gameplay.commandServices.GameService;
 import pojos.entity.PlayerEntity;
 import commandListener.Init;
-import commandServices.GameService;
 import uiView.classes.GUI_Client;
 import uiView.classes.LoadGameWindow;
 import uiView.classes.MainMenu;
@@ -15,10 +15,9 @@ import utilities.Logs;
 
 public class UIMain {
 	
-    final static String INSTANCE = "Test Instance";
     public static PlayWindow play;
     private static PlayerEntity player;
-    static CellAPI cellAPI = new CellAPI();
+    static PlayerInitializer playerinit = new PlayerInitializer();
     public static Init init = new Init();
     
     final static boolean DEBUG_LOAD = false;
@@ -30,7 +29,7 @@ public class UIMain {
 	        boolean nGame = menu.getNGame();
 	        if(nGame == true){//open new game window
 	            NewGameWindow window = new NewGameWindow();
-	            player = window.getNewPlayer();
+	            //player = window.getNewPlayer();
 
 	        }
 	        else{   //load game
@@ -51,7 +50,8 @@ public class UIMain {
 	            Logs.LOGGER.info("New Game started");
 	        }catch(Exception e){
 	            Logs.LOGGER.severe("Exception when trying to load newGame()");
-	            Logs.LOGGER.severe(e.toString());
+	           // Logs.LOGGER.severe(e.getMessage().toString());
+	          //  Logs.LOGGER.severe(e.toString());
 	        } 
 	        boolean run = true;
 	        while(run) {
@@ -65,7 +65,8 @@ public class UIMain {
         //save player
 
         if(!DEBUG_LOAD) {
-        		cellAPI.getCellsFromInstance(INSTANCE);
+        		playerinit.initializePlayer(true);
+        		Logs.LOGGER.info(player.toString());
         }
 //        else {
 //        		loadGameTest();

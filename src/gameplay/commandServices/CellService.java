@@ -1,5 +1,6 @@
-package commandServices;
+package gameplay.commandServices;
 
+import pojos.entity.PlayerEntity;
 import pojos.environment.Cell;
 import pojos.items.ConsumableItem;
 import pojos.items.Item;
@@ -7,17 +8,17 @@ import pojos.items.WeaponItem;
 
 public class CellService {
 
+	PlayerEntity player;
 	public String inspectCell() {
-		//TODO
-		/*
-		 * 			if(name == null) {
+		String output = "";
+ 			if(player.getCurrentCell().getInspectableObjects() == null) {
 				output = "You search long and hard, but your effort turns up nothing of interest.";
 			}
 			else {
-				output = "By your sharp eyes or by good fortune, you find " + name + "!";
+				output = "By your sharp eyes or by good fortune, you find " + player.getCurrentCell().getInspectableObjects() + "!";
 			}
-		 */
-		return "";
+		 
+		return output;
 	}
 	
 	public String inspectRoom() {

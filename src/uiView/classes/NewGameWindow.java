@@ -30,8 +30,6 @@ public class NewGameWindow extends GameWindow{
 	static JPanel outputPanel;
 	static JTextArea output;
 
-	static EntityClassObject playerClass;
-
 	private PlayerEntity newPlayer;
 	private boolean button;
 
@@ -167,6 +165,7 @@ public class NewGameWindow extends GameWindow{
 		con.add(button);
 
 	}//end main
+
 	private void addButtonListeners() {
 		mageButton.addActionListener(new ActionListener() {
 
@@ -199,6 +198,7 @@ public class NewGameWindow extends GameWindow{
 		});
 
 	}
+
 	private void mageButtonPressed() {
 		magePanel.setBackground(textColor.darker());
 		warriorPanel.setBackground(textColor);
@@ -346,9 +346,5 @@ public class NewGameWindow extends GameWindow{
 
 	public JTextArea getOutputBox() {
 		return output;
-	}
-
-	public PlayerEntity getNewPlayer() {
-		return newPlayer;
 	}
 }//end NewGameWindow

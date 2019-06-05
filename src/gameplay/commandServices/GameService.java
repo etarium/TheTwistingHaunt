@@ -1,4 +1,4 @@
-package commandServices;
+package gameplay.commandServices;
 
 import uiView.classes.HelpWin;
 import uiView.classes.PlayWindow;

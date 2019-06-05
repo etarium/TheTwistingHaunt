@@ -1,24 +1,20 @@
 package uiView.classes;
 
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import pojos.environment.Cell;
 
 public class PlayWindow extends GameWindow{
 
 	
-	private static final boolean TESTING = true;
 	JFrame window;
 	Container con;
 	JPanel bounds;
@@ -26,10 +22,6 @@ public class PlayWindow extends GameWindow{
 	static JTextArea upperOutput;
 	static JTextArea lowerOutput;
 	static JTextField input;
-	
-	private List<Cell> cellList;
-	public MapCell[][] map;
-
 	
 	static boolean enterPressed = false;
 	
@@ -42,7 +34,6 @@ public class PlayWindow extends GameWindow{
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setLayout(null);
 		window.setMaximumSize(window.getSize());
-			
 		
 		con = window.getContentPane();
 		con.setLayout(null);
@@ -160,7 +151,7 @@ public class PlayWindow extends GameWindow{
 		box.setWrapStyleWord(true);
 				
 		//initial text while database is loading
-		box.setText("First Cell Description text.");
+		box.setText("Upper text test. Not DB based.");
 		
 		out.add(box);
 	}

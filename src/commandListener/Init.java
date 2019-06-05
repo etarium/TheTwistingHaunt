@@ -1,10 +1,10 @@
 package commandListener;
 
-import commandServices.BattleService;
-import commandServices.CellService;
-import commandServices.GameService;
-import commandServices.InventoryService;
-import commandServices.MovementService;
+import gameplay.commandServices.BattleService;
+import gameplay.commandServices.CellService;
+import gameplay.commandServices.GameService;
+import gameplay.commandServices.InventoryService;
+import gameplay.commandServices.MovementService;
 import uiView.classes.PlayWindow;
 import utilities.InputParser;
 

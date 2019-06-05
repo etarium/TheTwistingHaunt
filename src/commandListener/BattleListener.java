@@ -1,6 +1,6 @@
 package commandListener;
 
-import commandServices.BattleService;
+import gameplay.commandServices.BattleService;
 
 public class BattleListener {
 

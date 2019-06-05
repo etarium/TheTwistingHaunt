@@ -13,6 +13,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.*;
 
+import pojos.entity.EntityClassObject;
 import pojos.environment.Cell;
 import utilities.Logs;
 
@@ -49,5 +50,22 @@ public class DBConnector {
 			}
 		});
 		return activeCells;
+	}
+	
+	public List<EntityClassObject> getAllAvailableClasses() {
+		List<EntityClassObject> activeClasses = new ArrayList();
+		MongoCollection<Document> classesCollection = database.getCollection("Classes");
+		Iterable<Document> classDocuments = classesCollection.find();
+		classDocuments.forEach(classes -> {
+			try {
+				EntityClassObject tempClass = mapper.readValue(classes.toJson(), EntityClassObject.class);
+				activeClasses.add(tempClass);
+				
+			} catch (IOException e) {
+				Logs.LOGGER.severe("Reading Cells into Cell Object failed.");
+				e.printStackTrace();
+			}
+		});
+		return activeClasses;
 	}
 }

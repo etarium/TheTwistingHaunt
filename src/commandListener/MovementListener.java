@@ -1,6 +1,6 @@
 package commandListener;
 
-import commandServices.MovementService;
+import gameplay.commandServices.MovementService;
 import utilities.Logs;
 
 public class MovementListener {
@@ -8,6 +8,7 @@ public class MovementListener {
 	MovementService system = new MovementService();
 	public Reply listen(String command, String parameter) {
 		String output = "";
+		String upperOutput = "";
 		boolean success = true;
 		switch (command) {
 		 //determines if movement can be made in the direction sent by the user
@@ -29,12 +30,9 @@ public class MovementListener {
             output = "You'd like to go that way, wouldn't you?";
             switch (direction) {
                 case 'n':
-                    //check to see of movement possible
-                	/*
-                		if(player.getCurrentCell(cellList).isNorth()) {
-                        player.getLocation().setY(player.getLocation().getY() + 1);
-                        output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
-                    } */
+                    
+                		upperOutput = system.movePlayer(direction);
+                
 
                     break;
                 case 's':
@@ -69,6 +67,6 @@ public class MovementListener {
             break;
     }//end switch
 		
-		return new Reply(success, output);
+		return new Reply(success, output, upperOutput);
 	}
 }

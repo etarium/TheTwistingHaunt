@@ -8,6 +8,7 @@ import pojos.Ability;
 import pojos.Statblock;
 import pojos.entity.enums.EntityClassEnum;
 import pojos.entity.enums.Faction;
+import pojos.environment.Cell;
 import pojos.environment.Location;
 import pojos.items.ArmorItem;
 import pojos.items.WeaponItem;
@@ -29,6 +30,7 @@ public class PlayerEntity extends Entity{
 	int xp;
 	int xpToNextLevel;
 	Location location;
+	public Cell currentCell;
 	
 	public Location getLocation() {
 		return location;
@@ -109,14 +111,20 @@ public class PlayerEntity extends Entity{
 		this.xpToNextLevel = xpToNextLevel;
 	}
 	
+	public Cell getCurrentCell() {
+		return currentCell;
+	}
+	public void setCurrentCell(Cell currentCell) {
+		this.currentCell = currentCell;
+	}
+	
 	@Override
 	public String toString() {
 		return "PlayerEntity [entityClass=" + entityClass + ", numOfHands=" + numOfHands + ", stats=" + stats
 				+ ", armorType=" + armorType + ", weaponType=" + weaponType + ", skills=" + skills + ", quests="
 				+ quests + ", equippedArmor=" + equippedArmor + ", equippedWeapons=" + equippedWeapons
 				+ ", factionLevel=" + factionLevel + ", xp=" + xp + ", xpToNextLevel=" + xpToNextLevel + ", location="
-				+ location + ", name=" + name + ", description=" + description + ", temperament=" + temperament
-				+ ", species=" + species + ", inventory=" + inventory + ", level=" + level + "]";
+				+ location + ", currentCell=" + currentCell + "]";
 	}
 	
 }

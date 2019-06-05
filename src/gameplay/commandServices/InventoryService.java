@@ -1,4 +1,4 @@
-package commandServices;
+package gameplay.commandServices;
 
 public class InventoryService {
 

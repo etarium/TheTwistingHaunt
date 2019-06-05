@@ -1,6 +1,6 @@
 package commandListener;
 
-import commandServices.GameService;
+import gameplay.commandServices.GameService;
 import utilities.Logs;
 
 public class SystemListener {

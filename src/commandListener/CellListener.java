@@ -1,6 +1,6 @@
 package commandListener;
 
-import commandServices.CellService;
+import gameplay.commandServices.CellService;
 import utilities.InputParser;
 
 public class CellListener {
@@ -17,17 +17,16 @@ public class CellListener {
 		case "/look":
 			//look at room
 			if (parameter == null) {
-				//TO_DO
-				system.inspectRoom();
+				output = system.inspectRoom();
 			} //inspect object of command
 			else {
 				Object looked = InputParser.parseParameter(parameter);
-				system.inspectItem();
+				output = system.inspectItem();
 			}
 			break;
 
 		case "/inspect":
-			system.inspectCell();
+			output = system.inspectCell();
 
 			break;
 		}
