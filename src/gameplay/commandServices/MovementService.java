@@ -1,6 +1,14 @@
 package gameplay.commandServices;
 
+import pojos.entity.PlayerEntity;
+
 public class MovementService {
+	
+	PlayerEntity player;
+	
+	public MovementService(PlayerEntity player) {
+		this.player = player;
+	}
 
 	public String movePlayer(char direction) {
 		//TODO

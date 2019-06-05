@@ -16,7 +16,7 @@ import utilities.Logs;
 public class UIMain {
 	
     public static PlayWindow play;
-    private static PlayerEntity player;
+    public static PlayerEntity player = new PlayerEntity();
     static PlayerInitializer playerinit = new PlayerInitializer();
     public static Init init = new Init();
     
@@ -29,37 +29,36 @@ public class UIMain {
 	        boolean nGame = menu.getNGame();
 	        if(nGame == true){//open new game window
 	            NewGameWindow window = new NewGameWindow();
-	            //player = window.getNewPlayer();
+	            //runGame(player);
 
 	        }
 	        else{   //load game
 	            new LoadGameWindow();
 	        }
-	        
-	        
+	        /*
 	        try{
 	        GUI_Client.main(null);
 	        play = GUI_Client.getPlayWindow();
 	        Logs.LOGGER.info("Play Window launched.");
 	        } catch(Exception e) {
-	        	Logs.LOGGER.severe("Exception when trying to play GUI_Client.getPlayWindow()");
+	        	Logs.LOGGER.severe("Exception when trying to play GUI_Client.getPlayWindow() " + e);
 	        }
-	        
+	        */
+	        /*
 	        try{
 	            newGame();
 	            Logs.LOGGER.info("New Game started");
 	        }catch(Exception e){
 	            Logs.LOGGER.severe("Exception when trying to load newGame()");
-	           // Logs.LOGGER.severe(e.getMessage().toString());
-	          //  Logs.LOGGER.severe(e.toString());
 	        } 
+	        */
 	        boolean run = true;
 	        while(run) {
-	            GameService system = new GameService(play, run);
-    				init.initializeListeners(play, system);	
-    			}
+	            //TODO
+	        		
+				}
 	    }
-	
+	/*
     public static void newGame() throws IOException {
         // create new instance of the game for the player using the input from the creator
         //save player
@@ -74,5 +73,6 @@ public class UIMain {
 //        }
         
     }
+    */
     
 }

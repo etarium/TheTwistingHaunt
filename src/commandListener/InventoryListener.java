@@ -1,12 +1,13 @@
 package commandListener;
 
 import gameplay.commandServices.InventoryService;
+import pojos.entity.PlayerEntity;
 
 public class InventoryListener {
 
-	InventoryService system = new InventoryService();
-
-	public Reply listen(String command, String parameter) {
+	public Reply listen(String command, String parameter, PlayerEntity player) {
+		InventoryService system = new InventoryService(player);
+		
 		String output = "";
 		boolean isSuccessful = true;
 		switch(command) {

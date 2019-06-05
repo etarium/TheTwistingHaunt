@@ -1,12 +1,13 @@
 package commandListener;
 
 import gameplay.commandServices.BattleService;
+import pojos.entity.PlayerEntity;
 
 public class BattleListener {
-
-	BattleService system = new BattleService();
 	
-	public Reply listen(String command, String parameter) {
+	public Reply listen(String command, String parameter, PlayerEntity player) {
+		BattleService system = new BattleService(player);
+		
 		String output="";
 		boolean isSuccessful = true;
 		switch (command) {

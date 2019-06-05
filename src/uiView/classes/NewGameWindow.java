@@ -16,14 +16,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import db.api.DbAPI;
 import gameplay.newGame.NewPlayerPayload;
-import pojos.entity.EntityClassObject;
+import gameplay.newGame.PlayerInitializer;
 import pojos.entity.PlayerEntity;
-
 import pojos.entity.enums.EntityClassEnum;
-import pojos.environment.Location;
 import utilities.Logs;
+
 public class NewGameWindow extends GameWindow{
 
 	static JFrame window;
@@ -33,9 +31,10 @@ public class NewGameWindow extends GameWindow{
 	static JTextArea output;
 
 	private NewPlayerPayload newPlayerPayload = new NewPlayerPayload();
+	private PlayerInitializer playerInit = new PlayerInitializer();
+	//public PlayerEntity player = new PlayerEntity();
+	public PlayerEntity player;
 	private boolean button;
-
-	private DbAPI dbApi = new DbAPI();
 
 	public NewGameWindow() {
 
@@ -200,6 +199,7 @@ public class NewGameWindow extends GameWindow{
 	}
 
 	private void mageButtonPressed() {
+		Logs.LOGGER.info("mageButtonPressed");
 		magePanel.setBackground(textColor.darker());
 		warriorPanel.setBackground(textColor);
 		thiefPanel.setBackground(textColor);
@@ -209,6 +209,7 @@ public class NewGameWindow extends GameWindow{
 	}
 
 	private void warriorButtonPressed() {
+		Logs.LOGGER.info("warriorButtonPressed");
 		magePanel.setBackground(textColor);
 		warriorPanel.setBackground(textColor.darker());
 		thiefPanel.setBackground(textColor);
@@ -218,6 +219,7 @@ public class NewGameWindow extends GameWindow{
 	}
 
 	private void thiefButtonPressed() {
+		Logs.LOGGER.info("thiefButtonPressed");
 		magePanel.setBackground(textColor);
 		warriorPanel.setBackground(textColor);
 		thiefPanel.setBackground(textColor.darker());
@@ -268,17 +270,28 @@ public class NewGameWindow extends GameWindow{
 	}
 
 	private void startButtonPressed(JPanel panel, JLabel label) {
-
+		Logs.LOGGER.info("startButtonPressed");
+		System.out.println(newPlayerPayload.getClassName());
 		button = false;
+		player = new PlayerEntity();
+		player = playerInit.initializePlayer(true, newPlayerPayload);
+		System.out.println("After playerInit " + player.getEntityClass());
 		try {
 			Thread.sleep(300);
+			try{
+		        //GUI_Client.main(null);
+				PlayWindow play = new PlayWindow();
+		        play = GUI_Client.getPlayWindow(player);
+		        Logs.LOGGER.info("Play Window launched.");
+		        } catch(Exception e) {
+		        	Logs.LOGGER.severe("Exception when trying to play GUI_Client.getPlayWindow() " + e);
+		        }
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		window.dispose();
-		//new PlayWindow();
 
 	}
 
@@ -344,4 +357,11 @@ public class NewGameWindow extends GameWindow{
 	public JTextArea getOutputBox() {
 		return output;
 	}
+
+	
+	public PlayerEntity getNewPlayer() {
+		System.out.println("NewGameWindow Player" + this.player);
+		Logs.LOGGER.info("NewGameWindow.getNewPlayer() " + this.player);
+		return player;
+	} 
 }//end NewGameWindow

@@ -5,6 +5,9 @@ import gameplay.commandServices.CellService;
 import gameplay.commandServices.GameService;
 import gameplay.commandServices.InventoryService;
 import gameplay.commandServices.MovementService;
+import gameplay.newGame.NewPlayerPayload;
+import gameplay.newGame.PlayerInitializer;
+import pojos.entity.PlayerEntity;
 import uiView.classes.PlayWindow;
 import utilities.InputParser;
 
@@ -17,7 +20,10 @@ public class Init {
 	SystemListener systemListener = new SystemListener();
 	CellListener cellListener = new CellListener();
 	
-	public void initializeListeners(PlayWindow play, GameService system) {
+	//declare initialization services
+	PlayerInitializer playinit = new PlayerInitializer();
+	
+	public void initializeListeners(PlayWindow play, GameService system, PlayerEntity player) {
 		
         String[] stringArray = InputParser.parse(play.requestInput());
         
@@ -29,11 +35,11 @@ public class Init {
         String upperOutput = "";
         //check the listeners
         
-        	Reply systemReply = systemListener.listen(command, system);
-        	Reply battleReply = battleListener.listen(command, parameter);
-        	Reply movementReply = movementListener.listen(command, parameter);
-        	Reply inventoryReply = inventoryListener.listen(command, parameter);
-        	Reply cellReply = cellListener.listen(command, parameter);
+        	Reply systemReply = systemListener.listen(command, system, player);
+        	Reply battleReply = battleListener.listen(command, parameter, player);
+        	Reply movementReply = movementListener.listen(command, parameter, player);
+        	Reply inventoryReply = inventoryListener.listen(command, parameter, player);
+        	Reply cellReply = cellListener.listen(command, parameter, player);
         	
         	Reply[] replies = {systemReply, battleReply, movementReply, inventoryReply, cellReply};
         	
@@ -50,5 +56,10 @@ public class Init {
         //sends output generated from user selection to the GUI window
         play.outGUI(output);
         play.outTopGUI(upperOutput);
+	}
+	
+	public void initializeGame(PlayWindow play, GameService system, boolean isNewGame, NewPlayerPayload payload) {
+		PlayerEntity player = playinit.initializePlayer(isNewGame, payload);
+		initializeListeners(play, system, player);
 	}
 }

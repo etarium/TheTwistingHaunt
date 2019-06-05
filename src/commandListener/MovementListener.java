@@ -1,12 +1,14 @@
 package commandListener;
 
 import gameplay.commandServices.MovementService;
+import pojos.entity.PlayerEntity;
 import utilities.Logs;
 
 public class MovementListener {
 
-	MovementService system = new MovementService();
-	public Reply listen(String command, String parameter) {
+	public Reply listen(String command, String parameter, PlayerEntity player) {
+		MovementService system = new MovementService(player);
+		
 		String output = "";
 		String upperOutput = "";
 		boolean success = true;

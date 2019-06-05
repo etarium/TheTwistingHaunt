@@ -1,13 +1,13 @@
 package commandListener;
 
 import gameplay.commandServices.CellService;
+import pojos.entity.PlayerEntity;
 import utilities.InputParser;
 
 public class CellListener {
-	
-	CellService system = new CellService();
-	
-	public Reply listen(String command, String parameter) {
+
+	public Reply listen(String command, String parameter, PlayerEntity player) {
+		CellService system = new CellService(player);
 		
 		String output = "";
 		boolean isSuccessful = true;

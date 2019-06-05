@@ -5,12 +5,21 @@ import pojos.environment.Cell;
 import pojos.items.ConsumableItem;
 import pojos.items.Item;
 import pojos.items.WeaponItem;
+import utilities.Logs;
 
 public class CellService {
 
-	PlayerEntity player;
+	PlayerEntity player = new PlayerEntity();
+	
+	public CellService(PlayerEntity player) {
+		this.player = player;
+	}
+	
 	public String inspectCell() {
+		Logs.LOGGER.info(player.toString());
+		
 		String output = "";
+		
  			if(player.getCurrentCell().getInspectableObjects() == null) {
 				output = "You search long and hard, but your effort turns up nothing of interest.";
 			}

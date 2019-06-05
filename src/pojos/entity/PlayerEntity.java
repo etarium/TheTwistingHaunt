@@ -19,8 +19,8 @@ public class PlayerEntity extends Entity{
 	EntityClassObject entityClass;
 	int numOfHands;
 	Statblock stats;
-	ArmorMaterial armorType;
-	WeaponType weaponType;
+	List<ArmorMaterial> armorType;
+	List<WeaponType> weaponType;
 	List<Ability> skills;
 	List<Quest> quests;
 	List<ArmorItem> equippedArmor;
@@ -55,16 +55,16 @@ public class PlayerEntity extends Entity{
 	public void setStats(Statblock stats) {
 		this.stats = stats;
 	}
-	public ArmorMaterial getArmorType() {
+	public List<ArmorMaterial> getArmorType() {
 		return armorType;
 	}
-	public void setArmorType(ArmorMaterial armorType) {
-		this.armorType = armorType;
+	public void setArmorType(List<ArmorMaterial> list) {
+		this.armorType = list;
 	}
-	public WeaponType getWeaponType() {
+	public List<WeaponType> getWeaponType() {
 		return weaponType;
 	}
-	public void setWeaponType(WeaponType weaponType) {
+	public void setWeaponType(List<WeaponType> weaponType) {
 		this.weaponType = weaponType;
 	}
 	public List<Ability> getSkills() {

@@ -1,11 +1,13 @@
 package commandListener;
 
 import gameplay.commandServices.GameService;
+import pojos.entity.PlayerEntity;
 import utilities.Logs;
 
 public class SystemListener {
 
-	public Reply listen(String command, GameService system) {
+	public Reply listen(String command, GameService system, PlayerEntity player) {
+
 		String output = "";
 		boolean success = true;
 		switch (command) {
