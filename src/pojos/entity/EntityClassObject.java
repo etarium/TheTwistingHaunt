@@ -2,12 +2,15 @@ package pojos.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import pojos.Ability;
 import pojos.Statblock;
 import pojos.entity.enums.EntityClassEnum;
 import pojos.items.enums.ArmorMaterial;
 import pojos.items.enums.WeaponType;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class EntityClassObject {
 	EntityClassEnum name;
 	String description;

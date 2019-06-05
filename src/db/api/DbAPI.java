@@ -4,6 +4,7 @@ import java.util.List;
 
 import db.repository.DBConnector;
 import pojos.entity.EntityClassObject;
+import pojos.entity.enums.EntityClassEnum;
 import pojos.environment.Cell;
 import utilities.Logs;
 
@@ -22,5 +23,11 @@ public class DbAPI {
 		List<EntityClassObject> activeClasses = db.getAllAvailableClasses();
 		Logs.LOGGER.info(DbAPI.class + " called getActiveClasses()");
 		return activeClasses;
+	}
+	
+	public EntityClassObject getSelectedClass(EntityClassEnum className) {
+		EntityClassObject selectedClass = db.getClassByName(className);
+		Logs.LOGGER.info(DbAPI.class + " called getSelectedClass(className)");
+		return selectedClass;
 	}
 }

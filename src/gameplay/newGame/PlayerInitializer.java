@@ -1,4 +1,4 @@
-package gameplay;
+package gameplay.newGame;
 
 import java.util.List;
 

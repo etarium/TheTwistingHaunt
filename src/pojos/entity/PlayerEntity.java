@@ -6,13 +6,12 @@ import java.util.Map;
 import pojos.Quest;
 import pojos.Ability;
 import pojos.Statblock;
-import pojos.entity.enums.EntityClassEnum;
 import pojos.entity.enums.Faction;
 import pojos.environment.Cell;
 import pojos.environment.Location;
 import pojos.items.ArmorItem;
 import pojos.items.WeaponItem;
-import pojos.items.enums.ArmorType;
+import pojos.items.enums.ArmorMaterial;
 import pojos.items.enums.WeaponType;
 
 public class PlayerEntity extends Entity{
@@ -20,7 +19,7 @@ public class PlayerEntity extends Entity{
 	EntityClassObject entityClass;
 	int numOfHands;
 	Statblock stats;
-	ArmorType armorType;
+	ArmorMaterial armorType;
 	WeaponType weaponType;
 	List<Ability> skills;
 	List<Quest> quests;
@@ -56,10 +55,10 @@ public class PlayerEntity extends Entity{
 	public void setStats(Statblock stats) {
 		this.stats = stats;
 	}
-	public ArmorType getArmorType() {
+	public ArmorMaterial getArmorType() {
 		return armorType;
 	}
-	public void setArmorType(ArmorType armorType) {
+	public void setArmorType(ArmorMaterial armorType) {
 		this.armorType = armorType;
 	}
 	public WeaponType getWeaponType() {

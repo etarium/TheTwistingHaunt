@@ -14,6 +14,7 @@ import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.*;
 
 import pojos.entity.EntityClassObject;
+import pojos.entity.enums.EntityClassEnum;
 import pojos.environment.Cell;
 import utilities.Logs;
 
@@ -67,5 +68,18 @@ public class DBConnector {
 			}
 		});
 		return activeClasses;
+	}
+	
+	public EntityClassObject getClassByName(EntityClassEnum className) {
+		MongoCollection<Document> classCollection = database.getCollection("Classes");
+		Document classDocument = classCollection.find(eq("name", className.toString())).first();
+		try {
+			EntityClassObject entityClassObject = mapper.readValue(classDocument.toJson(), EntityClassObject.class);
+			return entityClassObject;
+		} catch (IOException e) {
+			Logs.LOGGER.severe("Reading Entity Class Objects has failed.");
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

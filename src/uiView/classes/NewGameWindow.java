@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import db.api.DbAPI;
+import gameplay.newGame.NewPlayerPayload;
 import pojos.entity.EntityClassObject;
 import pojos.entity.PlayerEntity;
 
@@ -30,14 +32,12 @@ public class NewGameWindow extends GameWindow{
 	static JPanel outputPanel;
 	static JTextArea output;
 
-	private PlayerEntity newPlayer;
+	private NewPlayerPayload newPlayerPayload = new NewPlayerPayload();
 	private boolean button;
 
+	private DbAPI dbApi = new DbAPI();
 
 	public NewGameWindow() {
-
-		playerClass = new EntityClassObject();
-		newPlayer = new PlayerEntity();
 
 		window = new JFrame("New Game");
 		window.setSize(WINDOW_DIM);
@@ -203,9 +203,8 @@ public class NewGameWindow extends GameWindow{
 		magePanel.setBackground(textColor.darker());
 		warriorPanel.setBackground(textColor);
 		thiefPanel.setBackground(textColor);
-		playerClass.setName(EntityClassEnum.MAGE);
-		newPlayer.setEntityClass(playerClass);
-		newPlayer.setLocation(new Location(0,1,0));
+		
+		newPlayerPayload.setClassName(EntityClassEnum.MAGE);
 		updateText();
 	}
 
@@ -214,8 +213,7 @@ public class NewGameWindow extends GameWindow{
 		warriorPanel.setBackground(textColor.darker());
 		thiefPanel.setBackground(textColor);
 
-		playerClass.setName(EntityClassEnum.WARRIOR);
-		newPlayer.setEntityClass(playerClass);;
+		newPlayerPayload.setClassName(EntityClassEnum.WARRIOR);
 		updateText();
 	}
 
@@ -224,13 +222,12 @@ public class NewGameWindow extends GameWindow{
 		warriorPanel.setBackground(textColor);
 		thiefPanel.setBackground(textColor.darker());
 
-		playerClass.setName(EntityClassEnum.THIEF);
-		newPlayer.setEntityClass(playerClass);
+		newPlayerPayload.setClassName(EntityClassEnum.THIEF);
 		updateText();
 	}
 
-	private void updateText() {
-		output.setText(playerClass.getDescription());
+	private void updateText() {		
+		output.setText(newPlayerPayload.getClassName().getDescription());
 	}
 
 	private void addOutputBox(Container out, JTextArea box) {
@@ -308,7 +305,7 @@ public class NewGameWindow extends GameWindow{
 				panelS.setBackground(textColor);
 				labelS.setForeground(backgroundColor);
 
-				String loadText = "Ah, " + playerClass.getName() + ", I'm afraid I cannot hold you much longer... "
+				String loadText = "Ah, " + newPlayerPayload.getClassName().getName() + ", I'm afraid I cannot hold you much longer... "
 						+ "Prepare yourself! Don't give up against the ---\n\n ";
 
 				output.setText(loadText);

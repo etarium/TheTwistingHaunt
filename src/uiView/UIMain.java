@@ -2,8 +2,8 @@ package uiView;
 
 import java.io.IOException;
 
-import gameplay.PlayerInitializer;
 import gameplay.commandServices.GameService;
+import gameplay.newGame.PlayerInitializer;
 import pojos.entity.PlayerEntity;
 import commandListener.Init;
 import uiView.classes.GUI_Client;
@@ -65,6 +65,7 @@ public class UIMain {
         //save player
 
         if(!DEBUG_LOAD) {
+        		
         		playerinit.initializePlayer(true);
         		Logs.LOGGER.info(player.toString());
         }
