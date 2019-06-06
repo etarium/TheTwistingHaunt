@@ -16,12 +16,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import pojos.entity.EntityClassObject;
+import gameplay.newGame.NewPlayerPayload;
+import gameplay.newGame.PlayerInitializer;
 import pojos.entity.PlayerEntity;
-
 import pojos.entity.enums.EntityClassEnum;
-import pojos.environment.Location;
+import uiView.UIMain;
 import utilities.Logs;
+
 public class NewGameWindow extends GameWindow{
 
 	static JFrame window;
@@ -30,16 +31,11 @@ public class NewGameWindow extends GameWindow{
 	static JPanel outputPanel;
 	static JTextArea output;
 
-	static EntityClassObject playerClass;
-
-	private PlayerEntity newPlayer;
+	private NewPlayerPayload newPlayerPayload = new NewPlayerPayload();
+	private PlayerInitializer playerinit = new PlayerInitializer();
 	private boolean button;
 
-
 	public NewGameWindow() {
-
-		playerClass = new EntityClassObject();
-		newPlayer = new PlayerEntity();
 
 		window = new JFrame("New Game");
 		window.setSize(WINDOW_DIM);
@@ -167,6 +163,7 @@ public class NewGameWindow extends GameWindow{
 		con.add(button);
 
 	}//end main
+
 	private void addButtonListeners() {
 		mageButton.addActionListener(new ActionListener() {
 
@@ -199,38 +196,39 @@ public class NewGameWindow extends GameWindow{
 		});
 
 	}
+
 	private void mageButtonPressed() {
+		Logs.LOGGER.info("mageButtonPressed");
 		magePanel.setBackground(textColor.darker());
 		warriorPanel.setBackground(textColor);
 		thiefPanel.setBackground(textColor);
-		playerClass.setName(EntityClassEnum.MAGE);
-		newPlayer.setEntityClass(playerClass);
-		newPlayer.setLocation(new Location(0,1,0));
+		
+		newPlayerPayload.setClassName(EntityClassEnum.MAGE);
 		updateText();
 	}
 
 	private void warriorButtonPressed() {
+		Logs.LOGGER.info("warriorButtonPressed");
 		magePanel.setBackground(textColor);
 		warriorPanel.setBackground(textColor.darker());
 		thiefPanel.setBackground(textColor);
 
-		playerClass.setName(EntityClassEnum.WARRIOR);
-		newPlayer.setEntityClass(playerClass);;
+		newPlayerPayload.setClassName(EntityClassEnum.WARRIOR);
 		updateText();
 	}
 
 	private void thiefButtonPressed() {
+		Logs.LOGGER.info("thiefButtonPressed");
 		magePanel.setBackground(textColor);
 		warriorPanel.setBackground(textColor);
 		thiefPanel.setBackground(textColor.darker());
 
-		playerClass.setName(EntityClassEnum.THIEF);
-		newPlayer.setEntityClass(playerClass);
+		newPlayerPayload.setClassName(EntityClassEnum.THIEF);
 		updateText();
 	}
 
-	private void updateText() {
-		output.setText(playerClass.getDescription());
+	private void updateText() {		
+		output.setText(newPlayerPayload.getClassName().getDescription());
 	}
 
 	private void addOutputBox(Container out, JTextArea box) {
@@ -271,8 +269,9 @@ public class NewGameWindow extends GameWindow{
 	}
 
 	private void startButtonPressed(JPanel panel, JLabel label) {
-
+		Logs.LOGGER.info("startButtonPressed");
 		button = false;
+		UIMain.player = playerinit.initializePlayer(true, newPlayerPayload);
 		try {
 			Thread.sleep(300);
 		} catch (InterruptedException e) {
@@ -281,7 +280,6 @@ public class NewGameWindow extends GameWindow{
 		}
 
 		window.dispose();
-		//new PlayWindow();
 
 	}
 
@@ -308,7 +306,7 @@ public class NewGameWindow extends GameWindow{
 				panelS.setBackground(textColor);
 				labelS.setForeground(backgroundColor);
 
-				String loadText = "Ah, " + playerClass.getName() + ", I'm afraid I cannot hold you much longer... "
+				String loadText = "Ah, " + newPlayerPayload.getClassName().getName() + ", I'm afraid I cannot hold you much longer... "
 						+ "Prepare yourself! Don't give up against the ---\n\n ";
 
 				output.setText(loadText);
@@ -348,7 +346,9 @@ public class NewGameWindow extends GameWindow{
 		return output;
 	}
 
+	
 	public PlayerEntity getNewPlayer() {
-		return newPlayer;
-	}
+		Logs.LOGGER.info("NewGameWindow.getNewPlayer() " + UIMain.player);
+		return UIMain.player;
+	} 
 }//end NewGameWindow

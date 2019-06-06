@@ -1,7 +1,15 @@
-package commandServices;
+package gameplay.commandServices;
+
+import pojos.entity.PlayerEntity;
 
 public class InventoryService {
 
+	PlayerEntity player;
+	
+	public InventoryService(PlayerEntity player) {
+		this.player = player;
+	}
+	
 	public String takeItem(String parameter) {
 		//TODO
 		/*

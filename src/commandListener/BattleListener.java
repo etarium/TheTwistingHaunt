@@ -1,12 +1,14 @@
 package commandListener;
 
-import commandServices.BattleService;
+import gameplay.commandServices.BattleService;
+import pojos.entity.PlayerEntity;
+import utilities.Logs;
 
 public class BattleListener {
-
-	BattleService system = new BattleService();
 	
-	public Reply listen(String command, String parameter) {
+	public Reply listen(String command, String parameter, PlayerEntity player) {
+		BattleService system = new BattleService(player);
+		
 		String output="";
 		boolean isSuccessful = true;
 		switch (command) {
@@ -15,6 +17,10 @@ public class BattleListener {
 
 			//xoutput = this.player.getStats().toString();
 			break;
+			
+		default:
+			Logs.LOGGER.info("Hit default case in commandListener.BattleListener.listen with command " + command);
+			isSuccessful = false;
 		}
 		return new Reply(isSuccessful, output);
 	}

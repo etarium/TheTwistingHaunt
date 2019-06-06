@@ -1,13 +1,16 @@
 package commandListener;
 
-import commandServices.GameService;
+import gameplay.commandServices.GameService;
+import pojos.entity.PlayerEntity;
 import utilities.Logs;
 
 public class SystemListener {
 
-	public Reply listen(String command, GameService system) {
+	public Reply listen(String command, GameService system, PlayerEntity player) {
+
 		String output = "";
 		boolean success = true;
+		
 		switch (command) {
 		case "/help":
 			output = "Your cries for help go answered, and text appears before your eyes.";
@@ -27,12 +30,8 @@ public class SystemListener {
 			//output = "TEST SAVE";
 			break;
 
-
-			//if command is not recognized, outputs a flavorful error and references the /help command for assistance
 		default:
 			Logs.LOGGER.info("Hit default case in commandListener.SystemListener.listen with command " + command);
-			output = "Your mutterings echo softly, but go unanswered.\n"
-					+ "[try again, or type '/help' for assistance]";
 			success = false;
 			break;
 

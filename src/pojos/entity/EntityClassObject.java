@@ -2,16 +2,19 @@ package pojos.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import pojos.Ability;
 import pojos.Statblock;
 import pojos.entity.enums.EntityClassEnum;
-import pojos.items.enums.ArmorType;
+import pojos.items.enums.ArmorMaterial;
 import pojos.items.enums.WeaponType;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class EntityClassObject {
 	EntityClassEnum name;
 	String description;
-	List<ArmorType> armorType;
+	List<ArmorMaterial> armorType;
 	List<WeaponType> weaponType;
 	List<Ability> skills;
 	Statblock stats;
@@ -28,10 +31,10 @@ public class EntityClassObject {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public List<ArmorType> getArmorType() {
+	public List<ArmorMaterial> getArmorType() {
 		return armorType;
 	}
-	public void setArmorType(List<ArmorType> armorType) {
+	public void setArmorType(List<ArmorMaterial> armorType) {
 		this.armorType = armorType;
 	}
 	public List<WeaponType> getWeaponType() {

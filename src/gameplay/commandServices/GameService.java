@@ -1,5 +1,6 @@
-package commandServices;
+package gameplay.commandServices;
 
+import pojos.entity.PlayerEntity;
 import uiView.classes.HelpWin;
 import uiView.classes.PlayWindow;
 
@@ -11,6 +12,7 @@ public class GameService {
 	public GameService(PlayWindow play, boolean run) {
 		this.play = play;
 		this.run = run;
+		
 	}
 	
 	public void quitGame() {
@@ -25,7 +27,7 @@ public class GameService {
 	}
 	
 	//TODO	
-	public void saveGame() {
+	public void saveGame(PlayerEntity player) {
 		
 	}
 	

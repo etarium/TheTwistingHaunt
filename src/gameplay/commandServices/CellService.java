@@ -1,25 +1,35 @@
-package commandServices;
+package gameplay.commandServices;
 
+import pojos.entity.PlayerEntity;
 import pojos.environment.Cell;
 import pojos.items.ConsumableItem;
 import pojos.items.Item;
 import pojos.items.WeaponItem;
+import uiView.UIMain;
+import utilities.Logs;
 
 public class CellService {
 
-	public String inspectCell() {
-		//TODO
-		/*
-		 * 			if(name == null) {
-				output = "You search long and hard, but your effort turns up nothing of interest.";
-			}
-			else {
-				output = "By your sharp eyes or by good fortune, you find " + name + "!";
-			}
-		 */
-		return "";
+	PlayerEntity player = UIMain.player;
+
+	public CellService(PlayerEntity player) {
+		this.player = player;
 	}
-	
+
+	public String inspectCell() {
+		Logs.LOGGER.info("Inspect Active Cell " + player.currentCell.toString());
+		String output = "";
+
+		if(player.getCurrentCell().getInspectableObjects() == null) {
+			output = "You search long and hard, but your effort turns up nothing of interest.";
+		}
+		else {
+			output = "By your sharp eyes or by good fortune, you find " + player.getCurrentCell().getInspectableObjects() + "!";
+		}
+
+		return output;
+	}
+
 	public String inspectRoom() {
 		/*
 		 * TODO
@@ -32,10 +42,10 @@ public class CellService {
 				break;
 			}
 		}
-		*/
+		 */
 		return "";
 	}
-	
+
 	public String inspectItem() {
 		//TODO
 		/*

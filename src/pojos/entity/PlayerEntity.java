@@ -6,12 +6,12 @@ import java.util.Map;
 import pojos.Quest;
 import pojos.Ability;
 import pojos.Statblock;
-import pojos.entity.enums.EntityClassEnum;
 import pojos.entity.enums.Faction;
+import pojos.environment.Cell;
 import pojos.environment.Location;
 import pojos.items.ArmorItem;
 import pojos.items.WeaponItem;
-import pojos.items.enums.ArmorType;
+import pojos.items.enums.ArmorMaterial;
 import pojos.items.enums.WeaponType;
 
 public class PlayerEntity extends Entity{
@@ -19,8 +19,8 @@ public class PlayerEntity extends Entity{
 	EntityClassObject entityClass;
 	int numOfHands;
 	Statblock stats;
-	ArmorType armorType;
-	WeaponType weaponType;
+	List<ArmorMaterial> armorType;
+	List<WeaponType> weaponType;
 	List<Ability> skills;
 	List<Quest> quests;
 	List<ArmorItem> equippedArmor;
@@ -29,6 +29,7 @@ public class PlayerEntity extends Entity{
 	int xp;
 	int xpToNextLevel;
 	Location location;
+	public Cell currentCell;
 	
 	public Location getLocation() {
 		return location;
@@ -54,16 +55,16 @@ public class PlayerEntity extends Entity{
 	public void setStats(Statblock stats) {
 		this.stats = stats;
 	}
-	public ArmorType getArmorType() {
+	public List<ArmorMaterial> getArmorType() {
 		return armorType;
 	}
-	public void setArmorType(ArmorType armorType) {
-		this.armorType = armorType;
+	public void setArmorType(List<ArmorMaterial> list) {
+		this.armorType = list;
 	}
-	public WeaponType getWeaponType() {
+	public List<WeaponType> getWeaponType() {
 		return weaponType;
 	}
-	public void setWeaponType(WeaponType weaponType) {
+	public void setWeaponType(List<WeaponType> weaponType) {
 		this.weaponType = weaponType;
 	}
 	public List<Ability> getSkills() {
@@ -109,14 +110,20 @@ public class PlayerEntity extends Entity{
 		this.xpToNextLevel = xpToNextLevel;
 	}
 	
+	public Cell getCurrentCell() {
+		return currentCell;
+	}
+	public void setCurrentCell(Cell currentCell) {
+		this.currentCell = currentCell;
+	}
+	
 	@Override
 	public String toString() {
 		return "PlayerEntity [entityClass=" + entityClass + ", numOfHands=" + numOfHands + ", stats=" + stats
 				+ ", armorType=" + armorType + ", weaponType=" + weaponType + ", skills=" + skills + ", quests="
 				+ quests + ", equippedArmor=" + equippedArmor + ", equippedWeapons=" + equippedWeapons
 				+ ", factionLevel=" + factionLevel + ", xp=" + xp + ", xpToNextLevel=" + xpToNextLevel + ", location="
-				+ location + ", name=" + name + ", description=" + description + ", temperament=" + temperament
-				+ ", species=" + species + ", inventory=" + inventory + ", level=" + level + "]";
+				+ location + ", currentCell=" + currentCell + "]";
 	}
 	
 }

@@ -1,37 +1,42 @@
 package commandListener;
 
-import commandServices.CellService;
+import gameplay.commandServices.CellService;
+import pojos.entity.PlayerEntity;
 import utilities.InputParser;
+import utilities.Logs;
 
 public class CellListener {
-	
-	CellService system = new CellService();
-	
-	public Reply listen(String command, String parameter) {
-		
+
+	public Reply listen(String command, String parameter, PlayerEntity player) {
+		CellService system = new CellService(player);
+
 		String output = "";
 		boolean isSuccessful = true;
-		
-		
+
 		switch(command) {
+
 		case "/look":
+
 			//look at room
 			if (parameter == null) {
-				//TO_DO
-				system.inspectRoom();
+				output = system.inspectRoom();
 			} //inspect object of command
 			else {
 				Object looked = InputParser.parseParameter(parameter);
-				system.inspectItem();
+				output = system.inspectItem();
 			}
 			break;
 
 		case "/inspect":
-			system.inspectCell();
+			output = system.inspectCell();
 
 			break;
-		}
-		
+			
+		default:
+			Logs.LOGGER.info("Hit default case in commandListener.CellListener.listen with command " + command);
+			isSuccessful = false;
+		}	
+
 		return new Reply(isSuccessful, output);
 	}
 }
