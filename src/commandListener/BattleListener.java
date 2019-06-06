@@ -2,6 +2,7 @@ package commandListener;
 
 import gameplay.commandServices.BattleService;
 import pojos.entity.PlayerEntity;
+import utilities.Logs;
 
 public class BattleListener {
 	
@@ -16,6 +17,10 @@ public class BattleListener {
 
 			//xoutput = this.player.getStats().toString();
 			break;
+			
+		default:
+			Logs.LOGGER.info("Hit default case in commandListener.BattleListener.listen with command " + command);
+			isSuccessful = false;
 		}
 		return new Reply(isSuccessful, output);
 	}

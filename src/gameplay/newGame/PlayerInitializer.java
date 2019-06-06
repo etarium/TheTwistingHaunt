@@ -13,12 +13,10 @@ public class PlayerInitializer {
 
 	final static String INSTANCE = "Test Instance";
 	DbAPI cellAPI = new DbAPI();
-	//PlayerEntity player = new PlayerEntity();
+	
 	public PlayerEntity player = UIMain.player;
 	
 	public PlayerEntity initializePlayer(boolean isNewGame, NewPlayerPayload payload) {
-		//player = new PlayerEntity();
-		System.out.println("initPlayer Start " + player);
 		if(isNewGame) {
 			List<Cell> cells = cellAPI.getCellsFromInstance(INSTANCE);
 			//set player's location
@@ -43,12 +41,10 @@ public class PlayerInitializer {
 			Logs.LOGGER.info("Player has initialized class stats " + player.getStats());
 			Logs.LOGGER.info("Encounters loaded. " + player.currentCell.getEnemies());
 		}
-		System.out.println("initPlayer End " + player);
 		return player;
 	}
 	
 	public PlayerEntity getPlayer() {
-		System.out.println("getPlayer " + player);
 		return player;
 	}
 }

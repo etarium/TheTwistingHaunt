@@ -2,6 +2,7 @@ package commandListener;
 
 import gameplay.commandServices.InventoryService;
 import pojos.entity.PlayerEntity;
+import utilities.Logs;
 
 public class InventoryListener {
 
@@ -36,6 +37,9 @@ public class InventoryListener {
 			output = system.equipment();
 			break;
 			
+		default:
+			Logs.LOGGER.info("Hit default case in commandListener.InventoryListener.listen with command " + command);
+			isSuccessful = false;
 		}//ends switch
 
 		return new Reply(isSuccessful, output);

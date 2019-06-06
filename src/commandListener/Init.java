@@ -25,8 +25,6 @@ public class Init {
 	//PlayerInitializer playinit = new PlayerInitializer();
 	
 	public void initializeListeners(PlayWindow play, GameService system, PlayerEntity player) {
-		Logs.LOGGER.info("Init.initializeListeners() with player " + player);
-		System.out.println(play);
         String[] stringArray = InputParser.parse(play.requestInput());
         
         String command = stringArray[0];
@@ -45,9 +43,11 @@ public class Init {
         	
         	Reply[] replies = {systemReply, battleReply, movementReply, inventoryReply, cellReply};
         	
+        	boolean success = false;
         	for(Reply reply: replies) {
         		if(reply.isSuccess) {
         			output = reply.output;
+        			success = true;
         			if(reply.upperOutput != null) {
         				upperOutput = reply.upperOutput;
         			} else {
@@ -55,18 +55,19 @@ public class Init {
         			}
         		}
         	}
+        	if(!success) {
+    			output = "Your mutterings echo softly, but go unanswered.\n"
+    					+ "[try again, or type '/help' for assistance]";
+        	}
         	
         //sends output generated from user selection to the GUI window
-        	System.out.println("play.outGUI " + output);
         play.outGUI(output);
         play.outTopGUI(upperOutput);
 	}
 	
 	public void initializeGame(PlayWindow play, GameService system, PlayerEntity player) {
 		Logs.LOGGER.info("Init.initializeGame()");
-		
-		//PlayerEntity player = playinit.initializePlayer(isNewGame, payload);
-		System.out.println("initializeListeners: Player = " + player);
+
 		initializeListeners(play, system, player);
 	}
 }

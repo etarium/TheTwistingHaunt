@@ -3,18 +3,20 @@ package commandListener;
 import gameplay.commandServices.CellService;
 import pojos.entity.PlayerEntity;
 import utilities.InputParser;
+import utilities.Logs;
 
 public class CellListener {
 
 	public Reply listen(String command, String parameter, PlayerEntity player) {
 		CellService system = new CellService(player);
-		
+
 		String output = "";
 		boolean isSuccessful = true;
-		
-		
+
 		switch(command) {
+
 		case "/look":
+
 			//look at room
 			if (parameter == null) {
 				output = system.inspectRoom();
@@ -29,8 +31,12 @@ public class CellListener {
 			output = system.inspectCell();
 
 			break;
-		}
-		System.out.println("Reply = " + isSuccessful +" \n" + output);
+			
+		default:
+			Logs.LOGGER.info("Hit default case in commandListener.CellListener.listen with command " + command);
+			isSuccessful = false;
+		}	
+
 		return new Reply(isSuccessful, output);
 	}
 }

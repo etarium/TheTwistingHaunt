@@ -16,8 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import commandListener.Init;
-import gameplay.commandServices.GameService;
 import gameplay.newGame.NewPlayerPayload;
 import gameplay.newGame.PlayerInitializer;
 import pojos.entity.PlayerEntity;
@@ -34,9 +32,7 @@ public class NewGameWindow extends GameWindow{
 	static JTextArea output;
 
 	private NewPlayerPayload newPlayerPayload = new NewPlayerPayload();
-	private Init init = new Init();
 	private PlayerInitializer playerinit = new PlayerInitializer();
-	private GameService system;
 	private boolean button;
 
 	public NewGameWindow() {

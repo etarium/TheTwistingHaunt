@@ -11,19 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import commandListener.BattleListener;
-import commandListener.CellListener;
-import commandListener.InventoryListener;
-import commandListener.MovementListener;
-import commandListener.Reply;
-import commandListener.SystemListener;
-import gameplay.commandServices.GameService;
-import gameplay.newGame.NewPlayerPayload;
-import pojos.entity.PlayerEntity;
-import utilities.InputParser;
-import utilities.Logs;
-
-
 public class PlayWindow extends GameWindow{
 
 	
@@ -251,44 +238,4 @@ public class PlayWindow extends GameWindow{
 		window.dispose();
 	}
 	
-	public void addListeners(PlayerEntity player, GameService system) {
-		BattleListener battleListener = new BattleListener();
-		MovementListener movementListener = new MovementListener();
-		InventoryListener inventoryListener = new InventoryListener();
-		SystemListener systemListener = new SystemListener();
-		CellListener cellListener = new CellListener();
-		
-		Logs.LOGGER.info("Init.initializeListeners() with player " + player);
-        String[] stringArray = InputParser.parse(this.requestInput());
-        
-        String command = stringArray[0];
-        String parameter = stringArray[1];
-        
-        
-        String output = "";
-        String upperOutput = "";
-        //check the listeners
-        
-        	Reply systemReply = systemListener.listen(command, system, player);
-        	Reply battleReply = battleListener.listen(command, parameter, player);
-        	Reply movementReply = movementListener.listen(command, parameter, player);
-        	Reply inventoryReply = inventoryListener.listen(command, parameter, player);
-        	Reply cellReply = cellListener.listen(command, parameter, player);
-        	
-        	Reply[] replies = {systemReply, battleReply, movementReply, inventoryReply, cellReply};
-        	
-        	for(Reply reply: replies) {
-        		if(reply.isSuccess) {
-        			output = reply.output;
-        			if(reply.upperOutput != null) {
-        				upperOutput = reply.upperOutput;
-        			}
-        			break;
-        		}
-        	}
-        	
-        //sends output generated from user selection to the GUI window
-        this.outGUI(output);
-        this.outTopGUI(upperOutput);
-	}
 }//end class
