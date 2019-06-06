@@ -11,25 +11,25 @@ import utilities.Logs;
 public class CellService {
 
 	PlayerEntity player = UIMain.player;
-	
+
 	public CellService(PlayerEntity player) {
 		this.player = player;
 	}
-	
+
 	public String inspectCell() {
 		Logs.LOGGER.info("Inspect Active Cell " + player.currentCell.toString());
 		String output = "";
-		
- 			if(player.getCurrentCell().getInspectableObjects() == null) {
-				output = "You search long and hard, but your effort turns up nothing of interest.";
-			}
-			else {
-				output = "By your sharp eyes or by good fortune, you find " + player.getCurrentCell().getInspectableObjects() + "!";
-			}
-		 
+
+		if(player.getCurrentCell().getInspectableObjects() == null) {
+			output = "You search long and hard, but your effort turns up nothing of interest.";
+		}
+		else {
+			output = "By your sharp eyes or by good fortune, you find " + player.getCurrentCell().getInspectableObjects() + "!";
+		}
+
 		return output;
 	}
-	
+
 	public String inspectRoom() {
 		/*
 		 * TODO
@@ -42,10 +42,10 @@ public class CellService {
 				break;
 			}
 		}
-		*/
+		 */
 		return "";
 	}
-	
+
 	public String inspectItem() {
 		//TODO
 		/*

@@ -33,9 +33,9 @@ public class DBConnector {
 		MongoClient mongoClient = new MongoClient(uri);
 		database = mongoClient.getDatabase(dbName);
 		Logs.LOGGER.info("Connected to database " + dbName);
-		
+
 	}
-	
+
 	public List<Cell> getAllCellsFromInstance(String instance) {
 		List<Cell> activeCells = new ArrayList();
 		MongoCollection<Document> cellCollection = database.getCollection("Cells");
@@ -44,7 +44,6 @@ public class DBConnector {
 			try {
 				Cell tempCell = mapper.readValue(cell.toJson(), Cell.class);
 				activeCells.add(tempCell);
-				
 			} catch (IOException e) {
 				Logs.LOGGER.severe("Reading Cells into Cell Object failed.");
 				e.printStackTrace();
@@ -52,7 +51,7 @@ public class DBConnector {
 		});
 		return activeCells;
 	}
-	
+
 	public List<EntityClassObject> getAllAvailableClasses() {
 		List<EntityClassObject> activeClasses = new ArrayList();
 		MongoCollection<Document> classesCollection = database.getCollection("Classes");
@@ -61,7 +60,7 @@ public class DBConnector {
 			try {
 				EntityClassObject tempClass = mapper.readValue(classes.toJson(), EntityClassObject.class);
 				activeClasses.add(tempClass);
-				
+
 			} catch (IOException e) {
 				Logs.LOGGER.severe("Reading Cells into Cell Object failed.");
 				e.printStackTrace();
@@ -69,7 +68,7 @@ public class DBConnector {
 		});
 		return activeClasses;
 	}
-	
+
 	public EntityClassObject getClassByName(EntityClassEnum className) {
 		MongoCollection<Document> classCollection = database.getCollection("Classes");
 		Document classDocument = classCollection.find(eq("name", className.toString())).first();

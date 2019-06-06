@@ -13,19 +13,20 @@ public class PlayerInitializer {
 
 	final static String INSTANCE = "Test Instance";
 	DbAPI cellAPI = new DbAPI();
-	
+
 	public PlayerEntity player = UIMain.player;
-	
+
 	public PlayerEntity initializePlayer(boolean isNewGame, NewPlayerPayload payload) {
 		if(isNewGame) {
-			List<Cell> cells = cellAPI.getCellsFromInstance(INSTANCE);
+			UIMain.cells = cellAPI.getCellsFromInstance(INSTANCE);
+			System.out.println(UIMain.cells);
 			//set player's location
 			player.setLocation(payload.playerLocation);
 			player.setEntityClass(payload.getClassName());
 			player.setArmorType(payload.getClassName().getArmorType());
 			player.setWeaponType(payload.getClassName().getWeaponType());
 			player.setStats(payload.getClassName().getStats());
-			for(Cell cell : cells) {
+			for(Cell cell : UIMain.cells) {
 				if(cell.getLocation().getX() == player.getLocation().getX() &&
 						cell.getLocation().getY() == player.getLocation().getY() &&
 						cell.getLocation().getZ() == player.getLocation().getZ()) {;
@@ -43,7 +44,7 @@ public class PlayerInitializer {
 		}
 		return player;
 	}
-	
+
 	public PlayerEntity getPlayer() {
 		return player;
 	}

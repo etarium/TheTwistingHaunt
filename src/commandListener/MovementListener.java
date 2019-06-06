@@ -10,7 +10,9 @@ public class MovementListener {
 		MovementService system = new MovementService(player);
 
 		String output = "";
-		String upperOutput = "";
+		String upperOutput = player.currentCell.getDescription();
+		String failedMovementOutput = "You'd like to go that way, wouldn't you?";
+		String newUpperOutput = "";
 		boolean isSuccessful = true;
 		switch (command) {
 		//determines if movement can be made in the direction sent by the user
@@ -29,37 +31,53 @@ public class MovementListener {
 
 			char direction = command.charAt(1);
 
-			//            output = "You'd like to go that way, wouldn't you?";
 			switch (direction) {
 			case 'n':
 
-				upperOutput = system.movePlayer(direction);
+				newUpperOutput = system.moveNorth(direction);
 
+				if(!upperOutput.equals(newUpperOutput)) {
+					output = "You move to the north.";
+					upperOutput = newUpperOutput;
+				} else {
+					output = failedMovementOutput;
+				}
 
 				break;
 			case 's':
-				//check to see of movement possible 
-				/*
-            			if(player.getCurrentCell(cellList).isSouth()) {
-                        player.getLocation().setY(player.getLocation().getY() - 1);
-                        output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
-                    }  */
+
+				newUpperOutput = system.moveSouth(direction);
+
+				if(!upperOutput.equals(newUpperOutput)) {
+					output = "You move to the south.";
+					upperOutput = newUpperOutput;
+				} else {
+					output = failedMovementOutput;
+				}
+
 				break;
 			case 'e':
-				//check to see of movement possible
-				/*
-                		if(player.getCurrentCell(cellList).isEast()) {
-                        player.getLocation().setX(player.getLocation().getX() + 1);
-                        output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
-                    } */
+
+				newUpperOutput = system.moveEast(direction);
+				if(!newUpperOutput.equals(upperOutput)) {
+					output = "You move to the east.";
+					upperOutput = newUpperOutput;
+				} else {
+					output = failedMovementOutput;
+				}
+
 				break;
 			case 'w':
-				//check to see of movement possible
-				/*
-            			if(player.getCurrentCell(cellList).isWest()) {
-                        player.getLocation().setX(player.getLocation().getX() - 1);
-                        output = cellList[player.getLocation().getX()][player.getLocation().getY()][player.getLocation().getZ()].getDesc();
-                    } */
+
+				newUpperOutput = system.moveWest(direction);
+
+				if(!upperOutput.equals(newUpperOutput)) {
+					output = "You move to the west.";
+					upperOutput = newUpperOutput;
+				} else {
+					output = failedMovementOutput;
+				}
+
 				break;
 
 			default:
