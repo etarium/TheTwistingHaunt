@@ -40,7 +40,6 @@ public class MainMenu extends GameWindow {
 		window.getContentPane().setBackground(backgroundColor);
 		window.setLayout(null);
 
-
 		con = window.getContentPane();
 
 		JPanel windowBorder = new JPanel();
@@ -48,7 +47,6 @@ public class MainMenu extends GameWindow {
 		windowBorder.setOpaque(false);
 		windowBorder.setBorder(thiccLineBorder);
 		con.add(windowBorder);
-
 
 		titleNamePanel = new JPanel();
 		titleSetter(titleNamePanel, "The Twisting Haunt");
@@ -194,25 +192,15 @@ public class MainMenu extends GameWindow {
 		nGame = false;
 		button = false;
 
-		try {
-			Thread.sleep(300);
-		} catch (InterruptedException e) {
-			Logs.LOGGER.severe("InterruptedException caught in MainMenu.loadGameButtonPressed " + e);
-		}
+		//TODO: loadGame
+
 		window.dispose();
 	}
 
 	private void newGameButtonPressed() {		
 		button = false;
-
-		try {
-			Thread.sleep(300);
-			NewGameWindow.window.setVisible(true);
-			window.dispose();
-		} catch (InterruptedException e) {
-			Logs.LOGGER.severe("InterruptedException caught in MainMenu.newGameButtonPressed " + e);
-		}
-		//window.dispose();
+		NewGameWindow.window.setVisible(true);
+		window.dispose();
 	}
 
 	private void exitButtonPressed(ActionEvent evt) {
@@ -251,7 +239,6 @@ public class MainMenu extends GameWindow {
 		readmeContainer = readmeWindow.getContentPane();
 		readmeContainer.add(readmeScroller);
 		readmeWindow.setVisible(true);
-
 	}
 
 	private void helpButtonPressed(ActionEvent evt) {
