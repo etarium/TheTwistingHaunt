@@ -25,7 +25,6 @@ public class SystemListener {
 		case "/save":
 			system.saveGame(player);
 			output = "You've taken note of your travels.";
-			//output = "TEST SAVE";
 			break;
 
 		default:
