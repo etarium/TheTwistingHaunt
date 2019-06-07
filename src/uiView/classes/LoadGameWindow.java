@@ -31,7 +31,6 @@ public class LoadGameWindow extends GameWindow{
 		window.getContentPane().setBackground(backgroundColor);
 		window.setLayout(null);
 
-
 		Container con = window.getContentPane();
 		JPanel windowBorder = new JPanel();
 		//windowBorder.setSize(WINDOW_DIM);
@@ -45,20 +44,17 @@ public class LoadGameWindow extends GameWindow{
 		titleSetter(titleNamePanel, "Load Game");
 		con.add(titleNamePanel);
 
-
 		int standardWidth = (int)(WINDOW_WIDTH / 7);
 		int loadListWidth = standardWidth * 5;
 		int loadListBufferHeight = (int)(WINDOW_HEIGHT / 3);
 		int loadListBufferWidth = standardWidth;
 		int loadListHeight = (int)(WINDOW_HEIGHT / 6) + BUFFER + (int)(WINDOW_HEIGHT * .2 + 2 * BUFFER);
 
-
 		loadListScroller = new JScrollPane();
 		loadListScroller.setBounds(loadListBufferWidth, loadListBufferHeight, loadListWidth, loadListHeight);
 		loadListScroller.setBackground(backgroundColor);
 		loadListScroller.setForeground(backgroundColor);
 		loadListScroller.setBorder(medLineBorder);
-
 
 		//individual saved games in scrollpane
 		JPanel viewport = new JPanel();

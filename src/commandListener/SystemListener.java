@@ -6,7 +6,7 @@ import utilities.Logs;
 
 public class SystemListener {
 
-	public Reply listen(String command, GameService system, PlayerEntity player) {
+	public Reply listen(String command, GameService system, String parameter, PlayerEntity player) {
 
 		String output = "";
 		boolean success = true;
@@ -23,8 +23,14 @@ public class SystemListener {
 			break;
 
 		case "/save":
-			system.saveGame(player);
+			if(parameter == null) {
+				output = "Please enter a name with your save. Please remember using"
+						+ "the same name as a previous save will overwrite your files."
+						+ "Retype /save [save name]";
+			} else {
+			system.saveGame(player, parameter);
 			output = "You've taken note of your travels.";
+			}
 			break;
 
 		default:
