@@ -1,13 +1,24 @@
 package gameplay.commandServices;
 
+import java.io.File;
+import java.io.IOException;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import pojos.entity.PlayerEntity;
+import uiView.UIMain;
 import uiView.classes.HelpWin;
 import uiView.classes.PlayWindow;
+import utilities.ConfigReader;
+import utilities.Logs;
 
 public class GameService {
 
 	PlayWindow play;
 	boolean run;
+	
+	ObjectMapper mapper = new ObjectMapper();
+	ConfigReader config = new ConfigReader();
 	
 	public GameService(PlayWindow play, boolean run) {
 		this.play = play;
@@ -28,7 +39,16 @@ public class GameService {
 	
 	//TODO	
 	public void saveGame(PlayerEntity player) {
-		
+		String rootPath = System.getProperty("user.dir");
+		String saveLoc = config.getProperty("save.location");
+		try {
+			mapper.writeValue(new File(rootPath+saveLoc+"player-save.txt"), player);
+			mapper.writeValue(new File(rootPath+saveLoc+"cells-save.txt"), UIMain.cells);
+			Logs.LOGGER.info("Successfully saved " + player);
+		} catch (IOException e) {
+			e.printStackTrace();
+			Logs.LOGGER.severe("Unable to save game state,");
+		}
 	}
 	
 	public void options() {

@@ -23,10 +23,8 @@ public class SystemListener {
 			break;
 
 		case "/save":
-			output = "You're past the point of no return.";
-			//play.outGUI("Enter the name of your save file.\n)"
-			//       + "WARNING: Duplicating a save file name will override the original save.");
-			//String fileName = play.requestInput();
+			system.saveGame(player);
+			output = "You've taken note of your travels.";
 			//output = "TEST SAVE";
 			break;
 

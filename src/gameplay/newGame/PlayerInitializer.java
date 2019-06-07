@@ -37,11 +37,11 @@ public class PlayerInitializer {
 			player.setLevel(1);
 			player.setXp(0);
 			player.setXpToNextLevel(50);
-
-			Logs.LOGGER.info("Player has entered cell. " + player.currentCell);
-			Logs.LOGGER.info("Player has initialized class stats " + player.getStats());
-			Logs.LOGGER.info("Encounters loaded. " + player.currentCell.getEnemies());
+	
 		}
+		Logs.LOGGER.info("Player has entered cell. " + player.currentCell);
+		Logs.LOGGER.info("Player has initialized class stats " + player.getStats());
+		Logs.LOGGER.info("Encounters loaded. " + player.currentCell.getEnemies());
 		return player;
 	}
 

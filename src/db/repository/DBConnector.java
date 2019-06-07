@@ -16,14 +16,15 @@ import static com.mongodb.client.model.Filters.*;
 import pojos.entity.EntityClassObject;
 import pojos.entity.enums.EntityClassEnum;
 import pojos.environment.Cell;
+import utilities.ConfigReader;
 import utilities.Logs;
 
 public class DBConnector {
 	MongoDatabase database;
 	ObjectMapper mapper = new ObjectMapper();
 	public DBConnector() {
-		ConfigReader config;
-		config = new ConfigReader();
+		ConfigReader config = new ConfigReader();
+		
 		String user = config.getProperty("user");
 		String pass = config.getProperty("password");
 		String dbName = config.getProperty("database");
