@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import uiView.UIMain;
+
 public class PlayWindow extends GameWindow{
 
 	
@@ -23,7 +25,6 @@ public class PlayWindow extends GameWindow{
 	static JTextField input;
 	
 	static boolean enterPressed = false;
-	
 	
 	public PlayWindow() {
 		
@@ -150,7 +151,10 @@ public class PlayWindow extends GameWindow{
 		box.setWrapStyleWord(true);
 				
 		//initial text while database is loading
-		box.setText("Upper text test. Not DB based.");
+		while(UIMain.player.currentCell == null) {
+			box.setText("Database loading...");
+		}
+		box.setText(UIMain.player.currentCell.getDescription());
 		
 		out.add(box);
 	}

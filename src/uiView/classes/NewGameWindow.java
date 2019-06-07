@@ -272,13 +272,6 @@ public class NewGameWindow extends GameWindow{
 		Logs.LOGGER.info("startButtonPressed");
 		button = false;
 		UIMain.player = playerinit.initializePlayer(true, newPlayerPayload);
-		try {
-			Thread.sleep(300);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		window.dispose();
 
 	}
@@ -306,22 +299,10 @@ public class NewGameWindow extends GameWindow{
 				panelS.setBackground(textColor);
 				labelS.setForeground(backgroundColor);
 
-				String loadText = "Ah, " + newPlayerPayload.getClassName().getName() + ", I'm afraid I cannot hold you much longer... "
-						+ "Prepare yourself! Don't give up against the ---\n\n ";
-
-				output.setText(loadText);
-
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				try {
-					Thread.sleep(4500);
-
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 				startButtonPressed(panelS, labelS);
 
 			}
