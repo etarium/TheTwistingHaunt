@@ -6,6 +6,8 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import pojos.entity.PlayerEntity;
+import pojos.environment.Cell;
+import uiView.UIMain;
 import utilities.ConfigReader;
 import utilities.Logs;
 
@@ -24,6 +35,7 @@ public class LoadGameWindow extends GameWindow{
 	static JScrollPane loadListScroller;
 	static ArrayList<String> saveGameList = new ArrayList<>();;
 	ConfigReader config = new ConfigReader();
+	ObjectMapper mapper = new ObjectMapper();
 	String selected;
 
 	public LoadGameWindow() {
@@ -93,7 +105,6 @@ public class LoadGameWindow extends GameWindow{
 			}
 		});
 
-
 		window.setResizable(false);
 		window.setVisible(true);
 	}
@@ -139,6 +150,7 @@ public class LoadGameWindow extends GameWindow{
 		label.setForeground(backgroundColor);
 		Logs.LOGGER.info("Start Button Pressed.");
 
+		loadGame(selected);
 		window.setVisible(false);
 		if(!window.isVisible()) {
 			panel.setBackground(backgroundColor);
@@ -153,9 +165,9 @@ public class LoadGameWindow extends GameWindow{
 		for(JLabel unusedLabel : labelList) {
 			unusedLabel.setForeground(backgroundColor);
 		}
-			panel.setBackground(backgroundColor);
-			label.setForeground(textColor);
-			Logs.LOGGER.info(label.getText() + " Pressed.");
+		panel.setBackground(backgroundColor);
+		label.setForeground(textColor);
+		Logs.LOGGER.info(label.getText() + " Pressed.");
 		return label.getText();
 	}
 
@@ -223,4 +235,25 @@ public class LoadGameWindow extends GameWindow{
 		return viewport;
 	}
 
+	private void loadGame(String selected) {
+		selected = "/"+selected;
+		String rootPath = System.getProperty("user.dir");
+		String saveLoc = config.getProperty("save.location");
+		File dir = new File(rootPath+saveLoc+selected);
+		try {
+			Logs.LOGGER.info("Opening Save " + dir); 
+			
+			File playerFile = new File (dir+"/player-save.txt");
+			File cellsFile = new File (dir+"/cells-save.txt");
+			
+			UIMain.player = mapper.readValue(playerFile,  PlayerEntity.class);
+			UIMain.cells = mapper.readValue(cellsFile, new TypeReference<List<Cell>>(){});
+
+			Logs.LOGGER.info("Loaded player-save from " + selected);
+			Logs.LOGGER.info("Loaded cell-save from " + dir);
+			
+		} catch (IOException e ){
+			Logs.LOGGER.severe("Could not load save " + dir);
+		}
+	}
 }
