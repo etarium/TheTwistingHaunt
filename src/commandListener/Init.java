@@ -24,7 +24,6 @@ public class Init {
 		String output = "";
 		String upperOutput = "";
 		//check the listeners
-
 		Reply systemReply = systemListener.listen(command, system, parameter, player);
 		Reply battleReply = battleListener.listen(command, parameter, player);
 		Reply movementReply = movementListener.listen(command, parameter, player);

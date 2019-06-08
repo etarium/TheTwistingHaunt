@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,6 +24,7 @@ public class LoadGameWindow extends GameWindow{
 	static JScrollPane loadListScroller;
 	static ArrayList<String> saveGameList = new ArrayList<>();;
 	ConfigReader config = new ConfigReader();
+	String selected;
 
 	public LoadGameWindow() {
 		window = new JFrame("Load Game");
@@ -33,7 +35,6 @@ public class LoadGameWindow extends GameWindow{
 
 		Container con = window.getContentPane();
 		JPanel windowBorder = new JPanel();
-		//windowBorder.setSize(WINDOW_DIM);
 		windowBorder.setSize(WINDOW_DIM.width, WINDOW_DIM.height-23);
 		windowBorder.setOpaque(false);
 		windowBorder.setBorder(thiccLineBorder);
@@ -56,56 +57,8 @@ public class LoadGameWindow extends GameWindow{
 		loadListScroller.setForeground(backgroundColor);
 		loadListScroller.setBorder(medLineBorder);
 
-		//individual saved games in scrollpane
-		JPanel viewport = new JPanel();
-		viewport.setBackground(backgroundColor);
-		viewport.setLayout(null);
 
-		int savedGameHeight = (int)(WINDOW_HEIGHT * .2 / 2);
-		int savedGameWidth = loadListWidth;
-
-		int viewportWidth = loadListWidth;
-		int viewportHeight = 0;
-
-		String rootPath = System.getProperty("user.dir");
-		String saveLoc = config.getProperty("save.location");
-		File dir = new File(rootPath+saveLoc);
-
-		//do not show any hidden files
-		File[] directoryListing = dir.listFiles(file -> !file.isHidden());
-
-		if (directoryListing != null) {
-			for (File saveGame : directoryListing) {
-				String saveGameName = saveGame.getName();
-				saveGameList.add(saveGameName);
-
-				JPanel iPanel = new JPanel();
-				iPanel.setBackground(textColor);
-				iPanel.setBounds(0, viewportHeight, savedGameWidth, savedGameHeight);
-				Rectangle bounds = iPanel.getBounds();
-				iPanel.setLayout(new GridBagLayout());
-
-				JLabel iLabel = new JLabel(saveGameName);
-				iLabel.setBounds(bounds);
-				iLabel.setForeground(backgroundColor);
-				iLabel.setFont(gameFont);
-
-				JButton iButton = new JButton();
-				iButton.setBounds(bounds);
-
-				viewportHeight += savedGameHeight;
-
-				iPanel.add(iLabel);
-				viewport.add(iPanel);
-				viewport.add(iButton);
-			}
-		} else {
-			// Handle the case where dir is not really a directory.
-			// Checking dir.isDirectory() above would not be sufficient
-			// to avoid race conditions with another process that deletes
-			// directories.
-		}
-		viewport.setSize(viewportWidth,viewportHeight);
+		JPanel viewport = listAvailableSaves(loadListWidth);
 
 		loadListScroller.setViewportView(viewport);
 		con.add(loadListScroller);
@@ -127,14 +80,19 @@ public class LoadGameWindow extends GameWindow{
 		buttonSetup(con, startButtonPanel, startLabel, startButton, startButtonBuffer, buttonsBufferHeight);
 
 		backButton.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				backButtonPressed(backButtonPanel, backLabel);
 			}
-
 		});
+
+		startButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				startButtonPressed(startButtonPanel, startLabel);
+			}
+		});
+
 
 		window.setResizable(false);
 		window.setVisible(true);
@@ -174,6 +132,95 @@ public class LoadGameWindow extends GameWindow{
 			panel.setBackground(backgroundColor);
 			label.setForeground(textColor);
 		}
+	}
+
+	private void startButtonPressed(JPanel panel, JLabel label) {
+		panel.setBackground(textColor);
+		label.setForeground(backgroundColor);
+		Logs.LOGGER.info("Start Button Pressed.");
+
+		window.setVisible(false);
+		if(!window.isVisible()) {
+			panel.setBackground(backgroundColor);
+			label.setForeground(textColor);
+		}
+	}
+
+	private String saveFilePressed(List<JPanel> panelList, List<JLabel> labelList, JPanel panel, JLabel label) {
+		for(JPanel unusedPanel : panelList) {
+			unusedPanel.setBackground(textColor);
+		}
+		for(JLabel unusedLabel : labelList) {
+			unusedLabel.setForeground(backgroundColor);
+		}
+			panel.setBackground(backgroundColor);
+			label.setForeground(textColor);
+			Logs.LOGGER.info(label.getText() + " Pressed.");
+		return label.getText();
+	}
+
+	private JPanel listAvailableSaves(int loadListWidth) {
+		//individual saved games in scrollpane
+		JPanel viewport = new JPanel();
+		viewport.setBackground(backgroundColor);
+		viewport.setLayout(null);
+
+		int savedGameHeight = (int)(WINDOW_HEIGHT * .2 / 2);
+		int savedGameWidth = loadListWidth;
+
+		int viewportWidth = loadListWidth;
+		int viewportHeight = 0;
+
+		String rootPath = System.getProperty("user.dir");
+		String saveLoc = config.getProperty("save.location");
+		File dir = new File(rootPath+saveLoc);
+
+		//do not show any hidden files
+		File[] directoryListing = dir.listFiles(file -> !file.isHidden());
+		List<JPanel> panelList = new ArrayList<JPanel>();
+		List<JLabel> labelList = new ArrayList<JLabel>();
+		if (directoryListing != null) {
+			for (File saveGame : directoryListing) {
+				String saveGameName = saveGame.getName();
+				saveGameList.add(saveGameName);
+
+				JPanel iPanel = new JPanel();
+				iPanel.setBackground(textColor);
+				iPanel.setBounds(0, viewportHeight, savedGameWidth, savedGameHeight);
+				Rectangle bounds = iPanel.getBounds();
+				iPanel.setLayout(new GridBagLayout());
+
+				JLabel iLabel = new JLabel(saveGameName);
+				iLabel.setBounds(bounds);
+				iLabel.setForeground(backgroundColor);
+				iLabel.setFont(gameFont);
+
+				JButton iButton = new JButton();
+				iButton.setBounds(bounds);
+				iButton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						selected = saveFilePressed(panelList, labelList, iPanel, iLabel);
+					}
+				});
+
+				viewportHeight += savedGameHeight;
+
+				iPanel.add(iLabel);
+				viewport.add(iPanel);
+				viewport.add(iButton);
+				panelList.add(iPanel);
+				labelList.add(iLabel);
+			}
+		} else {
+			// Handle the case where dir is not really a directory.
+			// Checking dir.isDirectory() above would not be sufficient
+			// to avoid race conditions with another process that deletes
+			// directories.
+		}
+		viewport.setSize(viewportWidth,viewportHeight);
+
+		return viewport;
 	}
 
 }
