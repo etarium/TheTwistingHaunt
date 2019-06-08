@@ -24,8 +24,6 @@ public class UIMain {
 	static PlayerInitializer playerinit = new PlayerInitializer();
 	public static Init init = new Init();
 
-	final static boolean DEBUG_LOAD = false;
-	final boolean DEBUG_SAVE = false;
 
 	public static void main (String [] args) {
 
@@ -50,9 +48,7 @@ public class UIMain {
 
 		boolean run = true;
 		while(run) {
-			//TODO
 			GameService system = new GameService(play, run);
-
 			init.initializeListeners(play, system, player);
 		}
 	}

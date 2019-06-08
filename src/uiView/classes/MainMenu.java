@@ -118,7 +118,7 @@ public class MainMenu extends GameWindow {
 				}
 			});
 
-			lgButton.setEnabled(false);
+			lgButton.setEnabled(true);
 
 			con.add(menuPanels[i]);
 			con.add(buttons[i]);
@@ -138,6 +138,7 @@ public class MainMenu extends GameWindow {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				nGame = false;
 				loadGameButtonPressed();
 			}
 
@@ -191,10 +192,7 @@ public class MainMenu extends GameWindow {
 	private void loadGameButtonPressed() {
 		nGame = false;
 		button = false;
-
-		//TODO: loadGame
-
-		window.dispose();
+		
 	}
 
 	private void newGameButtonPressed() {		

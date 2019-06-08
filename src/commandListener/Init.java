@@ -15,21 +15,16 @@ public class Init {
 	SystemListener systemListener = new SystemListener();
 	CellListener cellListener = new CellListener();
 
-	//declare initialization services
-	//PlayerInitializer playinit = new PlayerInitializer();
-
 	public void initializeListeners(PlayWindow play, GameService system, PlayerEntity player) {
 		String[] stringArray = InputParser.parse(play.requestInput());
 
 		String command = stringArray[0];
 		String parameter = stringArray[1];
 
-
 		String output = "";
 		String upperOutput = "";
 		//check the listeners
-
-		Reply systemReply = systemListener.listen(command, system, player);
+		Reply systemReply = systemListener.listen(command, system, parameter, player);
 		Reply battleReply = battleListener.listen(command, parameter, player);
 		Reply movementReply = movementListener.listen(command, parameter, player);
 		Reply inventoryReply = inventoryListener.listen(command, parameter, player);

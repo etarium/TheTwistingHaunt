@@ -326,7 +326,6 @@ public class NewGameWindow extends GameWindow{
 	public JTextArea getOutputBox() {
 		return output;
 	}
-
 	
 	public PlayerEntity getNewPlayer() {
 		Logs.LOGGER.info("NewGameWindow.getNewPlayer() " + UIMain.player);
