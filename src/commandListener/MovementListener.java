@@ -6,7 +6,7 @@ import utilities.Logs;
 
 public class MovementListener {
 
-	public Reply listen(String command, String parameter) {
+	public Reply listen(String command) {
 		MovementService system = new MovementService();
 
 		String output = "";
