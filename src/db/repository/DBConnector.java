@@ -43,12 +43,10 @@ public class DBConnector {
 		Iterable<Document> cellDocuments = cellCollection.find(eq("instance.name", instance));
 		cellDocuments.forEach(cell -> {
 			try {
-				System.out.println(cell);
 				Cell tempCell = mapper.readValue(cell.toJson(), Cell.class);
 				activeCells.add(tempCell);
 			} catch (IOException e) {
 				Logs.LOGGER.severe("Reading Cells into Cell Object failed.");
-				e.printStackTrace();
 			}
 		});
 		return activeCells;
@@ -65,7 +63,6 @@ public class DBConnector {
 
 			} catch (IOException e) {
 				Logs.LOGGER.severe("Reading Cells into Cell Object failed.");
-				e.printStackTrace();
 			}
 		});
 		return activeClasses;
@@ -75,11 +72,9 @@ public class DBConnector {
 		MongoCollection<Document> classCollection = database.getCollection("Classes");
 		Document classDocument = classCollection.find(eq("name", className.toString())).first();
 		try {
-			EntityClassObject entityClassObject = mapper.readValue(classDocument.toJson(), EntityClassObject.class);
-			return entityClassObject;
+			return mapper.readValue(classDocument.toJson(), EntityClassObject.class);
 		} catch (IOException e) {
 			Logs.LOGGER.severe("Reading Entity Class Objects has failed.");
-			e.printStackTrace();
 		}
 		return null;
 	}

@@ -60,8 +60,6 @@ public class MovementListener {
 			case 'e':
 
 				newUpperOutput = system.moveEast(direction);
-				System.out.println("old " + upperOutput);
-				System.out.println("new " + newUpperOutput);
 				if(!upperOutput.equals(newUpperOutput)) {
 					output = "You move to the east.";
 					upperOutput = newUpperOutput;
