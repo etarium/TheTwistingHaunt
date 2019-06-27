@@ -1,8 +1,5 @@
 package gameplay.newGame;
 
-import java.util.List;
-
-import commandListener.Init;
 import db.api.DbAPI;
 import pojos.entity.PlayerEntity;
 import pojos.environment.Cell;
@@ -11,41 +8,40 @@ import utilities.Logs;
 
 public class PlayerInitializer {
 
-	final static String INSTANCE = "Test Instance";
+	static final String INSTANCE = "Test Instance";
 	DbAPI cellAPI = new DbAPI();
 
-	public PlayerEntity player = UIMain.player;
 
 	public PlayerEntity initializePlayer(boolean isNewGame, NewPlayerPayload payload) {
 		if(isNewGame) {
 			UIMain.cells = cellAPI.getCellsFromInstance(INSTANCE);
-			System.out.println(UIMain.cells);
+
 			//set player's location
-			player.setLocation(payload.playerLocation);
-			player.setEntityClass(payload.getClassName());
-			player.setArmorType(payload.getClassName().getArmorType());
-			player.setWeaponType(payload.getClassName().getWeaponType());
-			player.setStats(payload.getClassName().getStats());
+			UIMain.player.setLocation(payload.playerLocation);
+			UIMain.player.setEntityClass(payload.getClassName());
+			UIMain.player.setArmorType(payload.getClassName().getArmorType());
+			UIMain.player.setWeaponType(payload.getClassName().getWeaponType());
+			UIMain.player.setStats(payload.getClassName().getStats());
 			for(Cell cell : UIMain.cells) {
-				if(cell.getLocation().getX() == player.getLocation().getX() &&
-						cell.getLocation().getY() == player.getLocation().getY() &&
-						cell.getLocation().getZ() == player.getLocation().getZ()) {;
-						player.setCurrentCell(cell);
+				if(cell.getLocation().getX() == UIMain.player.getLocation().getX() &&
+						cell.getLocation().getY() == UIMain.player.getLocation().getY() &&
+						cell.getLocation().getZ() == UIMain.player.getLocation().getZ()) {
+						UIMain.player.setCurrentCell(cell);
 						break;
 				}
 			}
-			player.setLevel(1);
-			player.setXp(0);
-			player.setXpToNextLevel(50);
+			UIMain.player.setLevel(1);
+			UIMain.player.setXp(0);
+			UIMain.player.setXpToNextLevel(50);
 	
 		}
-		Logs.LOGGER.info("Player has entered cell. " + player.currentCell);
-		Logs.LOGGER.info("Player has initialized class stats " + player.getStats());
-		Logs.LOGGER.info("Encounters loaded. " + player.currentCell.getEnemies());
-		return player;
+		Logs.LOGGER.info("Player has entered cell. " + UIMain.player.currentCell);
+		Logs.LOGGER.info("Player has initialized class stats " + UIMain.player.getStats());
+		Logs.LOGGER.info("Encounters loaded. " + UIMain.player.currentCell.getEnemies());
+		return UIMain.player;
 	}
 
 	public PlayerEntity getPlayer() {
-		return player;
+		return UIMain.player;
 	}
 }

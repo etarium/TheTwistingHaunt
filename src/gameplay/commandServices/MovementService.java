@@ -1,64 +1,61 @@
 package gameplay.commandServices;
 
-import pojos.entity.PlayerEntity;
 import pojos.environment.Cell;
 import pojos.environment.Location;
 import uiView.UIMain;
 
 public class MovementService {
-
-	PlayerEntity player = UIMain.player;
-
-	public MovementService(PlayerEntity player) {
-		this.player = player;
+	
+	public MovementService() {
+		//empty constructor
 	}
 
 	public String moveNorth(char direction) {
-		if(player.currentCell.isNorth()) {
-			Location newLoc = player.getLocation();
+		if(UIMain.player.currentCell.isNorth()) {
+			Location newLoc = UIMain.player.getLocation();
 			newLoc.setY(newLoc.getY()+1);
 			setNewCell(newLoc);
 		}
-		return player.currentCell.getDescription();
+		return UIMain.player.currentCell.getDescription();
 	}
 
 	public String moveSouth(char direction) {
-		if(player.currentCell.isSouth()) {
-			Location newLoc = player.getLocation();
+		if(UIMain.player.currentCell.isSouth()) {
+			Location newLoc = UIMain.player.getLocation();
 			newLoc.setY(newLoc.getY()-1);
 			setNewCell(newLoc);
 		}
-		return player.currentCell.getDescription();
+		return UIMain.player.currentCell.getDescription();
 	}
 
 	public String moveEast(char direction) {
-		if(player.currentCell.isEast()) {
-			Location newLoc = player.getLocation();
+		if(UIMain.player.currentCell.isEast()) {
+			Location newLoc = UIMain.player.getLocation();
 			newLoc.setX(newLoc.getX()+1);
 			setNewCell(newLoc);
 		}
-		return player.currentCell.getDescription();
+		return UIMain.player.currentCell.getDescription();
 	}
 
 	public String moveWest(char direction) {
-		if(player.currentCell.isWest()) {
-			Location newLoc = player.getLocation();
+		if(UIMain.player.currentCell.isWest()) {
+			Location newLoc = UIMain.player.getLocation();
 			newLoc.setX(newLoc.getX()-1);
 			setNewCell(newLoc);
-			return player.currentCell.getDescription();
 		}
-		return "";
+		return UIMain.player.currentCell.getDescription();
 	}
 
-	private void setNewCell(Location newLoc) {
+	private String setNewCell(Location newLoc) {
 		for(Cell cell : UIMain.cells) {
 			if(cell.getLocation().getX() == newLoc.getX() &&
 					cell.getLocation().getY() == newLoc.getY() &&
-					cell.getLocation().getZ() == newLoc.getZ()) {;
-					player.setCurrentCell(cell);
-					player.setLocation(newLoc);
+					cell.getLocation().getZ() == newLoc.getZ()) {
+					UIMain.player.setCurrentCell(cell);
+					UIMain.player.setLocation(newLoc);
 					break;
 			}
 		}
+		return UIMain.player.currentCell.getDescription();
 	}
 }
