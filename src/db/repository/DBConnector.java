@@ -43,6 +43,7 @@ public class DBConnector {
 		Iterable<Document> cellDocuments = cellCollection.find(eq("instance.name", instance));
 		cellDocuments.forEach(cell -> {
 			try {
+				System.out.println(cell);
 				Cell tempCell = mapper.readValue(cell.toJson(), Cell.class);
 				activeCells.add(tempCell);
 			} catch (IOException e) {

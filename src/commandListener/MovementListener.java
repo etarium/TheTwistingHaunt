@@ -1,16 +1,16 @@
 package commandListener;
 
 import gameplay.commandServices.MovementService;
-import pojos.entity.PlayerEntity;
+import uiView.UIMain;
 import utilities.Logs;
 
 public class MovementListener {
 
-	public Reply listen(String command, String parameter, PlayerEntity player) {
-		MovementService system = new MovementService(player);
+	public Reply listen(String command, String parameter) {
+		MovementService system = new MovementService();
 
 		String output = "";
-		String upperOutput = player.currentCell.getDescription();
+		//String upperOutput = UIMain.player.currentCell.getDescription();
 		String failedMovementOutput = "You'd like to go that way, wouldn't you?";
 		String newUpperOutput = "";
 		boolean isSuccessful = true;
@@ -18,7 +18,7 @@ public class MovementListener {
 		//determines if movement can be made in the direction sent by the user
 		//direction is parsed from /command and streamlined into a single character: n, s, e, or w
 		//	so the input for applicable methods should rely on that passed char
-		//if player can move that direction, sets new current cell and outputs that cell's description
+		//if UIMain.player can move that direction, sets new current cell and outputs that cell's description
 		//if not, outputs some sort of error to user
 		case "/north":
 		case "/n":
@@ -30,9 +30,10 @@ public class MovementListener {
 		case "/w":
 
 			char direction = command.charAt(1);
-
+			String upperOutput = UIMain.player.currentCell.getDescription();
 			switch (direction) {
 			case 'n':
+				
 
 				newUpperOutput = system.moveNorth(direction);
 
@@ -59,7 +60,9 @@ public class MovementListener {
 			case 'e':
 
 				newUpperOutput = system.moveEast(direction);
-				if(!newUpperOutput.equals(upperOutput)) {
+				System.out.println("old " + upperOutput);
+				System.out.println("new " + newUpperOutput);
+				if(!upperOutput.equals(newUpperOutput)) {
 					output = "You move to the east.";
 					upperOutput = newUpperOutput;
 				} else {
@@ -91,6 +94,6 @@ public class MovementListener {
 			isSuccessful = false;
 		}//end switch
 
-		return new Reply(isSuccessful, output, upperOutput);
+		return new Reply(isSuccessful, output, newUpperOutput);
 	}
 }

@@ -1,8 +1,5 @@
 package gameplay.newGame;
 
-import java.util.List;
-
-import commandListener.Init;
 import db.api.DbAPI;
 import pojos.entity.PlayerEntity;
 import pojos.environment.Cell;

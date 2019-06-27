@@ -3,7 +3,6 @@ package pojos.environment;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import pojos.entity.EnemyEntity;
 import pojos.entity.Entity;
@@ -11,15 +10,15 @@ import pojos.items.Item;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Cell {
-
+	
+	String _id;
 	Location location;
 	Instance instance;
 	String description;
 	String terrain;
-	InspectableObjects inspectableObjects;
+	List<InspectableObjects> inspectableObjects;
 	List<Item> items;
 	List<Entity> npcs;
-	@JsonProperty("enemies")
 	List<EnemyEntity> enemies;
 	boolean isLocked;
 	List<Item> requiredItems; //used for places that require certain triggers to be able to enter, locked doors, etc
@@ -60,11 +59,11 @@ public class Cell {
 		this.terrain = terrain;
 	}
 
-	public InspectableObjects getInspectableObjects() {
+	public List<InspectableObjects> getInspectableObjects() {
 		return inspectableObjects;
 	}
 
-	public void setInspectableObjects(InspectableObjects inspectableObjects) {
+	public void setInspectableObjects(List<InspectableObjects> inspectableObjects) {
 		this.inspectableObjects = inspectableObjects;
 	}
 

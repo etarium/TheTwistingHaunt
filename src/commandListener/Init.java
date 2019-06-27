@@ -26,7 +26,7 @@ public class Init {
 		//check the listeners
 		Reply systemReply = systemListener.listen(command, system, parameter, player);
 		Reply battleReply = battleListener.listen(command, parameter, player);
-		Reply movementReply = movementListener.listen(command, parameter, player);
+		Reply movementReply = movementListener.listen(command, parameter);
 		Reply inventoryReply = inventoryListener.listen(command, parameter, player);
 		Reply cellReply = cellListener.listen(command, parameter, player);
 
