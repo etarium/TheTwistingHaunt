@@ -8,7 +8,7 @@ import utilities.Logs;
 
 public class PlayerInitializer {
 
-	final static String INSTANCE = "Test Instance";
+	static final String INSTANCE = "Test Instance";
 	DbAPI cellAPI = new DbAPI();
 
 
@@ -25,7 +25,7 @@ public class PlayerInitializer {
 			for(Cell cell : UIMain.cells) {
 				if(cell.getLocation().getX() == UIMain.player.getLocation().getX() &&
 						cell.getLocation().getY() == UIMain.player.getLocation().getY() &&
-						cell.getLocation().getZ() == UIMain.player.getLocation().getZ()) {;
+						cell.getLocation().getZ() == UIMain.player.getLocation().getZ()) {
 						UIMain.player.setCurrentCell(cell);
 						break;
 				}
