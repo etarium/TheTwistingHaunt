@@ -39,22 +39,15 @@ public class LoadGameWindow extends GameWindow{
 	String selected;
 
 	public LoadGameWindow() {
-		window = new JFrame("Load Game");
-		window.setSize(WINDOW_DIM);
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.getContentPane().setBackground(backgroundColor);
-		window.setLayout(null);
-
+		String title = "Load Game";
+		JFrame window = configureWindow(title);
 		Container con = window.getContentPane();
-		JPanel windowBorder = new JPanel();
-		windowBorder.setSize(WINDOW_DIM.width, WINDOW_DIM.height-23);
-		windowBorder.setOpaque(false);
-		windowBorder.setBorder(thiccLineBorder);
+		JPanel windowBorder = setWindowBorder();
 		con.add(windowBorder);
 
 		//panels to be affixed in container
 		JPanel titleNamePanel = new JPanel();
-		titleSetter(titleNamePanel, "Load Game");
+		titleSetter(titleNamePanel, title);
 		con.add(titleNamePanel);
 
 		int standardWidth = (int)(WINDOW_WIDTH / 7);

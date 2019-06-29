@@ -1,9 +1,11 @@
 package uiView.classes;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,13 +14,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -29,8 +31,7 @@ public class MainMenu extends GameWindow {
 
 	Container con;
 	JFrame window;
-	JPanel titleNamePanel, startButtonPanel;
-	JLabel titleNameLabel, outputLabel;
+	JPanel titleNamePanel;
 	JButton ngButton, lgButton, helpButton, readButton, exitButton;
 
 	static String message;
@@ -38,18 +39,10 @@ public class MainMenu extends GameWindow {
 	public static boolean nGame;
 
 	public MainMenu() {
-		window = new JFrame("Menu");
-		window.setSize(WINDOW_DIM);
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.getContentPane().setBackground(backgroundColor);
-		window.setLayout(null);
-
+		String title = "Menu";
+		window = configureWindow(title);
 		con = window.getContentPane();
-
-		JPanel windowBorder = new JPanel();
-		windowBorder.setSize(WINDOW_DIM.width, WINDOW_DIM.height-23);
-		windowBorder.setOpaque(false);
-		windowBorder.setBorder(thiccLineBorder);
+		JPanel windowBorder = setWindowBorder();
 		con.add(windowBorder);
 
 		titleNamePanel = new JPanel();
@@ -66,13 +59,11 @@ public class MainMenu extends GameWindow {
 		helpButton = new JButton();
 		readButton = new JButton();
 		exitButton = new JButton();
-
-		String[] menuNames = {"New Game", "Load Game", "Help", "Readme", "Exit"};
+		
 		JButton[] buttons = {ngButton, lgButton, helpButton, readButton, exitButton};
+		String[] menuNames = {"New Game", "Load Game", "Help", "Readme", "Exit"};
 		int optWidth = menuWidth;
 		int optHeight = (menuHeight / 5);
-
-
 
 		//both the button and the panel must receive the same treatment
 		//macs can't deal with setBackground on buttons, so panel is the workaround.
@@ -91,14 +82,7 @@ public class MainMenu extends GameWindow {
 		
 		addListeners(ngButton, lgButton, exitButton, readButton, helpButton);
 		
-		for (JButton button : buttons) {
-			addChangeListener(button);
-		}
-		
 		con.add(titleNamePanel);
-
-		//	window.setResizable(false);
-		window.setVisible(true);
 
 		nGame = true;
 		button = true;
@@ -116,19 +100,22 @@ public class MainMenu extends GameWindow {
 			menuPanels[i].setBackground(textColor);
 
 			JLabel menuLabel = new JLabel(menuNames[i]);
-
+			menuLabel.setOpaque(true);
+			menuLabel.setBackground(textColor);
 			menuLabel.setForeground(backgroundColor);
 			menuLabel.setFont(menuFont);
+			
 			menuPanels[i].add(menuLabel);
+			
 			menuPanels[i].setLayout(new GridBagLayout());
 
 			Rectangle bounds = menuPanels[i].getBounds();
 			buttons[i].setBounds(bounds);
 
 			lgButton.setEnabled(true);
-
+			menuPanels[i].add(buttons[i]);
 			con.add(menuPanels[i]);
-			con.add(buttons[i]);
+			//con.add(buttons[i]);
 		}//end menu button generation
 	} //end generateButtons();
 
@@ -139,31 +126,36 @@ public class MainMenu extends GameWindow {
 		for (int i = 0; i < buttons.length; i++) {
 			buttons[i].setBounds(menuBufferWidth, menuBufferHeight + (i * optHeight), optWidth, optHeight);
 			buttons[i].setBackground(textColor);
-
-			JLabel menuLabel = new JLabel(menuNames[i]);
-
-			menuLabel.setForeground(backgroundColor);
-			menuLabel.setFont(menuFont);
-			buttons[i].add(menuLabel);
-			buttons[i].setLayout(new GridBagLayout());
-			buttons[i].setBorder(thinLineBorder);
-
 			Rectangle bounds = buttons[i].getBounds();
+			
+			JLabel buttonLabel = new JLabel(menuNames[i]);
+			buttonLabel.setFont(menuFont);
+			buttonLabel.setForeground(backgroundColor);
+			buttonLabel.setVerticalTextPosition(SwingConstants.CENTER);
+			buttonLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			
+			JPanel buttonPanel = new JPanel();
+			buttonPanel.setOpaque(true);
+			buttonPanel.setBackground(textColor);
+			buttonPanel.add(buttonLabel);
+			buttonPanel.setLayout(new GridLayout());
+
+			buttons[i].add(buttonPanel);
+			buttons[i].setLayout(new GridLayout());
+			buttons[i].setBorder(thinLineBorder);
 			buttons[i].setBounds(bounds);
 
-
 			lgButton.setEnabled(true);
-
 			con.add(buttons[i]);
 		}//end menu button generation
 	}
 
 	private void addListeners(JButton ngButton, JButton lgButton, JButton exitButton, JButton readButton, JButton helpButton) {
-
+		JButton[] buttons = {ngButton, lgButton, helpButton, readButton, exitButton};
+		
 		ngButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				newGameButtonPressed();
 				button = false;
 			}
@@ -212,21 +204,34 @@ public class MainMenu extends GameWindow {
 				}
 			}
 		});
+		
+		for (JButton button : buttons) {
+			addChangeListener(button);
+		}
+	
 	}
 
 	private void addChangeListener(JButton button) {
 		button.getModel().addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				ButtonModel model = (ButtonModel) e.getSource();
-				if (model.isRollover() || model.isSelected()) {
+				if (button.getModel().isPressed() || button.getModel().isRollover()) {
 					button.setBackground(textColor.darker());
+					for (Component component : button.getComponents() ) {
+						component.setBackground(textColor.darker());
+						button.add(component);
+					}
 				} else {
 					button.setBackground(textColor);
+					for (Component component : button.getComponents() ) {
+						component.setBackground(textColor);
+						button.add(component);
+					}
 				}
 			}
 		});
 	}
+	
 	private void loadGameButtonPressed() {
 		nGame = false;
 		button = false;
@@ -234,7 +239,7 @@ public class MainMenu extends GameWindow {
 	}
 
 	private void newGameButtonPressed() {
-		ngButton.setBackground(textColor.darker());
+		//ngButton.setBackground(textColor.darker());
 		button = false;
 		NewGameWindow.window.setVisible(true);
 		window.dispose();

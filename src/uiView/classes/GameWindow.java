@@ -14,10 +14,12 @@ import java.io.FileNotFoundException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import uiView.UIMain;
 import utilities.Logs;
 
 public class GameWindow{
@@ -109,7 +111,31 @@ public class GameWindow{
 		panel.add(panelLabel);
 	}
 
+	public JPanel setWindowBorder() {
+		JPanel windowBorder = new JPanel();
+		
+		if(UIMain.os.contains("Windows")) {
+			windowBorder.setSize(WINDOW_DIM.width-7, WINDOW_DIM.height-29);
+		} else {
+			windowBorder.setSize(WINDOW_DIM.width, WINDOW_DIM.height-23);
+		}
+		windowBorder.setOpaque(false);
+		windowBorder.setBorder(thiccLineBorder);
+		
+		return windowBorder;
+	}
 
+	public JFrame configureWindow(String title) {
+		JFrame window = new JFrame(title);
+		window.setSize(WINDOW_DIM);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.getContentPane().setBackground(backgroundColor);
+		window.setLayout(null);
+		
+		window.setResizable(false);
+		window.setVisible(true);
+		return window;
+	}
 }//end GameWindow class
 
 
