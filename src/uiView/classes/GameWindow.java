@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.io.BufferedInputStream;
@@ -17,6 +18,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 import uiView.UIMain;
@@ -32,10 +34,8 @@ public class GameWindow{
 	protected final int SCREEN_HEIGHT = SCREEN_DIM.height - totalInset;
 	protected final int BUFFER = scnMax.top;
 
-
 	private final double WIDTH_RATIO = 0.5625;
 	private final double HEIGHT_RATIO = 0.8033240997229917;
-
 
 	protected  final int WINDOW_WIDTH = (int)(WIDTH_RATIO * SCREEN_WIDTH);
 	protected final int WINDOW_HEIGHT = (int)(HEIGHT_RATIO * SCREEN_HEIGHT);
@@ -62,7 +62,6 @@ public class GameWindow{
 	public Font menuFont = defaultFont.deriveFont(menuFontSize);
 	public Font helpFont = defaultFont.deriveFont(helpFontSize);
 
-
 	protected static final int THICC = 4;
 	protected static final int MED = 2;
 	protected static final int THIN = 1;
@@ -70,7 +69,6 @@ public class GameWindow{
 	public static Border thiccLineBorder = BorderFactory.createLineBorder(textColor, THICC);
 	public static Border medLineBorder = BorderFactory.createLineBorder(textColor, MED);
 	public static Border thinLineBorder = BorderFactory.createLineBorder(textColor, THIN);	
-
 
 	private Font defineFont(String filePath) {
 		Font defaultFont = null;
@@ -102,11 +100,14 @@ public class GameWindow{
 
 		panel.setBounds(titleBufferWidth,BUFFER,titleWidth, titleHeight);
 		panel.setBackground(textColor);
-		panel.setLayout(new GridBagLayout());
+		panel.setLayout(new GridLayout());
 
 		JLabel panelLabel = new JLabel(text);
+		panelLabel.setBackground(backgroundColor);
 		panelLabel.setForeground(backgroundColor);
 		panelLabel.setFont(titleFont);
+		panelLabel.setVerticalAlignment(SwingConstants.CENTER);
+		panelLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 		panel.add(panelLabel);
 	}
