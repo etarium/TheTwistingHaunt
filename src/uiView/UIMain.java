@@ -23,10 +23,12 @@ public class UIMain {
 	public static List<Cell> cells = new ArrayList<Cell>();
 	static PlayerInitializer playerinit = new PlayerInitializer();
 	public static Init init = new Init();
+	public static String os = System.getProperty("os.name");
 
 
 	public static void main (String [] args) {
-
+		Logs.LOGGER.info("Running on OS " + os);
+		
 		MainMenu menu = new MainMenu();
 		boolean nGame = menu.getNGame();
 		if(nGame == true){//open new game window
