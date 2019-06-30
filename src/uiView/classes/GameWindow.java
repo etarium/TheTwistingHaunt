@@ -103,6 +103,7 @@ public class GameWindow{
 		panel.setLayout(new GridLayout());
 
 		JLabel panelLabel = new JLabel(text);
+		panelLabel.setOpaque(true);
 		panelLabel.setBackground(backgroundColor);
 		panelLabel.setForeground(backgroundColor);
 		panelLabel.setFont(titleFont);

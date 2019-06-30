@@ -8,6 +8,9 @@ import pojos.environment.Cell;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+
 import commandListener.Init;
 import uiView.classes.GUI_Client;
 import uiView.classes.LoadGameWindow;
@@ -27,6 +30,18 @@ public class UIMain {
 
 
 	public static void main (String [] args) {
+		try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            System.out.println("assigned Nimbus LAF");
+		            break;
+		        }
+		    }
+		} catch (Exception e) {
+		    // If Nimbus is not available, you can set the GUI to another look and feel.
+		}
+		
 		Logs.LOGGER.info("Running on OS " + os);
 		
 		MainMenu menu = new MainMenu();
