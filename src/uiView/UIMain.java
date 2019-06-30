@@ -7,6 +7,7 @@ import pojos.environment.Cell;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -31,19 +32,18 @@ public class UIMain {
 
 	public static void main (String [] args) {
 		try {
-		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-		        if ("Nimbus".equals(info.getName())) {
-		            UIManager.setLookAndFeel(info.getClassName());
-		            System.out.println("assigned Nimbus LAF");
-		            break;
-		        }
-		    }
+			//Note: this is super bad and probs would have legal ramifications in a commercial product.
+			Properties p = System.getProperties();
+			p.put("os.name", "Windows 10");
+			System.setProperties(p);
+		  UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		  Logs.LOGGER.info("Set LAF to " + UIManager.getLookAndFeel());
 		} catch (Exception e) {
-		    // If Nimbus is not available, you can set the GUI to another look and feel.
+		    Logs.LOGGER.info("Could not set LAF.");
 		}
 		
 		Logs.LOGGER.info("Running on OS " + os);
-		
+
 		MainMenu menu = new MainMenu();
 		boolean nGame = menu.getNGame();
 		if(nGame == true){//open new game window
