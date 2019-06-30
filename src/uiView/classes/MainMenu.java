@@ -42,15 +42,6 @@ public class MainMenu extends GameWindow {
 
 	public MainMenu() {
 		
-//		try {
-//			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-//			Logs.LOGGER.info("Successfully set LAF");
-//		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-//				| UnsupportedLookAndFeelException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
 		String title = "Menu";
 		window = configureWindow(title);
 		con = window.getContentPane();
@@ -85,9 +76,116 @@ public class MainMenu extends GameWindow {
 			JPanel opt3 = new JPanel();
 			JPanel opt4 = new JPanel();
 			JPanel opt5 = new JPanel();
+
+			ngButton = new JButton();
+			lgButton = new JButton();
+			helpButton = new JButton();
+			readButton = new JButton();
+			exitButton = new JButton();
+
 			JPanel[] menuPanels = {opt1, opt2, opt3, opt4, opt5};
 
-			generateMacButtons(menuBufferWidth, menuBufferHeight, menuPanels, menuNames, buttons, optWidth, optHeight);
+			//programmatic menu button generation
+
+			for (int i = 0; i < menuPanels.length; i++) {
+				menuPanels[i].setBounds(menuBufferWidth, menuBufferHeight + (i * optHeight), optWidth, optHeight);
+				menuPanels[i].setBackground(textColor);
+
+				JLabel menuLabel = new JLabel(menuNames[i]);
+				menuLabel.setForeground(backgroundColor);
+				menuLabel.setFont(menuFont);
+				menuPanels[i].add(menuLabel);
+				menuPanels[i].setLayout(new GridBagLayout());
+
+				Rectangle bounds = menuPanels[i].getBounds();
+				buttons[i].setBounds(bounds);
+
+				buttons[i].addMouseListener(new java.awt.event.MouseAdapter() {
+					public void mouseEntered(java.awt.event.MouseEvent evt) {
+						JButton temp = (JButton) evt.getSource();
+						int index = -1;
+
+						for (int i = 0; i < buttons.length; i++) {
+							if (buttons[i].equals(temp)) {
+								index = i;
+							}
+						}
+
+						menuPanels[index].setBackground(textColor.darker());
+					}
+
+					public void mouseExited(java.awt.event.MouseEvent evt) {
+						JButton temp = (JButton) evt.getSource();
+						int index = -1;
+
+						for (int i = 0; i < buttons.length; i++) {
+							if (buttons[i].equals(temp)) {
+								index = i;
+							}
+						}
+
+						menuPanels[index].setBackground(textColor);
+					}
+				});
+
+				lgButton.setEnabled(true);
+
+				con.add(menuPanels[i]);
+				con.add(buttons[i]);
+			}//end menu button generation
+
+			ngButton.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					newGameButtonPressed();
+					button = false;
+				}
+
+			});
+
+			lgButton.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					nGame = false;
+					loadGameButtonPressed();
+				}
+
+			}); 
+
+			exitButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent evt) {
+					// delegate to event handler method
+					exitButtonPressed(evt);
+				}
+
+			});
+
+			readButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent evt) {
+					//delegate to event handler method
+					try {
+						readmeButtonPressed(evt);
+					} catch (Exception e) {
+						Logs.LOGGER.severe("Exception caught in MainMenu.readButton " + e);
+					}
+				}
+			});
+
+			helpButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent evt) {
+					//delegate to event handler method
+					try {
+						helpButtonPressed(evt);
+					} catch (Exception e) {
+						Logs.LOGGER.severe("Exception caught in MainMenu.helpButton " + e);
+					}
+				}
+			});
 		} else {
 			generateWindowsButtons(menuBufferWidth, menuBufferHeight, menuNames, buttons, optWidth, optHeight);
 		}
