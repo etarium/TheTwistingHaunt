@@ -21,8 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -31,8 +29,8 @@ import utilities.Logs;
 
 public class MainMenu extends GameWindow {
 
-	Container con;
-	JFrame window;
+	Container con = new Container();
+	JFrame window = new JFrame();
 	JPanel titleNamePanel;
 	JButton ngButton, lgButton, helpButton, readButton, exitButton;
 
@@ -47,10 +45,10 @@ public class MainMenu extends GameWindow {
 		con = window.getContentPane();
 		JPanel windowBorder = setWindowBorder();
 		con.add(windowBorder);
-
 		titleNamePanel = new JPanel();
-		titleSetter(titleNamePanel, "The Twisting Haunt");
-
+		titleNamePanel = titleSetter(titleNamePanel, "The Twisting Haunt");
+		con.add(titleNamePanel);
+		
 		int titleHeight = (int) (WINDOW_HEIGHT * .2);
 		int menuWidth = (int) (WINDOW_WIDTH / 3);
 		int menuHeight = (int) (WINDOW_HEIGHT / 2);
@@ -77,122 +75,17 @@ public class MainMenu extends GameWindow {
 			JPanel opt4 = new JPanel();
 			JPanel opt5 = new JPanel();
 
-			ngButton = new JButton();
-			lgButton = new JButton();
-			helpButton = new JButton();
-			readButton = new JButton();
-			exitButton = new JButton();
-
 			JPanel[] menuPanels = {opt1, opt2, opt3, opt4, opt5};
 
 			//programmatic menu button generation
 
-			for (int i = 0; i < menuPanels.length; i++) {
-				menuPanels[i].setBounds(menuBufferWidth, menuBufferHeight + (i * optHeight), optWidth, optHeight);
-				menuPanels[i].setBackground(textColor);
-
-				JLabel menuLabel = new JLabel(menuNames[i]);
-				menuLabel.setForeground(backgroundColor);
-				menuLabel.setFont(menuFont);
-				menuPanels[i].add(menuLabel);
-				menuPanels[i].setLayout(new GridBagLayout());
-
-				Rectangle bounds = menuPanels[i].getBounds();
-				buttons[i].setBounds(bounds);
-
-				buttons[i].addMouseListener(new java.awt.event.MouseAdapter() {
-					public void mouseEntered(java.awt.event.MouseEvent evt) {
-						JButton temp = (JButton) evt.getSource();
-						int index = -1;
-
-						for (int i = 0; i < buttons.length; i++) {
-							if (buttons[i].equals(temp)) {
-								index = i;
-							}
-						}
-
-						menuPanels[index].setBackground(textColor.darker());
-					}
-
-					public void mouseExited(java.awt.event.MouseEvent evt) {
-						JButton temp = (JButton) evt.getSource();
-						int index = -1;
-
-						for (int i = 0; i < buttons.length; i++) {
-							if (buttons[i].equals(temp)) {
-								index = i;
-							}
-						}
-
-						menuPanels[index].setBackground(textColor);
-					}
-				});
-
-				lgButton.setEnabled(true);
-
-				con.add(menuPanels[i]);
-				con.add(buttons[i]);
-			}//end menu button generation
-
-			ngButton.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					newGameButtonPressed();
-					button = false;
-				}
-
-			});
-
-			lgButton.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					nGame = false;
-					loadGameButtonPressed();
-				}
-
-			}); 
-
-			exitButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent evt) {
-					// delegate to event handler method
-					exitButtonPressed(evt);
-				}
-
-			});
-
-			readButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent evt) {
-					//delegate to event handler method
-					try {
-						readmeButtonPressed(evt);
-					} catch (Exception e) {
-						Logs.LOGGER.severe("Exception caught in MainMenu.readButton " + e);
-					}
-				}
-			});
-
-			helpButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent evt) {
-					//delegate to event handler method
-					try {
-						helpButtonPressed(evt);
-					} catch (Exception e) {
-						Logs.LOGGER.severe("Exception caught in MainMenu.helpButton " + e);
-					}
-				}
-			});
+			generateMacButtons(optHeight, optHeight, menuPanels, menuNames, buttons, optHeight, optHeight);
 		} else {
 			generateWindowsButtons(menuBufferWidth, menuBufferHeight, menuNames, buttons, optWidth, optHeight);
 		}
 		
 		addListeners(ngButton, lgButton, exitButton, readButton, helpButton);
 		
-		con.add(titleNamePanel);
 
 		nGame = true;
 		button = true;
@@ -222,7 +115,6 @@ public class MainMenu extends GameWindow {
 			Rectangle bounds = menuPanels[i].getBounds();
 			buttons[i].setBounds(bounds);
 
-			lgButton.setEnabled(true);
 			menuPanels[i].add(buttons[i]);
 			con.add(menuPanels[i]);
 			//con.add(buttons[i]);
@@ -255,7 +147,6 @@ public class MainMenu extends GameWindow {
 			buttons[i].setBorder(thinLineBorder);
 			buttons[i].setBounds(bounds);
 
-			lgButton.setEnabled(true);
 			con.add(buttons[i]);
 		}//end menu button generation
 	}

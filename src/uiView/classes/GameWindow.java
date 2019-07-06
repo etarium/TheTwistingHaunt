@@ -92,7 +92,7 @@ public class GameWindow{
 		return defaultFont;
 	}
 
-	public void titleSetter(JPanel panel, String text) {
+	public JPanel titleSetter(JPanel panel, String text) {
 
 		int titleWidth = (int)(WINDOW_WIDTH * .75);
 		int titleHeight = (int)(WINDOW_HEIGHT * .2);
@@ -104,13 +104,15 @@ public class GameWindow{
 
 		JLabel panelLabel = new JLabel(text);
 		panelLabel.setOpaque(true);
-		panelLabel.setBackground(backgroundColor);
+		panelLabel.setBackground(textColor);
 		panelLabel.setForeground(backgroundColor);
 		panelLabel.setFont(titleFont);
 		panelLabel.setVerticalAlignment(SwingConstants.CENTER);
 		panelLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 		panel.add(panelLabel);
+		
+		return panel;
 	}
 
 	public JPanel setWindowBorder() {
