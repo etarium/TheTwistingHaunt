@@ -140,6 +140,16 @@ public class GameWindow{
 		window.setVisible(true);
 		return window;
 	}
+	
+	public JLabel setMenuLabels(String title) {
+		JLabel label = new JLabel(title);
+		label.setFont(menuFont);
+		label.setForeground(backgroundColor);
+		label.setVerticalTextPosition(SwingConstants.CENTER);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		return label;
+	}
 }//end GameWindow class
 
 

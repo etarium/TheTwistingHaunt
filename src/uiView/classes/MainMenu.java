@@ -1,9 +1,11 @@
 package uiView.classes;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
@@ -100,56 +102,55 @@ public class MainMenu extends GameWindow {
 		//programmatic menu button generation
 		Logs.LOGGER.info("Generating Buttons for " + UIMain.os);
 
-		
 		for (int i = 0; i < menuNames.length; i++) {
-			Rectangle bounds = new Rectangle(menuBufferWidth, menuBufferHeight + (i * optHeight), optWidth, optHeight);
-			System.out.println(bounds);
-			JLabel menuLabel = new JLabel(menuNames[i]);
-			System.out.println(menuLabel.getText());
-			menuLabel.setFont(menuFont);	
-			menuLabel.setForeground(backgroundColor);
-			menuLabel.setBackground(textColor);
-			menuLabel.setBounds(bounds);
-			menuLabel.setVisible(true);
-
-			menuPanels[i].add(menuLabel);
-			
-			menuPanels[i].setForeground(backgroundColor);
-			menuPanels[i].setBackground(textColor);
-			menuPanels[i].setLayout(new GridLayout());
-			menuPanels[i].setBounds(bounds);
-			menuPanels[i].setOpaque(true);
-			
-
-			buttons[i].setForeground(backgroundColor);
-			buttons[i].setBackground(textColor);
-			buttons[i].setLayout(new GridLayout());
-			buttons[i].setBounds(bounds);
-			//buttons[i].add(menuPanels[i]);
-			menuPanels[i].add(buttons[i]);
-			menuPanels[i].setVisible(true);
-			
-			window.add(menuPanels[i]);
-			
-//			menuPanels[i].setBounds(menuBufferWidth, menuBufferHeight + (i * optHeight), optWidth, optHeight);
-//			menuPanels[i].setBackground(textColor);
-//
+//			Rectangle bounds = new Rectangle(menuBufferWidth, menuBufferHeight + (i * optHeight), optWidth, optHeight);
+//			System.out.println(bounds);
 //			JLabel menuLabel = new JLabel(menuNames[i]);
-//			menuLabel.setOpaque(true);
-//			menuLabel.setBackground(textColor);
-//			menuLabel.setForeground(backgroundColor);
-//			menuLabel.setFont(menuFont);
+//			System.out.println(menuLabel.getText());
+//			menuLabel.setFont(menuFont);	
+////			menuLabel.setForeground(backgroundColor);
+////			menuLabel.setBackground(textColor);
+//			menuLabel.setBounds(bounds);
+//			menuLabel.setVisible(true);
+//			//menuPanels[i].add(menuLabel);
 //			
-//			menuPanels[i].add(menuLabel);
+////			menuPanels[i].setForeground(backgroundColor);
+////			menuPanels[i].setBackground(textColor);
+//			menuPanels[i].setLayout(new GridLayout());
+//			menuPanels[i].setBounds(bounds);
+//			menuPanels[i].setOpaque(true);
+//			menuPanels[i].setVisible(true);
 //			
-//			menuPanels[i].setLayout(new GridBagLayout());
 //
-//			Rectangle bounds = menuPanels[i].getBounds();
+////			buttons[i].setForeground(backgroundColor);
+////			buttons[i].setBackground(textColor);
+//			buttons[i].setLayout(new GridLayout());
 //			buttons[i].setBounds(bounds);
-//
-//			menuPanels[i].add(buttons[i]);
-//			con.add(menuPanels[i]);
-			//con.add(buttons[i]);
+//			buttons[i].add(menuPanels[i]);
+//			//buttons[i].add(menuLabel);
+//			buttons[i].setVisible(true);
+//			
+//			window.add(buttons[i]);
+			Rectangle bounds = new Rectangle(menuBufferWidth, menuBufferHeight + (i * optHeight), optWidth, optHeight);
+			
+			buttons[i].setBounds(bounds);
+			buttons[i].setBackground(textColor);
+					
+			JLabel buttonLabel = new JLabel();
+			buttonLabel.setText(menuNames[i]);
+			buttonLabel.setFont(menuFont);
+			buttonLabel.setForeground(backgroundColor);
+//			buttonLabel.setBackground(textColor);
+			buttonLabel.setVerticalTextPosition(SwingConstants.CENTER);
+			buttonLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			buttonLabel.setBounds(bounds);
+
+			buttons[i].setLayout(new GridLayout());
+			buttons[i].setBorder(thinLineBorder);
+
+			window.add(buttons[i]);
+			window.repaint();
+			//window.add(buttonLabel);
 		}//end menu button generation
 	} //end generateButtons();
 
