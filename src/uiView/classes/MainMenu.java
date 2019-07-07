@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -103,54 +104,25 @@ public class MainMenu extends GameWindow {
 		Logs.LOGGER.info("Generating Buttons for " + UIMain.os);
 
 		for (int i = 0; i < menuNames.length; i++) {
-//			Rectangle bounds = new Rectangle(menuBufferWidth, menuBufferHeight + (i * optHeight), optWidth, optHeight);
-//			System.out.println(bounds);
-//			JLabel menuLabel = new JLabel(menuNames[i]);
-//			System.out.println(menuLabel.getText());
-//			menuLabel.setFont(menuFont);	
-////			menuLabel.setForeground(backgroundColor);
-////			menuLabel.setBackground(textColor);
-//			menuLabel.setBounds(bounds);
-//			menuLabel.setVisible(true);
-//			//menuPanels[i].add(menuLabel);
-//			
-////			menuPanels[i].setForeground(backgroundColor);
-////			menuPanels[i].setBackground(textColor);
-//			menuPanels[i].setLayout(new GridLayout());
-//			menuPanels[i].setBounds(bounds);
-//			menuPanels[i].setOpaque(true);
-//			menuPanels[i].setVisible(true);
-//			
-//
-////			buttons[i].setForeground(backgroundColor);
-////			buttons[i].setBackground(textColor);
-//			buttons[i].setLayout(new GridLayout());
-//			buttons[i].setBounds(bounds);
-//			buttons[i].add(menuPanels[i]);
-//			//buttons[i].add(menuLabel);
-//			buttons[i].setVisible(true);
-//			
-//			window.add(buttons[i]);
+
 			Rectangle bounds = new Rectangle(menuBufferWidth, menuBufferHeight + (i * optHeight), optWidth, optHeight);
 			
 			buttons[i].setBounds(bounds);
 			buttons[i].setBackground(textColor);
-					
-			JLabel buttonLabel = new JLabel();
-			buttonLabel.setText(menuNames[i]);
-			buttonLabel.setFont(menuFont);
-			buttonLabel.setForeground(backgroundColor);
-//			buttonLabel.setBackground(textColor);
-			buttonLabel.setVerticalTextPosition(SwingConstants.CENTER);
-			buttonLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			buttonLabel.setBounds(bounds);
-
-			buttons[i].setLayout(new GridLayout());
 			buttons[i].setBorder(thinLineBorder);
+			
+			menuPanels[i].setBackground(textColor);
+			menuPanels[i].setBounds(bounds);
+			
+			JLabel buttonLabel = new JLabel(menuNames[i]);
+			buttonLabel.setForeground(backgroundColor);
+			buttonLabel.setFont(menuFont);
+			
+			menuPanels[i].add(buttonLabel);
 
+			window.add(menuPanels[i]);
 			window.add(buttons[i]);
-			window.repaint();
-			//window.add(buttonLabel);
+
 		}//end menu button generation
 	} //end generateButtons();
 
