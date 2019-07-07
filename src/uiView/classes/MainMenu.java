@@ -42,12 +42,12 @@ public class MainMenu extends GameWindow {
 		
 		String title = "Menu";
 		window = configureWindow(title);
-		con = window.getContentPane();
+		
 		JPanel windowBorder = setWindowBorder();
-		con.add(windowBorder);
+		window.add(windowBorder);
 		titleNamePanel = new JPanel();
 		titleNamePanel = titleSetter(titleNamePanel, "The Twisting Haunt");
-		con.add(titleNamePanel);
+		window.add(titleNamePanel);
 		
 		int titleHeight = (int) (WINDOW_HEIGHT * .2);
 		int menuWidth = (int) (WINDOW_WIDTH / 3);
@@ -79,14 +79,16 @@ public class MainMenu extends GameWindow {
 
 			//programmatic menu button generation
 
-			generateMacButtons(optHeight, optHeight, menuPanels, menuNames, buttons, optHeight, optHeight);
+			generateMacButtons(menuBufferWidth, menuBufferHeight, menuPanels, menuNames, buttons, optWidth, optHeight);
 		} else {
 			generateWindowsButtons(menuBufferWidth, menuBufferHeight, menuNames, buttons, optWidth, optHeight);
 		}
 		
 		addListeners(ngButton, lgButton, exitButton, readButton, helpButton);
 		
-
+		con = window.getContentPane();
+		con.repaint();
+		
 		nGame = true;
 		button = true;
 		while(button) {
@@ -98,25 +100,55 @@ public class MainMenu extends GameWindow {
 		//programmatic menu button generation
 		Logs.LOGGER.info("Generating Buttons for " + UIMain.os);
 
-		for (int i = 0; i < menuPanels.length; i++) {
-			menuPanels[i].setBounds(menuBufferWidth, menuBufferHeight + (i * optHeight), optWidth, optHeight);
-			menuPanels[i].setBackground(textColor);
-
+		
+		for (int i = 0; i < menuNames.length; i++) {
+			Rectangle bounds = new Rectangle(menuBufferWidth, menuBufferHeight + (i * optHeight), optWidth, optHeight);
+			System.out.println(bounds);
 			JLabel menuLabel = new JLabel(menuNames[i]);
-			menuLabel.setOpaque(true);
-			menuLabel.setBackground(textColor);
+			System.out.println(menuLabel.getText());
+			menuLabel.setFont(menuFont);	
 			menuLabel.setForeground(backgroundColor);
-			menuLabel.setFont(menuFont);
-			
+			menuLabel.setBackground(textColor);
+			menuLabel.setBounds(bounds);
+			menuLabel.setVisible(true);
+
 			menuPanels[i].add(menuLabel);
 			
-			menuPanels[i].setLayout(new GridBagLayout());
+			menuPanels[i].setForeground(backgroundColor);
+			menuPanels[i].setBackground(textColor);
+			menuPanels[i].setLayout(new GridLayout());
+			menuPanels[i].setBounds(bounds);
+			menuPanels[i].setOpaque(true);
+			
 
-			Rectangle bounds = menuPanels[i].getBounds();
+			buttons[i].setForeground(backgroundColor);
+			buttons[i].setBackground(textColor);
+			buttons[i].setLayout(new GridLayout());
 			buttons[i].setBounds(bounds);
-
+			//buttons[i].add(menuPanels[i]);
 			menuPanels[i].add(buttons[i]);
-			con.add(menuPanels[i]);
+			menuPanels[i].setVisible(true);
+			
+			window.add(menuPanels[i]);
+			
+//			menuPanels[i].setBounds(menuBufferWidth, menuBufferHeight + (i * optHeight), optWidth, optHeight);
+//			menuPanels[i].setBackground(textColor);
+//
+//			JLabel menuLabel = new JLabel(menuNames[i]);
+//			menuLabel.setOpaque(true);
+//			menuLabel.setBackground(textColor);
+//			menuLabel.setForeground(backgroundColor);
+//			menuLabel.setFont(menuFont);
+//			
+//			menuPanels[i].add(menuLabel);
+//			
+//			menuPanels[i].setLayout(new GridBagLayout());
+//
+//			Rectangle bounds = menuPanels[i].getBounds();
+//			buttons[i].setBounds(bounds);
+//
+//			menuPanels[i].add(buttons[i]);
+//			con.add(menuPanels[i]);
 			//con.add(buttons[i]);
 		}//end menu button generation
 	} //end generateButtons();
@@ -147,7 +179,7 @@ public class MainMenu extends GameWindow {
 			buttons[i].setBorder(thinLineBorder);
 			buttons[i].setBounds(bounds);
 
-			con.add(buttons[i]);
+			window.add(buttons[i]);
 		}//end menu button generation
 	}
 
