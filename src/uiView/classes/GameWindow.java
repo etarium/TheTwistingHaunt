@@ -140,10 +140,11 @@ public class GameWindow{
 		return window;
 	}
 	
-	public JLabel setMenuLabels(String title) {
+	public JLabel setMenuLabel(String title) {
 		JLabel label = new JLabel(title);
 		label.setFont(menuFont);
-		label.setForeground(backgroundColor);
+		label.setForeground(Color.RED);
+		label.setBackground(textColor);
 		label.setVerticalTextPosition(SwingConstants.CENTER);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		

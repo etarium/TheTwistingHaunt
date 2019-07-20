@@ -1,6 +1,7 @@
 package uiView.classes;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -48,8 +49,8 @@ public class MainMenu extends GameWindow {
 		
 		JPanel windowBorder = setWindowBorder();
 		window.add(windowBorder);
-		titleNamePanel = new JPanel();
-		titleNamePanel = titleSetter(titleNamePanel, "The Twisting Haunt");
+		//titleNamePanel = new JPanel();
+		JPanel titleNamePanel = titleSetter(new JPanel(), "The Twisting Haunt");
 		window.add(titleNamePanel);
 		
 		int titleHeight = (int) (WINDOW_HEIGHT * .2);
@@ -108,22 +109,25 @@ public class MainMenu extends GameWindow {
 			Rectangle bounds = new Rectangle(menuBufferWidth, menuBufferHeight + (i * optHeight), optWidth, optHeight);
 			
 			buttons[i].setBounds(bounds);
-			buttons[i].setBackground(textColor);
+			//buttons[i].setBackground(textColor);
 			buttons[i].setBorder(thinLineBorder);
 			
-			menuPanels[i].setBackground(textColor);
+			//menuPanels[i].setBackground(textColor);
 			menuPanels[i].setBounds(bounds);
 			
-			JLabel buttonLabel = new JLabel(menuNames[i]);
-			buttonLabel.setForeground(backgroundColor);
-			buttonLabel.setFont(menuFont);
+//			JLabel buttonLabel = new JLabel(menuNames[i]);
+//			buttonLabel.setForeground(backgroundColor);
+//			buttonLabel.setFont(menuFont);
+			JLabel buttonLabel = setMenuLabel(menuNames[i]);
 			
 			menuPanels[i].add(buttonLabel);
-
-			window.add(menuPanels[i]);
-			window.add(buttons[i]);
+			
+			//window.add(buttons[i]);
+			//window.add(menuPanels[i]);
+			
 
 		}//end menu button generation
+		
 	} //end generateButtons();
 
 	private void generateWindowsButtons(int menuBufferWidth, int menuBufferHeight, String[] menuNames, JButton[] buttons, int optWidth, int optHeight) {		

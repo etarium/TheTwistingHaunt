@@ -31,16 +31,6 @@ public class UIMain {
 
 
 	public static void main (String [] args) {
-		try {
-			//Note: this is super bad and probs would have legal ramifications in a commercial product.
-			Properties p = System.getProperties();
-			p.put("os.name", "Windows 10");
-			System.setProperties(p);
-		  UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		  Logs.LOGGER.info("Set LAF to " + UIManager.getLookAndFeel());
-		} catch (Exception e) {
-		    Logs.LOGGER.info("Could not set LAF.");
-		}
 		
 		Logs.LOGGER.info("Running on OS " + os);
 
