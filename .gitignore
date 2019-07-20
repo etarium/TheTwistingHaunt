@@ -1,3 +1,6 @@
 /bin/
 /target/
 /game-data/
+/resources/.DS_Store
+/src/.DS_Store
+/src/uiView/resources/.DS_Store
