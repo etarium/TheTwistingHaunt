@@ -36,24 +36,16 @@ public class NewGameWindow extends GameWindow{
 	private boolean button;
 
 	public NewGameWindow() {
-
-		window = new JFrame("New Game");
-		window.setSize(WINDOW_DIM);
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.getContentPane().setBackground(backgroundColor);
-		window.setLayout(null);
-
+		
+		String title = "New Game";
+		JFrame window = configureWindow(title);
 		Container con = window.getContentPane();
-		JPanel windowBorder = new JPanel();
-		windowBorder.setSize(WINDOW_DIM.width, WINDOW_DIM.height-23);
-		windowBorder.setOpaque(false);
-		windowBorder.setBorder(thiccLineBorder);
-
+		JPanel windowBorder = setWindowBorder();
 		con.add(windowBorder);
 
 		//panels to be affixed in container
 		JPanel titleNamePanel = new JPanel();
-		titleSetter(titleNamePanel, "New Game");
+		titleSetter(titleNamePanel, title);
 		con.add(titleNamePanel);
 
 		magePanel = new JPanel();
@@ -106,8 +98,6 @@ public class NewGameWindow extends GameWindow{
 
 		bsSetup(backButton, backButtonPanel, backLabel, startButton, startButtonPanel, startLabel);
 
-		window.setResizable(false);
-		window.setVisible(true);
 		button = true;
 		while(button){
 			System.out.print("");

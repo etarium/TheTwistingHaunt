@@ -7,6 +7,10 @@ import pojos.environment.Cell;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 import commandListener.Init;
 import uiView.classes.GUI_Client;
@@ -23,9 +27,12 @@ public class UIMain {
 	public static List<Cell> cells = new ArrayList<Cell>();
 	static PlayerInitializer playerinit = new PlayerInitializer();
 	public static Init init = new Init();
+	public static String os = System.getProperty("os.name");
 
 
 	public static void main (String [] args) {
+		
+		Logs.LOGGER.info("Running on OS " + os);
 
 		MainMenu menu = new MainMenu();
 		boolean nGame = menu.getNGame();
