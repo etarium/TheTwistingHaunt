@@ -24,7 +24,6 @@ public class CellListener {
 				output = system.inspectItem(parameter);
 			}
 			break;
-
 			
 		default:
 			Logs.LOGGER.info("Hit default case in commandListener.CellListener.listen with command " + command);
