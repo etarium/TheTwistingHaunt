@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
-import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.io.BufferedInputStream;
@@ -14,10 +14,13 @@ import java.io.FileNotFoundException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
+import uiView.UIMain;
 import utilities.Logs;
 
 public class GameWindow{
@@ -30,10 +33,8 @@ public class GameWindow{
 	protected final int SCREEN_HEIGHT = SCREEN_DIM.height - totalInset;
 	protected final int BUFFER = scnMax.top;
 
-
 	private final double WIDTH_RATIO = 0.5625;
 	private final double HEIGHT_RATIO = 0.8033240997229917;
-
 
 	protected  final int WINDOW_WIDTH = (int)(WIDTH_RATIO * SCREEN_WIDTH);
 	protected final int WINDOW_HEIGHT = (int)(HEIGHT_RATIO * SCREEN_HEIGHT);
@@ -60,7 +61,6 @@ public class GameWindow{
 	public Font menuFont = defaultFont.deriveFont(menuFontSize);
 	public Font helpFont = defaultFont.deriveFont(helpFontSize);
 
-
 	protected static final int THICC = 4;
 	protected static final int MED = 2;
 	protected static final int THIN = 1;
@@ -68,7 +68,6 @@ public class GameWindow{
 	public static Border thiccLineBorder = BorderFactory.createLineBorder(textColor, THICC);
 	public static Border medLineBorder = BorderFactory.createLineBorder(textColor, MED);
 	public static Border thinLineBorder = BorderFactory.createLineBorder(textColor, THIN);	
-
 
 	private Font defineFont(String filePath) {
 		Font defaultFont = null;
@@ -92,7 +91,7 @@ public class GameWindow{
 		return defaultFont;
 	}
 
-	public void titleSetter(JPanel panel, String text) {
+	public JPanel titleSetter(JPanel panel, String text) {
 
 		int titleWidth = (int)(WINDOW_WIDTH * .75);
 		int titleHeight = (int)(WINDOW_HEIGHT * .2);
@@ -100,16 +99,57 @@ public class GameWindow{
 
 		panel.setBounds(titleBufferWidth,BUFFER,titleWidth, titleHeight);
 		panel.setBackground(textColor);
-		panel.setLayout(new GridBagLayout());
+		panel.setLayout(new GridLayout());
 
 		JLabel panelLabel = new JLabel(text);
+		panelLabel.setOpaque(true);
+		panelLabel.setBackground(textColor);
 		panelLabel.setForeground(backgroundColor);
 		panelLabel.setFont(titleFont);
+		panelLabel.setVerticalAlignment(SwingConstants.CENTER);
+		panelLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 		panel.add(panelLabel);
+		
+		return panel;
 	}
 
+	public JPanel setWindowBorder() {
+		JPanel windowBorder = new JPanel();
+		
+		if(UIMain.os.contains("Windows")) {
+			windowBorder.setSize(WINDOW_DIM.width-7, WINDOW_DIM.height-29);
+		} else {
+			windowBorder.setSize(WINDOW_DIM.width, WINDOW_DIM.height-23);
+		}
+		windowBorder.setOpaque(false);
+		windowBorder.setBorder(thiccLineBorder);
+		
+		return windowBorder;
+	}
 
+	public JFrame configureWindow(String title) {
+		JFrame window = new JFrame(title);
+		window.setSize(WINDOW_DIM);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.getContentPane().setBackground(backgroundColor);
+		window.setLayout(null);
+		
+		window.setResizable(false);
+		window.setVisible(true);
+		return window;
+	}
+	
+	public JLabel setMenuLabel(String title) {
+		JLabel label = new JLabel(title);
+		label.setFont(menuFont);
+		label.setForeground(Color.RED);
+		label.setBackground(textColor);
+		label.setVerticalTextPosition(SwingConstants.CENTER);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		return label;
+	}
 }//end GameWindow class
 
 
