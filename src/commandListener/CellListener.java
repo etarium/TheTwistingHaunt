@@ -25,7 +25,11 @@ public class CellListener {
 			break;
 			
 		case "/open":
-			output = system.openItem(parameter);
+			if (parameter == null) {
+				output = "You look around aimlessly, unsure of what could possibly be opened. Perhaps you should be more specific.";
+			} else {
+				output = system.openItem(parameter);
+			}
 			break;
 		default:
 			Logs.LOGGER.info("Hit default case in commandListener.CellListener.listen with command " + command);
