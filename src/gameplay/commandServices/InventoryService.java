@@ -1,13 +1,10 @@
 package gameplay.commandServices;
 
-import pojos.entity.PlayerEntity;
+import uiView.UIMain;
 
 public class InventoryService {
-
-	PlayerEntity player;
 	
-	public InventoryService(PlayerEntity player) {
-		this.player = player;
+	public InventoryService() {
 	}
 	
 	public String takeItem(String parameter) {
