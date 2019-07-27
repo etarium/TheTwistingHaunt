@@ -1,12 +1,12 @@
 package commandListener;
 
-import gameplay.commandServices.InventoryService;
+import gameplay.commandServices.PlayerService;
 import utilities.Logs;
 
-public class InventoryListener {
+public class PlayerListener {
 
 	public Reply listen(String command, String parameter) {
-		InventoryService system = new InventoryService();
+		PlayerService system = new PlayerService();
 		
 		String output = "";
 		boolean isSuccessful = true;

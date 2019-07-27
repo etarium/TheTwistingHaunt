@@ -11,7 +11,7 @@ public class Init {
 	//declare listeners
 	BattleListener battleListener = new BattleListener();
 	MovementListener movementListener = new MovementListener();
-	InventoryListener inventoryListener = new InventoryListener();
+	PlayerListener inventoryListener = new PlayerListener();
 	SystemListener systemListener = new SystemListener();
 	CellListener cellListener = new CellListener();
 

@@ -2,9 +2,9 @@ package gameplay.commandServices;
 
 import uiView.UIMain;
 
-public class InventoryService {
+public class PlayerService {
 	
-	public InventoryService() {
+	public PlayerService() {
 	}
 	
 	public String takeItem(String parameter) {
