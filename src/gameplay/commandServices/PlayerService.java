@@ -254,26 +254,30 @@ public class PlayerService {
 		return"";
 	}
 	
-	public String getStatus() {
+	public String getPlayerStats() {
 		StringBuilder output = new StringBuilder();
 		
 		output.append(String.format("%-25s", "Name: " + UIMain.player.getName()));
 		output.append(String.format("%10s", "Class: " + UIMain.player.getEntityClass().getName()));
 		output.append(String.format("%20s", "Level: " + UIMain.player.getLevel()));
 		output.append("\n\n\n");
-		output.append(String.format("%-5s",  "HP: " + UIMain.player.getStats().getHp()));
-		output.append(String.format("%15s",  "SP: " + UIMain.player.getStats().getSp()));
-		output.append(String.format("%20s",  "EVA: " + UIMain.player.getStats().getEva()));
+		output.append(String.format("%-5s",  "HP: "));
+		output.append(String.format("%5s",  UIMain.player.getStats().getHp()));
+		output.append(String.format("%13s",  "SP: "));
+		output.append(String.format("%6s", UIMain.player.getStats().getSp()));
+		output.append(String.format("%14s",  "EVA: " + UIMain.player.getStats().getEva()));
 		output.append(String.format("%14s",  "STA: " + UIMain.player.getStats().getSta()));
 		output.append("\n\n\n");
-		output.append(String.format("%-5s",  "ATK: " + UIMain.player.getStats().getAtk()));
-		output.append(String.format("%15s",  "DEF: " + UIMain.player.getStats().getDef()));
-		output.append(String.format("%19s",  "INT: " + UIMain.player.getStats().getIntel()));
+		output.append(String.format("%-5s",  "ATK: "));
+		output.append(String.format("%5s", UIMain.player.getStats().getAtk()));
+		output.append(String.format("%14s",  "DEF: "));
+		output.append(String.format("%5s",  + UIMain.player.getStats().getDef()));
+		output.append(String.format("%14s",  "INT: " + UIMain.player.getStats().getIntel()));
 		output.append(String.format("%15s",  "AGI: " + UIMain.player.getStats().getAgi()));
 		output.append("\n\n\n");
 		output.append(String.format("%-5s",  "SP ATK: " + UIMain.player.getStats().getSpatk()));
-		output.append(String.format("%15s",  "SP DEF: " + UIMain.player.getStats().getSpdef()));
-		output.append(String.format("%15s",  "CHA: " + UIMain.player.getStats().getCha()));
+		output.append(String.format("%19s",  "SP DEF: " + UIMain.player.getStats().getSpdef()));
+		output.append(String.format("%13s",  "CHA: " + UIMain.player.getStats().getCha()));
 		output.append(String.format("%15s",  "ACC: " + UIMain.player.getStats().getAcc()));
 		output.append("\n\n\n");
 		output.append("Available Weapon Types: ");

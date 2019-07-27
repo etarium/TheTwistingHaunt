@@ -39,7 +39,7 @@ public class PlayerListener {
 			
 		case "/status":
 		case "/stats":
-			output = system.getStatus();
+			output = system.getPlayerStats();
 			break;
 			
 		default:

@@ -1,6 +1,7 @@
 package gameplay.commandServices;
 
 import pojos.environment.InspectableObjects;
+import pojos.items.Item;
 import uiView.UIMain;
 import utilities.Logs;
 
@@ -44,5 +45,37 @@ public class CellService {
 		}
 
 		return output;
+	}
+	
+	public String openItem(String param) {
+		StringBuilder outputBuilder = new StringBuilder();
+		outputBuilder.append("Hands trembling, you unveil: ");
+		String output = "You fumble with various items around the room, failing to find any latches like what you're looking for.";
+		
+		for(InspectableObjects item : UIMain.player.getCurrentCell().getInspectableObjects()) {
+			if(item.getName().equalsIgnoreCase(param) && item.getItems()!= null) {
+				for(Item innerItem: item.getItems()) {
+					outputBuilder.append("\n\n***** \n");
+					outputBuilder.append(getItemDescription(innerItem));
+				}
+				outputBuilder.append("\n\n\nYou should consider taking your findings with you.");
+				break;
+			} else {
+				return output;
+			}
+		}
+
+		return outputBuilder.toString();
+		
+	}
+	
+	public String getItemDescription(Item item) {
+		StringBuilder outputBuilder = new StringBuilder();
+		
+		outputBuilder.append(item.getName());
+		outputBuilder.append("\n\n- ");
+		outputBuilder.append(item.getDescription());
+		
+		return outputBuilder.toString();
 	}
 }
