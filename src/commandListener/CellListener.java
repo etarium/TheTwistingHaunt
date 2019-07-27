@@ -24,6 +24,9 @@ public class CellListener {
 			}
 			break;
 			
+		case "/open":
+			output = system.openItem(parameter);
+			break;
 		default:
 			Logs.LOGGER.info("Hit default case in commandListener.CellListener.listen with command " + command);
 			isSuccessful = false;
