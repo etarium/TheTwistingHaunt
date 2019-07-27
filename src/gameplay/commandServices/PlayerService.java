@@ -254,7 +254,7 @@ public class PlayerService {
 		return"";
 	}
 	
-	public String getStatus() {
+	public String getPlayerStats() {
 		StringBuilder output = new StringBuilder();
 		
 		output.append(String.format("%-25s", "Name: " + UIMain.player.getName()));
