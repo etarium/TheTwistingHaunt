@@ -1,12 +1,12 @@
 package commandListener;
 
 import gameplay.commandServices.GameService;
-import pojos.entity.PlayerEntity;
+import uiView.UIMain;
 import utilities.Logs;
 
 public class SystemListener {
 
-	public Reply listen(String command, GameService system, String parameter, PlayerEntity player) {
+	public Reply listen(String command, GameService system, String parameter) {
 
 		String output = "";
 		boolean success = true;
@@ -28,7 +28,7 @@ public class SystemListener {
 						+ " the same name as a previous save will overwrite your files."
 						+ " Retype /save [save name]";
 			} else {
-				system.saveGame(player, parameter);
+				system.saveGame(UIMain.player, parameter);
 				output = "You've taken note of your travels.";
 			}
 			break;

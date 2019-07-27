@@ -1,18 +1,18 @@
 package commandListener;
 
-import gameplay.commandServices.InventoryService;
-import pojos.entity.PlayerEntity;
+import gameplay.commandServices.PlayerService;
 import utilities.Logs;
 
-public class InventoryListener {
+public class PlayerListener {
 
-	public Reply listen(String command, String parameter, PlayerEntity player) {
-		InventoryService system = new InventoryService(player);
+	public Reply listen(String command, String parameter) {
+		PlayerService system = new PlayerService();
 		
 		String output = "";
 		boolean isSuccessful = true;
 		switch(command) {
 		case "/take":
+
 			output = system.takeItem(parameter);
 			break;
 
@@ -35,6 +35,11 @@ public class InventoryListener {
 
 		case "/equipment":
 			output = system.equipment();
+			break;
+			
+		case "/status":
+		case "/stats":
+			output = system.getStatus();
 			break;
 			
 		default:

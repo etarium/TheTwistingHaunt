@@ -11,7 +11,7 @@ public class Init {
 	//declare listeners
 	BattleListener battleListener = new BattleListener();
 	MovementListener movementListener = new MovementListener();
-	InventoryListener inventoryListener = new InventoryListener();
+	PlayerListener inventoryListener = new PlayerListener();
 	SystemListener systemListener = new SystemListener();
 	CellListener cellListener = new CellListener();
 
@@ -24,11 +24,11 @@ public class Init {
 		String output = "";
 		String upperOutput = "";
 		//check the listeners
-		Reply systemReply = systemListener.listen(command, system, parameter, player);
-		Reply battleReply = battleListener.listen(command, parameter, player);
+		Reply systemReply = systemListener.listen(command, system, parameter);
+		Reply battleReply = battleListener.listen(command, parameter);
 		Reply movementReply = movementListener.listen(command);
-		Reply inventoryReply = inventoryListener.listen(command, parameter, player);
-		Reply cellReply = cellListener.listen(command, parameter, player);
+		Reply inventoryReply = inventoryListener.listen(command, parameter);
+		Reply cellReply = cellListener.listen(command, parameter);
 
 		Reply[] replies = {systemReply, battleReply, movementReply, inventoryReply, cellReply};
 

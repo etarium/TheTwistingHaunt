@@ -10,7 +10,6 @@ public class MovementListener {
 		MovementService system = new MovementService();
 
 		String output = "";
-		//String upperOutput = UIMain.player.currentCell.getDescription();
 		String failedMovementOutput = "You'd like to go that way, wouldn't you?";
 		String newUpperOutput = "";
 		boolean isSuccessful = true;
