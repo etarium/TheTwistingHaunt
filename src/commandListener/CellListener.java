@@ -2,7 +2,6 @@ package commandListener;
 
 import gameplay.commandServices.CellService;
 import pojos.entity.PlayerEntity;
-import utilities.InputParser;
 import utilities.Logs;
 
 public class CellListener {
@@ -16,20 +15,14 @@ public class CellListener {
 		switch(command) {
 
 		case "/look":
-
+		case "/inspect":
 			//look at room
 			if (parameter == null) {
-				output = system.inspectRoom();
+				output = system.inspectCell();
 			} //inspect object of command
 			else {
-				Object looked = InputParser.parseParameter(parameter);
-				output = system.inspectItem();
+				output = system.inspectItem(parameter);
 			}
-			break;
-
-		case "/inspect":
-			output = system.inspectCell();
-
 			break;
 			
 		default:

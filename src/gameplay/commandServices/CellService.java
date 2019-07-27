@@ -1,10 +1,7 @@
 package gameplay.commandServices;
 
 import pojos.entity.PlayerEntity;
-import pojos.environment.Cell;
-import pojos.items.ConsumableItem;
-import pojos.items.Item;
-import pojos.items.WeaponItem;
+import pojos.environment.InspectableObjects;
 import uiView.UIMain;
 import utilities.Logs;
 
@@ -24,47 +21,32 @@ public class CellService {
 			output = "You search long and hard, but your effort turns up nothing of interest.";
 		}
 		else {
-			output = "By your sharp eyes or by good fortune, you find " + player.getCurrentCell().getInspectableObjects() + "!";
+			String objects = "";
+			for(InspectableObjects item : player.getCurrentCell().getInspectableObjects()) {
+				if(objects.equals("")) {
+					objects = item.getName();
+				} else {
+					objects = objects + ", " + item.getName();
+				}
+			}
+			output = "By your sharp eyes or by good fortune, you find " + objects + "!";
 		}
 
 		return output;
 	}
 
-	public String inspectRoom() {
-		/*
-		 * TODO
-		for(Cell cell : cells) {
-			if(cell.getLocation().getX() == player.getLocation().getX() &&
-					cell.getLocation().getY() == player.getLocation().getY() &&
-					cell.getLocation().getZ() == player.getLocation().getZ()) {
-				location = cells.indexOf(cell);
-				output = cell.getDescription();
+	public String inspectItem(String param) {
+		String output = "";
+
+		for(InspectableObjects item : player.getCurrentCell().getInspectableObjects()) {
+			if(item.getName().equalsIgnoreCase(param)) {
+				output = item.getDescription();
 				break;
+			} else {
+				output = "You can look all day, but you still won't find it, " + this.player.getEntityClass().getName() + ".";
 			}
 		}
-		 */
-		return "";
-	}
 
-	public String inspectItem() {
-		//TODO
-		/*
-		 * if (looked == null) {
-					output = "You can look all day, but you still won't find it, " + this.player.getName() + ".";
-				}
-				else if(looked instanceof ConsumableItem) {
-					output = ((ConsumableItem) looked).getDescription();
-				}
-				else if(looked instanceof WeaponItem ) {
-					output = ((WeaponItem) looked).getDescription();
-				}
-				else if(looked instanceof Item) {
-					output = ((Item) looked).getDescription();
-
-				}
-
-			}
-		 */
-		return "";
+		return output;
 	}
 }
