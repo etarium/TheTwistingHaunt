@@ -1,7 +1,6 @@
 package gameplay.commandServices;
 
 import pojos.items.enums.ArmorMaterial;
-import pojos.items.enums.ArmorType;
 import pojos.items.enums.WeaponType;
 import uiView.UIMain;
 
