@@ -1,5 +1,8 @@
 package gameplay.commandServices;
 
+import pojos.items.enums.ArmorMaterial;
+import pojos.items.enums.ArmorType;
+import pojos.items.enums.WeaponType;
 import uiView.UIMain;
 
 public class PlayerService {
@@ -252,7 +255,43 @@ public class PlayerService {
 		return"";
 	}
 	
-	private void searchInventory() {
-		//TODO
+	public String getStatus() {
+		StringBuilder output = new StringBuilder();
+		
+		output.append(String.format("%-25s", "Name: " + UIMain.player.getName()));
+		output.append(String.format("%10s", "Class: " + UIMain.player.getEntityClass().getName()));
+		output.append(String.format("%20s", "Level: " + UIMain.player.getLevel()));
+		output.append("\n\n\n");
+		output.append(String.format("%-5s",  "HP: " + UIMain.player.getStats().getHp()));
+		output.append(String.format("%15s",  "SP: " + UIMain.player.getStats().getSp()));
+		output.append(String.format("%20s",  "EVA: " + UIMain.player.getStats().getEva()));
+		output.append(String.format("%14s",  "STA: " + UIMain.player.getStats().getSta()));
+		output.append("\n\n\n");
+		output.append(String.format("%-5s",  "ATK: " + UIMain.player.getStats().getAtk()));
+		output.append(String.format("%15s",  "DEF: " + UIMain.player.getStats().getDef()));
+		output.append(String.format("%19s",  "INT: " + UIMain.player.getStats().getIntel()));
+		output.append(String.format("%15s",  "AGI: " + UIMain.player.getStats().getAgi()));
+		output.append("\n\n\n");
+		output.append(String.format("%-5s",  "SP ATK: " + UIMain.player.getStats().getSpatk()));
+		output.append(String.format("%15s",  "SP DEF: " + UIMain.player.getStats().getSpdef()));
+		output.append(String.format("%15s",  "CHA: " + UIMain.player.getStats().getCha()));
+		output.append(String.format("%15s",  "ACC: " + UIMain.player.getStats().getAcc()));
+		output.append("\n\n\n");
+		output.append("Available Weapon Types: ");
+		for(WeaponType weapon : UIMain.player.getWeaponType()) {
+			output.append(weapon.toString() + ", ");
+		}
+		output.deleteCharAt(output.length()-2);
+		output.append("\n\n\n");
+		output.append("Available Armor Types: ");
+		for(ArmorMaterial armor : UIMain.player.getArmorType()) {
+			output.append(armor.toString() + ", ");
+		}
+		output.deleteCharAt(output.length()-2);
+		output.append("\n\n\n");
+		output.append(String.format("%-25s", "XP: " + UIMain.player.getXp()));
+		output.append(String.format("%10s", "XP to Next Level: " + UIMain.player.getXpToNextLevel()));
+		
+		return output.toString();
 	}
 }
