@@ -13,6 +13,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import commandListener.Init;
+import uiView.classes.CharacterCreateWindow;
 import uiView.classes.GUI_Client;
 import uiView.classes.LoadGameWindow;
 import uiView.classes.MainMenu;
@@ -37,9 +38,10 @@ public class UIMain {
 		MainMenu menu = new MainMenu();
 		boolean nGame = menu.getNGame();
 		if(nGame == true){//open new game window
-			NewGameWindow window = new NewGameWindow();	            
+			//NewGameWindow window = new NewGameWindow();
+			CharacterCreateWindow window = new CharacterCreateWindow();
 			player = window.getNewPlayer();
-
+			//new CharacterCreateWindow();
 		}
 		else{   //load game
 			new LoadGameWindow();
