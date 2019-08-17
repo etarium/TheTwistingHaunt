@@ -1,12 +1,19 @@
 package gameplay.commandServices;
 
+import gameplay.StatModMethods.PlayerStatMethods;
 import pojos.items.enums.ArmorMaterial;
 import pojos.items.enums.WeaponType;
 import uiView.UIMain;
 
 public class PlayerService {
 	
+	PlayerStatMethods system = new PlayerStatMethods();
+	
 	public PlayerService() {
+	}
+	
+	public String rest() {
+		return "Your HP and SP have been restored! \n" + system.fullHP() + "\n" + system.fullSP(); 
 	}
 	
 	public String takeItem(String parameter) {

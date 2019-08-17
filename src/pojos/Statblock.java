@@ -7,6 +7,8 @@ public class Statblock {
 
 	int hp;
 	int sp;
+	int currentHP;
+	int currentSP;
 	int atk;
 	int def;
 	int spatk;
@@ -21,6 +23,8 @@ public class Statblock {
 	public Statblock() {
 		this.hp = 0;
 		this.sp = 0;
+		this.currentHP = 0;
+		this.currentSP = 0;
 		this.atk = 0;
 		this.def = 0;
 		this.spatk = 0;
@@ -48,6 +52,22 @@ public class Statblock {
 		this.sta = sta;
 		this.agi = agi;
 		this.acc = acc;
+	}
+
+	public int getCurrentHP() {
+		return currentHP;
+	}
+
+	public void setCurrentHP(int currentHP) {
+		this.currentHP = currentHP;
+	}
+
+	public int getCurrentSP() {
+		return currentSP;
+	}
+
+	public void setCurrentSP(int currentSP) {
+		this.currentSP = currentSP;
 	}
 
 	public int getHp() {

@@ -1,10 +1,10 @@
 package pojos.entity.enums;
 
 public enum EntityClassEnum {
-	MAGE,
+	MAGE, 
 	WARRIOR,
 	THIEF,
-	ROGUE,
+	ROGUE, // combine with thief
 	HUNTER,
 	DRUID,
 	BARD,
@@ -12,4 +12,5 @@ public enum EntityClassEnum {
 	CLERIC,
 	WIZARD,
 	PRIEST
+	// what about like a fairy or a spirit?
 }
