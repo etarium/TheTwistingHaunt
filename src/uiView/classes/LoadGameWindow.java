@@ -115,7 +115,7 @@ public class LoadGameWindow extends GameWindow{
 
 		label.setBounds(bounds);
 		label.setForeground(textColor);
-		label.setFont(gameFont);		
+		label.setFont(smallMenuFont);	
 
 		button.setBounds(bounds);
 		button.setOpaque(false);
@@ -198,7 +198,7 @@ public class LoadGameWindow extends GameWindow{
 				JLabel iLabel = new JLabel(saveGameName);
 				iLabel.setBounds(bounds);
 				iLabel.setForeground(backgroundColor);
-				iLabel.setFont(gameFont);
+				iLabel.setFont(smallMenuFont);
 
 				JButton iButton = new JButton();
 				iButton.setBounds(bounds);

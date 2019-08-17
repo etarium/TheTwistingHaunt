@@ -43,23 +43,28 @@ public class GameWindow{
 	public static Color backgroundColor = new Color(26,23,1);
 	public static Color textColor = new Color(107,93,3);
 
-	protected float gameFontSize = 0.5625f * SCREEN_WIDTH / 50;
+	protected float smallMenuFontSize = 0.5625f * SCREEN_WIDTH / 50;
+	protected float gameFontSize = 0.7625f * SCREEN_WIDTH / 50;
 	protected float titleFontSize = WINDOW_WIDTH/25;
 	protected float menuFontSize = (float)(titleFontSize * (.8));
 	protected float helpFontSize = (float)(titleFontSize / 3.5);
 
 	private String dir = "src/uiView/resources/fonts/";
-	private String fontFile = "Px437_IBM_Conv.ttf";
+	private String gameFontFile = "Px437_IBM_VGA9.ttf";
+	private String menuFontFile = "Px437_IBM_Conv.ttf";
 	//TODO: create an options page that lets a user choose a highly readable font
 	//private String fontFile = "SFNSText.ttf";
-	private String fontPath = dir + fontFile;
+	private String gameFontPath = dir + gameFontFile;
+	private String menuFontPath = dir + menuFontFile;
 
-	protected Font defaultFont = this.defineFont(fontPath);
+	protected Font mainMenuFont = this.defineFont(menuFontPath);
+	protected Font mainGameFont = this.defineFont(gameFontPath);
 
-	public Font gameFont = defaultFont.deriveFont(gameFontSize);
-	public Font titleFont = defaultFont.deriveFont(titleFontSize);
-	public Font menuFont = defaultFont.deriveFont(menuFontSize);
-	public Font helpFont = defaultFont.deriveFont(helpFontSize);
+	public Font gameFont = mainGameFont.deriveFont(gameFontSize);
+	public Font titleFont = mainMenuFont.deriveFont(titleFontSize);
+	public Font menuFont = mainMenuFont.deriveFont(menuFontSize);
+	public Font helpFont = mainGameFont.deriveFont(helpFontSize);
+	public Font smallMenuFont = mainMenuFont.deriveFont(smallMenuFontSize);
 
 	protected static final int THICC = 4;
 	protected static final int MED = 2;
@@ -142,7 +147,7 @@ public class GameWindow{
 	
 	public JLabel setMenuLabel(String title) {
 		JLabel label = new JLabel(title);
-		label.setFont(menuFont);
+		label.setFont(mainMenuFont);
 		label.setForeground(Color.RED);
 		label.setBackground(textColor);
 		label.setVerticalTextPosition(SwingConstants.CENTER);
