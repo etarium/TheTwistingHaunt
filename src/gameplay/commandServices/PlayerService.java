@@ -9,6 +9,11 @@ public class PlayerService {
 	public PlayerService() {
 	}
 	
+	public String rest() {
+		
+		return "Your HP and SP have been restored!";
+	}
+	
 	public String takeItem(String parameter) {
 		//TODO
 		/*

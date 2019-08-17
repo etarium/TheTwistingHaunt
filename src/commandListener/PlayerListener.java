@@ -42,6 +42,10 @@ public class PlayerListener {
 			output = system.getPlayerStats();
 			break;
 			
+		case "/rest":
+			output = system.rest();
+			break;
+			
 		default:
 			Logs.LOGGER.info("Hit default case in commandListener.InventoryListener.listen with command " + command);
 			isSuccessful = false;
