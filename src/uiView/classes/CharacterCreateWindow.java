@@ -6,8 +6,8 @@ import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -31,7 +31,7 @@ public class CharacterCreateWindow extends GameWindow{
 
 	private PlayerInitializer playerinit = new PlayerInitializer();
 	private NewPlayerPayload newPlayerPayload = new NewPlayerPayload();
-	
+
 	public CharacterCreateWindow() {
 
 		window = new JFrame("Character Creation");
@@ -62,10 +62,6 @@ public class CharacterCreateWindow extends GameWindow{
 		int bounds_HEIGHT = bounds.getHeight();		
 
 		upOut = new JPanel();
-		JButton classLButton = new JButton("<");
-		JButton classRButton = new JButton(">");
-		JButton speciesLButton = new JButton("<");
-		JButton speciesRButton = new JButton(">");
 		bounds.add(upOut);
 
 		int upperOutWidth = (int)(bounds_WIDTH * .75);
@@ -105,7 +101,7 @@ public class CharacterCreateWindow extends GameWindow{
 		lowerOutput = new JTextArea();
 		input = new JTextField("Type your name to beging your adventure, hero.");
 
-		upOut.setLayout(new FlowLayout(FlowLayout.LEADING));
+		//upOut.setLayout(new FlowLayout(FlowLayout.LEADING));
 		out.setLayout(new FlowLayout(FlowLayout.LEADING));
 		in.setLayout(new FlowLayout(FlowLayout.LEADING));
 
@@ -117,11 +113,7 @@ public class CharacterCreateWindow extends GameWindow{
 		window.pack();
 		window.setVisible(true);
 
-
 		input.requestFocus();
-
-
-
 	}//end PlayWindow initializer
 
 	private void addOutputBox(Container out, JTextArea box) {
@@ -136,10 +128,9 @@ public class CharacterCreateWindow extends GameWindow{
 		box.setLineWrap(true);
 		box.setWrapStyleWord(true);
 
-
-
 		//initial text while database is loading
-		box.setText("New Character Creation Window Test");
+		box.setText("It appears the snarling tendrils of this fantasy world have not yet ensnared you, weary traveler." 
+				+ "\n\nDo tell, what is your profession?");
 
 		out.add(box);
 	}
@@ -156,14 +147,30 @@ public class CharacterCreateWindow extends GameWindow{
 		box.setLineWrap(true);
 		box.setWrapStyleWord(true);
 
-//		//initial text while database is loading
-//		while(UIMain.player.currentCell == null) {
-//			box.setText("Database loading...");
-//		}
-//		box.setText(UIMain.player.currentCell.getDescription());
-		box.setText("It appears the snarling tendrils of this fantasy world have not yet ensnared you, weary traveler." 
-					+ "\n\nDo tell, what is your profession?");
-		out.add(box);
+		//procedurally style the buttons
+		JLabel classLButton = new JLabel("<");
+		JLabel classRButton = new JLabel(">");
+		JLabel speciesLButton = new JLabel("<");
+		JLabel speciesRButton = new JLabel(">");
+
+		JPanel buttonContainer = new JPanel();
+		buttonContainer.setLocation(upOut.getX() /4, upOut.getY() /4);
+		buttonContainer.setBackground(backgroundColor);
+		classLButton.setForeground(textColor);
+		classLButton.setFont(menuFont);
+		classRButton.setForeground(textColor);
+		classRButton.setFont(menuFont);
+
+		speciesLButton.setForeground(textColor);
+		speciesLButton.setFont(menuFont);
+		speciesRButton.setForeground(textColor);
+		speciesRButton.setFont(menuFont);
+
+		buttonContainer.add(classLButton);
+		buttonContainer.add(classRButton);
+		buttonContainer.add(speciesLButton);
+		buttonContainer.add(speciesRButton);
+		upOut.add(buttonContainer);
 	}
 
 	private void addInputBox(Container in, JTextField box) {
@@ -173,7 +180,6 @@ public class CharacterCreateWindow extends GameWindow{
 		box.setFont(gameFont);
 		box.setHighlighter(null);
 		box.setPreferredSize(in.getSize());
-
 
 		box.setFocusTraversalKeysEnabled(false);
 		box.addKeyListener(new KeyListener() {
@@ -188,12 +194,15 @@ public class CharacterCreateWindow extends GameWindow{
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == e.VK_ENTER) {
 					enterPressed = true;
-					UIMain.player.setName(input.getText());
-					//newPlayerPayload.setClassName(classEnum);
-					UIMain.player = playerinit.initializePlayer(true, newPlayerPayload);
-					
-					Logs.LOGGER.info("Character Creation Character Name: " + UIMain.player.getName());
-					window.dispose();
+					if(!input.getText().equals("/quit")) {
+						UIMain.player.setName(input.getText());
+						UIMain.player = playerinit.initializePlayer(true, newPlayerPayload);
+
+						Logs.LOGGER.info("Character Creation Character Name: " + UIMain.player.getName());
+						window.dispose();
+					} else {
+						window.dispose();
+					}
 				}
 			}
 
@@ -249,12 +258,12 @@ public class CharacterCreateWindow extends GameWindow{
 		return inGUI();
 
 	}
-	
+
 	public PlayerEntity getNewPlayer() {
 		Logs.LOGGER.info("NewGameWindow.getNewPlayer() " + UIMain.player);
 		return UIMain.player;
 	} 
-	
+
 	public void exitWindow() {
 		window.dispose();
 	}
