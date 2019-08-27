@@ -2,11 +2,13 @@ package uiView.classes;
 
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -33,14 +35,14 @@ public class CharacterCreateWindow extends GameWindow{
 	private NewPlayerPayload newPlayerPayload = new NewPlayerPayload();
 
 	public CharacterCreateWindow() {
-		
+
 		window = new JFrame("Character Creation");
 		window.setPreferredSize(SCREEN_DIM);
 		window.setSize(SCREEN_DIM);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setLayout(null);
 		window.setMaximumSize(window.getSize());
-		
+
 		con = window.getContentPane();
 		con.setLayout(null);
 		JPanel orig_bounds = new JPanel();
@@ -49,7 +51,7 @@ public class CharacterCreateWindow extends GameWindow{
 		orig_bounds.setBorder(thiccLineBorder);
 		orig_bounds.setLayout(null);
 		con.add(orig_bounds);
-		
+
 		JPanel bounds = new JPanel();
 		int half_buffer = (int)(BUFFER / 2);
 		bounds.setBounds(half_buffer, half_buffer, SCREEN_WIDTH - BUFFER, SCREEN_HEIGHT -  BUFFER - BUFFER);
@@ -57,7 +59,7 @@ public class CharacterCreateWindow extends GameWindow{
 		bounds.setBorder(thinLineBorder);
 		bounds.setLayout(null);
 		orig_bounds.add(bounds);
-		
+
 		int bounds_WIDTH = bounds.getWidth();
 		int bounds_HEIGHT = bounds.getHeight();		
 
@@ -72,7 +74,7 @@ public class CharacterCreateWindow extends GameWindow{
 		upOut.setBounds(upperOutBufferWidth,upperOutBufferHeight, upperOutWidth, upperOutHeight);
 		upOut.setBackground(backgroundColor);
 		upOut.setBorder(thiccLineBorder);
-		
+
 		out = new JPanel();
 		bounds.add(out);
 
@@ -85,8 +87,8 @@ public class CharacterCreateWindow extends GameWindow{
 		out.setPreferredSize(out.getSize());
 		out.setBackground(backgroundColor);
 		out.setBorder(medLineBorder);
-		
-		
+
+
 		in = new JPanel();
 		bounds.add(in);
 
@@ -96,27 +98,27 @@ public class CharacterCreateWindow extends GameWindow{
 		in.setBounds(outBufferWidth,inBufferHeight,outWidth, inHeight);
 		in.setBackground(backgroundColor);
 		in.setBorder(medLineBorder);
-		
+
 		upperOutput = new JTextArea();
 		lowerOutput = new JTextArea();
 		input = new JTextField("Type your name to begin your adventure, hero.");
-		
-		upOut.setLayout(new FlowLayout(FlowLayout.LEADING));
+
+		upOut.setLayout(new GridLayout(2,3));
 		out.setLayout(new FlowLayout(FlowLayout.LEADING));
 		in.setLayout(new FlowLayout(FlowLayout.LEADING));
 
 		addUpperOutputBox(upOut, outBufferHeight, outBufferWidth);
 		addOutputBox(out, lowerOutput);
 		addInputBox(in,input);
-		
+
 		window.setResizable(false);
 		window.pack();
 		window.setVisible(true);
-		
+
 
 		input.requestFocus();
-		
-		
+
+
 	}//end initializer
 
 	private void addOutputBox(Container out, JTextArea box) {
@@ -144,18 +146,40 @@ public class CharacterCreateWindow extends GameWindow{
 		JButton classRButton = new JButton(">");
 		JButton speciesLButton = new JButton("<");
 		JButton speciesRButton = new JButton(">");
-		JButton[] buttonArray = new JButton[] {classLButton, classRButton, speciesLButton, speciesRButton};
-		JPanel panel = new JPanel();
-		panel.setBackground(backgroundColor);
-		panel.setLayout(new GridLayout());
-		for (JButton button : buttonArray) {	
-			button.setForeground(textColor);
-			button.setBackground(backgroundColor);
-			button.setFont(smallMenuFont);
-			panel.add(button);
-		}
-		
-		out.add(panel);
+
+		//class select
+		JPanel classPanel = new JPanel();
+		classPanel.setBackground(backgroundColor);
+		classPanel.setLayout(new GridLayout());
+		classLButton.setForeground(textColor);
+		classLButton.setBackground(backgroundColor);
+		classLButton.setFont(smallMenuFont);
+		classLButton.setOpaque(true);
+		classLButton.setBorderPainted(false);
+		classRButton.setForeground(textColor);
+		classRButton.setBackground(backgroundColor);
+		classRButton.setFont(smallMenuFont);
+		classPanel.add(classLButton);
+		classPanel.add(classRButton);
+
+		//species select
+		JPanel speciesPanel = new JPanel();
+		speciesPanel.setBackground(backgroundColor);
+		speciesPanel.setForeground(textColor);
+		speciesPanel.setLayout(new GridLayout());
+		speciesPanel.setAlignmentY(height / 2);
+		speciesLButton.setForeground(textColor);
+		speciesLButton.setBackground(backgroundColor);
+		speciesLButton.setFont(smallMenuFont);
+		speciesRButton.setForeground(textColor);
+		speciesRButton.setBackground(backgroundColor);
+		speciesRButton.setFont(smallMenuFont);
+		speciesPanel.add(speciesLButton);
+		speciesPanel.add(speciesRButton);
+
+
+		out.add(classPanel);
+		out.add(speciesPanel);
 	}
 
 	private void addInputBox(Container in, JTextField box) {
@@ -193,7 +217,7 @@ public class CharacterCreateWindow extends GameWindow{
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if(input.getText().equals("Type your name to begin your adventure, hero.")) {
-					
+
 				}
 			}});
 
