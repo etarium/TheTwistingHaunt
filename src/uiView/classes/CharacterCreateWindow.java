@@ -2,13 +2,13 @@ package uiView.classes;
 
 import java.awt.Container;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Arrays;
+import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,6 +18,8 @@ import javax.swing.JTextField;
 import gameplay.newGame.NewPlayerPayload;
 import gameplay.newGame.PlayerInitializer;
 import pojos.entity.PlayerEntity;
+import pojos.entity.enums.EntityClassEnum;
+import pojos.entity.enums.Species;
 import uiView.UIMain;
 import utilities.Logs;
 
@@ -107,7 +109,7 @@ public class CharacterCreateWindow extends GameWindow{
 		out.setLayout(new FlowLayout(FlowLayout.LEADING));
 		in.setLayout(new FlowLayout(FlowLayout.LEADING));
 
-		addUpperOutputBox(upOut, outBufferHeight, outBufferWidth);
+		addUpperOutputBox(upOut);
 		addOutputBox(out, lowerOutput);
 		addInputBox(in,input);
 
@@ -140,41 +142,42 @@ public class CharacterCreateWindow extends GameWindow{
 		out.add(box);
 	}
 
-	private void addUpperOutputBox(Container out, int height, int width) {
+	private void addUpperOutputBox(Container out) {
 		JButton classLButton = new JButton("<");
-		//classLButton.setLocation(height /3 , width / 4);
 		JButton classRButton = new JButton(">");
+		JTextArea className = new JTextArea(""+getClasses().get(0));
 		JButton speciesLButton = new JButton("<");
 		JButton speciesRButton = new JButton(">");
-
-		//class select
+		JTextArea speciesName = new JTextArea( ""+getSpecies().get(0));
+		JButton[] buttonArray = new JButton[] { classLButton, classRButton, speciesLButton, speciesRButton };
 		JPanel classPanel = new JPanel();
+		JPanel speciesPanel = new JPanel();
+		
 		classPanel.setBackground(backgroundColor);
-		classPanel.setLayout(new GridLayout());
-		classLButton.setForeground(textColor);
-		classLButton.setBackground(backgroundColor);
-		classLButton.setFont(smallMenuFont);
-		classLButton.setOpaque(true);
-		classLButton.setBorderPainted(false);
-		classRButton.setForeground(textColor);
-		classRButton.setBackground(backgroundColor);
-		classRButton.setFont(smallMenuFont);
+		speciesPanel.setBackground(backgroundColor);
+		className.setBackground(backgroundColor);
+		className.setForeground(textColor);
+		className.setFont(smallMenuFont);
+		speciesName.setBackground(backgroundColor);
+		speciesName.setForeground(textColor);
+		speciesName.setFont(smallMenuFont);
+		
+		
+		for(JButton button : buttonArray) {
+			button.setForeground(textColor);
+			button.setBackground(backgroundColor);
+			button.setFont(smallMenuFont);
+			button.setOpaque(true);
+			button.setBorderPainted(false);	
+		}
+
 		classPanel.add(classLButton);
+		classPanel.add(className);
 		classPanel.add(classRButton);
 
 		//species select
-		JPanel speciesPanel = new JPanel();
-		speciesPanel.setBackground(backgroundColor);
-		speciesPanel.setForeground(textColor);
-		speciesPanel.setLayout(new GridLayout());
-		speciesPanel.setAlignmentY(height / 2);
-		speciesLButton.setForeground(textColor);
-		speciesLButton.setBackground(backgroundColor);
-		speciesLButton.setFont(smallMenuFont);
-		speciesRButton.setForeground(textColor);
-		speciesRButton.setBackground(backgroundColor);
-		speciesRButton.setFont(smallMenuFont);
 		speciesPanel.add(speciesLButton);
+		speciesPanel.add(speciesName);
 		speciesPanel.add(speciesRButton);
 
 
@@ -194,8 +197,6 @@ public class CharacterCreateWindow extends GameWindow{
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
@@ -216,9 +217,6 @@ public class CharacterCreateWindow extends GameWindow{
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(input.getText().equals("Type your name to begin your adventure, hero.")) {
-
-				}
 			}});
 
 
@@ -273,6 +271,14 @@ public class CharacterCreateWindow extends GameWindow{
 		Logs.LOGGER.info("NewGameWindow.getNewPlayer() " + UIMain.player);
 		return UIMain.player;
 	} 
+	
+	public List<EntityClassEnum> getClasses() {
+		return Arrays.asList(EntityClassEnum.values());
+	}
+	
+	public List<Species> getSpecies() {
+		return Arrays.asList(Species.values());
+	}
 
 	public void exitWindow() {
 		window.dispose();

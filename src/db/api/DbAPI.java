@@ -30,4 +30,5 @@ public class DbAPI {
 		Logs.LOGGER.info(DbAPI.class + " called getSelectedClass(className)");
 		return selectedClass;
 	}
+	
 }
