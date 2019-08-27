@@ -2,6 +2,7 @@ package uiView.classes;
 
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -139,13 +140,14 @@ public class CharacterCreateWindow extends GameWindow{
 
 	private void addUpperOutputBox(Container out, int height, int width) {
 		JButton classLButton = new JButton("<");
+		//classLButton.setLocation(height /3 , width / 4);
 		JButton classRButton = new JButton(">");
 		JButton speciesLButton = new JButton("<");
 		JButton speciesRButton = new JButton(">");
 		JButton[] buttonArray = new JButton[] {classLButton, classRButton, speciesLButton, speciesRButton};
 		JPanel panel = new JPanel();
 		panel.setBackground(backgroundColor);
-		panel.setLocation(height / 3, width / 2);
+		panel.setLayout(new GridLayout());
 		for (JButton button : buttonArray) {	
 			button.setForeground(textColor);
 			button.setBackground(backgroundColor);
@@ -190,7 +192,9 @@ public class CharacterCreateWindow extends GameWindow{
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-
+				if(input.getText().equals("Type your name to begin your adventure, hero.")) {
+					
+				}
 			}});
 
 
