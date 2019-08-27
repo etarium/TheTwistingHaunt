@@ -21,6 +21,7 @@ import utilities.Logs;
 public class CharacterCreateWindow extends GameWindow{	
 	static JFrame window;
 	Container con;
+	JPanel upOut, out, in;
 	static JTextArea upperOutput;
 	static JTextArea lowerOutput;
 	static JTextField input;
@@ -32,80 +33,88 @@ public class CharacterCreateWindow extends GameWindow{
 
 	public CharacterCreateWindow() {
 		
-		JPanel orig_bounds = new JPanel();
-		JPanel bounds = new JPanel();
-		JPanel upOut = new JPanel();
-		JPanel out = new JPanel();
-		JPanel in = new JPanel();
-
-		bounds.add(upOut);
-		bounds.add(out);
-		bounds.add(in);
-		
 		window = new JFrame("Character Creation");
 		window.setPreferredSize(SCREEN_DIM);
 		window.setSize(SCREEN_DIM);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setLayout(null);
 		window.setMaximumSize(window.getSize());
-
+		
 		con = window.getContentPane();
 		con.setLayout(null);
-		
+		JPanel orig_bounds = new JPanel();
 		orig_bounds.setBackground(backgroundColor);
 		orig_bounds.setBounds(0,0, SCREEN_WIDTH, SCREEN_HEIGHT);
 		orig_bounds.setBorder(thiccLineBorder);
 		orig_bounds.setLayout(null);
 		con.add(orig_bounds);
 		
+		JPanel bounds = new JPanel();
 		int half_buffer = (int)(BUFFER / 2);
 		bounds.setBounds(half_buffer, half_buffer, SCREEN_WIDTH - BUFFER, SCREEN_HEIGHT -  BUFFER - BUFFER);
 		bounds.setBackground(backgroundColor);
 		bounds.setBorder(thinLineBorder);
 		bounds.setLayout(null);
 		orig_bounds.add(bounds);
-
+		
 		int bounds_WIDTH = bounds.getWidth();
 		int bounds_HEIGHT = bounds.getHeight();		
+
+		upOut = new JPanel();
+		bounds.add(upOut);
 
 		int upperOutWidth = (int)(bounds_WIDTH * .75);
 		int upperOutHeight = (int)(bounds_HEIGHT * .375);
 		int upperOutBufferWidth = (int)((bounds_WIDTH - upperOutWidth)/2);
 		int upperOutBufferHeight = 0;
 
+		upOut.setBounds(upperOutBufferWidth,upperOutBufferHeight, upperOutWidth, upperOutHeight);
+		upOut.setBackground(backgroundColor);
+		upOut.setBorder(thiccLineBorder);
+		
+		out = new JPanel();
+		bounds.add(out);
+
 		int outWidth = (int)(bounds_WIDTH * .875);
 		int outHeight = (int)(bounds_HEIGHT * .5625);
 		int outBufferWidth = (int)((bounds_WIDTH - outWidth)/2);
 		int outBufferHeight = upperOutBufferHeight + upperOutHeight;
 
-	
-		upOut.setBounds(upperOutBufferWidth,upperOutBufferHeight, upperOutWidth, upperOutHeight);
-		upOut.setBackground(backgroundColor);
-		upOut.setBorder(thiccLineBorder);
-
 		out.setBounds(outBufferWidth,outBufferHeight,outWidth, outHeight);
 		out.setPreferredSize(out.getSize());
 		out.setBackground(backgroundColor);
 		out.setBorder(medLineBorder);
+		
+		
+		in = new JPanel();
+		bounds.add(in);
 
+		int inHeight = (int)(bounds_HEIGHT * .0625);
+		int inBufferHeight = outBufferHeight + outHeight;
+
+		in.setBounds(outBufferWidth,inBufferHeight,outWidth, inHeight);
 		in.setBackground(backgroundColor);
 		in.setBorder(medLineBorder);
 		
+		upperOutput = new JTextArea();
 		lowerOutput = new JTextArea();
 		input = new JTextField("Type your name to begin your adventure, hero.");
-
+		
+		upOut.setLayout(new FlowLayout(FlowLayout.LEADING));
 		out.setLayout(new FlowLayout(FlowLayout.LEADING));
 		in.setLayout(new FlowLayout(FlowLayout.LEADING));
 
-		addUpperOutputBox(upOut, upperOutHeight, upperOutWidth);
+		addUpperOutputBox(upOut, outBufferHeight, outBufferWidth);
 		addOutputBox(out, lowerOutput);
 		addInputBox(in,input);
-
+		
 		window.setResizable(false);
 		window.pack();
 		window.setVisible(true);
+		
 
 		input.requestFocus();
+		
 		
 	}//end initializer
 
