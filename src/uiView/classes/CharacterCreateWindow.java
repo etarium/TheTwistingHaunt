@@ -38,6 +38,10 @@ public class CharacterCreateWindow extends GameWindow{
 		JPanel out = new JPanel();
 		JPanel in = new JPanel();
 
+		bounds.add(upOut);
+		bounds.add(out);
+		bounds.add(in);
+		
 		window = new JFrame("Character Creation");
 		window.setPreferredSize(SCREEN_DIM);
 		window.setSize(SCREEN_DIM);
@@ -53,7 +57,6 @@ public class CharacterCreateWindow extends GameWindow{
 		orig_bounds.setBorder(thiccLineBorder);
 		orig_bounds.setLayout(null);
 		con.add(orig_bounds);
-
 		
 		int half_buffer = (int)(BUFFER / 2);
 		bounds.setBounds(half_buffer, half_buffer, SCREEN_WIDTH - BUFFER, SCREEN_HEIGHT -  BUFFER - BUFFER);
@@ -75,7 +78,7 @@ public class CharacterCreateWindow extends GameWindow{
 		int outBufferWidth = (int)((bounds_WIDTH - outWidth)/2);
 		int outBufferHeight = upperOutBufferHeight + upperOutHeight;
 
-		
+	
 		upOut.setBounds(upperOutBufferWidth,upperOutBufferHeight, upperOutWidth, upperOutHeight);
 		upOut.setBackground(backgroundColor);
 		upOut.setBorder(thiccLineBorder);
@@ -89,7 +92,7 @@ public class CharacterCreateWindow extends GameWindow{
 		in.setBorder(medLineBorder);
 		
 		lowerOutput = new JTextArea();
-		input = new JTextField("Type your name to beging your adventure, hero.");
+		input = new JTextField("Type your name to begin your adventure, hero.");
 
 		out.setLayout(new FlowLayout(FlowLayout.LEADING));
 		in.setLayout(new FlowLayout(FlowLayout.LEADING));
@@ -97,10 +100,6 @@ public class CharacterCreateWindow extends GameWindow{
 		addUpperOutputBox(upOut, upperOutHeight, upperOutWidth);
 		addOutputBox(out, lowerOutput);
 		addInputBox(in,input);
-		
-		bounds.add(upOut);
-		bounds.add(out);
-		bounds.add(in);
 
 		window.setResizable(false);
 		window.pack();
@@ -155,7 +154,6 @@ public class CharacterCreateWindow extends GameWindow{
 		box.setFont(gameFont);
 		box.setHighlighter(null);
 		box.setPreferredSize(in.getSize());
-
 		box.setFocusTraversalKeysEnabled(false);
 		box.addKeyListener(new KeyListener() {
 
