@@ -37,6 +37,8 @@ public class CharacterCreateWindow extends GameWindow{
 	static JTextField input;
 
 	static boolean enterPressed = false;
+	int classCounter = 0;
+	int speciesCounter = 0;
 
 	private PlayerInitializer playerinit = new PlayerInitializer();
 	private NewPlayerPayload newPlayerPayload = new NewPlayerPayload();
@@ -148,8 +150,6 @@ public class CharacterCreateWindow extends GameWindow{
 	}
 
 	private void addUpperOutputBox(Container out) {
-		int speciesCounter = 0;
-		int classCounter = 0;
 
 		JButton classLButton = new JButton("<");
 		JButton classRButton = new JButton(">");
@@ -177,7 +177,7 @@ public class CharacterCreateWindow extends GameWindow{
 			button.setOpaque(true);
 			button.setBorderPainted(false);	
 		}
-		addListeners(classLButton, classRButton, speciesLButton, speciesRButton, classCounter, speciesCounter);
+		addListeners(classLButton, classRButton, speciesLButton, speciesRButton, className, speciesName);
 
 		classPanel.add(classLButton);
 		classPanel.add(className);
@@ -291,23 +291,23 @@ public class CharacterCreateWindow extends GameWindow{
 	public void exitWindow() {
 		window.dispose();
 	}
-	private void addListeners(JButton classLButton, JButton classRButton, JButton speciesLButton, JButton speciesRButton, int classCounter, int speciesCounter) {
+	private void addListeners(JButton classLButton, JButton classRButton, JButton speciesLButton, JButton speciesRButton, JTextArea className, JTextArea speciesName) {
 		JButton[] buttonArray = new JButton[] { classLButton, classRButton, speciesLButton, speciesRButton };
 		
 		classLButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int iterator = classCounter;
-				//move class list back one
-				iterator = backOneClass(iterator);
+				className.setText(backOneClass());
+				className.update(className.getGraphics());
 			}
 		});
 
 		classRButton.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//move class list forward one
+				className.setText(forwardOneClass());
+				className.update(className.getGraphics());
 			}
 
 		}); 
@@ -316,6 +316,8 @@ public class CharacterCreateWindow extends GameWindow{
 			@Override
 			public void actionPerformed(ActionEvent evt) {
 				//move species list back one
+				speciesName.setText(backOneSpecies());
+				speciesName.update(speciesName.getGraphics());
 			}
 
 		});
@@ -324,6 +326,8 @@ public class CharacterCreateWindow extends GameWindow{
 			@Override
 			public void actionPerformed(ActionEvent evt) {
 				//move species list forward one
+				speciesName.setText(forwardOneSpecies());
+				speciesName.update(speciesName.getGraphics());
 			}
 		});
 
@@ -354,19 +358,45 @@ public class CharacterCreateWindow extends GameWindow{
 		});
 	}
 	
-	public int backOneClass(int classCounter) {
-		JTextArea activeClass = new JTextArea();
+	public String backOneClass() {
 		if(classCounter == 0) {
 			classCounter = getClasses().size()-1;
-			activeClass = new JTextArea(""+getClasses().get(getClasses().size()-1));
-
-			Logs.LOGGER.info("Active Class Select is " + activeClass.getText());
-
 		} else {
 			classCounter = classCounter -1;
-			activeClass = new JTextArea(""+getClasses().get(classCounter));
-			Logs.LOGGER.info("Active Class Select is " + activeClass.getText());
 		}
-		return classCounter;
+		Logs.LOGGER.info("Back Class Select is " + getClasses().get(classCounter).toString());
+		
+		return getClasses().get(classCounter).toString();
+	}
+	public String forwardOneClass() {
+		if(classCounter == getClasses().size()-1) {
+			classCounter = 0;
+		} else {
+			classCounter = classCounter + 1;
+		}
+
+		Logs.LOGGER.info("Forward Class Select is " + getClasses().get(classCounter).toString());		
+		return getClasses().get(classCounter).toString();
+	}
+	public String backOneSpecies() {
+		if(speciesCounter == 0) {
+			speciesCounter = getSpecies().size()-1;
+
+		} else {
+			speciesCounter = speciesCounter -1;	
+		}
+		
+		Logs.LOGGER.info("Back Species Select is " + getSpecies().get(speciesCounter).toString());
+		return getSpecies().get(speciesCounter).toString();
+	}
+	public String forwardOneSpecies() {
+			if(speciesCounter == getSpecies().size()-1) {
+				speciesCounter = 0;
+			} else {
+				speciesCounter = speciesCounter + 1;
+			}
+
+			Logs.LOGGER.info("Forward Species Select is " + getSpecies().get(speciesCounter).toString());		
+			return getSpecies().get(speciesCounter).toString();
 	}
 }
