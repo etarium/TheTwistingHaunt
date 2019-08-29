@@ -1,9 +1,12 @@
 package uiView.classes;
 
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Arrays;
@@ -14,6 +17,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import gameplay.newGame.NewPlayerPayload;
 import gameplay.newGame.PlayerInitializer;
@@ -143,16 +148,18 @@ public class CharacterCreateWindow extends GameWindow{
 	}
 
 	private void addUpperOutputBox(Container out) {
+		int speciesCounter = 0;
+		int classCounter = 0;
+
 		JButton classLButton = new JButton("<");
 		JButton classRButton = new JButton(">");
-		JTextArea className = new JTextArea(""+getClasses().get(0));
+		JTextArea className = new JTextArea(""+getClasses().get(classCounter));
 		JButton speciesLButton = new JButton("<");
 		JButton speciesRButton = new JButton(">");
-		JTextArea speciesName = new JTextArea( ""+getSpecies().get(0));
+		JTextArea speciesName = new JTextArea( ""+getSpecies().get(speciesCounter));
 		JButton[] buttonArray = new JButton[] { classLButton, classRButton, speciesLButton, speciesRButton };
 		JPanel classPanel = new JPanel();
 		JPanel speciesPanel = new JPanel();
-		
 		classPanel.setBackground(backgroundColor);
 		speciesPanel.setBackground(backgroundColor);
 		className.setBackground(backgroundColor);
@@ -161,8 +168,8 @@ public class CharacterCreateWindow extends GameWindow{
 		speciesName.setBackground(backgroundColor);
 		speciesName.setForeground(textColor);
 		speciesName.setFont(smallMenuFont);
-		
-		
+
+
 		for(JButton button : buttonArray) {
 			button.setForeground(textColor);
 			button.setBackground(backgroundColor);
@@ -170,6 +177,7 @@ public class CharacterCreateWindow extends GameWindow{
 			button.setOpaque(true);
 			button.setBorderPainted(false);	
 		}
+		addListeners(classLButton, classRButton, speciesLButton, speciesRButton, classCounter, speciesCounter);
 
 		classPanel.add(classLButton);
 		classPanel.add(className);
@@ -271,16 +279,94 @@ public class CharacterCreateWindow extends GameWindow{
 		Logs.LOGGER.info("NewGameWindow.getNewPlayer() " + UIMain.player);
 		return UIMain.player;
 	} 
-	
+
 	public List<EntityClassEnum> getClasses() {
 		return Arrays.asList(EntityClassEnum.values());
 	}
-	
+
 	public List<Species> getSpecies() {
 		return Arrays.asList(Species.values());
 	}
 
 	public void exitWindow() {
 		window.dispose();
+	}
+	private void addListeners(JButton classLButton, JButton classRButton, JButton speciesLButton, JButton speciesRButton, int classCounter, int speciesCounter) {
+		JButton[] buttonArray = new JButton[] { classLButton, classRButton, speciesLButton, speciesRButton };
+		
+		classLButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int iterator = classCounter;
+				//move class list back one
+				iterator = backOneClass(iterator);
+			}
+		});
+
+		classRButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//move class list forward one
+			}
+
+		}); 
+
+		speciesLButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				//move species list back one
+			}
+
+		});
+
+		speciesRButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				//move species list forward one
+			}
+		});
+
+		for (JButton button : buttonArray) {
+			addChangeListener(button);
+		}
+
+	}
+
+	private void addChangeListener(JButton button) {
+		button.getModel().addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				if (button.getModel().isPressed() || button.getModel().isRollover()) {
+					button.setForeground(textColor.darker());
+					for (Component component : button.getComponents() ) {
+						component.setForeground(textColor.darker());
+						button.add(component);
+					}
+				} else {
+					button.setForeground(textColor);
+					for (Component component : button.getComponents() ) {
+						component.setForeground(textColor);
+						button.add(component);
+					}
+				}
+			}
+		});
+	}
+	
+	public int backOneClass(int classCounter) {
+		JTextArea activeClass = new JTextArea();
+		if(classCounter == 0) {
+			classCounter = getClasses().size()-1;
+			activeClass = new JTextArea(""+getClasses().get(getClasses().size()-1));
+
+			Logs.LOGGER.info("Active Class Select is " + activeClass.getText());
+
+		} else {
+			classCounter = classCounter -1;
+			activeClass = new JTextArea(""+getClasses().get(classCounter));
+			Logs.LOGGER.info("Active Class Select is " + activeClass.getText());
+		}
+		return classCounter;
 	}
 }
