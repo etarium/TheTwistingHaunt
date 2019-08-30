@@ -14,7 +14,9 @@ import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.*;
 
 import pojos.entity.EntityClassObject;
+import pojos.entity.SpeciesObject;
 import pojos.entity.enums.EntityClassEnum;
+import pojos.entity.enums.SpeciesEnum;
 import pojos.environment.Cell;
 import utilities.ConfigReader;
 import utilities.Logs;
@@ -78,4 +80,16 @@ public class DBConnector {
 		}
 		return null;
 	}
+	
+	public SpeciesObject getSpeciesByName(SpeciesEnum speciesName) {
+		MongoCollection<Document> speciesCollection = database.getCollection("Species");
+		Document speciesDocument = speciesCollection.find(eq("name", speciesName.toString())).first();
+		try {
+			return mapper.readValue(speciesDocument.toJson(), SpeciesObject.class);
+		} catch (IOException e) {
+			Logs.LOGGER.severe("Reading Entity Species Objects has failed.");
+		}
+		return null;
+	}
+
 }

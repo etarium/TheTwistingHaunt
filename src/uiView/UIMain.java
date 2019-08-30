@@ -7,16 +7,12 @@ import pojos.environment.Cell;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 
 import commandListener.Init;
+import uiView.classes.CharacterCreateWindow;
 import uiView.classes.GUI_Client;
 import uiView.classes.LoadGameWindow;
 import uiView.classes.MainMenu;
-import uiView.classes.NewGameWindow;
 import uiView.classes.PlayWindow;
 import utilities.Logs;
 
@@ -37,9 +33,8 @@ public class UIMain {
 		MainMenu menu = new MainMenu();
 		boolean nGame = menu.getNGame();
 		if(nGame == true){//open new game window
-			NewGameWindow window = new NewGameWindow();	            
+			CharacterCreateWindow window = new CharacterCreateWindow();
 			player = window.getNewPlayer();
-
 		}
 		else{   //load game
 			new LoadGameWindow();

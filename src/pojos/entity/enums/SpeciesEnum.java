@@ -1,6 +1,6 @@
 package pojos.entity.enums;
 
-public enum Species {
+public enum SpeciesEnum {
 
 	HUMAN,
 	DWARF,

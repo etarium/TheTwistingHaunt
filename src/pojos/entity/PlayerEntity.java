@@ -17,6 +17,7 @@ import pojos.items.enums.WeaponType;
 public class PlayerEntity extends Entity{
 	
 	EntityClassObject entityClass;
+	SpeciesObject species;
 	int numOfHands;
 	Statblock stats;
 	List<ArmorMaterial> armorType;
@@ -31,6 +32,13 @@ public class PlayerEntity extends Entity{
 	Location location;
 	public Cell currentCell;
 	
+	
+	public SpeciesObject getSpeciesObject() {
+		return species;
+	}
+	public void setSpecies(SpeciesObject species) {
+		this.species = species;
+	}
 	public Location getLocation() {
 		return location;
 	}

@@ -166,8 +166,6 @@ public class PlayWindow extends GameWindow{
 		box.setFont(gameFont);
 		box.setHighlighter(null);
 		box.setPreferredSize(in.getSize());
-		
-		
 		box.setFocusTraversalKeysEnabled(false);
 		box.addKeyListener(new KeyListener() {
 
