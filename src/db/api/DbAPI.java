@@ -4,7 +4,9 @@ import java.util.List;
 
 import db.repository.DBConnector;
 import pojos.entity.EntityClassObject;
+import pojos.entity.SpeciesObject;
 import pojos.entity.enums.EntityClassEnum;
+import pojos.entity.enums.SpeciesEnum;
 import pojos.environment.Cell;
 import utilities.Logs;
 
@@ -28,6 +30,12 @@ public class DbAPI {
 	public EntityClassObject getSelectedClass(EntityClassEnum className) {
 		EntityClassObject selectedClass = db.getClassByName(className);
 		Logs.LOGGER.info(DbAPI.class + " called getSelectedClass(className)");
+		return selectedClass;
+	}
+	
+	public SpeciesObject getSelectedSpecies(SpeciesEnum speciesName) {
+		SpeciesObject selectedClass = db.getSpeciesByName(speciesName);
+		Logs.LOGGER.info(DbAPI.class + " called getSelectedSpecies(speciesName)");
 		return selectedClass;
 	}
 	

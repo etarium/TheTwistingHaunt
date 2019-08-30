@@ -7,7 +7,7 @@ import pojos.Quest;
 import pojos.Ability;
 import pojos.Statblock;
 import pojos.entity.enums.Faction;
-import pojos.entity.enums.Species;
+import pojos.entity.enums.SpeciesEnum;
 import pojos.environment.Cell;
 import pojos.environment.Location;
 import pojos.items.ArmorItem;
@@ -18,7 +18,7 @@ import pojos.items.enums.WeaponType;
 public class PlayerEntity extends Entity{
 	
 	EntityClassObject entityClass;
-	Species species;
+	SpeciesEnum species;
 	int numOfHands;
 	Statblock stats;
 	List<ArmorMaterial> armorType;
@@ -34,10 +34,10 @@ public class PlayerEntity extends Entity{
 	public Cell currentCell;
 	
 	
-	public Species getSpecies() {
+	public SpeciesEnum getSpecies() {
 		return species;
 	}
-	public void setSpecies(Species species) {
+	public void setSpecies(SpeciesEnum species) {
 		this.species = species;
 	}
 	public Location getLocation() {

@@ -24,7 +24,7 @@ import gameplay.newGame.NewPlayerPayload;
 import gameplay.newGame.PlayerInitializer;
 import pojos.entity.PlayerEntity;
 import pojos.entity.enums.EntityClassEnum;
-import pojos.entity.enums.Species;
+import pojos.entity.enums.SpeciesEnum;
 import uiView.UIMain;
 import utilities.Logs;
 
@@ -32,6 +32,8 @@ public class CharacterCreateWindow extends GameWindow{
 	static JFrame window;
 	Container con;
 	JPanel upOut, out, in;
+	JTextArea className;
+	JTextArea speciesName;
 	static JTextArea upperOutput;
 	static JTextArea lowerOutput;
 	static JTextField input;
@@ -153,13 +155,14 @@ public class CharacterCreateWindow extends GameWindow{
 
 		JButton classLButton = new JButton("<");
 		JButton classRButton = new JButton(">");
-		JTextArea className = new JTextArea(""+getClasses().get(classCounter));
 		JButton speciesLButton = new JButton("<");
 		JButton speciesRButton = new JButton(">");
-		JTextArea speciesName = new JTextArea( ""+getSpecies().get(speciesCounter));
 		JButton[] buttonArray = new JButton[] { classLButton, classRButton, speciesLButton, speciesRButton };
 		JPanel classPanel = new JPanel();
 		JPanel speciesPanel = new JPanel();
+		
+		className = new JTextArea(""+getClasses().get(classCounter));
+		speciesName = new JTextArea( ""+getSpecies().get(speciesCounter));
 		classPanel.setBackground(backgroundColor);
 		speciesPanel.setBackground(backgroundColor);
 		className.setBackground(backgroundColor);
@@ -212,7 +215,9 @@ public class CharacterCreateWindow extends GameWindow{
 				if(e.getKeyCode() == e.VK_ENTER) {
 					enterPressed = true;
 					if(!input.getText().equals("/quit")) {
-						UIMain.player.setName(input.getText());
+						newPlayerPayload.setSpecies(getSpecies().get(speciesCounter));
+						newPlayerPayload.setClassName(getClasses().get(classCounter));
+						newPlayerPayload.setName(input.getText());
 						UIMain.player = playerinit.initializePlayer(true, newPlayerPayload);
 
 						Logs.LOGGER.info("Character Creation Character Name: " + UIMain.player.getName());
@@ -284,8 +289,8 @@ public class CharacterCreateWindow extends GameWindow{
 		return Arrays.asList(EntityClassEnum.values());
 	}
 
-	public List<Species> getSpecies() {
-		return Arrays.asList(Species.values());
+	public List<SpeciesEnum> getSpecies() {
+		return Arrays.asList(SpeciesEnum.values());
 	}
 
 	public void exitWindow() {
@@ -338,7 +343,7 @@ public class CharacterCreateWindow extends GameWindow{
 	}
 
 	private void addChangeListener(JButton button) {
-		button.getModel().addChangeListener(new ChangeListener() {
+		button.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				if (button.getModel().isPressed() || button.getModel().isRollover()) {
