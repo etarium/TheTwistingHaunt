@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import pojos.Statblock;
-import pojos.entity.enums.SpeciesEnum;
 import pojos.entity.enums.Temperament;
 import pojos.items.Item;
 
@@ -15,7 +13,7 @@ public class Entity {
 	String name;
 	String description;
 	Temperament temperament;
-	SpeciesEnum species;
+	SpeciesObject species;
 	List<Item> inventory;
 	int level;
 	
@@ -37,10 +35,10 @@ public class Entity {
 	public void setTemperament(Temperament temperament) {
 		this.temperament = temperament;
 	}
-	public SpeciesEnum getSpecies() {
+	public SpeciesObject getSpecies() {
 		return species;
 	}
-	public void setSpecies(SpeciesEnum species) {
+	public void setSpecies(SpeciesObject species) {
 		this.species = species;
 	}
 	public List<Item> getInventory() {

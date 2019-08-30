@@ -36,8 +36,8 @@ public class NewPlayerPayload {
 		this.name = name;
 	}
 
-	public SpeciesEnum getSpecies() {
-		return species;
+	public SpeciesObject getSpecies() {
+		return speciesObject;
 	}
 
 	public void setSpecies(SpeciesEnum species) {

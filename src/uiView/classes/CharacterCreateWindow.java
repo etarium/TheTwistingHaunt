@@ -41,6 +41,8 @@ public class CharacterCreateWindow extends GameWindow{
 	static boolean enterPressed = false;
 	int classCounter = 0;
 	int speciesCounter = 0;
+	String newGameIntroText = "It appears the snarling tendrils of this fantasy world have not yet ensnared you, weary traveler." 
+			+ "\n\nDo tell, what is your profession?";
 
 	private PlayerInitializer playerinit = new PlayerInitializer();
 	private NewPlayerPayload newPlayerPayload = new NewPlayerPayload();
@@ -144,9 +146,8 @@ public class CharacterCreateWindow extends GameWindow{
 		box.setLineWrap(true);
 		box.setWrapStyleWord(true);
 
-		//initial text while database is loading
-		box.setText("It appears the snarling tendrils of this fantasy world have not yet ensnared you, weary traveler." 
-				+ "\n\nDo tell, what is your profession?");
+		//initial text
+		box.setText(formattedText());
 
 		out.add(box);
 	}
@@ -215,8 +216,6 @@ public class CharacterCreateWindow extends GameWindow{
 				if(e.getKeyCode() == e.VK_ENTER) {
 					enterPressed = true;
 					if(!input.getText().equals("/quit")) {
-						newPlayerPayload.setSpecies(getSpecies().get(speciesCounter));
-						newPlayerPayload.setClassName(getClasses().get(classCounter));
 						newPlayerPayload.setName(input.getText());
 						UIMain.player = playerinit.initializePlayer(true, newPlayerPayload);
 
@@ -280,6 +279,21 @@ public class CharacterCreateWindow extends GameWindow{
 
 	}
 
+	private void updateText() {		
+		outGUI(formattedText());
+	}
+	
+	private String formattedText() {
+		if(newPlayerPayload.getClassName().getName() == null || newPlayerPayload.getSpecies().getName() == null) {
+			newPlayerPayload.setClassName(getClasses().get(classCounter));
+			newPlayerPayload.setSpecies(getSpecies().get(speciesCounter));
+		}
+		return (newGameIntroText + "\n\n"
+				+"**********\n"
+				+ newPlayerPayload.getClassName().getName() + ": " + newPlayerPayload.getClassName().getDescription() + "\n\n"
+				+"**********\n"
+				+ newPlayerPayload.getSpecies().getName() + ": " + newPlayerPayload.getSpecies().getDescription());
+	}
 	public PlayerEntity getNewPlayer() {
 		Logs.LOGGER.info("NewGameWindow.getNewPlayer() " + UIMain.player);
 		return UIMain.player;
@@ -369,6 +383,8 @@ public class CharacterCreateWindow extends GameWindow{
 		} else {
 			classCounter = classCounter -1;
 		}
+		newPlayerPayload.setClassName(getClasses().get(classCounter));
+		updateText();
 		Logs.LOGGER.info("Back Class Select is " + getClasses().get(classCounter).toString());
 		
 		return getClasses().get(classCounter).toString();
@@ -379,7 +395,8 @@ public class CharacterCreateWindow extends GameWindow{
 		} else {
 			classCounter = classCounter + 1;
 		}
-
+		newPlayerPayload.setClassName(getClasses().get(classCounter));
+		updateText();
 		Logs.LOGGER.info("Forward Class Select is " + getClasses().get(classCounter).toString());		
 		return getClasses().get(classCounter).toString();
 	}
@@ -390,7 +407,8 @@ public class CharacterCreateWindow extends GameWindow{
 		} else {
 			speciesCounter = speciesCounter -1;	
 		}
-		
+		newPlayerPayload.setSpecies(getSpecies().get(speciesCounter));
+		updateText();
 		Logs.LOGGER.info("Back Species Select is " + getSpecies().get(speciesCounter).toString());
 		return getSpecies().get(speciesCounter).toString();
 	}
@@ -400,7 +418,8 @@ public class CharacterCreateWindow extends GameWindow{
 			} else {
 				speciesCounter = speciesCounter + 1;
 			}
-
+			newPlayerPayload.setSpecies(getSpecies().get(speciesCounter));
+			updateText();
 			Logs.LOGGER.info("Forward Species Select is " + getSpecies().get(speciesCounter).toString());		
 			return getSpecies().get(speciesCounter).toString();
 	}
