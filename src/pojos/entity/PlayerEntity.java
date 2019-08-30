@@ -33,7 +33,7 @@ public class PlayerEntity extends Entity{
 	public Cell currentCell;
 	
 	
-	public SpeciesObject getSpecies() {
+	public SpeciesObject getSpeciesObject() {
 		return species;
 	}
 	public void setSpecies(SpeciesObject species) {

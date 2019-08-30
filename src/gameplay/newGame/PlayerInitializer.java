@@ -15,10 +15,9 @@ public class PlayerInitializer {
 	public PlayerEntity initializePlayer(boolean isNewGame, NewPlayerPayload payload) {
 		if(isNewGame) {
 			UIMain.cells = cellAPI.getCellsFromInstance(INSTANCE);
-
 			//set player's location
 			UIMain.player.setName(payload.getName());
-			UIMain.player.setLocation(payload.playerLocation);
+			UIMain.player.setLocation(payload.getPlayerLocation());
 			UIMain.player.setSpecies(payload.getSpecies());
 			UIMain.player.setEntityClass(payload.getClassName());
 			UIMain.player.setArmorType(payload.getClassName().getArmorType());

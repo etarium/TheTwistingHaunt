@@ -28,6 +28,15 @@ public class NewPlayerPayload {
 	List<WeaponItem> equippedWeapons = new ArrayList();
 	
 	
+	
+	public Location getPlayerLocation() {
+		return playerLocation;
+	}
+
+	public void setPlayerLocation(Location playerLocation) {
+		this.playerLocation = playerLocation;
+	}
+
 	public String getName() {
 		return name;
 	}
