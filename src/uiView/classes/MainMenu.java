@@ -280,9 +280,7 @@ public class MainMenu extends GameWindow {
 
 	private void newGameButtonPressed() {
 		button = false;
-		//NewGameWindow.window.setVisible(true);
 		CharacterCreateWindow.window.setVisible(true);
-		//new CharacterCreateWindow();
 		window.dispose();
 	}
 

@@ -46,14 +46,11 @@ public class DBConnector {
 		cellDocuments.forEach(cell -> {
 			try {
 				Cell tempCell = mapper.readValue(cell.toJson(), Cell.class);
-				System.out.println(cell.toJson());
 				activeCells.add(tempCell);
 			} catch (IOException e) {
-				System.out.println(cell.toJson());
 				Logs.LOGGER.severe("Reading Cells into Cell Object failed.");
 			}
 		});
-		System.out.println(activeCells);
 		return activeCells;
 	}
 

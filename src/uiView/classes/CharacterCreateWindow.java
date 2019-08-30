@@ -9,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,9 +20,9 @@ import javax.swing.event.ChangeListener;
 
 import gameplay.newGame.NewPlayerPayload;
 import gameplay.newGame.PlayerInitializer;
+import pojos.entity.EntityClassObject;
 import pojos.entity.PlayerEntity;
-import pojos.entity.enums.EntityClassEnum;
-import pojos.entity.enums.SpeciesEnum;
+import pojos.entity.SpeciesObject;
 import uiView.UIMain;
 import utilities.Logs;
 
@@ -161,8 +159,8 @@ public class CharacterCreateWindow extends GameWindow{
 		JPanel classPanel = new JPanel();
 		JPanel speciesPanel = new JPanel();
 		
-		className = new JTextArea(""+getClasses().get(classCounter));
-		speciesName = new JTextArea( ""+getSpecies().get(speciesCounter));
+		className = new JTextArea(""+EntityClassObject.getClasses().get(classCounter));
+		speciesName = new JTextArea( ""+SpeciesObject.getSpecies().get(speciesCounter));
 		classPanel.setBackground(backgroundColor);
 		speciesPanel.setBackground(backgroundColor);
 		className.setBackground(backgroundColor);
@@ -284,8 +282,8 @@ public class CharacterCreateWindow extends GameWindow{
 	
 	private String formattedText() {
 		if(newPlayerPayload.getClassName().getName() == null || newPlayerPayload.getSpecies().getName() == null) {
-			newPlayerPayload.setClassName(getClasses().get(classCounter));
-			newPlayerPayload.setSpecies(getSpecies().get(speciesCounter));
+			newPlayerPayload.setClassName(EntityClassObject.getClasses().get(classCounter));
+			newPlayerPayload.setSpecies(SpeciesObject.getSpecies().get(speciesCounter));
 		}
 		return (newGameIntroText + "\n\n"
 				+"**********\n"
@@ -296,14 +294,6 @@ public class CharacterCreateWindow extends GameWindow{
 	public PlayerEntity getNewPlayer() {
 		Logs.LOGGER.info("NewGameWindow.getNewPlayer() " + UIMain.player);
 		return UIMain.player;
-	} 
-
-	public List<EntityClassEnum> getClasses() {
-		return Arrays.asList(EntityClassEnum.values());
-	}
-
-	public List<SpeciesEnum> getSpecies() {
-		return Arrays.asList(SpeciesEnum.values());
 	}
 
 	public void exitWindow() {
@@ -378,48 +368,48 @@ public class CharacterCreateWindow extends GameWindow{
 	
 	public String backOneClass() {
 		if(classCounter == 0) {
-			classCounter = getClasses().size()-1;
+			classCounter = EntityClassObject.getClasses().size()-1;
 		} else {
 			classCounter = classCounter -1;
 		}
-		newPlayerPayload.setClassName(getClasses().get(classCounter));
+		newPlayerPayload.setClassName(EntityClassObject.getClasses().get(classCounter));
 		updateText();
-		Logs.LOGGER.info("Back Class Select is " + getClasses().get(classCounter).toString());
+		Logs.LOGGER.info("Back Class Select is " + EntityClassObject.getClasses().get(classCounter).toString());
 		
-		return getClasses().get(classCounter).toString();
+		return EntityClassObject.getClasses().get(classCounter).toString();
 	}
 	public String forwardOneClass() {
-		if(classCounter == getClasses().size()-1) {
+		if(classCounter == EntityClassObject.getClasses().size()-1) {
 			classCounter = 0;
 		} else {
 			classCounter = classCounter + 1;
 		}
-		newPlayerPayload.setClassName(getClasses().get(classCounter));
+		newPlayerPayload.setClassName(EntityClassObject.getClasses().get(classCounter));
 		updateText();
-		Logs.LOGGER.info("Forward Class Select is " + getClasses().get(classCounter).toString());		
-		return getClasses().get(classCounter).toString();
+		Logs.LOGGER.info("Forward Class Select is " + EntityClassObject.getClasses().get(classCounter).toString());		
+		return EntityClassObject.getClasses().get(classCounter).toString();
 	}
 	public String backOneSpecies() {
 		if(speciesCounter == 0) {
-			speciesCounter = getSpecies().size()-1;
+			speciesCounter = SpeciesObject.getSpecies().size()-1;
 
 		} else {
 			speciesCounter = speciesCounter -1;	
 		}
-		newPlayerPayload.setSpecies(getSpecies().get(speciesCounter));
+		newPlayerPayload.setSpecies(SpeciesObject.getSpecies().get(speciesCounter));
 		updateText();
-		Logs.LOGGER.info("Back Species Select is " + getSpecies().get(speciesCounter).toString());
-		return getSpecies().get(speciesCounter).toString();
+		Logs.LOGGER.info("Back Species Select is " + SpeciesObject.getSpecies().get(speciesCounter).toString());
+		return SpeciesObject.getSpecies().get(speciesCounter).toString();
 	}
 	public String forwardOneSpecies() {
-			if(speciesCounter == getSpecies().size()-1) {
+			if(speciesCounter == SpeciesObject.getSpecies().size()-1) {
 				speciesCounter = 0;
 			} else {
 				speciesCounter = speciesCounter + 1;
 			}
-			newPlayerPayload.setSpecies(getSpecies().get(speciesCounter));
+			newPlayerPayload.setSpecies(SpeciesObject.getSpecies().get(speciesCounter));
 			updateText();
-			Logs.LOGGER.info("Forward Species Select is " + getSpecies().get(speciesCounter).toString());		
-			return getSpecies().get(speciesCounter).toString();
+			Logs.LOGGER.info("Forward Species Select is " + SpeciesObject.getSpecies().get(speciesCounter).toString());		
+			return SpeciesObject.getSpecies().get(speciesCounter).toString();
 	}
 }

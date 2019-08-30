@@ -1,5 +1,6 @@
 package pojos.entity;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -54,6 +55,9 @@ public class EntityClassObject {
 	}
 	public void setStats(Statblock stats) {
 		this.stats = stats;
+	}
+	public static List<EntityClassEnum> getClasses() {
+		return Arrays.asList(EntityClassEnum.values());
 	}
 	
 	@Override

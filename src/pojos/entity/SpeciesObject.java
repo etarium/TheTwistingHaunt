@@ -1,8 +1,12 @@
 package pojos.entity;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import pojos.Statblock;
+import pojos.entity.enums.SpeciesEnum;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SpeciesObject {
@@ -35,6 +39,9 @@ public class SpeciesObject {
 	}
 	public void setStats(Statblock stats) {
 		this.stats = stats;
+	}
+	public static List<SpeciesEnum> getSpecies() {
+		return Arrays.asList(SpeciesEnum.values());
 	}
 	
 	@Override
