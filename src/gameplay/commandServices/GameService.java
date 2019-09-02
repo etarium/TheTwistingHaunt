@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import pojos.entity.PlayerEntity;
 import uiView.UIMain;
 import uiView.classes.HelpWin;
 import uiView.classes.PlayWindow;
@@ -37,17 +36,16 @@ public class GameService {
 		new HelpWin();
 	}
 	
-	//TODO	
-	public void saveGame(PlayerEntity player, String parameter) {
+	public void saveGame(String parameter) {
 		String rootPath = System.getProperty("user.dir");
 		String saveLoc = config.getProperty("save.location");
 		File dir = new File(rootPath+saveLoc+parameter);
 		dir.mkdir();
 	
 		try {
-			mapper.writeValue(new File(dir+"/player-save.txt"), player);
+			mapper.writeValue(new File(dir+"/player-save.txt"), UIMain.player);
 			mapper.writeValue(new File(dir+"/cells-save.txt"), UIMain.cells);
-			Logs.LOGGER.info("Successfully saved " + player);
+			Logs.LOGGER.info("Successfully saved " + UIMain.player);
 		} catch (IOException e) {
 			e.printStackTrace();
 			Logs.LOGGER.severe("Unable to save game state,");

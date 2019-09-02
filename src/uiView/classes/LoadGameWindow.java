@@ -33,7 +33,7 @@ public class LoadGameWindow extends GameWindow{
 
 	static JFrame window;
 	static JScrollPane loadListScroller;
-	static ArrayList<String> saveGameList = new ArrayList<>();;
+	static ArrayList<String> saveGameList = new ArrayList<>();
 	ConfigReader config = new ConfigReader();
 	ObjectMapper mapper = new ObjectMapper();
 	String selected;
