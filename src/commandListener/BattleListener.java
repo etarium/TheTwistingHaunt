@@ -11,11 +11,27 @@ public class BattleListener {
 		String output="";
 		boolean isSuccessful = true;
 		switch (command) {
+		
 		case "/order":
 		case "/battle":
 			//TODO:
 			break;
-
+		
+		case "/phys":
+		case "/physical attack":
+		case "/attack":
+			//TODO:
+			break;
+		
+		case "/spell":
+		case "/magic":
+		case "/magic attack":
+		case "/spell attack":
+		case "/sp attack":
+			//TOOD
+			break;
+		
+		
 		default:
 			Logs.LOGGER.info("Hit default case in commandListener.BattleListener.listen with command " + command);
 			isSuccessful = false;
