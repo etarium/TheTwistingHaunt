@@ -39,7 +39,9 @@ public class Init {
 			Reply[] replies = {systemReply, battleReply, movementReply, inventoryReply, cellReply};
 			processReplies(replies);
 		} else { //player is engaged in combat
-			Reply[] replies = {battleReply, inventoryReply, movementReply};
+			Reply[] replies = {battleReply, movementReply, inventoryReply };
+			System.out.println(movementReply.output);
+			System.out.println(movementReply.upperOutput);
 			processReplies(replies);
 		}
 			if(!success) {
