@@ -31,8 +31,7 @@ public class MovementListener {
 			
 			//if there's a fight, the player cannot move cells.
 			if(UIMain.player.isInEncounter) {
-				output = "You attempt to flee, but the enemies block your path. Your must resolve to fight, hero!";
-				return new Reply(true, output, UIMain.player.currentCell.getDescription());
+				return new Reply(false, output, UIMain.player.currentCell.getDescription());
 			}
 			
 			char direction = command.charAt(1);
