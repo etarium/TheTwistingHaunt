@@ -1,7 +1,6 @@
 package commandListener;
 
 import gameplay.commandServices.GameService;
-import pojos.entity.PlayerEntity;
 import uiView.UIMain;
 import uiView.classes.PlayWindow;
 import utilities.InputParser;
@@ -40,8 +39,6 @@ public class Init {
 			processReplies(replies);
 		} else { //player is engaged in combat
 			Reply[] replies = {battleReply, movementReply, inventoryReply };
-			System.out.println(movementReply.output);
-			System.out.println(movementReply.upperOutput);
 			processReplies(replies);
 		}
 			if(!success) {
@@ -53,7 +50,7 @@ public class Init {
 		play.outTopGUI(upperOutput);
 	}
 
-	public void initializeGame(PlayWindow play, GameService system, PlayerEntity player) {
+	public void initializeGame(PlayWindow play, GameService system ) {
 		Logs.LOGGER.info("Init.initializeGame()");
 
 		initializeListeners(play, system);

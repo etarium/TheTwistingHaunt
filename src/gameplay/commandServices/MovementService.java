@@ -54,8 +54,6 @@ public class MovementService {
 					UIMain.player.setCurrentCell(cell);
 					UIMain.player.setLocation(newLoc);
 					UIMain.player.setIsInEncounter(checkForEncounters());
-					System.out.println(UIMain.player.isInEncounter);
-					System.out.println(UIMain.player.currentCell.getDescription());
 					break;
 			}
 		}
