@@ -51,7 +51,7 @@ public class UIMain {
 		boolean run = true;
 		while(run) {
 			GameService system = new GameService(play, run);
-			init.initializeListeners(play, system, player);
+			init.initializeListeners(play, system);
 		}
 	}
 

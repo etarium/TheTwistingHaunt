@@ -11,12 +11,11 @@ public class BattleListener {
 		String output="";
 		boolean isSuccessful = true;
 		switch (command) {
-		case "/status":
-		case "/stats":
-
-			//xoutput = this.player.getStats().toString();
+		case "/order":
+		case "/battle":
+			//TODO:
 			break;
-			
+
 		default:
 			Logs.LOGGER.info("Hit default case in commandListener.BattleListener.listen with command " + command);
 			isSuccessful = false;

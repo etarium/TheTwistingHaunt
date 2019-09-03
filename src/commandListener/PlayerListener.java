@@ -1,6 +1,7 @@
 package commandListener;
 
 import gameplay.commandServices.PlayerService;
+import uiView.UIMain;
 import utilities.Logs;
 
 public class PlayerListener {
@@ -43,7 +44,11 @@ public class PlayerListener {
 			break;
 			
 		case "/rest":
+			if(!UIMain.player.isInEncounter) {
 			output = system.rest();
+			} else {
+				output = "Looking around, you see imminent danger. Resting here would not be wise.";
+			}
 			break;
 			
 		default:

@@ -1,5 +1,6 @@
 package pojos.environment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -19,7 +20,7 @@ public class Cell {
 	List<InspectableObjects> inspectableObjects;
 	List<Item> items;
 	List<Entity> npcs;
-	List<EnemyEntity> enemies;
+	List<EnemyEntity> enemies = new ArrayList<EnemyEntity>();
 	boolean isLocked;
 	List<Item> requiredItems; //used for places that require certain triggers to be able to enter, locked doors, etc
 	boolean north;

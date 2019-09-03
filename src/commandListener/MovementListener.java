@@ -13,6 +13,7 @@ public class MovementListener {
 		String failedMovementOutput = "You'd like to go that way, wouldn't you?";
 		String newUpperOutput = "";
 		boolean isSuccessful = true;
+
 		switch (command) {
 		//determines if movement can be made in the direction sent by the user
 		//direction is parsed from /command and streamlined into a single character: n, s, e, or w
@@ -27,7 +28,12 @@ public class MovementListener {
 		case "/e":
 		case "/west":
 		case "/w":
-
+			
+			//if there's a fight, the player cannot move cells.
+			if(UIMain.player.isInEncounter) {
+				return new Reply(false, output, UIMain.player.currentCell.getDescription());
+			}
+			
 			char direction = command.charAt(1);
 			String upperOutput = UIMain.player.currentCell.getDescription();
 			switch (direction) {
