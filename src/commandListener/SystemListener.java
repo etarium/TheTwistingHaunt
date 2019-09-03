@@ -1,7 +1,6 @@
 package commandListener;
 
 import gameplay.commandServices.GameService;
-import uiView.UIMain;
 import utilities.Logs;
 
 public class SystemListener {
@@ -28,7 +27,7 @@ public class SystemListener {
 						+ " the same name as a previous save will overwrite your files."
 						+ " Retype /save [save name]";
 			} else {
-				system.saveGame(UIMain.player, parameter);
+				system.saveGame(parameter);
 				output = "You've taken note of your travels.";
 			}
 			break;

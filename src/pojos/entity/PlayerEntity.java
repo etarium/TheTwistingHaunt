@@ -17,7 +17,7 @@ import pojos.items.enums.WeaponType;
 public class PlayerEntity extends Entity{
 	
 	EntityClassObject entityClass;
-	SpeciesObject species;
+	SpeciesObject speciesObject = new SpeciesObject();
 	int numOfHands;
 	Statblock stats;
 	List<ArmorMaterial> armorType;
@@ -34,10 +34,10 @@ public class PlayerEntity extends Entity{
 	
 	
 	public SpeciesObject getSpeciesObject() {
-		return species;
+		return speciesObject;
 	}
-	public void setSpecies(SpeciesObject species) {
-		this.species = species;
+	public void setSpecies(SpeciesObject speciesObject) {
+		this.speciesObject = speciesObject;
 	}
 	public Location getLocation() {
 		return location;
@@ -127,11 +127,12 @@ public class PlayerEntity extends Entity{
 	
 	@Override
 	public String toString() {
-		return "PlayerEntity [entityClass=" + entityClass + ", numOfHands=" + numOfHands + ", stats=" + stats
-				+ ", armorType=" + armorType + ", weaponType=" + weaponType + ", skills=" + skills + ", quests="
-				+ quests + ", equippedArmor=" + equippedArmor + ", equippedWeapons=" + equippedWeapons
+		return "PlayerEntity [entityClass=" + entityClass + ", species=" + speciesObject + ", numOfHands=" + numOfHands
+				+ ", stats=" + stats + ", armorType=" + armorType + ", weaponType=" + weaponType + ", skills=" + skills
+				+ ", quests=" + quests + ", equippedArmor=" + equippedArmor + ", equippedWeapons=" + equippedWeapons
 				+ ", factionLevel=" + factionLevel + ", xp=" + xp + ", xpToNextLevel=" + xpToNextLevel + ", location="
-				+ location + ", currentCell=" + currentCell + "]";
+				+ location + ", currentCell=" + currentCell + ", name=" + name + ", description=" + description
+				+ ", temperament=" + temperament + ", inventory=" + inventory + ", level=" + level + "]";
 	}
 	
 }

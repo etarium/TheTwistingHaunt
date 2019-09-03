@@ -99,7 +99,6 @@ public class CharacterCreateWindow extends GameWindow{
 		out.setBackground(backgroundColor);
 		out.setBorder(medLineBorder);
 
-
 		in = new JPanel();
 		bounds.add(in);
 
@@ -127,7 +126,6 @@ public class CharacterCreateWindow extends GameWindow{
 		window.setVisible(true);
 		
 		input.requestFocus();
-
 
 	}//end initializer
 
@@ -170,7 +168,6 @@ public class CharacterCreateWindow extends GameWindow{
 		speciesName.setForeground(textColor);
 		speciesName.setFont(smallMenuFont);
 
-
 		for(JButton button : buttonArray) {
 			button.setForeground(textColor);
 			button.setBackground(backgroundColor);
@@ -188,7 +185,6 @@ public class CharacterCreateWindow extends GameWindow{
 		speciesPanel.add(speciesLButton);
 		speciesPanel.add(speciesName);
 		speciesPanel.add(speciesRButton);
-
 
 		out.add(classPanel);
 		out.add(speciesPanel);

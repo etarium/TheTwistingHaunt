@@ -263,7 +263,7 @@ public class PlayerService {
 	
 	public String getPlayerStats() {
 		StringBuilder output = new StringBuilder();
-		
+		System.out.println("get player stats \n" + UIMain.player.toString());
 		output.append(String.format("%-25s", "Name: " + UIMain.player.getName()));
 		output.append(String.format("%10s", "Class: " + UIMain.player.getEntityClass().getName()));
 		output.append(String.format("%20s", "Level: " + UIMain.player.getLevel()));
