@@ -1,7 +1,7 @@
 package gameplay.StatModMethods;
 
 import pojos.entity.Entity;
-import uiView.UIMain;
+import utilities.Logs;
 
 public class BattleStatMethods {
 
@@ -12,6 +12,7 @@ public class BattleStatMethods {
 		double playerLevel = entity.getLevel() * .15;
 		double randomMultiplier = Math.random() * .05;
 		double initiative = playerAgility + playerLevel + randomMultiplier;
+		Logs.LOGGER.info(entity.getName() + " rolled a " + initiative + " initiative."); 
 		return initiative;
 	}
 	
