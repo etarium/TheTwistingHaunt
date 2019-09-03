@@ -53,9 +53,21 @@ public class MovementService {
 					cell.getLocation().getZ() == newLoc.getZ()) {
 					UIMain.player.setCurrentCell(cell);
 					UIMain.player.setLocation(newLoc);
+					UIMain.player.setIsInEncounter(checkForEncounters());
+					System.out.println(UIMain.player.isInEncounter);
+					System.out.println(UIMain.player.currentCell.getDescription());
 					break;
 			}
 		}
 		return UIMain.player.currentCell.getDescription();
+	}
+	
+	
+	private boolean checkForEncounters() {
+		if(UIMain.player.currentCell.getEnemies().isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }
