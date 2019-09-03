@@ -19,7 +19,6 @@ public class PlayerEntity extends Entity{
 	EntityClassObject entityClass;
 	SpeciesObject speciesObject = new SpeciesObject();
 	int numOfHands;
-	Statblock stats;
 	List<ArmorMaterial> armorType;
 	List<WeaponType> weaponType;
 	List<Ability> skills;
@@ -64,14 +63,6 @@ public class PlayerEntity extends Entity{
 	
 	public void setNumOfHands(int numOfHands) {
 		this.numOfHands = numOfHands;
-	}
-	
-	public Statblock getStats() {
-		return stats;
-	}
-	
-	public void setStats(Statblock stats) {
-		this.stats = stats;
 	}
 	
 	public List<ArmorMaterial> getArmorType() {

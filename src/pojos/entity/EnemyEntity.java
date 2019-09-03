@@ -16,7 +16,6 @@ public class EnemyEntity extends Entity{
 	String loserCry;
 	List<Item> loot;
 	List<Ability> skills;
-	Statblock stats;
 	int numOfHands;
 	
 	public EnemyEntity() {
@@ -65,12 +64,6 @@ public class EnemyEntity extends Entity{
 	}
 	public void setSkills(List<Ability> skills) {
 		this.skills = skills;
-	}
-	public Statblock getStats() {
-		return stats;
-	}
-	public void setStats(Statblock stats) {
-		this.stats = stats;
 	}
 	
 	public int getNumOfHands() {

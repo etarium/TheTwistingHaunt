@@ -2,10 +2,14 @@ package gameplay.battle;
 
 import java.util.List;
 
+import gameplay.StatModMethods.BattleStatMethods;
 import pojos.entity.Entity;
+import uiView.UIMain;
 
 public class BattleOrder {
 
+	private BattleStatMethods statMethods = new BattleStatMethods();
+	
 	public String initializeBattle() {
 		determineFirstAttack();
 		List<Entity> battleOrder = determineBattleOrder();
@@ -13,7 +17,9 @@ public class BattleOrder {
 	}
 	
 	private Entity determineFirstAttack() {
-		//TODO
+		//first calculate the player
+		double playerInit = statMethods.calculateInitiative(UIMain.player);
+		
 		return null;
 	}
 	

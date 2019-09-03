@@ -57,7 +57,7 @@ public class MovementService {
 					UIMain.player.setIsInEncounter(checkForEncounters());
 					if(checkForEncounters()) {
 						BattleOrder battle = new BattleOrder();
-						battle.initializeBattle();
+						return battle.initializeBattle();
 					}
 					break;
 			}

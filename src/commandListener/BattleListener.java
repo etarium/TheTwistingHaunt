@@ -30,7 +30,10 @@ public class BattleListener {
 		case "/sp attack":
 			//TOOD
 			break;
-		
+		case "/look":
+		case "/inspect":
+			//TODO
+			break;
 		
 		default:
 			Logs.LOGGER.info("Hit default case in commandListener.BattleListener.listen with command " + command);
