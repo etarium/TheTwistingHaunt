@@ -6,13 +6,23 @@ import pojos.entity.Entity;
 
 public class BattleOrder {
 
-	public Entity determineFirstAttack() {
+	public String initializeBattle() {
+		determineFirstAttack();
+		List<Entity> battleOrder = determineBattleOrder();
+		return formatBattleOrder(battleOrder);
+	}
+	
+	private Entity determineFirstAttack() {
 		//TODO
 		return null;
 	}
 	
-	public List<Entity> determineBattleOrder () {
+	private List<Entity> determineBattleOrder () {
 		//TODO
 		return null;
+	}
+	
+	private String formatBattleOrder(List<Entity> battleOrder) {
+		return "";
 	}
 }

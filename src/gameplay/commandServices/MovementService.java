@@ -1,5 +1,6 @@
 package gameplay.commandServices;
 
+import gameplay.battle.BattleOrder;
 import pojos.environment.Cell;
 import pojos.environment.Location;
 import uiView.UIMain;
@@ -54,6 +55,10 @@ public class MovementService {
 					UIMain.player.setCurrentCell(cell);
 					UIMain.player.setLocation(newLoc);
 					UIMain.player.setIsInEncounter(checkForEncounters());
+					if(checkForEncounters()) {
+						BattleOrder battle = new BattleOrder();
+						battle.initializeBattle();
+					}
 					break;
 			}
 		}
