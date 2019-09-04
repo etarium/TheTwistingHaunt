@@ -7,7 +7,7 @@ import uiView.UIMain;
 
 public class MovementService {
 	
-	String output = "";
+	String output = UIMain.player.currentCell.getDescription();
 	public MovementService() {
 		//empty constructor
 	}
@@ -56,6 +56,7 @@ public class MovementService {
 					UIMain.player.setCurrentCell(cell);
 					UIMain.player.setLocation(newLoc);
 					UIMain.player.setIsInEncounter(checkForEncounters());
+					System.out.println(cell);
 					if(checkForEncounters()) {
 						BattleOrder battle = new BattleOrder();
 						return (UIMain.player.currentCell.getDescription() + "\n" + battle.initializeBattle());

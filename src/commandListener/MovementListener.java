@@ -42,10 +42,9 @@ public class MovementListener {
 			switch (direction) {
 			case 'n':
 
-
 				newUpperOutput = system.moveNorth(direction);
 
-				if(!upperOutput.equals(newUpperOutput)) {
+				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
 						outputBuilder.append("You move to the north, and find yourself surrounded by ");
 						output = battleOutput(outputBuilder);
@@ -64,7 +63,7 @@ public class MovementListener {
 
 				newUpperOutput = system.moveSouth(direction);
 
-				if(!upperOutput.equals(newUpperOutput)) {
+				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
 						outputBuilder.append("You move to the south, and find yourself surrounded by ");
 						output = battleOutput(outputBuilder);
@@ -82,7 +81,8 @@ public class MovementListener {
 			case 'e':
 
 				newUpperOutput = system.moveEast(direction);
-				if(!upperOutput.equals(newUpperOutput)) {
+				
+				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
 						outputBuilder.append("You move to the east, and find yourself surrounded by ");
 						output = battleOutput(outputBuilder);
@@ -93,6 +93,7 @@ public class MovementListener {
 					}
 					upperOutput = newUpperOutput;
 				} else {
+					System.out.println("failed movement east");
 					output = failedMovementOutput;
 				}
 
@@ -101,7 +102,7 @@ public class MovementListener {
 
 				newUpperOutput = system.moveWest(direction);
 
-				if(!upperOutput.equals(newUpperOutput)) {
+				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
 						
 						outputBuilder.append("You move to the west, and find yourself surrounded by ");
@@ -112,7 +113,7 @@ public class MovementListener {
 						output = outputBuilder.toString();
 					}
 					upperOutput = newUpperOutput;
-				} else {
+				} else {;
 					output = failedMovementOutput;
 				}
 
