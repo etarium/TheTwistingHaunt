@@ -44,6 +44,9 @@ public class Statblock {
 		super();
 		this.hp = hp;
 		this.sp = sp;
+		//start at full HP and SP
+		this.currentHP = hp;
+		this.currentSP = sp;
 		this.atk = atk;
 		this.def = def;
 		this.spatk = spatk;

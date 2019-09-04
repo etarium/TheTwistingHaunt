@@ -2,10 +2,12 @@ package uiView;
 
 import gameplay.commandServices.GameService;
 import gameplay.newGame.PlayerInitializer;
+import pojos.entity.Entity;
 import pojos.entity.PlayerEntity;
 import pojos.environment.Cell;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import commandListener.Init;
@@ -21,7 +23,8 @@ public class UIMain {
 	public static PlayWindow play;
 	public static PlayerEntity player = new PlayerEntity();
 	public static List<Cell> cells = new ArrayList<Cell>();
-	static PlayerInitializer playerinit = new PlayerInitializer();
+	public static PlayerInitializer playerinit = new PlayerInitializer();
+	public static List<Entity> battleOrder = new LinkedList<Entity>();
 	public static Init init = new Init();
 	public static String os = System.getProperty("os.name");
 

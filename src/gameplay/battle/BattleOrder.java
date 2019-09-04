@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import gameplay.StatModMethods.BattleStatMethods;
+import pojos.entity.EnemyEntity;
 import pojos.entity.Entity;
 import uiView.UIMain;
 import utilities.Logs;
@@ -11,19 +12,18 @@ import utilities.Logs;
 public class BattleOrder {
 
 	private BattleStatMethods statMethods = new BattleStatMethods();
-	private List<Entity> battleOrder = new LinkedList<Entity>();
 	private List<Entity> initialOrder = new LinkedList<Entity>();
 	double enemyInit = 0.0;
 
 	public String initializeBattle() {
-		List<Entity> battleOrder = determineBattleOrder();
+		UIMain.battleOrder = determineBattleOrder();
 		determineFirstAttack();
-		return formatBattleOrder(battleOrder);
+		return formatBattleOrder(UIMain.battleOrder);
 	}
 
 	private Entity determineFirstAttack() {
 		Logs.LOGGER.info("Determine First Attacker");
-		return battleOrder.get(0);
+		return UIMain.battleOrder.get(0);
 	}
 
 	private List<Entity> calculateAllInits() {
@@ -36,40 +36,46 @@ public class BattleOrder {
 		UIMain.player.getStats().setInit(playerInit);
 		initialOrder.add(UIMain.player);
 		
-		for(Entity enemy : UIMain.player.currentCell.getEnemies()) {
+		for(EnemyEntity enemy : UIMain.player.currentCell.getEnemies()) {
 			enemyInit = statMethods.calculateInitiative(enemy);
 			enemy.getStats().setInit(enemyInit);
+			//TODO:
+			//ensure all data allows us to this without explicitly coding
+			//setting all hp and sp to their max
+			enemy.getStats().setCurrentHP(enemy.getStats().getHp());
+			enemy.getStats().setCurrentSP(enemy.getStats().getSp());
 			initialOrder.add(enemy);
 		}
 		
 		Logs.LOGGER.info("All initiatives calculated");
 		return initialOrder;
 	}
-	private List<Entity> determineBattleOrder () {
-		battleOrder = new LinkedList<Entity>();
+	
+	public List<Entity> determineBattleOrder () {
+		UIMain.battleOrder = new LinkedList<Entity>();
 		initialOrder = calculateAllInits();
 		//then check against all entities
 		for(int i=0; i < initialOrder.size(); i++) {
-			if(battleOrder.isEmpty()) {
-				battleOrder.add(initialOrder.get(i));
+			if(UIMain.battleOrder.isEmpty()) {
+				UIMain.battleOrder.add(initialOrder.get(i));
 			} else {
-				if(initialOrder.get(i).getStats().getInit() > battleOrder.get(i-1).getStats().getInit()) {
-					for(int j=0; j<battleOrder.size(); j++) {
+				if(initialOrder.get(i).getStats().getInit() > UIMain.battleOrder.get(i-1).getStats().getInit()) {
+					for(int j=0; j<UIMain.battleOrder.size(); j++) {
 						double higherStat = initialOrder.get(i).getStats().getInit();
-						if(higherStat < battleOrder.get(j).getStats().getInit()) {
-							battleOrder.add(j-1, initialOrder.get(i));
+						if(higherStat < UIMain.battleOrder.get(j).getStats().getInit()) {
+							UIMain.battleOrder.add(j-1, initialOrder.get(i));
 							break;
 						}
 					}
-					battleOrder.add(0, initialOrder.get(i));
+					UIMain.battleOrder.add(0, initialOrder.get(i));
 				} else {
-					battleOrder.add(initialOrder.get(i));
+					UIMain.battleOrder.add(initialOrder.get(i));
 				}
 			}
 		}
 		
 		Logs.LOGGER.info("Battle order for all opponents calculated");
-		return battleOrder;
+		return UIMain.battleOrder;
 	}
 
 	private String formatBattleOrder(List<Entity> battleOrder) {

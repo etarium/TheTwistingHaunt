@@ -2,20 +2,8 @@ package gameplay.commandServices;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
-
-import javax.crypto.Cipher;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import pojos.entity.PlayerEntity;
-import pojos.environment.Cell;
 import uiView.UIMain;
 import uiView.classes.HelpWin;
 import uiView.classes.PlayWindow;
