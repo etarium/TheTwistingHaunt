@@ -38,6 +38,11 @@ public class BattleOrder {
 		for(Entity enemy : UIMain.player.currentCell.getEnemies()) {
 			enemyInit = statMethods.calculateInitiative(enemy);
 			enemy.getStats().setInit(enemyInit);
+			//TODO:
+			//ensure all data allows us to this without explicitly coding
+			//setting all hp and sp to their max
+			enemy.getStats().setCurrentHP(enemy.getStats().getHp());
+			enemy.getStats().setCurrentSP(enemy.getStats().getSp());
 			initialOrder.add(enemy);
 		}
 		
