@@ -21,7 +21,6 @@ public class BattleListener {
 		case "/phys":
 		case "/physical attack":
 		case "/attack":
-			//TODO:
 			if (parameter == null) {
 				if(UIMain.player.currentCell.getEnemies().size() == 1) {
 					output = system.physAttack(UIMain.player.getCurrentCell().getEnemies().get(0).getName());

@@ -3,7 +3,7 @@ package gameplay.battle;
 import pojos.entity.EnemyEntity;
 import uiView.UIMain;
 
-public class DeathHandlers {
+public class DeathService {
 
 	public static void removeEnemy(EnemyEntity selectedTarget) {
 		for(int i=0; i<UIMain.player.currentCell.getEnemies().size(); i++) {
