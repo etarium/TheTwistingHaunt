@@ -14,8 +14,10 @@ public class VictoryService {
 		return false;
 	}
 	
-	public static void trackXP(int xp) {
-		accruedXP += xp;
+	public static void trackXP(int xp, int enemyLevel) {
+		double multiplier = (enemyLevel / UIMain.player.getLevel());
+		int calculatedXP = (int) (xp * multiplier);
+		accruedXP += calculatedXP;
 	}
 	
 	public static String victory() {

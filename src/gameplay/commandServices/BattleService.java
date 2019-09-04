@@ -36,7 +36,7 @@ public class BattleService {
 						+ "Nice work, hero! \n\n"
 						+ selectedTarget.getName() + " Remaining HP: " + selectedTarget.getStats().getCurrentHP();
 			} else {
-				VictoryService.trackXP(selectedTarget.getXp());
+				VictoryService.trackXP(selectedTarget.getXp(), selectedTarget.getLevel());
 				output = defeatedEnemy(selectedTarget);
 			}
 		} else {
