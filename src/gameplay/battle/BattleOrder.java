@@ -45,6 +45,9 @@ public class BattleOrder {
 	private List<Entity> determineBattleOrder () {
 		
 		initialOrder = calculateAllInits();
+		initialOrder = calculateAllInits();
+		initialOrder = calculateAllInits();
+		initialOrder = calculateAllInits();
 		//then check against all entities
 		for(int i=0; i < initialOrder.size(); i++) {
 			if(battleOrder.isEmpty()) {
@@ -63,13 +66,32 @@ public class BattleOrder {
 
 	private String formatBattleOrder(List<Entity> battleOrder) {
 		StringBuilder output = new StringBuilder();
+		
+		output.append(String.format("%40s", "Battle Order"));
+		output.append("\n");
+		StringBuilder entityOutput = new StringBuilder();
+		entityOutput.append(String.format("%30s", ""));
 		for(Entity entity : battleOrder) {
-		output.append(String.format(entity.getName() + " -> "));
+			int lineCounter = 1;
+			//we should only have 30 chars per line
+			if(entityOutput.length() < 30 && lineCounter == 1) {
+				entityOutput.append(String.format(entity.getName() + " -> "));
+			} else if (output.length() > 30 && output.length() < 60 && lineCounter == 3) {
+				entityOutput.append(String.format(entity.getName() + " -> "));
+			} else if (output.length() > 60 && output.length() < 90 && lineCounter == 4) {
+				entityOutput.append(String.format(entity.getName() + " -> "));
+			} else {
+				entityOutput.append("\n");
+				lineCounter++;
+				entityOutput.append(String.format("%30s", ""));
+				entityOutput.append(String.format(entity.getName() + " -> "));
+				
+			}
 		}
-		output.replace(output.length()-4, output.length(), "");
+		entityOutput.replace(entityOutput.length()-4, entityOutput.length(), "");
+		output.append(entityOutput);
 		Logs.LOGGER.info("Formatted battle order for game output " + output.toString());
 		return output.toString();
 	}
-
 
 }

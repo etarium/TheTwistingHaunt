@@ -7,6 +7,7 @@ import uiView.UIMain;
 
 public class MovementService {
 	
+	String output = "";
 	public MovementService() {
 		//empty constructor
 	}
@@ -15,36 +16,36 @@ public class MovementService {
 		if(UIMain.player.currentCell.isNorth()) {
 			Location newLoc = UIMain.player.getLocation();
 			newLoc.setY(newLoc.getY()+1);
-			setNewCell(newLoc);
+			output = setNewCell(newLoc);
 		}
-		return UIMain.player.currentCell.getDescription();
+		return output;
 	}
 
 	public String moveSouth(char direction) {
 		if(UIMain.player.currentCell.isSouth()) {
 			Location newLoc = UIMain.player.getLocation();
 			newLoc.setY(newLoc.getY()-1);
-			setNewCell(newLoc);
+			output = setNewCell(newLoc);
 		}
-		return UIMain.player.currentCell.getDescription();
+		return output;
 	}
 
 	public String moveEast(char direction) {
 		if(UIMain.player.currentCell.isEast()) {
 			Location newLoc = UIMain.player.getLocation();
 			newLoc.setX(newLoc.getX()+1);
-			setNewCell(newLoc);
+			output = setNewCell(newLoc);
 		}
-		return UIMain.player.currentCell.getDescription();
+		return output;
 	}
 
 	public String moveWest(char direction) {
 		if(UIMain.player.currentCell.isWest()) {
 			Location newLoc = UIMain.player.getLocation();
 			newLoc.setX(newLoc.getX()-1);
-			setNewCell(newLoc);
+			output = setNewCell(newLoc);
 		}
-		return UIMain.player.currentCell.getDescription();
+		return output;
 	}
 
 	private String setNewCell(Location newLoc) {
@@ -57,7 +58,8 @@ public class MovementService {
 					UIMain.player.setIsInEncounter(checkForEncounters());
 					if(checkForEncounters()) {
 						BattleOrder battle = new BattleOrder();
-						return battle.initializeBattle();
+						//System.out.println(battle.initializeBattle());
+						return (UIMain.player.currentCell.getDescription() + "\n" + battle.initializeBattle());
 					}
 					break;
 			}
