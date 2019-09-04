@@ -5,6 +5,7 @@ import uiView.UIMain;
 
 public class DeathService {
 
+	
 	public static void removeEnemy(EnemyEntity selectedTarget) {
 		for(int i=0; i<UIMain.player.currentCell.getEnemies().size(); i++) {
 			if(UIMain.player.currentCell.getEnemies().get(i).getName().equalsIgnoreCase(selectedTarget.getName())) {

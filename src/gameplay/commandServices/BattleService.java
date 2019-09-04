@@ -1,5 +1,8 @@
 package gameplay.commandServices;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import gameplay.StatModMethods.BattleStatMethods;
 import gameplay.battle.CheckStatuses;
 import gameplay.battle.DeathService;
@@ -11,6 +14,7 @@ import utilities.Logs;
 public class BattleService {
 
 	String output = "";
+	List<EnemyEntity> defeatedEnemies = new ArrayList<EnemyEntity>();
 	public BattleService() {
 
 	}
@@ -32,7 +36,7 @@ public class BattleService {
 						+ "Nice work, hero! \n\n"
 						+ selectedTarget.getName() + " Remaining HP: " + selectedTarget.getStats().getCurrentHP();
 			} else {
-				defeatedEnemy(selectedTarget);
+				output = defeatedEnemy(selectedTarget);
 			}
 		} else {
 			output = "You lunge toward " + selectedTarget.getName() + ", but you were sidestepped and missed completely.\n"
@@ -66,10 +70,12 @@ public class BattleService {
 	private String defeatedEnemy(EnemyEntity selectedTarget) {
 		DeathService.removeEnemy(selectedTarget);
 		if(VictoryService.isVictory()) {
-			VictoryService.victory();
+			output = VictoryService.victory();
 		} else {
-			
+			output = "The " + selectedTarget.getName() + "let out a horrible scream\n"
+					+ selectedTarget.getName() + ": " + selectedTarget.getLoserCry() + "\n"
+							+ "Great Job! Only " + UIMain.player.currentCell.getEnemies().size() + " remaining!";
 		}
-		return "";
+		return output;
 	}
 }
