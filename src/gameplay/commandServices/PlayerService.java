@@ -8,12 +8,17 @@ import uiView.UIMain;
 public class PlayerService {
 	
 	PlayerStatMethods system = new PlayerStatMethods();
+	String output = "";
 	
 	public PlayerService() {
 	}
 	
 	public String rest() {
-		return "Your HP and SP have been restored! \n" + system.fullHP() + "\n" + system.fullSP(); 
+		StringBuilder output = new StringBuilder();
+		output.append("You rest, and find yourself feeling much better than you had before. \n");
+		output.append(system.fullHP() + "\n");
+		output.append(system.fullSP() + "\n");
+		return output.toString();
 	}
 	
 	public String takeItem(String parameter) {

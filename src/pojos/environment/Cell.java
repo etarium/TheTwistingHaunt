@@ -140,7 +140,7 @@ public class Cell {
 		this.west = west;
 	}
 
-	public boolean isCanRest() {
+	public boolean canRest() {
 		return canRest;
 	}
 

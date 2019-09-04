@@ -10,12 +10,18 @@ public class PlayerStatMethods {
 	}
 	
 	public String fullHP(){
+		StringBuilder output = new StringBuilder();
+		output.append("HP: " + UIMain.player.getStats().getCurrentHP() + " -> "); 
 		UIMain.player.getStats().setCurrentHP(UIMain.player.getStats().getHp());
-		return "Health Points: " + UIMain.player.getStats().getHp();
+		output.append(UIMain.player.getStats().getCurrentHP());
+		return output.toString();
 	}
 	public String fullSP(){
+		StringBuilder output = new StringBuilder();
+		output.append("SP: " + UIMain.player.getStats().getCurrentSP() + " -> "); 
 		UIMain.player.getStats().setCurrentSP(UIMain.player.getStats().getSp());
-		return "Spell Points: " + UIMain.player.getStats().getSp();
+		output.append(UIMain.player.getStats().getCurrentSP());
+		return output.toString();
 	}
 	
 	public Statblock calculateBaseStats() {

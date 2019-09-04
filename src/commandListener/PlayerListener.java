@@ -44,10 +44,10 @@ public class PlayerListener {
 			break;
 			
 		case "/rest":
-			if(!UIMain.player.isInEncounter) {
-			output = system.rest();
-			} else {
+			if(UIMain.player.isInEncounter || !UIMain.player.currentCell.canRest()) {
 				output = "Looking around, you see imminent danger. Resting here would not be wise.";
+			} else {
+				output = system.rest();
 			}
 			break;
 			
