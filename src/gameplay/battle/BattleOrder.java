@@ -6,6 +6,7 @@ import java.util.List;
 import gameplay.StatModMethods.BattleStatMethods;
 import pojos.entity.Entity;
 import uiView.UIMain;
+import utilities.Logs;
 
 public class BattleOrder {
 
@@ -15,40 +16,36 @@ public class BattleOrder {
 	double enemyInit = 0.0;
 
 	public String initializeBattle() {
-		determineFirstAttack();
 		List<Entity> battleOrder = determineBattleOrder();
+		determineFirstAttack();
 		return formatBattleOrder(battleOrder);
 	}
 
 	private Entity determineFirstAttack() {
+		Logs.LOGGER.info("Determine First Attacker");
 		return battleOrder.get(0);
 	}
 
 	private List<Entity> calculateAllInits() {
 		//first calculate the player
+		Logs.LOGGER.info("Calculating All Initiatives");
 		double playerInit = statMethods.calculateInitiative(UIMain.player);
 		UIMain.player.getStats().setInit(playerInit);
 		initialOrder.add(UIMain.player);
 		
 		for(Entity enemy : UIMain.player.currentCell.getEnemies()) {
-			System.out.println("calculate Enemies for loop");
 			enemyInit = statMethods.calculateInitiative(enemy);
 			enemy.getStats().setInit(enemyInit);
 			initialOrder.add(enemy);
 		}
 		
+		Logs.LOGGER.info("All initiatives calculated");
 		return initialOrder;
 	}
 	private List<Entity> determineBattleOrder () {
 		
 		initialOrder = calculateAllInits();
 		//then check against all entities
-		for(Entity enemy : UIMain.player.currentCell.getEnemies()) {
-			System.out.println("calculate Enemies for loop");
-			enemyInit = statMethods.calculateInitiative(enemy);
-			enemy.getStats().setInit(enemyInit);
-			initialOrder.add(enemy);
-		}
 		for(int i=0; i < initialOrder.size(); i++) {
 			if(battleOrder.isEmpty()) {
 				battleOrder.add(initialOrder.get(i));
@@ -60,12 +57,18 @@ public class BattleOrder {
 				}
 			}
 		}
-
+		Logs.LOGGER.info("Battle order for all opponents calculated");
 		return battleOrder;
 	}
 
 	private String formatBattleOrder(List<Entity> battleOrder) {
-		return "";
+		StringBuilder output = new StringBuilder();
+		for(Entity entity : battleOrder) {
+		output.append(String.format(entity.getName() + " -> "));
+		}
+		output.replace(output.length()-4, output.length(), "");
+		Logs.LOGGER.info("Formatted battle order for game output " + output.toString());
+		return output.toString();
 	}
 
 
