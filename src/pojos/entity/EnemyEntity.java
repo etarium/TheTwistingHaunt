@@ -17,6 +17,7 @@ public class EnemyEntity extends Entity{
 	List<Item> loot;
 	List<Ability> skills;
 	int numOfHands;
+	int xp;
 	
 	public EnemyEntity() {
 		super();
@@ -24,7 +25,7 @@ public class EnemyEntity extends Entity{
 	}
 
 	public EnemyEntity(String battleCry, String victoryCry, String loserCry, List<Item> loot, List<Ability> skills,
-			Statblock stats, int numOfHands) {
+			Statblock stats, int numOfHands, int xp) {
 		super();
 		this.battleCry = battleCry;
 		this.victoryCry = victoryCry;
@@ -33,6 +34,7 @@ public class EnemyEntity extends Entity{
 		this.skills = skills;
 		this.stats = stats;
 		this.numOfHands = numOfHands;
+		this.xp = xp;
 	}
 	
 	public String getBattleCry() {
@@ -73,12 +75,20 @@ public class EnemyEntity extends Entity{
 		this.numOfHands = numOfHands;
 	}
 	
+	public int getXp() {
+		return xp;
+	}
+
+	public void setXp(int xp) {
+		this.xp = xp;
+	}
+
 	@Override
 	public String toString() {
 		return "EnemyEntity [battleCry=" + battleCry + ", victoryCry=" + victoryCry + ", loserCry=" + loserCry
-				+ ", loot=" + loot + ", skills=" + skills + ", stats=" + stats + ", numOfHands=" + numOfHands
-				+ ", name=" + name + ", description=" + description + ", temperament=" + temperament + ", species="
-				+ species + ", inventory=" + inventory + ", level=" + level + "]";
+				+ ", loot=" + loot + ", skills=" + skills + ", numOfHands=" + numOfHands + ", xp=" + xp + ", name="
+				+ name + ", description=" + description + ", temperament=" + temperament + ", species=" + species
+				+ ", inventory=" + inventory + ", stats=" + stats + ", level=" + level + "]";
 	}
 	
 }
