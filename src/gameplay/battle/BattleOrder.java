@@ -53,7 +53,6 @@ public class BattleOrder {
 			if(battleOrder.isEmpty()) {
 				battleOrder.add(initialOrder.get(i));
 			} else {
-				System.out.println(i);
 				if(initialOrder.get(i).getStats().getInit() > battleOrder.get(i-1).getStats().getInit()) {
 					for(int j=0; j<battleOrder.size(); j++) {
 						double higherStat = initialOrder.get(i).getStats().getInit();
