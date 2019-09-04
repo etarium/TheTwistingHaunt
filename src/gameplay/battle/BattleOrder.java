@@ -21,37 +21,46 @@ public class BattleOrder {
 	}
 
 	private Entity determineFirstAttack() {
-		return null;
+		return battleOrder.get(0);
 	}
 
-	private List<Entity> determineBattleOrder () {
-		//TODO
+	private List<Entity> calculateAllInits() {
 		//first calculate the player
-		System.out.println("entered determine battle ordeR");
 		double playerInit = statMethods.calculateInitiative(UIMain.player);
 		UIMain.player.getStats().setInit(playerInit);
 		initialOrder.add(UIMain.player);
-		battleOrder.add(UIMain.player);
+		
+		for(Entity enemy : UIMain.player.currentCell.getEnemies()) {
+			System.out.println("calculate Enemies for loop");
+			enemyInit = statMethods.calculateInitiative(enemy);
+			enemy.getStats().setInit(enemyInit);
+			initialOrder.add(enemy);
+		}
+		
+		return initialOrder;
+	}
+	private List<Entity> determineBattleOrder () {
+		
+		initialOrder = calculateAllInits();
 		//then check against all entities
-//		for(Entity enemy : UIMain.player.currentCell.getEnemies()) {
-//			System.out.println("calculate Enemies for loop");
-//			enemyInit = statMethods.calculateInitiative(enemy);
-//			enemy.getStats().setInit(enemyInit);
-//			initialOrder.add(enemy);
-//		}
-//		System.out.println("sort array");
-//		for(int i=0; i < initialOrder.size()-1; i++) {
-//			if(initialOrder.get(i).getStats().getInit() > initialOrder.get(i+1).getStats().getInit()) {
-//				battleOrder.add(i, initialOrder.get(i));
-//			} else {
-//				battleOrder.add(initialOrder.get(i));
-//			}
-//		}
-		for(Entity entity: battleOrder) {
-			System.out.println(entity.getName() + " " + entity.getStats().getInit());
+		for(Entity enemy : UIMain.player.currentCell.getEnemies()) {
+			System.out.println("calculate Enemies for loop");
+			enemyInit = statMethods.calculateInitiative(enemy);
+			enemy.getStats().setInit(enemyInit);
+			initialOrder.add(enemy);
+		}
+		for(int i=0; i < initialOrder.size(); i++) {
+			if(battleOrder.isEmpty()) {
+				battleOrder.add(initialOrder.get(i));
+			} else {
+				if(initialOrder.get(i).getStats().getInit() > battleOrder.get(i-1).getStats().getInit()) {
+					battleOrder.add(i, initialOrder.get(i));
+				} else {
+					battleOrder.add(initialOrder.get(i));
+				}
+			}
 		}
 
-		System.out.println("end of determine battle order");
 		return battleOrder;
 	}
 
