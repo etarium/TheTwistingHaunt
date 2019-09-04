@@ -12,7 +12,7 @@ public class CheckStatuses {
 		}
 	}
 
-	public boolean isEnemyDead(EnemyEntity enemy) {
+	public static boolean isEnemyDead(EnemyEntity enemy) {
 		if(enemy.getStats().getCurrentHP() > 0) {
 			return false;
 		}

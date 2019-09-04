@@ -50,7 +50,7 @@ public class BattleOrder {
 		return initialOrder;
 	}
 	
-	private List<Entity> determineBattleOrder () {
+	public List<Entity> determineBattleOrder () {
 		UIMain.battleOrder = new LinkedList<Entity>();
 		initialOrder = calculateAllInits();
 		//then check against all entities

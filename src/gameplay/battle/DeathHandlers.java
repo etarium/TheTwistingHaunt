@@ -1,14 +1,18 @@
 package gameplay.battle;
 
-import java.util.LinkedList;
-
-import pojos.entity.Entity;
+import pojos.entity.EnemyEntity;
 import uiView.UIMain;
 
 public class DeathHandlers {
 
-	public String enemyDeath(LinkedList<Entity> battleOrder) {
-		//UIMain.battleOrder.remove();
-		return "";
+	public static void removeEnemy(EnemyEntity selectedTarget) {
+		for(int i=0; i<UIMain.player.currentCell.getEnemies().size(); i++) {
+			if(UIMain.player.currentCell.getEnemies().get(i).getName().equalsIgnoreCase(selectedTarget.getName())) {
+				UIMain.player.currentCell.getEnemies().remove(i);
+			}
+			if(UIMain.battleOrder.get(i).getName().equalsIgnoreCase(selectedTarget.getName())) {
+				UIMain.battleOrder.remove(i);
+			}
+		}
 	}
 }

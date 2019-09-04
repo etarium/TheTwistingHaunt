@@ -1,5 +1,7 @@
 package gameplay.commandServices;
 
+import gameplay.battle.CheckStatuses;
+import gameplay.battle.DeathHandlers;
 import pojos.entity.EnemyEntity;
 import uiView.UIMain;
 import utilities.Logs;
@@ -24,10 +26,15 @@ public class BattleService {
 		
 		if(calculateHitRate(selectedTarget)) {
 			selectedTarget.getStats().setCurrentHP(selectedTarget.getStats().getCurrentHP() - total);
+			
+			if(!CheckStatuses.isEnemyDead(selectedTarget)) {
 			output = "You attack " + selectedTarget.getName() + ", and with a stunning blow deal " + total + " damage. \n"
 					+ "Nice work, hero! \n\n"
 					+ selectedTarget.getName() + " Remaining HP: " + selectedTarget.getStats().getCurrentHP();
-		} else {
+			} else {
+				DeathHandlers.removeEnemy(selectedTarget);
+			}
+			} else {
 			output = "You lunge toward " + selectedTarget.getName() + ", but you were sidestepped and missed completely.\n"
 					+ "Big bummer, hero. \n\n"
 					+ selectedTarget.getName() + " Remaining HP: " + selectedTarget.getStats().getCurrentHP();
@@ -105,4 +112,5 @@ public class BattleService {
 		Logs.LOGGER.info("Enemies present in battle were " + UIMain.player.currentCell.getEnemies());
 		return null;
 	}
+
 }
