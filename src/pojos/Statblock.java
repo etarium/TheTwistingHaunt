@@ -19,6 +19,7 @@ public class Statblock {
 	int sta;
 	int agi;
 	int acc;
+	double init;
 	
 	public Statblock() {
 		this.hp = 0;
@@ -35,6 +36,7 @@ public class Statblock {
 		this.sta = 0;
 		this.agi = 0;
 		this.acc = 0;
+		this.init = 0;
 	}
 	
 	public Statblock(int hp, int sp, int atk, int def, int spatk, int spdef, int eva, int intel, int cha, int sta,
@@ -142,6 +144,15 @@ public class Statblock {
 	public void setAcc(int acc) {
 		this.acc = acc;
 	}
+	
+	public double getInit() {
+		return init;
+	}
+
+	public void setInit(double init) {
+		this.init = init;
+	}
+
 	@Override
 	public String toString() {
 		return "Statblock [hp=" + hp + ", sp=" + sp + ", atk=" + atk + ", def=" + def + ", spatk=" + spatk + ", spdef="

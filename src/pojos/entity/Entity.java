@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import pojos.Statblock;
 import pojos.entity.enums.SpeciesEnum;
 import pojos.entity.enums.Temperament;
 import pojos.items.Item;
@@ -16,6 +17,7 @@ public class Entity {
 	Temperament temperament;
 	SpeciesEnum species;
 	List<Item> inventory;
+	Statblock stats;
 	int level;
 	
 	public String getName() {
@@ -54,10 +56,17 @@ public class Entity {
 	public void setLevel(int level) {
 		this.level = level;
 	}
+	
+	public Statblock getStats() {
+		return stats;
+	}
+	public void setStats(Statblock stats) {
+		this.stats = stats;
+	}
 	@Override
 	public String toString() {
 		return "Entity [name=" + name + ", description=" + description + ", temperament=" + temperament + ", species="
-				+ species + ", inventory=" + inventory + ", level=" + level + "]";
+				+ species + ", inventory=" + inventory + ", stats=" + stats + ", level=" + level + "]";
 	}
-	
+
 }

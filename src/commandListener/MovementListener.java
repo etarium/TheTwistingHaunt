@@ -1,6 +1,7 @@
 package commandListener;
 
 import gameplay.commandServices.MovementService;
+import pojos.entity.EnemyEntity;
 import uiView.UIMain;
 import utilities.Logs;
 
@@ -28,22 +29,28 @@ public class MovementListener {
 		case "/e":
 		case "/west":
 		case "/w":
-			
+
 			//if there's a fight, the player cannot move cells.
 			if(UIMain.player.isInEncounter) {
 				return new Reply(false, output, UIMain.player.currentCell.getDescription());
 			}
-			
+
 			char direction = command.charAt(1);
 			String upperOutput = UIMain.player.currentCell.getDescription();
 			switch (direction) {
 			case 'n':
-				
+
 
 				newUpperOutput = system.moveNorth(direction);
 
 				if(!upperOutput.equals(newUpperOutput)) {
-					output = "You move to the north.";
+					if(UIMain.player.isInEncounter) {
+						StringBuilder outputBuilder = new StringBuilder(); 
+						outputBuilder.append("You move to the north, and find yourself surrounded by ");
+						output = battleOutput(outputBuilder);
+					} else {
+						output = "You move to the north.";
+					}
 					upperOutput = newUpperOutput;
 				} else {
 					output = failedMovementOutput;
@@ -55,7 +62,13 @@ public class MovementListener {
 				newUpperOutput = system.moveSouth(direction);
 
 				if(!upperOutput.equals(newUpperOutput)) {
-					output = "You move to the south.";
+					if(UIMain.player.isInEncounter) {
+						StringBuilder outputBuilder = new StringBuilder(); 
+						outputBuilder.append("You move to the south, and find yourself surrounded by ");
+						output = battleOutput(outputBuilder);
+					} else {
+						output = "You move to the south.";
+					}
 					upperOutput = newUpperOutput;
 				} else {
 					output = failedMovementOutput;
@@ -66,7 +79,13 @@ public class MovementListener {
 
 				newUpperOutput = system.moveEast(direction);
 				if(!upperOutput.equals(newUpperOutput)) {
-					output = "You move to the east.";
+					if(UIMain.player.isInEncounter) {
+						StringBuilder outputBuilder = new StringBuilder(); 
+						outputBuilder.append("You move to the east, and find yourself surrounded by ");
+						output = battleOutput(outputBuilder);
+					} else {
+						output = "You move to the east.";
+					}
 					upperOutput = newUpperOutput;
 				} else {
 					output = failedMovementOutput;
@@ -78,7 +97,13 @@ public class MovementListener {
 				newUpperOutput = system.moveWest(direction);
 
 				if(!upperOutput.equals(newUpperOutput)) {
-					output = "You move to the west.";
+					if(UIMain.player.isInEncounter) {
+						StringBuilder outputBuilder = new StringBuilder(); 
+						outputBuilder.append("You move to the west, and find yourself surrounded by ");
+						output = battleOutput(outputBuilder);
+					} else {
+						output = "You move to the west.";
+					}
 					upperOutput = newUpperOutput;
 				} else {
 					output = failedMovementOutput;
@@ -98,5 +123,16 @@ public class MovementListener {
 		}//end switch
 
 		return new Reply(isSuccessful, output, newUpperOutput);
+	}
+
+	private String battleOutput(StringBuilder outputBuilder) {
+		for(EnemyEntity enemy : UIMain.player.currentCell.getEnemies()) {
+			outputBuilder.append(enemy.getName());
+			outputBuilder.append(", ");
+		}
+		outputBuilder.replace(outputBuilder.length()-2, outputBuilder.length(), "!");
+		outputBuilder.append("\nQuick, you must fight!");
+
+		return outputBuilder.toString();
 	}
 }
