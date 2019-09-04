@@ -1,11 +1,13 @@
 package gameplay.commandServices;
 
+import gameplay.battle.BattleOrder;
 import pojos.environment.Cell;
 import pojos.environment.Location;
 import uiView.UIMain;
 
 public class MovementService {
 	
+	String output = "";
 	public MovementService() {
 		//empty constructor
 	}
@@ -14,36 +16,36 @@ public class MovementService {
 		if(UIMain.player.currentCell.isNorth()) {
 			Location newLoc = UIMain.player.getLocation();
 			newLoc.setY(newLoc.getY()+1);
-			setNewCell(newLoc);
+			output = setNewCell(newLoc);
 		}
-		return UIMain.player.currentCell.getDescription();
+		return output;
 	}
 
 	public String moveSouth(char direction) {
 		if(UIMain.player.currentCell.isSouth()) {
 			Location newLoc = UIMain.player.getLocation();
 			newLoc.setY(newLoc.getY()-1);
-			setNewCell(newLoc);
+			output = setNewCell(newLoc);
 		}
-		return UIMain.player.currentCell.getDescription();
+		return output;
 	}
 
 	public String moveEast(char direction) {
 		if(UIMain.player.currentCell.isEast()) {
 			Location newLoc = UIMain.player.getLocation();
 			newLoc.setX(newLoc.getX()+1);
-			setNewCell(newLoc);
+			output = setNewCell(newLoc);
 		}
-		return UIMain.player.currentCell.getDescription();
+		return output;
 	}
 
 	public String moveWest(char direction) {
 		if(UIMain.player.currentCell.isWest()) {
 			Location newLoc = UIMain.player.getLocation();
 			newLoc.setX(newLoc.getX()-1);
-			setNewCell(newLoc);
+			output = setNewCell(newLoc);
 		}
-		return UIMain.player.currentCell.getDescription();
+		return output;
 	}
 
 	private String setNewCell(Location newLoc) {
@@ -54,6 +56,10 @@ public class MovementService {
 					UIMain.player.setCurrentCell(cell);
 					UIMain.player.setLocation(newLoc);
 					UIMain.player.setIsInEncounter(checkForEncounters());
+					if(checkForEncounters()) {
+						BattleOrder battle = new BattleOrder();
+						return (UIMain.player.currentCell.getDescription() + "\n" + battle.initializeBattle());
+					}
 					break;
 			}
 		}
