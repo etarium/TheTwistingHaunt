@@ -1,5 +1,6 @@
 package gameplay.battle;
 
+import gameplay.commandServices.PlayerService;
 import uiView.UIMain;
 
 public class VictoryService {
@@ -22,13 +23,17 @@ public class VictoryService {
 		StringBuilder output = new StringBuilder();
 		output.append("All foes have been vanquished");
 		if(didLevelUp()) {
+			PlayerService service = new PlayerService();
 			output.append(", and you feel yourself become stronger!");
+			output.append("\nXP Earned: " + accruedXP);
+			output.append("\n" + service.getPlayerStats());
 		} else {
 			output.append("!");
+			output.append("\n**********");
+			output.append("\nXP Earned: " + accruedXP);
+			output.append("\nXP to Next Level: " + UIMain.player.getXpToNextLevel());
 		}
-		output.append("\n**********");
-		output.append("\nXP Earned: " + accruedXP);
-		output.append("\nXP to Next Level: " + UIMain.player.getXpToNextLevel());
+		
 		awardXP();
 		exitBattle();
 		

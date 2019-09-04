@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import gameplay.StatModMethods.BattleStatMethods;
+import pojos.entity.EnemyEntity;
 import pojos.entity.Entity;
 import uiView.UIMain;
 import utilities.Logs;
@@ -35,7 +36,7 @@ public class BattleOrder {
 		UIMain.player.getStats().setInit(playerInit);
 		initialOrder.add(UIMain.player);
 		
-		for(Entity enemy : UIMain.player.currentCell.getEnemies()) {
+		for(EnemyEntity enemy : UIMain.player.currentCell.getEnemies()) {
 			enemyInit = statMethods.calculateInitiative(enemy);
 			enemy.getStats().setInit(enemyInit);
 			//TODO:
