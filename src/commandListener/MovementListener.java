@@ -34,22 +34,24 @@ public class MovementListener {
 			if(UIMain.player.isInEncounter) {
 				return new Reply(false, output, UIMain.player.currentCell.getDescription());
 			}
-
+			
+			StringBuilder outputBuilder = new StringBuilder(); 
+			
 			char direction = command.charAt(1);
 			String upperOutput = UIMain.player.currentCell.getDescription();
 			switch (direction) {
 			case 'n':
 
-
 				newUpperOutput = system.moveNorth(direction);
 
-				if(!upperOutput.equals(newUpperOutput)) {
+				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
-						StringBuilder outputBuilder = new StringBuilder(); 
 						outputBuilder.append("You move to the north, and find yourself surrounded by ");
 						output = battleOutput(outputBuilder);
 					} else {
-						output = "You move to the north.";
+						outputBuilder.append("You move to the north.");
+						outputBuilder.append(restOutput());
+						output = outputBuilder.toString();
 					}
 					upperOutput = newUpperOutput;
 				} else {
@@ -61,13 +63,14 @@ public class MovementListener {
 
 				newUpperOutput = system.moveSouth(direction);
 
-				if(!upperOutput.equals(newUpperOutput)) {
+				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
-						StringBuilder outputBuilder = new StringBuilder(); 
 						outputBuilder.append("You move to the south, and find yourself surrounded by ");
 						output = battleOutput(outputBuilder);
 					} else {
-						output = "You move to the south.";
+						outputBuilder.append("You move to the south.");
+						outputBuilder.append(restOutput());
+						output = outputBuilder.toString();
 					}
 					upperOutput = newUpperOutput;
 				} else {
@@ -78,16 +81,19 @@ public class MovementListener {
 			case 'e':
 
 				newUpperOutput = system.moveEast(direction);
-				if(!upperOutput.equals(newUpperOutput)) {
+				
+				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
-						StringBuilder outputBuilder = new StringBuilder(); 
 						outputBuilder.append("You move to the east, and find yourself surrounded by ");
 						output = battleOutput(outputBuilder);
 					} else {
-						output = "You move to the east.";
+						outputBuilder.append("You move to the east.");
+						outputBuilder.append(restOutput());
+						output = outputBuilder.toString();
 					}
 					upperOutput = newUpperOutput;
 				} else {
+					System.out.println("failed movement east");
 					output = failedMovementOutput;
 				}
 
@@ -96,16 +102,18 @@ public class MovementListener {
 
 				newUpperOutput = system.moveWest(direction);
 
-				if(!upperOutput.equals(newUpperOutput)) {
+				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
-						StringBuilder outputBuilder = new StringBuilder(); 
+						
 						outputBuilder.append("You move to the west, and find yourself surrounded by ");
 						output = battleOutput(outputBuilder);
 					} else {
-						output = "You move to the west.";
+						outputBuilder.append("You move to the west.");
+						outputBuilder.append(restOutput());
+						output = outputBuilder.toString();
 					}
 					upperOutput = newUpperOutput;
-				} else {
+				} else {;
 					output = failedMovementOutput;
 				}
 
@@ -134,5 +142,13 @@ public class MovementListener {
 		outputBuilder.append("\nQuick, you must fight!");
 
 		return outputBuilder.toString();
+	}
+	
+	private String restOutput() {
+		if(UIMain.player.currentCell.canRest()) {
+			return "\n\nThis area seems safer than most. It wouldn't be a terrible place to have a short rest. \n"
+					+ "[type '/rest' to refill your HP and SP!]";
+		}
+		return "";
 	}
 }

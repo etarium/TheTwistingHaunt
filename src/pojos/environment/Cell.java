@@ -12,7 +12,6 @@ import pojos.items.Item;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Cell {
 	
-	String _id;
 	Location location;
 	Instance instance;
 	String description;
@@ -27,6 +26,7 @@ public class Cell {
 	boolean south;
 	boolean east;
 	boolean west;
+	boolean canRest;
 
 	public Location getLocation() {
 		return location;
@@ -140,12 +140,20 @@ public class Cell {
 		this.west = west;
 	}
 
+	public boolean canRest() {
+		return canRest;
+	}
+
+	public void setCanRest(boolean canRest) {
+		this.canRest = canRest;
+	}
+
 	@Override
 	public String toString() {
 		return "Cell [location=" + location + ", instance=" + instance + ", description=" + description + ", terrain="
 				+ terrain + ", inspectableObjects=" + inspectableObjects + ", items=" + items + ", npcs=" + npcs
 				+ ", enemies=" + enemies + ", isLocked=" + isLocked + ", requiredItems=" + requiredItems + ", north="
-				+ north + ", south=" + south + ", east=" + east + ", west=" + west + "]";
-	} 
+				+ north + ", south=" + south + ", east=" + east + ", west=" + west + ", canRest=" + canRest + "]";
+	}
 
 }
