@@ -7,6 +7,7 @@ import utilities.Logs;
 
 public class CellService {
 
+	public static InspectableObjects recentlyOpenedObject = new InspectableObjects();
 	public CellService() {
 	}
 
@@ -38,19 +39,19 @@ public class CellService {
 		for(InspectableObjects item : UIMain.player.getCurrentCell().getInspectableObjects()) {
 			if(item.getName().equalsIgnoreCase(param)) {
 				output = item.getDescription();
+				recentlyOpenedObject = item;
 				break;
 			} else {
 				output = "You can look all day, but you still won't find it, " + UIMain.player.getEntityClass().getName() + ".";
 			}
-		}
-
+		} 
 		return output;
 	}
 	
 	public String openItem(String param) {
 		StringBuilder outputBuilder = new StringBuilder();
 		outputBuilder.append("Hands trembling, you unveil: ");
-		String output = "You fumble with various items around the room, failing to find any latches like what you're looking for.";
+		String failedOutput = "You fumble with various items around the room, failing to find any latches like what you're looking for.";
 		
 		for(InspectableObjects item : UIMain.player.getCurrentCell().getInspectableObjects()) {
 			if(item.getName().equalsIgnoreCase(param) && item.getItems()!= null) {
@@ -58,13 +59,14 @@ public class CellService {
 					outputBuilder.append("\n\n***** \n");
 					outputBuilder.append(getItemDescription(innerItem));
 				}
+				recentlyOpenedObject = item;
 				outputBuilder.append("\n\n\nYou should consider taking your findings with you.");
 				break;
 			} else {
-				return output;
+				return failedOutput;
 			}
 		}
-
+		
 		return outputBuilder.toString();
 		
 	}

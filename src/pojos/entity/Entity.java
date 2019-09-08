@@ -1,5 +1,6 @@
 package pojos.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -16,7 +17,7 @@ public class Entity {
 	String description;
 	Temperament temperament;
 	SpeciesEnum species;
-	List<Item> inventory;
+	List<Item> inventory = new ArrayList<Item>();
 	Statblock stats;
 	int level;
 	
