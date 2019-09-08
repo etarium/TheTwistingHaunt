@@ -37,7 +37,7 @@ public class BattleListener {
 		case "/magic attack":
 		case "/spell attack":
 		case "/sp attack":
-			//TOOD
+			//TODO
 			if (parameter == null) {
 				if(UIMain.player.currentCell.getEnemies().size() == 1) {
 					output = system.spAttack(UIMain.player.getCurrentCell().getEnemies().get(0).getName());
