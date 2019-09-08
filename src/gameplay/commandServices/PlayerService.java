@@ -301,6 +301,7 @@ public class PlayerService {
 			} else {
 				UIMain.player.getInventory().add(item);
 				outputBuilder.append(item.getName() + "\n");
+				removeItemFromCell(item);
 			}
 		}
 		return outputBuilder.toString();
@@ -309,12 +310,11 @@ public class PlayerService {
 	private String takeOnlyItem() {
 		//no parameter but only one item
 		StringBuilder outputBuilder = new StringBuilder();
-		if(CellService.recentlyOpenedObject.getItems().size() == 1) {
+		if(CellService.recentlyOpenedObject.getItems() != null && CellService.recentlyOpenedObject.getItems().size() == 1) {
 			UIMain.player.getInventory().add(CellService.recentlyOpenedObject.getItems().get(0));
 			outputBuilder.append("You take the " + CellService.recentlyOpenedObject.getItems().get(0).getName());
-			CellService.recentlyOpenedObject.getItems().remove(0);
 			//then remove the item from the cell / instance
-			removeItemFromCell();
+			removeItemFromCell(CellService.recentlyOpenedObject.getItems().get(0));
 		} else {
 			outputBuilder.append("I'm not sure what you were expecting to take..."
 					+ "\n [Use /take all for every item, or be more specific.]");
@@ -329,19 +329,25 @@ public class PlayerService {
 			if(item.getName().equalsIgnoreCase(param)) {
 				UIMain.player.getInventory().add(item);
 				outputBuilder.append("You take the " + item.getName());
+				removeItemFromCell(item);
 				break;
+			} else {
+				outputBuilder.append("You look around, but can't find anything worth taking by that name.");
 			}
 		}
 		return outputBuilder.toString();
 	}
 
-	private void removeItemFromCell() {
-		for(int i = 0; i < UIMain.player.currentCell.getInspectableObjects().size(); i ++) {
-			if(CellService.recentlyOpenedObject.getName().equalsIgnoreCase(UIMain.player.currentCell.getInspectableObjects().get(i).getName())) {
-				UIMain.cells.remove(UIMain.player.currentCell);
-				UIMain.player.currentCell.getInspectableObjects().remove(i);
-				UIMain.cells.add(UIMain.player.currentCell);
-				break;
+	private void removeItemFromCell(Item item) {
+		for(InspectableObjects object : UIMain.player.currentCell.getInspectableObjects()) {
+			for(int i = 0; i < object.getItems().size(); i ++) {
+				if(item.getName().equalsIgnoreCase(object.getItems().get(i).getName())) {
+					UIMain.cells.remove(UIMain.player.currentCell);
+					UIMain.player.currentCell.getInspectableObjects().remove(object);
+					object.getItems().remove(i);
+					UIMain.player.currentCell.getInspectableObjects().add(object);
+					UIMain.cells.add(UIMain.player.currentCell);
+				}
 			}
 		}
 	}
