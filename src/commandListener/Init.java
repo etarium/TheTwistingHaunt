@@ -30,11 +30,10 @@ public class Init {
 		//player is not engaged in combat
 		if(!UIMain.player.isInEncounter) { 
 			Reply systemReply = systemListener.listen(command, system, parameter);
-			Reply battleReply = battleListener.listen(command, parameter);
 			Reply movementReply = movementListener.listen(command);
 			Reply inventoryReply = inventoryListener.listen(command, parameter);
 			Reply cellReply = cellListener.listen(command, parameter);
-			Reply[] replies = {systemReply, battleReply, movementReply, inventoryReply, cellReply};
+			Reply[] replies = {systemReply, movementReply, inventoryReply, cellReply};
 			Reply reply = processReplies(replies);
 			if(!reply.isSuccess) {
 				output = "Your mutterings echo softly, but go unanswered.\n"
