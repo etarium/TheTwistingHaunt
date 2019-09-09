@@ -32,6 +32,12 @@ public class PlayerService {
 		String noItemByThatName = "You look around, but can't find anything worth taking.";
 
 		//take all from the object most recently inspected
+		System.out.println(CellService.recentlyOpenedObject);
+		if(CellService.recentlyOpenedObject.getName() == null) {
+			return "You haven't found anything to take, yet. Try looking around or opening items.";
+		} else if(CellService.recentlyOpenedObject.getItems().isEmpty()) {
+			return "There's nothing to be found in the " + CellService.recentlyOpenedObject.getName() + ".";
+		}
 		if (param == null || param.equals("")) {
 			outputBuilder.append(takeOnlyItem());
 		} else if (!CellService.recentlyOpenedObject.getItems().isEmpty()) {
@@ -306,7 +312,6 @@ public class PlayerService {
 				UIMain.player.getInventory().add(item);
 				itemsToRemove.add(item);
 				outputBuilder.append(item.getName() + "\n");
-				//removeItemFromCell(item);
 			}
 		}
 		removeItemsFromCell(itemsToRemove);
@@ -349,8 +354,6 @@ public class PlayerService {
 		for(InspectableObjects object : UIMain.player.currentCell.getInspectableObjects()) {
 			for(int i = 0; i < object.getItems().size(); i ++) {
 				if(item.getName().equalsIgnoreCase(object.getItems().get(i).getName())) {
-
-					//TODO: deal with concurrency error
 					//to avoid concurrency errors, first add any matching items to a new list
 					matchedInspectable = object;
 					matchedInspectable.getItems().remove(i);
@@ -372,7 +375,6 @@ public class PlayerService {
 				for(int i = 0; i < object.getItems().size(); i ++) {
 					if(item.getName().equalsIgnoreCase(object.getItems().get(i).getName())) {
 
-						//TODO: deal with concurrency error
 						//to avoid concurrency errors, first add any matching items to a new list
 						matchedInspectable = object;
 						matchedInspectable.getItems().remove(i);
