@@ -31,7 +31,7 @@ public class PlayerService {
 
 	public String takeItem(String param) {
 		StringBuilder outputBuilder = new StringBuilder();
-		String noItemByThatName = "You look around, but can't find anything worth taking.";
+		String noItemByThatName = "You look around, but can't find anything by that name worth taking.";
 
 
 		//if inspectable item is empty, check the cell first
