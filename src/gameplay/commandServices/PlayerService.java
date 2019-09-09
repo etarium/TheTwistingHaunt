@@ -29,7 +29,6 @@ public class PlayerService {
 		//if inspectable item isnt declared, and the cell is empty, display failure text
 		if((CellService.recentlyOpenedObject.getName() == null || CellService.recentlyOpenedObject.getItems().isEmpty())
 				&& (UIMain.player.currentCell.getItems() == null || UIMain.player.currentCell.getItems().isEmpty())) {
-
 			return "You haven't found anything to take, yet. Try looking around or opening items.";
 
 		} else if(CellService.recentlyOpenedObject.getName() == null) {
@@ -44,9 +43,9 @@ public class PlayerService {
 				if(!UIMain.player.currentCell.getItems().isEmpty()) {
 					outputBuilder.append(takeItemFromCell(param));
 				}
-				//else check inspectableObjct
-				outputBuilder.append(takeItemFromInspectable(param));
 			} 
+			//else check inspectableObjct
+			outputBuilder.append(takeItemFromInspectable(param));
 		}
 		return outputBuilder.toString();
 	}
@@ -302,7 +301,7 @@ public class PlayerService {
 		if (param == null || param.equals("")) {
 			//take the only item from cell
 			outputBuilder.append(take.takeOnlyItemFromCell());
-		} else if (!CellService.recentlyOpenedObject.getItems().isEmpty()) {
+		} else if (!UIMain.player.currentCell.getItems().isEmpty()) {
 			//if the cell's items aren't empty, player can take all or take specific item
 			if (param.equalsIgnoreCase("all")) {
 				outputBuilder.append(take.takeAllFromCell());
@@ -317,7 +316,7 @@ public class PlayerService {
 
 	private String takeItemFromInspectable(String param) {
 		StringBuilder outputBuilder = new StringBuilder();
-
+		System.out.println("hit take from inspectable");
 		if(CellService.recentlyOpenedObject.getItems().isEmpty()) {
 			return "There's nothing to be found in the " + CellService.recentlyOpenedObject.getName() + ".";
 		}
