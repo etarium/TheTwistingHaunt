@@ -124,11 +124,34 @@ public class TakeUtilities {
 	}
 
 	public String takeOnlyItemFromCell() {
-		return "";
+		//no parameter but only one item
+		StringBuilder outputBuilder = new StringBuilder();
+		if(UIMain.player.currentCell.getItems() != null && UIMain.player.currentCell.getItems().size() == 1) {
+			UIMain.player.getInventory().add(UIMain.player.currentCell.getItems().get(0));
+			outputBuilder.append("You take the " + UIMain.player.currentCell.getItems().get(0).getName());
+			//then remove the item from the cell / instance
+			removeItemFromInspectableObject(UIMain.player.currentCell.getItems().get(0));
+		} else {
+			outputBuilder.append("I'm not sure what you were expecting to take..."
+					+ "\n [Use /take all for every item, or be more specific.]");
+		}
+		return outputBuilder.toString();
 	}
 
 	public String takeItemByNameFromCell(String param) {
-		return "";
+		StringBuilder outputBuilder = new StringBuilder();
+
+		for(Item item : UIMain.player.currentCell.getItems()) {
+			if(item.getName().equalsIgnoreCase(param)) {
+				UIMain.player.getInventory().add(item);
+				outputBuilder.append("You take the " + item.getName());
+				removeItemFromInspectableObject(item);
+				break;
+			} else {
+				outputBuilder.append("You look around, but can't find anything worth taking by that name.");
+			}
+		}
+		return outputBuilder.toString();
 	}
 
 	public void removeItemsFromCell(List<Item> itemsToRemove) {

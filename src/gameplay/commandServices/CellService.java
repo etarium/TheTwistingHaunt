@@ -13,21 +13,41 @@ public class CellService {
 
 	public String inspectCell() {
 		Logs.LOGGER.info("Inspect Active Cell " + UIMain.player.currentCell.toString());
+		String failedOutput = "You search long and hard, but your effort turns up nothing of interest.";
 		String output = "";
+		String objects = "";
 
-		if(UIMain.player.getCurrentCell().getInspectableObjects() == null) {
-			output = "You search long and hard, but your effort turns up nothing of interest.";
+		if(UIMain.player.getCurrentCell().getInspectableObjects() == null && UIMain.player.getCurrentCell().getItems() == null) {
+			output = failedOutput;
 		}
 		else {
-			String objects = "";
-			for(InspectableObjects item : UIMain.player.getCurrentCell().getInspectableObjects()) {
-				if(objects.equals("")) {
-					objects = item.getName();
-				} else {
-					objects = objects + ", " + item.getName();
+			if(UIMain.player.getCurrentCell().getInspectableObjects() != null
+					&& !UIMain.player.getCurrentCell().getInspectableObjects().isEmpty()) {
+				for(InspectableObjects item : UIMain.player.getCurrentCell().getInspectableObjects()) {
+					if(objects.equals("")) {
+						objects = item.getName();
+					} else {
+						objects = objects + ", " + item.getName();
+					}
+
 				}
 			}
-			output = "By your sharp eyes or by good fortune, you find " + objects + "!";
+			if(UIMain.player.getCurrentCell().getItems() != null 
+					&& !UIMain.player.getCurrentCell().getItems().isEmpty()) {
+				for(Item item : UIMain.player.getCurrentCell().getItems()) {
+					if(objects.equals("")) {
+						objects = item.getName();
+					} else {
+						objects = objects + ", " + item.getName();
+					}
+				}
+			}
+			if(objects.equals("")) {
+				output = failedOutput;
+			}
+			else {
+				output = "By your sharp eyes or by good fortune, you find " + objects + "!";
+			}
 		}
 
 		return output;
@@ -46,7 +66,7 @@ public class CellService {
 		} 
 		return output;
 	}
-	
+
 	public String openItem(String param) {
 		StringBuilder outputBuilder = new StringBuilder();
 		outputBuilder.append("Hands trembling, you unveil: ");
@@ -66,18 +86,18 @@ public class CellService {
 				return "You fumble with various items around the room, failing to find any latches like what you're looking for.";
 			}
 		}
-		
+
 		return outputBuilder.toString();
-		
+
 	}
-	
+
 	public String getItemDescription(Item item) {
 		StringBuilder outputBuilder = new StringBuilder();
-		
+
 		outputBuilder.append(item.getName());
 		outputBuilder.append("\n\n- ");
 		outputBuilder.append(item.getDescription());
-		
+
 		return outputBuilder.toString();
 	}
 }
