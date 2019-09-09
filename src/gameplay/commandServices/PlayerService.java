@@ -5,6 +5,7 @@ import java.util.List;
 
 import gameplay.GamePlayConstants;
 import gameplay.StatModMethods.PlayerStatMethods;
+import gameplay.commandServices.utilities.TakeUtilities;
 import pojos.environment.InspectableObjects;
 import pojos.items.Item;
 import pojos.items.enums.ArmorMaterial;
@@ -14,6 +15,7 @@ import uiView.UIMain;
 public class PlayerService {
 
 	PlayerStatMethods system = new PlayerStatMethods();
+	TakeUtilities take = new TakeUtilities();
 	String output = "";
 
 	public PlayerService() {
@@ -31,23 +33,40 @@ public class PlayerService {
 		StringBuilder outputBuilder = new StringBuilder();
 		String noItemByThatName = "You look around, but can't find anything worth taking.";
 
-		//take all from the object most recently inspected
-		System.out.println(CellService.recentlyOpenedObject);
+
+		//if inspectable item is empty, check the cell first
 		if(CellService.recentlyOpenedObject.getName() == null) {
-			return "You haven't found anything to take, yet. Try looking around or opening items.";
-		} else if(CellService.recentlyOpenedObject.getItems().isEmpty()) {
-			return "There's nothing to be found in the " + CellService.recentlyOpenedObject.getName() + ".";
-		}
-		if (param == null || param.equals("")) {
-			outputBuilder.append(takeOnlyItem());
-		} else if (!CellService.recentlyOpenedObject.getItems().isEmpty()) {
-			if (param.equalsIgnoreCase("all")) {
-				outputBuilder.append(takeAll());
+			if (param == null || param.equals("")) {
+				//take the only item from cell
+				outputBuilder.append(take.takeOnlyItemFromCell());
+			} else if (!CellService.recentlyOpenedObject.getItems().isEmpty()) {
+				//if the cell's items aren't empty, player can take all or take specific item
+				if (param.equalsIgnoreCase("all")) {
+					outputBuilder.append(take.takeAllFromCell());
+				} else {
+					outputBuilder.append(take.takeItemByNameFromCell(param));
+				}
 			} else {
-				outputBuilder.append(takeItemByName(param));
+				return noItemByThatName;
 			}
 		} else {
-			return noItemByThatName;
+			//else fail if there are no items in the cell and no items have been inspected
+			if(CellService.recentlyOpenedObject.getName() == null && (UIMain.player.currentCell.getItems() == null || UIMain.player.currentCell.getItems().isEmpty())) {
+				return "You haven't found anything to take, yet. Try looking around or opening items.";
+			} else if(CellService.recentlyOpenedObject.getItems().isEmpty()) {
+				return "There's nothing to be found in the " + CellService.recentlyOpenedObject.getName() + ".";
+			}
+			if (param == null || param.equals("")) {
+				outputBuilder.append(take.takeOnlyItemFromInspectable());
+			} else if (!CellService.recentlyOpenedObject.getItems().isEmpty()) {
+				if (param.equalsIgnoreCase("all")) {
+					outputBuilder.append(take.takeAllFromInspectable());
+				} else {
+					outputBuilder.append(take.takeItemByNameFromInspectable(param));
+				}
+			} else {
+				return noItemByThatName;
+			}
 		}
 		return outputBuilder.toString();
 	}
@@ -298,95 +317,5 @@ public class PlayerService {
 		return output.toString();
 	}
 
-	private String takeAll() {
-		StringBuilder outputBuilder = new StringBuilder();
-		outputBuilder.append("You take all of the items.\n");
-		outputBuilder.append("**********\n");
-		outputBuilder.append("Items Received: \n");
-		List<Item> itemsToRemove = new ArrayList<Item>();
-		for(Item item : CellService.recentlyOpenedObject.getItems()) {
-			if(UIMain.player.getInventory().size() >= GamePlayConstants.MAX_INVENTORY_SIZE) {
-				return "Your bag is heaving with the volume of items inside. You couldn't possible take anymore!"
-						+ "\n [Use /drop to remove items from your inventory.]";
-			} else {
-				UIMain.player.getInventory().add(item);
-				itemsToRemove.add(item);
-				outputBuilder.append(item.getName() + "\n");
-			}
-		}
-		removeItemsFromCell(itemsToRemove);
-		return outputBuilder.toString();
-	}
 
-	private String takeOnlyItem() {
-		//no parameter but only one item
-		StringBuilder outputBuilder = new StringBuilder();
-		if(CellService.recentlyOpenedObject.getItems() != null && CellService.recentlyOpenedObject.getItems().size() == 1) {
-			UIMain.player.getInventory().add(CellService.recentlyOpenedObject.getItems().get(0));
-			outputBuilder.append("You take the " + CellService.recentlyOpenedObject.getItems().get(0).getName());
-			//then remove the item from the cell / instance
-			removeItemFromCell(CellService.recentlyOpenedObject.getItems().get(0));
-		} else {
-			outputBuilder.append("I'm not sure what you were expecting to take..."
-					+ "\n [Use /take all for every item, or be more specific.]");
-		}
-		return outputBuilder.toString();
-	}
-
-	private String takeItemByName(String param) {
-		StringBuilder outputBuilder = new StringBuilder();
-
-		for(Item item : CellService.recentlyOpenedObject.getItems()) {
-			if(item.getName().equalsIgnoreCase(param)) {
-				UIMain.player.getInventory().add(item);
-				outputBuilder.append("You take the " + item.getName());
-				removeItemFromCell(item);
-				break;
-			} else {
-				outputBuilder.append("You look around, but can't find anything worth taking by that name.");
-			}
-		}
-		return outputBuilder.toString();
-	}
-
-	private void removeItemFromCell(Item item) {
-		InspectableObjects matchedInspectable = new InspectableObjects();
-		for(InspectableObjects object : UIMain.player.currentCell.getInspectableObjects()) {
-			for(int i = 0; i < object.getItems().size(); i ++) {
-				if(item.getName().equalsIgnoreCase(object.getItems().get(i).getName())) {
-					//to avoid concurrency errors, first add any matching items to a new list
-					matchedInspectable = object;
-					matchedInspectable.getItems().remove(i);
-					object.getItems().remove(i);
-				}
-			}
-		}
-		//then replace the current inspectable with the new set
-		UIMain.cells.remove(UIMain.player.currentCell);	
-		UIMain.player.currentCell.getInspectableObjects().remove(matchedInspectable);
-		UIMain.player.currentCell.getInspectableObjects().add(matchedInspectable);
-		UIMain.cells.add(UIMain.player.currentCell);
-	}
-
-	private void removeItemsFromCell(List<Item> items) {
-		InspectableObjects matchedInspectable = new InspectableObjects();
-		for(Item item : items) {
-			for(InspectableObjects object : UIMain.player.currentCell.getInspectableObjects()) {
-				for(int i = 0; i < object.getItems().size(); i ++) {
-					if(item.getName().equalsIgnoreCase(object.getItems().get(i).getName())) {
-
-						//to avoid concurrency errors, first add any matching items to a new list
-						matchedInspectable = object;
-						matchedInspectable.getItems().remove(i);
-						object.getItems().remove(i);
-					}
-				}
-			}
-			//then replace the current inspectable with the new set
-			UIMain.cells.remove(UIMain.player.currentCell);	
-			UIMain.player.currentCell.getInspectableObjects().remove(matchedInspectable);
-			UIMain.player.currentCell.getInspectableObjects().add(matchedInspectable);
-			UIMain.cells.add(UIMain.player.currentCell);
-		}
-	}
 }
