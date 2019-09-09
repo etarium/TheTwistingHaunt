@@ -26,23 +26,28 @@ public class PlayerService {
 	public String takeItem(String param) {
 		StringBuilder outputBuilder = new StringBuilder();
 
-		//if inspectable item is empty, check the cell first
-		if(CellService.recentlyOpenedObject.getName() == null || CellService.recentlyOpenedObject.getItems().isEmpty()) {
-			//if theres an inspected object without any items
-			if(CellService.recentlyOpenedObject.getName() != null && (CellService.recentlyOpenedObject.getItems() == null || CellService.recentlyOpenedObject.getItems().isEmpty())) {
+		//if inspectable item isnt declared, and the cell is empty, display failure text
+		if((CellService.recentlyOpenedObject.getName() == null || CellService.recentlyOpenedObject.getItems().isEmpty())
+				&& (UIMain.player.currentCell.getItems() == null || UIMain.player.currentCell.getItems().isEmpty())) {
+
+			return "You haven't found anything to take, yet. Try looking around or opening items.";
+
+		} else if(CellService.recentlyOpenedObject.getName() == null) {
+			//otherwise if inspectable item isnt declared, but the cell is not, take from the cell
+			outputBuilder.append(takeItemFromCell(param));
+		} else {
+			//the inspectable item is declared, but there are not items
+			if(CellService.recentlyOpenedObject.getName() != null && 
+					(CellService.recentlyOpenedObject.getItems() == null || CellService.recentlyOpenedObject.getItems().isEmpty())) {
 				outputBuilder.append("There's nothing to be found in the " + CellService.recentlyOpenedObject.getName() + ".\n");
 				//then check the cell
 				if(!UIMain.player.currentCell.getItems().isEmpty()) {
 					outputBuilder.append(takeItemFromCell(param));
 				}
-			}
-		} else if(CellService.recentlyOpenedObject.getName() == null && (UIMain.player.currentCell.getItems() == null || UIMain.player.currentCell.getItems().isEmpty())) {
-			//else fail if there are no items in the cell and no items have been inspected
-			return "You haven't found anything to take, yet. Try looking around or opening items.";
-		} else {
-			//else check inspectableObjct
-			outputBuilder.append(takeItemFromInspectable(param));
-		} 
+				//else check inspectableObjct
+				outputBuilder.append(takeItemFromInspectable(param));
+			} 
+		}
 		return outputBuilder.toString();
 	}
 
