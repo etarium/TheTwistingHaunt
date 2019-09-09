@@ -9,6 +9,8 @@ import gameplay.battle.DeathService;
 import gameplay.battle.VictoryService;
 import pojos.entity.EnemyEntity;
 import pojos.entity.Entity;
+import pojos.items.enums.ArmorMaterial;
+import pojos.items.enums.WeaponType;
 import uiView.UIMain;
 import utilities.Logs;
 
@@ -43,7 +45,14 @@ public class BattleService {
 
 	public String inspectEnemy(String target) {
 		//TODO
-		return "";
+		EnemyEntity selectedTarget = findEnemy(target);
+		if(selectedTarget == null) {
+			return "You squinted at the enemies before you, unable to focus on any foe in particular."
+		+ "\nYou realize that there doesn't seem to be any enemies called that.\n"
+					+ "[try again, or type '/help' for battle assistance]\n";
+		}
+		output = getEnemyStats(selectedTarget);
+		return output;
 	}
 
 	private EnemyEntity findEnemy(String target) {
@@ -137,5 +146,34 @@ public class BattleService {
 		}
 		return outputBuilder.toString();
 	}
-
+	
+	private String getEnemyStats(EnemyEntity enemy) {
+		StringBuilder output = new StringBuilder();
+		output.append(String.format("%-25s", "Name: " + enemy.getName()));
+		output.append(String.format("%20s", "Level: " + enemy.getLevel()));
+		output.append(String.format("%30s",  "Species: " + enemy.getSpecies()));
+		output.append("\n\n\n");
+		output.append(String.format("%-5s",  "HP: "));
+		output.append(String.format("%5s",  enemy.getStats().getHp()));
+		output.append(String.format("%13s",  "SP: "));
+		output.append(String.format("%6s", enemy.getStats().getSp()));
+		output.append(String.format("%14s",  "EVA: " + enemy.getStats().getEva()));
+		output.append(String.format("%14s",  "STA: " + enemy.getStats().getSta()));
+		output.append("\n\n\n");
+		output.append(String.format("%-5s",  "ATK: "));
+		output.append(String.format("%5s", enemy.getStats().getAtk()));
+		output.append(String.format("%14s",  "DEF: "));
+		output.append(String.format("%5s",  + enemy.getStats().getDef()));
+		output.append(String.format("%14s",  "INT: " + enemy.getStats().getIntel()));
+		output.append(String.format("%15s",  "AGI: " + enemy.getStats().getAgi()));
+		output.append("\n\n\n");
+		output.append(String.format("%-5s",  "SP ATK: " + enemy.getStats().getSpatk()));
+		output.append(String.format("%19s",  "SP DEF: " + enemy.getStats().getSpdef()));
+		output.append(String.format("%13s",  "CHA: " + enemy.getStats().getCha()));
+		output.append(String.format("%15s",  "ACC: " + enemy.getStats().getAcc()));
+		output.append("\n\n\n**********\n\n\n");
+		output.append(String.format("%-25s", "XP: " + enemy.getXp()));
+		
+		return output.toString();
+	}
 }
