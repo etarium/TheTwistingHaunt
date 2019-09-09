@@ -1,13 +1,7 @@
 package gameplay.commandServices;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import gameplay.GamePlayConstants;
 import gameplay.StatModMethods.PlayerStatMethods;
 import gameplay.commandServices.utilities.TakeUtilities;
-import pojos.environment.InspectableObjects;
-import pojos.items.Item;
 import pojos.items.enums.ArmorMaterial;
 import pojos.items.enums.WeaponType;
 import uiView.UIMain;
@@ -31,43 +25,24 @@ public class PlayerService {
 
 	public String takeItem(String param) {
 		StringBuilder outputBuilder = new StringBuilder();
-		String noItemByThatName = "You look around, but can't find anything by that name worth taking.";
-
 
 		//if inspectable item is empty, check the cell first
-		if(CellService.recentlyOpenedObject.getName() == null) {
-			if (param == null || param.equals("")) {
-				//take the only item from cell
-				outputBuilder.append(take.takeOnlyItemFromCell());
-			} else if (!CellService.recentlyOpenedObject.getItems().isEmpty()) {
-				//if the cell's items aren't empty, player can take all or take specific item
-				if (param.equalsIgnoreCase("all")) {
-					outputBuilder.append(take.takeAllFromCell());
-				} else {
-					outputBuilder.append(take.takeItemByNameFromCell(param));
+		if(CellService.recentlyOpenedObject.getName() == null || CellService.recentlyOpenedObject.getItems().isEmpty()) {
+			//if theres an inspected object without any items
+			if(CellService.recentlyOpenedObject.getName() != null && (CellService.recentlyOpenedObject.getItems() == null || CellService.recentlyOpenedObject.getItems().isEmpty())) {
+				outputBuilder.append("There's nothing to be found in the " + CellService.recentlyOpenedObject.getName() + ".\n");
+				//then check the cell
+				if(!UIMain.player.currentCell.getItems().isEmpty()) {
+					outputBuilder.append(takeItemFromCell(param));
 				}
-			} else {
-				return noItemByThatName;
 			}
-		} else {
+		} else if(CellService.recentlyOpenedObject.getName() == null && (UIMain.player.currentCell.getItems() == null || UIMain.player.currentCell.getItems().isEmpty())) {
 			//else fail if there are no items in the cell and no items have been inspected
-			if(CellService.recentlyOpenedObject.getName() == null && (UIMain.player.currentCell.getItems() == null || UIMain.player.currentCell.getItems().isEmpty())) {
-				return "You haven't found anything to take, yet. Try looking around or opening items.";
-			} else if(CellService.recentlyOpenedObject.getItems().isEmpty()) {
-				return "There's nothing to be found in the " + CellService.recentlyOpenedObject.getName() + ".";
-			}
-			if (param == null || param.equals("")) {
-				outputBuilder.append(take.takeOnlyItemFromInspectable());
-			} else if (!CellService.recentlyOpenedObject.getItems().isEmpty()) {
-				if (param.equalsIgnoreCase("all")) {
-					outputBuilder.append(take.takeAllFromInspectable());
-				} else {
-					outputBuilder.append(take.takeItemByNameFromInspectable(param));
-				}
-			} else {
-				return noItemByThatName;
-			}
-		}
+			return "You haven't found anything to take, yet. Try looking around or opening items.";
+		} else {
+			//else check inspectableObjct
+			outputBuilder.append(takeItemFromInspectable(param));
+		} 
 		return outputBuilder.toString();
 	}
 
@@ -317,5 +292,42 @@ public class PlayerService {
 		return output.toString();
 	}
 
+	private String takeItemFromCell(String param) {
+		StringBuilder outputBuilder = new StringBuilder();
+		if (param == null || param.equals("")) {
+			//take the only item from cell
+			outputBuilder.append(take.takeOnlyItemFromCell());
+		} else if (!CellService.recentlyOpenedObject.getItems().isEmpty()) {
+			//if the cell's items aren't empty, player can take all or take specific item
+			if (param.equalsIgnoreCase("all")) {
+				outputBuilder.append(take.takeAllFromCell());
+			} else {
+				outputBuilder.append(take.takeItemByNameFromCell(param));
+			}
+		} else {
+			return "You look around, but can't find anything by that name worth taking.";
+		}
+		return outputBuilder.toString();
+	}
+
+	private String takeItemFromInspectable(String param) {
+		StringBuilder outputBuilder = new StringBuilder();
+
+		if(CellService.recentlyOpenedObject.getItems().isEmpty()) {
+			return "There's nothing to be found in the " + CellService.recentlyOpenedObject.getName() + ".";
+		}
+		if (param == null || param.equals("")) {
+			outputBuilder.append(take.takeOnlyItemFromInspectable());
+		} else if (!CellService.recentlyOpenedObject.getItems().isEmpty()) {
+			if (param.equalsIgnoreCase("all")) {
+				outputBuilder.append(take.takeAllFromInspectable());
+			} else {
+				outputBuilder.append(take.takeItemByNameFromInspectable(param));
+			}
+		} else {
+			return "You look around, but can't find anything by that name worth taking.";
+		}
+		return outputBuilder.toString();
+	}
 
 }

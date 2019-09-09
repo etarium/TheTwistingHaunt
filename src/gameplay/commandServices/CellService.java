@@ -61,7 +61,7 @@ public class CellService {
 				outputBuilder.append("\n\n\nYou should consider taking your findings with you.");
 				break;
 			} else if (item.getItems() == null || item.getItems().isEmpty()) {
-				return "Sifting around the " + item.getName() + ", you don't find anything to take.";
+				return "Sifting around the " + item.getName() + ", you don't find anything of interest.";
 			} else {
 				return "You fumble with various items around the room, failing to find any latches like what you're looking for.";
 			}
