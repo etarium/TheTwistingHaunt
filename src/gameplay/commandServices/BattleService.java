@@ -17,7 +17,6 @@ public class BattleService {
 	String output = "";
 	List<EnemyEntity> defeatedEnemies = new ArrayList<EnemyEntity>();
 	public BattleService() {
-
 	}
 
 	public String physAttack(String target) {
@@ -74,7 +73,7 @@ public class BattleService {
 		int totalDamage = (int) ( BattleStatMethods.calculateEnemyPhysDamage(enemy) - BattleStatMethods.calculatePlayerPhysDefense());
 		if(BattleStatMethods.calculateEnemyHitRate(enemy)) {
 			UIMain.player.getStats().setCurrentHP(UIMain.player.getStats().getCurrentHP() - totalDamage);
-			output = "\nThe " + enemy.getName() + " lashes out, inflicting " + totalDamage + "!\n";
+			output = "\nThe " + enemy.getName() + " lashes out, inflicting " + totalDamage + " damage!\n";
 		} else {
 			output = "\n The " + enemy.getName() + " stumbles, missing its target.\n";
 		}
@@ -87,7 +86,7 @@ public class BattleService {
 			output = "\nSwinging wildly, you charge after a figment of your imagination. Stopping at the last second, "
 					+ "you realize that there doesn't seem to be any enemies called that.\n"
 					+ "[try again, or type '/help' for battle assistance]\n";
-			
+
 			Logs.LOGGER.info("Target could not be found during phys attack \n" +
 					"target: " + target + ", battle: " + UIMain.battleOrder);
 		}
