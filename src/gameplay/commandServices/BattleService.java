@@ -9,8 +9,6 @@ import gameplay.battle.DeathService;
 import gameplay.battle.VictoryService;
 import pojos.entity.EnemyEntity;
 import pojos.entity.Entity;
-import pojos.items.enums.ArmorMaterial;
-import pojos.items.enums.WeaponType;
 import uiView.UIMain;
 import utilities.Logs;
 
@@ -23,9 +21,21 @@ public class BattleService {
 
 	public String physAttack(String target) {
 		StringBuilder outputBuilder = new StringBuilder();
+		EnemyEntity selectedTarget = findEnemy(target);
+		if(selectedTarget == null) {
+			output = "\nSwinging wildly, you charge after a figment of your imagination. Stopping at the last second, "
+					+ "you realize that there doesn't seem to be any enemies called that.\n"
+					+ "[try again, or type '/help' for battle assistance]\n";
+
+			Logs.LOGGER.info("Target could not be found during phys attack \n" +
+					"target: " + target + ", battle: " + UIMain.battleOrder);
+
+			return output;
+		}
+
 		for(Entity activeEntity : UIMain.battleOrder) {
 			if(activeEntity.equals(UIMain.player)) {
-				outputBuilder.append(playerPhysAttack(target));
+				outputBuilder.append(playerPhysAttack(selectedTarget));
 			} else {
 				if(!UIMain.player.isInEncounter) {
 					break;
@@ -48,7 +58,7 @@ public class BattleService {
 		EnemyEntity selectedTarget = findEnemy(target);
 		if(selectedTarget == null) {
 			return "You squinted at the enemies before you, unable to focus on any foe in particular."
-		+ "\nYou realize that there doesn't seem to be any enemies called that.\n"
+					+ "\nYou realize that there doesn't seem to be any enemies called that.\n"
 					+ "[try again, or type '/help' for battle assistance]\n";
 		}
 		output = getEnemyStats(selectedTarget);
@@ -89,21 +99,15 @@ public class BattleService {
 		return output;
 	}
 
-	private String playerPhysAttack(String target) {
-		EnemyEntity selectedTarget = findEnemy(target);
-		if(selectedTarget == null) {
-			output = "\nSwinging wildly, you charge after a figment of your imagination. Stopping at the last second, "
-					+ "you realize that there doesn't seem to be any enemies called that.\n"
-					+ "[try again, or type '/help' for battle assistance]\n";
-
-			Logs.LOGGER.info("Target could not be found during phys attack \n" +
-					"target: " + target + ", battle: " + UIMain.battleOrder);
-		}
+	private String playerPhysAttack(EnemyEntity selectedTarget) {
 
 		int total = (int) (BattleStatMethods.calculatePlayerPhysDamage() - BattleStatMethods.calculateEnemyPhysDefense(selectedTarget));
 
 		if(BattleStatMethods.calculatePlayerHitRate(selectedTarget)) {
 			selectedTarget.getStats().setCurrentHP(selectedTarget.getStats().getCurrentHP() - total);
+			if(selectedTarget.getStats().getCurrentHP() < 0) {
+				selectedTarget.getStats().setCurrentHP(0);
+			}
 
 			if(!CheckStatuses.isEnemyDead(selectedTarget)) {
 				output = "\nYou attack " + selectedTarget.getName() + ", and with a stunning blow deal " + total + " damage. \n"
@@ -146,7 +150,7 @@ public class BattleService {
 		}
 		return outputBuilder.toString();
 	}
-	
+
 	private String getEnemyStats(EnemyEntity enemy) {
 		StringBuilder output = new StringBuilder();
 		output.append(String.format("%-25s", "Name: " + enemy.getName()));
@@ -173,7 +177,7 @@ public class BattleService {
 		output.append(String.format("%15s",  "ACC: " + enemy.getStats().getAcc()));
 		output.append("\n\n\n**********\n\n\n");
 		output.append(String.format("%-25s", "XP: " + enemy.getXp()));
-		
+
 		return output.toString();
 	}
 }
