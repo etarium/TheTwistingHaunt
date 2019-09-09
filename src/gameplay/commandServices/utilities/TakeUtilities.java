@@ -27,7 +27,7 @@ public class TakeUtilities {
 				outputBuilder.append(item.getName() + "\n");
 			}
 		}
-		removeItemsFromCell(itemsToRemove);
+		removeItemsFromInspectableObject(itemsToRemove);
 		return outputBuilder.toString();
 	}
 
@@ -38,7 +38,7 @@ public class TakeUtilities {
 			UIMain.player.getInventory().add(CellService.recentlyOpenedObject.getItems().get(0));
 			outputBuilder.append("You take the " + CellService.recentlyOpenedObject.getItems().get(0).getName());
 			//then remove the item from the cell / instance
-			removeItemFromCell(CellService.recentlyOpenedObject.getItems().get(0));
+			removeItemFromInspectableObject(CellService.recentlyOpenedObject.getItems().get(0));
 		} else {
 			outputBuilder.append("I'm not sure what you were expecting to take..."
 					+ "\n [Use /take all for every item, or be more specific.]");
@@ -53,7 +53,7 @@ public class TakeUtilities {
 			if(item.getName().equalsIgnoreCase(param)) {
 				UIMain.player.getInventory().add(item);
 				outputBuilder.append("You take the " + item.getName());
-				removeItemFromCell(item);
+				removeItemFromInspectableObject(item);
 				break;
 			} else {
 				outputBuilder.append("You look around, but can't find anything worth taking by that name.");
@@ -62,7 +62,7 @@ public class TakeUtilities {
 		return outputBuilder.toString();
 	}
 
-	public void removeItemFromCell(Item item) {
+	public void removeItemFromInspectableObject(Item item) {
 		InspectableObjects matchedInspectable = new InspectableObjects();
 		for(InspectableObjects object : UIMain.player.currentCell.getInspectableObjects()) {
 			for(int i = 0; i < object.getItems().size(); i ++) {
@@ -81,7 +81,7 @@ public class TakeUtilities {
 		UIMain.cells.add(UIMain.player.currentCell);
 	}
 
-	public void removeItemsFromCell(List<Item> items) {
+	public void removeItemsFromInspectableObject(List<Item> items) {
 		InspectableObjects matchedInspectable = new InspectableObjects();
 		for(Item item : items) {
 			for(InspectableObjects object : UIMain.player.currentCell.getInspectableObjects()) {
@@ -104,7 +104,23 @@ public class TakeUtilities {
 	}
 
 	public String takeAllFromCell() {
-		return "";
+		StringBuilder outputBuilder = new StringBuilder();
+		outputBuilder.append("You take all of the items.\n");
+		outputBuilder.append("**********\n");
+		outputBuilder.append("Items Received: \n");
+		List<Item> itemsToRemove = new ArrayList<Item>();
+		for(Item item : UIMain.player.currentCell.getItems()) {
+			if(UIMain.player.getInventory().size() >= GamePlayConstants.MAX_INVENTORY_SIZE) {
+				return "Your bag is heaving with the volume of items inside. You couldn't possible take anymore!"
+						+ "\n [Use /drop to remove items from your inventory.]";
+			} else {
+				UIMain.player.getInventory().add(item);
+				itemsToRemove.add(item);
+				outputBuilder.append(item.getName() + "\n");
+			}
+		}
+		removeItemsFromCell(itemsToRemove);
+		return outputBuilder.toString();
 	}
 
 	public String takeOnlyItemFromCell() {
@@ -113,5 +129,25 @@ public class TakeUtilities {
 
 	public String takeItemByNameFromCell(String param) {
 		return "";
+	}
+
+	public void removeItemsFromCell(List<Item> itemsToRemove) {
+		List<Item> itemsInCell = UIMain.player.currentCell.getItems();
+		for(Item item : itemsToRemove) {
+			for(int i = 0; i < itemsInCell.size(); i ++) {
+				if(item.getName().equalsIgnoreCase(itemsInCell.get(i).getName())) {
+					UIMain.player.currentCell.getItems().remove(item);
+				}
+			}
+		}
+	}
+
+	public void removeItemFromCell(Item itemToRemove) {
+		List<Item> itemsInCell = UIMain.player.currentCell.getItems();
+		for(int i = 0; i < itemsInCell.size(); i ++) {
+			if(itemToRemove.getName().equalsIgnoreCase(itemsInCell.get(i).getName())) {
+				UIMain.player.currentCell.getItems().remove(itemToRemove);
+			}
+		}
 	}
 }
