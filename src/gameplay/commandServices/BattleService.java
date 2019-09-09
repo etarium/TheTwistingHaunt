@@ -22,7 +22,8 @@ public class BattleService {
 	public String physAttack(String target) {
 		EnemyEntity selectedTarget = findEnemy(target);
 		if(selectedTarget == null) {
-			return "Swinging wildly, you charge after a figment of your imagination. Stopping at the last second, you realize that there doesn't seem to be any enemies called that.\n"
+			return "Swinging wildly, you charge after a figment of your imagination. Stopping at the last second, "
+					+ "you realize that there doesn't seem to be any enemies called that.\n"
 					+ "[try again, or type '/help' for battle assistance]";
 		}
 

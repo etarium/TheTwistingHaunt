@@ -39,11 +39,6 @@ public class BattleOrder {
 		for(EnemyEntity enemy : UIMain.player.currentCell.getEnemies()) {
 			enemyInit = statMethods.calculateInitiative(enemy);
 			enemy.getStats().setInit(enemyInit);
-			//TODO:
-			//ensure all data allows us to this without explicitly coding
-			//setting all hp and sp to their max
-			enemy.getStats().setCurrentHP(enemy.getStats().getHp());
-			enemy.getStats().setCurrentSP(enemy.getStats().getSp());
 			initialOrder.add(enemy);
 		}
 		
@@ -78,7 +73,7 @@ public class BattleOrder {
 		return UIMain.battleOrder;
 	}
 
-	private String formatBattleOrder(List<Entity> battleOrder) {
+	public String formatBattleOrder(List<Entity> battleOrder) {
 		StringBuilder output = new StringBuilder();
 		
 		output.append(String.format("%45s", "************\n"));
