@@ -10,7 +10,6 @@ public class PlayerService {
 
 	PlayerStatMethods system = new PlayerStatMethods();
 	TakeUtilities take = new TakeUtilities();
-	String output = "";
 
 	public PlayerService() {
 	}
@@ -29,7 +28,7 @@ public class PlayerService {
 		//if inspectable item isnt declared, and the cell is empty, display failure text
 		if((CellService.recentlyOpenedObject.getName() == null || CellService.recentlyOpenedObject.getItems().isEmpty())
 				&& (UIMain.player.currentCell.getItems() == null || UIMain.player.currentCell.getItems().isEmpty())) {
-			return "You haven't found anything to take, yet. Try looking around or opening items.";
+			return "You haven't found anything to take. Try looking around or opening items.";
 
 		} else if(CellService.recentlyOpenedObject.getName() == null) {
 			//otherwise if inspectable item isnt declared, but the cell is not, take from the cell
@@ -316,7 +315,6 @@ public class PlayerService {
 
 	private String takeItemFromInspectable(String param) {
 		StringBuilder outputBuilder = new StringBuilder();
-		System.out.println("hit take from inspectable");
 		if(CellService.recentlyOpenedObject.getItems().isEmpty()) {
 			return "There's nothing to be found in the " + CellService.recentlyOpenedObject.getName() + ".";
 		}
@@ -333,5 +331,4 @@ public class PlayerService {
 		}
 		return outputBuilder.toString();
 	}
-
 }
