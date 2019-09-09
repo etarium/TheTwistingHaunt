@@ -39,7 +39,6 @@ public class CellService {
 		for(InspectableObjects item : UIMain.player.getCurrentCell().getInspectableObjects()) {
 			if(item.getName().equalsIgnoreCase(param)) {
 				output = item.getDescription();
-				recentlyOpenedObject = item;
 				break;
 			} else {
 				output = "You can look all day, but you still won't find it, " + UIMain.player.getEntityClass().getName() + ".";

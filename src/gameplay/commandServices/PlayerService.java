@@ -1,5 +1,8 @@
 package gameplay.commandServices;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import gameplay.GamePlayConstants;
 import gameplay.StatModMethods.PlayerStatMethods;
 import pojos.environment.InspectableObjects;
@@ -294,16 +297,19 @@ public class PlayerService {
 		outputBuilder.append("You take all of the items.\n");
 		outputBuilder.append("**********\n");
 		outputBuilder.append("Items Received: \n");
+		List<Item> itemsToRemove = new ArrayList<Item>();
 		for(Item item : CellService.recentlyOpenedObject.getItems()) {
-			if(UIMain.player.getInventory().size() > GamePlayConstants.MAX_INVENTORY_SIZE) {
+			if(UIMain.player.getInventory().size() >= GamePlayConstants.MAX_INVENTORY_SIZE) {
 				return "Your bag is heaving with the volume of items inside. You couldn't possible take anymore!"
 						+ "\n [Use /drop to remove items from your inventory.]";
 			} else {
 				UIMain.player.getInventory().add(item);
+				itemsToRemove.add(item);
 				outputBuilder.append(item.getName() + "\n");
-				removeItemFromCell(item);
+				//removeItemFromCell(item);
 			}
 		}
+		removeItemsFromCell(itemsToRemove);
 		return outputBuilder.toString();
 	}
 
@@ -339,17 +345,46 @@ public class PlayerService {
 	}
 
 	private void removeItemFromCell(Item item) {
+		InspectableObjects matchedInspectable = new InspectableObjects();
 		for(InspectableObjects object : UIMain.player.currentCell.getInspectableObjects()) {
 			for(int i = 0; i < object.getItems().size(); i ++) {
 				if(item.getName().equalsIgnoreCase(object.getItems().get(i).getName())) {
-					UIMain.cells.remove(UIMain.player.currentCell);
-					UIMain.player.currentCell.getInspectableObjects().remove(object);
+
+					//TODO: deal with concurrency error
+					//to avoid concurrency errors, first add any matching items to a new list
+					matchedInspectable = object;
+					matchedInspectable.getItems().remove(i);
 					object.getItems().remove(i);
-					UIMain.player.currentCell.getInspectableObjects().add(object);
-					UIMain.cells.add(UIMain.player.currentCell);
 				}
 			}
 		}
+		//then replace the current inspectable with the new set
+		UIMain.cells.remove(UIMain.player.currentCell);	
+		UIMain.player.currentCell.getInspectableObjects().remove(matchedInspectable);
+		UIMain.player.currentCell.getInspectableObjects().add(matchedInspectable);
+		UIMain.cells.add(UIMain.player.currentCell);
 	}
 
+	private void removeItemsFromCell(List<Item> items) {
+		InspectableObjects matchedInspectable = new InspectableObjects();
+		for(Item item : items) {
+			for(InspectableObjects object : UIMain.player.currentCell.getInspectableObjects()) {
+				for(int i = 0; i < object.getItems().size(); i ++) {
+					if(item.getName().equalsIgnoreCase(object.getItems().get(i).getName())) {
+
+						//TODO: deal with concurrency error
+						//to avoid concurrency errors, first add any matching items to a new list
+						matchedInspectable = object;
+						matchedInspectable.getItems().remove(i);
+						object.getItems().remove(i);
+					}
+				}
+			}
+			//then replace the current inspectable with the new set
+			UIMain.cells.remove(UIMain.player.currentCell);	
+			UIMain.player.currentCell.getInspectableObjects().remove(matchedInspectable);
+			UIMain.player.currentCell.getInspectableObjects().add(matchedInspectable);
+			UIMain.cells.add(UIMain.player.currentCell);
+		}
+	}
 }
