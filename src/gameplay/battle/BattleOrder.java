@@ -35,17 +35,17 @@ public class BattleOrder {
 		double playerInit = statMethods.calculateInitiative(UIMain.player);
 		UIMain.player.getStats().setInit(playerInit);
 		initialOrder.add(UIMain.player);
-		
+
 		for(EnemyEntity enemy : UIMain.player.currentCell.getEnemies()) {
 			enemyInit = statMethods.calculateInitiative(enemy);
 			enemy.getStats().setInit(enemyInit);
 			initialOrder.add(enemy);
 		}
-		
+
 		Logs.LOGGER.info("All initiatives calculated");
 		return initialOrder;
 	}
-	
+
 	public List<Entity> determineBattleOrder () {
 		UIMain.battleOrder = new LinkedList<Entity>();
 		initialOrder = calculateAllInits();
@@ -58,7 +58,11 @@ public class BattleOrder {
 					for(int j=0; j<UIMain.battleOrder.size(); j++) {
 						double higherStat = initialOrder.get(i).getStats().getInit();
 						if(higherStat < UIMain.battleOrder.get(j).getStats().getInit()) {
-							UIMain.battleOrder.add(j-1, initialOrder.get(i));
+							if(j == 0) {
+								UIMain.battleOrder.add(j, initialOrder.get(i));
+							} else {
+								UIMain.battleOrder.add(j-1, initialOrder.get(i));
+							}
 							break;
 						}
 					}
@@ -68,14 +72,13 @@ public class BattleOrder {
 				}
 			}
 		}
-		
 		Logs.LOGGER.info("Battle order for all opponents calculated");
 		return UIMain.battleOrder;
 	}
 
 	public String formatBattleOrder(List<Entity> battleOrder) {
 		StringBuilder output = new StringBuilder();
-		
+
 		output.append(String.format("%45s", "************\n"));
 		output.append(String.format("%45s", "Battle Order\n"));
 		output.append("\n");
@@ -95,7 +98,7 @@ public class BattleOrder {
 				lineCounter++;
 				entityOutput.append(String.format("%30s", ""));
 				entityOutput.append(String.format(entity.getName() + " -> "));
-				
+
 			}
 		}
 		entityOutput.replace(entityOutput.length()-4, entityOutput.length(), "");

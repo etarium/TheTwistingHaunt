@@ -26,12 +26,10 @@ public class BattleListener {
 		case "/physical attack":
 		case "/attack":
 			if (parameter == null) {
-				if(UIMain.player.currentCell.getEnemies().size() == 1) {
+				//if no name, attack first enemy in queue
 					output = system.physAttack(UIMain.player.getCurrentCell().getEnemies().get(0).getName());
-				} else {
-					output = "Your weapon clanks as you drag it along the ground, preparing to strike. Yet you pause and wonder... who? Perhaps you should be more specific.";
-				}
 			} else {
+				System.out.println(parameter);
 				output = system.physAttack(parameter);
 			}
 			break;
