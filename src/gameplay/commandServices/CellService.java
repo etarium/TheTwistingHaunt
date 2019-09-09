@@ -50,10 +50,9 @@ public class CellService {
 	public String openItem(String param) {
 		StringBuilder outputBuilder = new StringBuilder();
 		outputBuilder.append("Hands trembling, you unveil: ");
-		String failedOutput = "You fumble with various items around the room, failing to find any latches like what you're looking for.";
-		
+
 		for(InspectableObjects item : UIMain.player.getCurrentCell().getInspectableObjects()) {
-			if(item.getName().equalsIgnoreCase(param) && item.getItems()!= null) {
+			if(item.getName().equalsIgnoreCase(param) && item.getItems()!= null && !item.getItems().isEmpty()) {
 				for(Item innerItem: item.getItems()) {
 					outputBuilder.append("\n\n***** \n");
 					outputBuilder.append(getItemDescription(innerItem));
@@ -61,8 +60,10 @@ public class CellService {
 				recentlyOpenedObject = item;
 				outputBuilder.append("\n\n\nYou should consider taking your findings with you.");
 				break;
+			} else if (item.getItems() == null || item.getItems().isEmpty()) {
+				return "Sifting around the " + item.getName() + ", you don't find anything to take.";
 			} else {
-				return failedOutput;
+				return "You fumble with various items around the room, failing to find any latches like what you're looking for.";
 			}
 		}
 		
