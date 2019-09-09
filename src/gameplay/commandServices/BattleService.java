@@ -63,7 +63,7 @@ public class BattleService {
 		if(VictoryService.isVictory()) {
 			output = VictoryService.victory();
 		} else {
-			output = "The " + selectedTarget.getName() + "let out a horrible scream.\n"
+			output = "\nThe " + selectedTarget.getName() + "let out a horrible scream.\n"
 					+ "Great Job! Only " + UIMain.player.currentCell.getEnemies().size() + " remaining!\n";
 		}
 		return output;
@@ -83,11 +83,10 @@ public class BattleService {
 
 	private String playerPhysAttack(String target) {
 		EnemyEntity selectedTarget = findEnemy(target);
-		System.out.println(selectedTarget);
 		if(selectedTarget == null) {
-			output = "Swinging wildly, you charge after a figment of your imagination. Stopping at the last second, "
+			output = "\nSwinging wildly, you charge after a figment of your imagination. Stopping at the last second, "
 					+ "you realize that there doesn't seem to be any enemies called that.\n"
-					+ "[try again, or type '/help' for battle assistance]";
+					+ "[try again, or type '/help' for battle assistance]\n";
 			
 			Logs.LOGGER.info("Target could not be found during phys attack \n" +
 					"target: " + target + ", battle: " + UIMain.battleOrder);
@@ -99,14 +98,14 @@ public class BattleService {
 			selectedTarget.getStats().setCurrentHP(selectedTarget.getStats().getCurrentHP() - total);
 
 			if(!CheckStatuses.isEnemyDead(selectedTarget)) {
-				output = "You attack " + selectedTarget.getName() + ", and with a stunning blow deal " + total + " damage. \n"
+				output = "\nYou attack " + selectedTarget.getName() + ", and with a stunning blow deal " + total + " damage. \n"
 						+ "Nice work, hero! \n";
 			} else {
 				VictoryService.trackXP(selectedTarget.getXp(), selectedTarget.getLevel());
-				output = defeatedEnemy(selectedTarget);
+				output = "\nYou attack " + selectedTarget.getName() + ", and with a stunning blow deal " + total + " damage. \n" + defeatedEnemy(selectedTarget);
 			}
 		} else {
-			output = "You lunge toward " + selectedTarget.getName() + ", but you were sidestepped and missed completely.\n"
+			output = "\nYou lunge toward " + selectedTarget.getName() + ", but you were sidestepped and missed completely.\n"
 					+ "Big bummer, hero. \n";
 		}
 		return output;

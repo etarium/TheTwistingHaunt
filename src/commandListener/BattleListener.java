@@ -29,7 +29,6 @@ public class BattleListener {
 				//if no name, attack first enemy in queue
 					output = system.physAttack(UIMain.player.getCurrentCell().getEnemies().get(0).getName());
 			} else {
-				System.out.println(parameter);
 				output = system.physAttack(parameter);
 			}
 			break;
