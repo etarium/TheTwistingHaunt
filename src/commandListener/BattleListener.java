@@ -31,7 +31,6 @@ public class BattleListener {
 
 		case "/look":
 		case "/inspect":
-			//TODO
 			if (parameter == null) {
 				if(UIMain.player.currentCell.getEnemies().size() == 1) {
 					output = system.inspectEnemy(UIMain.player.getCurrentCell().getEnemies().get(0).getName());
@@ -42,6 +41,10 @@ public class BattleListener {
 			}
 			break;
 
+		case "/list":
+			output = system.listAbilities();
+			break;
+			
 		case "/help":
 			output = "Your cries for help go answered, and text appears before your eyes.";
 			GameService.help();
