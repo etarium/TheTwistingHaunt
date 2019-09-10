@@ -1,4 +1,3 @@
-
 &------*
 | Help |            Battle Gameplay
 &------*
@@ -11,13 +10,14 @@
 |                    |    piece of equipment                               |
 |                    |                                                     |
 | /attack {entity}   | Attack an entity using equipped weapon.             |
-| /phys {entity}     | If no entity declared, attacks default entity       |
+|     /phys {entity} | If no entity declared, attacks default entity       |
 |                    |                                                     |
 | /{spell} {entity}  | Use spell on targeted entity. If no entity declared,|
 |                    | spell is used on default entity or error message    |
 |                    |                                                     |
 | /drop {item}       | Drop targeted item to floor of current room         |
 |                    |    WARNING: Will be lost upon leaving instance      |
+|                    |                                                     |
 | /drop {equipment}  | Drop targeted equipment to floor of current room    |
 |                    |    WARNING: Will be lost upon leaving instance      |
 |                    |                                                     |
