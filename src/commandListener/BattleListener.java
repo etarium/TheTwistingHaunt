@@ -2,6 +2,7 @@ package commandListener;
 
 import gameplay.battle.BattleOrder;
 import gameplay.commandServices.BattleService;
+import gameplay.commandServices.GameService;
 import uiView.UIMain;
 import utilities.Logs;
 
@@ -55,6 +56,11 @@ public class BattleListener {
 			} else {
 				output = system.inspectEnemy(parameter);
 			}
+			break;
+			
+		case "/help":
+			output = "Your cries for help go answered, and text appears before your eyes.";
+			GameService.help();
 			break;
 
 		default:

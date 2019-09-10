@@ -30,8 +30,8 @@ public class HelpWin extends GameWindow{
 		help.setSize(WINDOW_DIM);		
 
 		JButton exitButton = new JButton();
-		exitButton.setBackground(backgroundColor);
-		exitButton.setForeground(textColor);
+		exitButton.setBackground(null);
+		exitButton.setForeground(null);
 		exitButton.setSize(WINDOW_DIM);
 		
 		exitButton.addActionListener(new ActionListener() {
@@ -41,7 +41,7 @@ public class HelpWin extends GameWindow{
 				exitButtonPressed(evt, help);
 			
 		}});
-		exitButton.setOpaque(true);
+		exitButton.setOpaque(false);
 		exitButton.setBorderPainted(false);
 		
 		help.addKeyListener(new KeyListener() {
@@ -64,7 +64,7 @@ public class HelpWin extends GameWindow{
 
 			}
 		});
-		help.add(exitButton);
+//		help.add(exitButton);
 		
 		String dir = "src/uiView/resources/";
 		String fileName = "help_instructions.txt";
@@ -90,16 +90,18 @@ public class HelpWin extends GameWindow{
 		helpText.setForeground(textColor);
 		helpText.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		helpText.setEditable(false);
+		helpText.add(exitButton);
 		help.add(helpText);
+//		exitButton.add(helpText);
+//		help.add(exitButton);
+//		help.add(helpText);
 		help.setResizable(false);
 		help.setVisible(true);
 		help.setFocusable(true);
-		
+		//help.pack();
 	}//end constructor
 		
 	private void exitButtonPressed(AWTEvent evt, JFrame window) {
 		window.dispose();
 	}
-	
-
 }
