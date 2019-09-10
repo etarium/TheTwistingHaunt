@@ -7,6 +7,7 @@ import gameplay.StatModMethods.BattleStatMethods;
 import gameplay.battle.CheckStatuses;
 import gameplay.battle.DeathService;
 import gameplay.battle.VictoryService;
+import pojos.Ability;
 import pojos.entity.EnemyEntity;
 import pojos.entity.Entity;
 import uiView.UIMain;
@@ -48,7 +49,7 @@ public class BattleService {
 		return outputBuilder.toString();
 	}
 
-	public String spAttack(String target) {
+	public String spAttack(Ability spell, String target) {
 		//TODO
 		return "";
 	}

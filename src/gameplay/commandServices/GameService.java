@@ -30,7 +30,7 @@ public class GameService {
 		play = null;
 	}
 
-	public void help() {
+	public static void help() {
 		//this one might not have needed to be factored out, but it gives us a consistent patter to follow
 		new HelpWin();
 	}

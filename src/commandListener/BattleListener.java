@@ -2,6 +2,8 @@ package commandListener;
 
 import gameplay.battle.BattleOrder;
 import gameplay.commandServices.BattleService;
+import gameplay.commandServices.GameService;
+import pojos.Ability;
 import uiView.UIMain;
 import utilities.Logs;
 
@@ -17,38 +19,16 @@ public class BattleListener {
 		boolean isSuccessful = true;
 		switch (command) {
 
-		case "/order":
-		case "/battle":
-			//TODO:
-			break;
-
 		case "/phys":
-		case "/physical attack":
 		case "/attack":
 			if (parameter == null) {
 				//if no name, attack first enemy in queue
-					output = system.physAttack(UIMain.player.getCurrentCell().getEnemies().get(0).getName());
+				output = system.physAttack(UIMain.player.getCurrentCell().getEnemies().get(0).getName());
 			} else {
 				output = system.physAttack(parameter);
 			}
 			break;
 
-		case "/spell":
-		case "/magic":
-		case "/magic attack":
-		case "/spell attack":
-		case "/sp attack":
-			//TODO
-			if (parameter == null) {
-				if(UIMain.player.currentCell.getEnemies().size() == 1) {
-					output = system.spAttack(UIMain.player.getCurrentCell().getEnemies().get(0).getName());
-				}
-				output = "The thunderous fury of your spells pound in your ears. The magic begs to be unleashed. Yet you pause and wonder... who? Perhaps you should be more specific.";
-			} else {
-				output = system.spAttack(parameter);
-
-			}
-			break;
 		case "/look":
 		case "/inspect":
 			//TODO
@@ -62,9 +42,35 @@ public class BattleListener {
 			}
 			break;
 
+		case "/help":
+			output = "Your cries for help go answered, and text appears before your eyes.";
+			GameService.help();
+			break;
+
 		default:
 			Logs.LOGGER.info("Hit default case in commandListener.BattleListener.listen with command " + command);
 			isSuccessful = false;
+		}
+
+		//switch cases require final values, therefore dynamically 
+		//creating the switch case based on skills would be cumbersome to implement custom classes for
+		//this should operate in a similar manner
+		for(Ability spell : UIMain.player.getSkills()) {
+			if(command.equalsIgnoreCase(spell.getName())) {
+				if (parameter == null) {
+					if(UIMain.player.currentCell.getEnemies().size() == 1) {
+						output = system.spAttack(spell, UIMain.player.getCurrentCell().getEnemies().get(0).getName());
+					}
+					output = "The thunderous fury of your spells pound in your ears. The magic begs to be unleashed. Yet you pause and wonder... who? Perhaps you should be more specific.";
+				} else {
+					output = system.spAttack(spell, parameter);
+
+				}
+
+				Logs.LOGGER.info("Hit spell if statement in commandListener.BattleListener.listen with command " + command);	
+				isSuccessful = true;
+				break;
+			}
 		}
 
 		if(UIMain.player.isInEncounter) {

@@ -47,7 +47,7 @@ public class GameWindow{
 	protected float gameFontSize = 0.7625f * SCREEN_WIDTH / 50;
 	protected float titleFontSize = WINDOW_WIDTH/25;
 	protected float menuFontSize = (float)(titleFontSize * (.8));
-	protected float helpFontSize = (float)(titleFontSize / 3.5);
+	protected float helpFontSize = (float)(titleFontSize / 2.5);
 
 	private String dir = "src/uiView/resources/fonts/";
 	private String gameFontFile = "Px437_IBM_VGA9.ttf";
