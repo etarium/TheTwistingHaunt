@@ -2,6 +2,7 @@ package gameplay.commandServices;
 
 import gameplay.battle.BattleOrder;
 import pojos.environment.Cell;
+import pojos.environment.InspectableObjects;
 import pojos.environment.Location;
 import uiView.UIMain;
 
@@ -56,7 +57,9 @@ public class MovementService {
 					UIMain.player.setCurrentCell(cell);
 					UIMain.player.setLocation(newLoc);
 					UIMain.player.setIsInEncounter(checkForEncounters());
-					System.out.println(cell);
+					
+					//every time a new cell is entered, reset the recentlyOpened item
+					CellService.recentlyOpenedObject = new InspectableObjects();
 					if(checkForEncounters()) {
 						BattleOrder battle = new BattleOrder();
 						return (UIMain.player.currentCell.getDescription() + "\n" + battle.initializeBattle());
