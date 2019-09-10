@@ -17,11 +17,6 @@ public class BattleListener {
 		boolean isSuccessful = true;
 		switch (command) {
 
-		case "/order":
-		case "/battle":
-			//TODO:
-			break;
-
 		case "/phys":
 		case "/physical attack":
 		case "/attack":

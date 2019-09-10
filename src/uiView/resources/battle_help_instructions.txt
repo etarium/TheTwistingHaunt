@@ -1,20 +1,20 @@
 
 &------*
-| Help |            Main Gameplay
+| Help |            Battle Gameplay
 &------*
 
 &--------------------------------------------------------------------------*
-|                    |                                                     |
-| /look              | Displays information about current room             |
 | /look {item}       | Displays information about targeted item            |
-|                    |    either in cell, or in inventory                  |
+|                    |    currently in player's inventory                  |
 | /look {entity}     | Displays information about targeted entity          |
 | /look {equipment}  | Displays information about targeted                 |
 |                    |    piece of equipment                               |
 |                    |                                                     |
-| /inspect           | Search the room thoroughly                          |
+| /attack {entity}   | Attack an entity using equipped weapon.             |
+| /phys {entity}     | If no entity declared, attacks default entity       |
 |                    |                                                     |
-| /take {item}       | Add takeable object to inventory                    |
+| /{spell} {entity}  | Use spell on targeted entity. If no entity declared,|
+|                    | spell is used on default entity or error message    |
 |                    |                                                     |
 | /drop {item}       | Drop targeted item to floor of current room         |
 |                    |    WARNING: Will be lost upon leaving instance      |
@@ -33,18 +33,5 @@
 |                    |                                                     |
 | /status            | Displays player's status, such as                   |
 | /stats             |    current HP and SP                                |
-|                    |                                                     |
-|                    |                                                     |
-| /north             | If available, go to area immediately north          |
-|    /n              |                                                     |
-| /south             | If available, go to area immediately south          |
-|    /s              |                                                     |
-| /east              | If available, go to area immediately east           |
-|    /e              |                                                     |
-| /west              | If available, go to area immediately west           |
-|    /w              |                                                     |
-|                    |                                                     |
-| /save {name}       | Save game                                           |
-| /quit              | Quit game                                           |
 |                    |                                                     |
 &--------------------------------------------------------------------------*

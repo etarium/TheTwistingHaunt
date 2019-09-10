@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
 
+import uiView.UIMain;
 import utilities.Logs;
 
 public class HelpWin extends GameWindow{
@@ -29,7 +30,8 @@ public class HelpWin extends GameWindow{
 		help.setSize(WINDOW_DIM);		
 
 		JButton exitButton = new JButton();
-		exitButton.setBackground(null);
+		exitButton.setBackground(backgroundColor);
+		exitButton.setForeground(textColor);
 		exitButton.setSize(WINDOW_DIM);
 		
 		exitButton.addActionListener(new ActionListener() {
@@ -39,7 +41,8 @@ public class HelpWin extends GameWindow{
 				exitButtonPressed(evt, help);
 			
 		}});
-		
+		exitButton.setOpaque(true);
+		exitButton.setBorderPainted(false);
 		
 		help.addKeyListener(new KeyListener() {
 			@Override
@@ -63,11 +66,11 @@ public class HelpWin extends GameWindow{
 		});
 		help.add(exitButton);
 		
-		
-		
-		
 		String dir = "src/uiView/resources/";
 		String fileName = "help_instructions.txt";
+		if(UIMain.player.isInEncounter) {
+			fileName = "battle_help_instructions.txt";
+		}
 		String filePath = dir + fileName + "";
 		JTextPane helpText = new JTextPane();
 		
@@ -88,8 +91,6 @@ public class HelpWin extends GameWindow{
 		helpText.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		helpText.setEditable(false);
 		help.add(helpText);
-		
-		
 		help.setResizable(false);
 		help.setVisible(true);
 		help.setFocusable(true);
