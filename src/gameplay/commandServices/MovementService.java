@@ -57,7 +57,7 @@ public class MovementService {
 					UIMain.player.setCurrentCell(cell);
 					UIMain.player.setLocation(newLoc);
 					UIMain.player.setIsInEncounter(checkForEncounters());
-					
+        
 					//every time a new cell is entered, reset the recentlyOpened item
 					CellService.recentlyOpenedObject = new InspectableObjects();
 					if(checkForEncounters()) {

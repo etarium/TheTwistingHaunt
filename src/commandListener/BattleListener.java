@@ -1,5 +1,6 @@
 package commandListener;
 
+import gameplay.battle.BattleOrder;
 import gameplay.commandServices.BattleService;
 import uiView.UIMain;
 import utilities.Logs;
@@ -8,8 +9,11 @@ public class BattleListener {
 
 	public Reply listen(String command, String parameter) {
 		BattleService system = new BattleService();
+		BattleOrder order = new BattleOrder();
 
 		String output="";
+		String description = UIMain.player.currentCell.getDescription() + "\n"; 
+		String upperOutput = description + order.formatBattleOrder(UIMain.battleOrder);
 		boolean isSuccessful = true;
 		switch (command) {
 
@@ -22,11 +26,8 @@ public class BattleListener {
 		case "/physical attack":
 		case "/attack":
 			if (parameter == null) {
-				if(UIMain.player.currentCell.getEnemies().size() == 1) {
+				//if no name, attack first enemy in queue
 					output = system.physAttack(UIMain.player.getCurrentCell().getEnemies().get(0).getName());
-				} else {
-					output = "Your weapon clanks as you drag it along the ground, preparing to strike. Yet you pause and wonder... who? Perhaps you should be more specific.";
-				}
 			} else {
 				output = system.physAttack(parameter);
 			}
@@ -45,6 +46,7 @@ public class BattleListener {
 				output = "The thunderous fury of your spells pound in your ears. The magic begs to be unleashed. Yet you pause and wonder... who? Perhaps you should be more specific.";
 			} else {
 				output = system.spAttack(parameter);
+
 			}
 			break;
 		case "/look":
@@ -64,6 +66,12 @@ public class BattleListener {
 			Logs.LOGGER.info("Hit default case in commandListener.BattleListener.listen with command " + command);
 			isSuccessful = false;
 		}
-		return new Reply(isSuccessful, output);
+
+		if(UIMain.player.isInEncounter) {
+			upperOutput = description + order.initializeBattle();
+		} else {
+			upperOutput = description;
+		}
+		return new Reply(isSuccessful, output, upperOutput);
 	}
 }

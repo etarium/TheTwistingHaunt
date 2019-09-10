@@ -44,7 +44,7 @@ public class BattleStatMethods {
 		return calculatedDefense;
 	}
 	
-	public static boolean calculateHitRate(EnemyEntity selectedTarget) {
+	public static boolean calculatePlayerHitRate(EnemyEntity selectedTarget) {
 		//hit rate = 
 		//   [ (playerAcc * .5) + (playerLvl * .3) + (playerAgi * .1) + (RANDOM * 2)]
 		// - [ (enemyEva * .3) + (enemyLvl * .4) + (enemyAgi * .1) + (RANDOM * 1.5)]
@@ -67,5 +67,52 @@ public class BattleStatMethods {
 		Logs.LOGGER.info("Calculated enemy evasion rate " + enemyEvasionRate);
 
 		return playerHitRate - enemyEvasionRate > 0;
+	}
+	
+	public static boolean calculateEnemyHitRate(EnemyEntity enemy) {
+		double enemyAcc = enemy.getStats().getAcc() * .5;
+		double enemyLvl = enemy.getLevel() * .3;
+		double enemyAgi = enemy.getStats().getAgi() * .1;
+		double enemyRandomMultiplier = Math.random() * 2;
+		double enemyHitRate = enemyAcc + enemyLvl + enemyAgi + enemyRandomMultiplier;
+
+		Logs.LOGGER.info("Calculated enemy hit rate " + enemyHitRate);
+
+		double playerEva = UIMain.player.getStats().getEva() * .5;
+		double playerLvl = UIMain.player.getLevel() * .4;
+		double playerAgi = UIMain.player.getStats().getAgi() * .1;
+		double playerRandomMultiplier = Math.random() * 3;
+		double playerEvasionRate = playerEva + playerLvl + playerAgi + playerRandomMultiplier;
+
+		Logs.LOGGER.info("Calculated player evasion rate " + playerEvasionRate);
+
+		return enemyHitRate - playerEvasionRate > 0;
+	}
+	
+	public static double calculatePlayerPhysDefense() {
+		double playerDef = UIMain.player.getStats().getDef();
+		double playerLvl = UIMain.player.getLevel() *.4;
+		double randomMultiplier = Math.random() * 4;
+		double calculatedDefense = ((playerDef + playerLvl + randomMultiplier) * .75);
+
+		Logs.LOGGER.info("Calculated Player's phys defense rate " + calculatedDefense);
+
+		return calculatedDefense;
+	}
+	
+	public static double calculateEnemyPhysDamage(EnemyEntity enemy) {
+		// damage =
+		// [ (playerAttk * .6) + (level *.2) + (RANDOM * 4) + 2]
+		double enemyAtk = enemy.getStats().getAtk() * .8 + (Math.random() * .5);
+		double enemyLvl = enemy.getLevel() * .2;
+		double randomMultiplier = Math.random() * 3;
+		double calculatedDamage = (enemyAtk + enemyLvl + randomMultiplier + 1);
+
+		Logs.LOGGER.info("Calculated Enemy's attack rate " + calculatedDamage);
+
+		return calculatedDamage;
+	}
+	public static double calculateIntel(EnemyEntity enemy) {
+		return 0.0;
 	}
 }
