@@ -115,4 +115,5 @@ public class BattleStatMethods {
 	public static double calculateIntel(EnemyEntity enemy) {
 		return 0.0;
 	}
+
 }

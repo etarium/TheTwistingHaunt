@@ -4,6 +4,7 @@ import gameplay.battle.BattleOrder;
 import gameplay.commandServices.BattleService;
 import gameplay.commandServices.GameService;
 import pojos.Ability;
+import pojos.ability.enums.AbilityType;
 import uiView.UIMain;
 import utilities.Logs;
 
@@ -40,7 +41,7 @@ public class BattleListener {
 				output = system.inspectEnemy(parameter);
 			}
 			break;
-			
+
 		case "/help":
 			output = "Your cries for help go answered, and text appears before your eyes.";
 			GameService.help();
@@ -56,22 +57,37 @@ public class BattleListener {
 		//this should operate in a similar manner
 		for(Ability spell : UIMain.player.getSkills()) {
 			if(command.equalsIgnoreCase(spell.getName())) {
-				if (parameter == null) {
-					if(UIMain.player.currentCell.getEnemies().size() == 1) {
-						output = system.spAttack(spell, UIMain.player.getCurrentCell().getEnemies().get(0).getName());
-					}
-					output = "The thunderous fury of your spells pound in your ears. The magic begs to be unleashed. Yet you pause and wonder... who? Perhaps you should be more specific.";
+
+				//if target wasn't specific and the ability is damage
+				if (parameter == null && ( spell.getType().equals(AbilityType.DAMAGE) 
+						|| spell.getType().equals(AbilityType.DEBUFF) 
+						|| spell.getType().equals(AbilityType.DRAIN))) {
+					//if no name, attack first enemy in queue
+					output = system.spAttack(spell, UIMain.player.getCurrentCell().getEnemies().get(0).getName());
+
+					//or if the target wasnt specific and the ability is support
+				} else if(parameter == null && ( spell.getType().equals(AbilityType.HEAL) 
+						|| spell.getType().equals(AbilityType.BUFF) )) {
+
+					output = system.spSupport(spell, null);
+
+					//or a target was specified
 				} else {
-					output = system.spAttack(spell, parameter);
+					if(spell.getType().equals(AbilityType.DAMAGE) 
+							|| spell.getType().equals(AbilityType.DEBUFF) 
+							|| spell.getType().equals(AbilityType.DRAIN)) {
+						output = system.spAttack(spell, parameter);
 
+					} else {
+						output = system.spSupport(spell, parameter);
+					}
+
+					Logs.LOGGER.info("Hit spell if statement in commandListener.BattleListener.listen with command " + command);	
+					isSuccessful = true;
+					break;
 				}
-
-				Logs.LOGGER.info("Hit spell if statement in commandListener.BattleListener.listen with command " + command);	
-				isSuccessful = true;
-				break;
 			}
 		}
-
 		if(UIMain.player.isInEncounter) {
 			upperOutput = description + order.initializeBattle();
 		} else {
