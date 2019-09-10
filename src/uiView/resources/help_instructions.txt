@@ -33,7 +33,8 @@
 | /status            | Displays player's status, such as                   |
 | /stats             |    current HP and SP                                |
 |                    |                                                     |
-|                    |                                                     |
+| /skills            | Display player's spells and abilities               |
+|     /abilities     |                                                     |
 | /north             | If available, go to area immediately north          |
 |    /n              |                                                     |
 | /south             | If available, go to area immediately south          |
@@ -42,7 +43,6 @@
 |    /e              |                                                     |
 | /west              | If available, go to area immediately west           |
 |    /w              |                                                     |
-|                    |                                                     |
 | /save {name}       | Save game                                           |
 | /quit              | Quit game                                           |
 |                    |                                                     |
