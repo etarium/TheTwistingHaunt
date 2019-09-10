@@ -40,10 +40,6 @@ public class BattleListener {
 				output = system.inspectEnemy(parameter);
 			}
 			break;
-
-		case "/list":
-			output = system.listAbilities();
-			break;
 			
 		case "/help":
 			output = "Your cries for help go answered, and text appears before your eyes.";

@@ -66,22 +66,6 @@ public class BattleService {
 		return output;
 	}
 
-	public String listAbilities() {
-		StringBuilder outputBuilder = new StringBuilder();
-		outputBuilder.append(UIMain.player.getName() + " Abilities, Skills, and Spells");
-		outputBuilder.append("\n\n");
-		for(Ability ability : UIMain.player.getSkills()) {
-			outputBuilder.append(String.format("%-5s",  "NAME: " + ability.getName()));
-			outputBuilder.append(String.format("%17s", "ATTRIBUTE: " + ability.getAttribute()));
-			if(ability.getHpCost() > 0) {
-				outputBuilder.append(String.format("%30s", "HP: " + ability.getHpCost()));
-			}
-			if(ability.getSpCost() > 0) {
-				outputBuilder.append(String.format("%30s", "SP: " + ability.getSpCost()));
-			}
-		}
-		return outputBuilder.toString();
-	}
 	private EnemyEntity findEnemy(String target) {
 		for(EnemyEntity enemy : UIMain.player.currentCell.getEnemies()) {
 			if(enemy.getName().equalsIgnoreCase(target)) {
