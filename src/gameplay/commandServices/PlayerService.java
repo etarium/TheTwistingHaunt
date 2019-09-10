@@ -1,18 +1,19 @@
 package gameplay.commandServices;
 
 import gameplay.StatModMethods.PlayerStatMethods;
+import gameplay.commandServices.utilities.TakeUtilities;
 import pojos.items.enums.ArmorMaterial;
 import pojos.items.enums.WeaponType;
 import uiView.UIMain;
 
 public class PlayerService {
-	
+
 	PlayerStatMethods system = new PlayerStatMethods();
-	String output = "";
-	
+	TakeUtilities take = new TakeUtilities();
+
 	public PlayerService() {
 	}
-	
+
 	public String rest() {
 		StringBuilder output = new StringBuilder();
 		output.append("You rest, and find yourself feeling much better than you had before. \n");
@@ -20,48 +21,32 @@ public class PlayerService {
 		output.append(system.fullSP() + "\n");
 		return output.toString();
 	}
-	
-	public String takeItem(String parameter) {
-		//TODO
-		/*
-		if (parameter == null) {
-            //TO_DO
-            output = "Oh, come one. You've got to give me more info than that!";
-        } //inspect object of command
-        else {
-            Object taken = parseParameter(parameter);
 
-            if(taken == null) {
-            		output = "I'm not sure what you were expecting to take...";
-            }
-            else if(taken instanceof ConsumableItem) {
-            	ConsumableItem item = (ConsumableItem)taken;
+	public String takeItem(String param) {
+		StringBuilder outputBuilder = new StringBuilder();
 
-            		usableList.remove(item);
-            		//player.getCurrentCell(cellList).setItem("");
+		//if inspectable item isnt declared, and the cell is empty, display failure text
+		if((CellService.recentlyOpenedObject.getName() == null || CellService.recentlyOpenedObject.getItems().isEmpty())
+				&& (UIMain.player.currentCell.getItems() == null || UIMain.player.currentCell.getItems().isEmpty())) {
+			return "You haven't found anything to take. Try looking around or opening items.";
 
-            		//player.getItemList().add(item);
-
-
-            		output = "You have added " + item.getName() + " to your inventory.";
-            }
-            else if (taken instanceof Item) {
-            	Item item = (Item)taken;
-            		keyList.remove(item);
-            		//player.getCurrentCell(cellList).setKeyItem("");
-
-
-            		//player.getKeyItemsList().add(item);
-
-            		output = "Hm. This looks interesting. You add " + item.getName() + " to your pack.";
-            }
-
-            else {
-            		output = "That looks awkward to just carry around.";
-            }
-
-        } */
-		return "";
+		} else if(CellService.recentlyOpenedObject.getName() == null) {
+			//otherwise if inspectable item isnt declared, but the cell is not, take from the cell
+			outputBuilder.append(takeItemFromCell(param));
+		} else {
+			//the inspectable item is declared, but there are not items
+			if(CellService.recentlyOpenedObject.getName() != null && 
+					(CellService.recentlyOpenedObject.getItems() == null || CellService.recentlyOpenedObject.getItems().isEmpty())) {
+				outputBuilder.append("There's nothing to be found in the " + CellService.recentlyOpenedObject.getName() + ".\n");
+				//then check the cell
+				if(!UIMain.player.currentCell.getItems().isEmpty()) {
+					outputBuilder.append(takeItemFromCell(param));
+				}
+			} 
+			//else check inspectableObjct
+			outputBuilder.append(takeItemFromInspectable(param));
+		}
+		return outputBuilder.toString();
 	}
 
 	public String useItem(String parameter) {
@@ -265,7 +250,7 @@ public class PlayerService {
 		 */
 		return"";
 	}
-	
+
 	public String getPlayerStats() {
 		StringBuilder output = new StringBuilder();
 		output.append(String.format("%-25s", "Name: " + UIMain.player.getName()));
@@ -306,7 +291,44 @@ public class PlayerService {
 		output.append("\n**********\n");
 		output.append(String.format("%-25s", "XP: " + UIMain.player.getXp()));
 		output.append(String.format("%10s", "XP to Next Level: " + UIMain.player.getXpToNextLevel()));
-		
+
 		return output.toString();
+	}
+
+	private String takeItemFromCell(String param) {
+		StringBuilder outputBuilder = new StringBuilder();
+		if (param == null || param.equals("")) {
+			//take the only item from cell
+			outputBuilder.append(take.takeOnlyItemFromCell());
+		} else if (!UIMain.player.currentCell.getItems().isEmpty()) {
+			//if the cell's items aren't empty, player can take all or take specific item
+			if (param.equalsIgnoreCase("all")) {
+				outputBuilder.append(take.takeAllFromCell());
+			} else {
+				outputBuilder.append(take.takeItemByNameFromCell(param));
+			}
+		} else {
+			return "You look around, but can't find anything by that name worth taking.";
+		}
+		return outputBuilder.toString();
+	}
+
+	private String takeItemFromInspectable(String param) {
+		StringBuilder outputBuilder = new StringBuilder();
+		if(CellService.recentlyOpenedObject.getItems().isEmpty()) {
+			return "There's nothing to be found in the " + CellService.recentlyOpenedObject.getName() + ".";
+		}
+		if (param == null || param.equals("")) {
+			outputBuilder.append(take.takeOnlyItemFromInspectable());
+		} else if (!CellService.recentlyOpenedObject.getItems().isEmpty()) {
+			if (param.equalsIgnoreCase("all")) {
+				outputBuilder.append(take.takeAllFromInspectable());
+			} else {
+				outputBuilder.append(take.takeItemByNameFromInspectable(param));
+			}
+		} else {
+			return "You look around, but can't find anything by that name worth taking.";
+		}
+		return outputBuilder.toString();
 	}
 }

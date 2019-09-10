@@ -34,9 +34,9 @@ public class MovementListener {
 			if(UIMain.player.isInEncounter) {
 				return new Reply(false, output, UIMain.player.currentCell.getDescription());
 			}
-			
+
 			StringBuilder outputBuilder = new StringBuilder(); 
-			
+
 			char direction = command.charAt(1);
 			String upperOutput = UIMain.player.currentCell.getDescription();
 			switch (direction) {
@@ -81,7 +81,7 @@ public class MovementListener {
 			case 'e':
 
 				newUpperOutput = system.moveEast(direction);
-				
+
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
 						outputBuilder.append("You move to the east, and find yourself surrounded by ");
@@ -104,7 +104,7 @@ public class MovementListener {
 
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
-						
+
 						outputBuilder.append("You move to the west, and find yourself surrounded by ");
 						output = battleOutput(outputBuilder);
 					} else {
@@ -114,7 +114,7 @@ public class MovementListener {
 					}
 					upperOutput = newUpperOutput;
 				} else {;
-					output = failedMovementOutput;
+				output = failedMovementOutput;
 				}
 
 				break;
@@ -143,7 +143,7 @@ public class MovementListener {
 
 		return outputBuilder.toString();
 	}
-	
+
 	private String restOutput() {
 		if(UIMain.player.currentCell.canRest()) {
 			return "\n\nThis area seems safer than most. It wouldn't be a terrible place to have a short rest. \n"

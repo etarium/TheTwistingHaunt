@@ -18,7 +18,7 @@ public class CellListener {
 			//look at room
 			if (parameter == null) {
 				output = system.inspectCell();
-			} //inspect object of command
+			} //inspect object
 			else {
 				output = system.inspectItem(parameter);
 			}

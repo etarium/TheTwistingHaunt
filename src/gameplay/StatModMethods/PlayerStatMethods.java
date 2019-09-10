@@ -1,5 +1,6 @@
 package gameplay.StatModMethods;
 
+import gameplay.GamePlayConstants;
 import pojos.Statblock;
 import uiView.UIMain;
 
@@ -48,97 +49,97 @@ public class PlayerStatMethods {
 	private int calculateBaseHp() {
 		int hp = UIMain.player.getEntityClass().getStats().getHp() 
 				+ UIMain.player.getSpeciesObject().getStats().getHp();
-		if(hp > 0) {
+		if(hp > GamePlayConstants.MIN_STAT) {
 			return hp;
 		}
-		return 0;
+		return GamePlayConstants.MIN_STAT;
 	}
 	private int calculateBaseSp() {
 		int sp = UIMain.player.getEntityClass().getStats().getSp() 
 				+ UIMain.player.getSpeciesObject().getStats().getSp();
-		if(sp > 0) {
+		if(sp > GamePlayConstants.MIN_STAT) {
 			return sp;
 		}
-		return 0;
+		return GamePlayConstants.MIN_STAT;
 	}
 	private int calculateBaseAtk() {
 		int atk = UIMain.player.getEntityClass().getStats().getAtk() 
 				+ UIMain.player.getSpeciesObject().getStats().getAtk();
-		if(atk > 0) {
+		if(atk > GamePlayConstants.MIN_STAT) {
 			return atk;
 		}
-		return 0;
+		return GamePlayConstants.MIN_STAT;
 	}
 	private int calculateBaseDef() {
 		int def = UIMain.player.getEntityClass().getStats().getDef() 
 				+ UIMain.player.getSpeciesObject().getStats().getDef();
-		if(def > 0) {
+		if(def > GamePlayConstants.MIN_STAT) {
 			return def;
 		}
-		return 0;
+		return GamePlayConstants.MIN_STAT;
 	}
 	private int calculateBaseSpAtk() {
 		int spAtk = UIMain.player.getEntityClass().getStats().getSpatk() 
 				+ UIMain.player.getSpeciesObject().getStats().getSpatk();
-		if(spAtk > 0) {
+		if(spAtk > GamePlayConstants.MIN_STAT) {
 			return spAtk;
 		}
-		return 0;
+		return GamePlayConstants.MIN_STAT;
 	}
 	private int calculateBaseSpDef() {
 		int spDef = UIMain.player.getEntityClass().getStats().getSpdef() 
 				+ UIMain.player.getSpeciesObject().getStats().getSpdef();
-		if(spDef > 0) {
+		if(spDef > GamePlayConstants.MIN_STAT) {
 			return spDef;
 		}
-		return 0;
+		return GamePlayConstants.MIN_STAT;
 	}
 	private int calculateBaseEva() {
 		int eva = UIMain.player.getEntityClass().getStats().getEva() 
 				+ UIMain.player.getSpeciesObject().getStats().getEva();
-		if(eva > 0) {
+		if(eva > GamePlayConstants.MIN_STAT) {
 			return eva;
 		}
-		return 0;
+		return GamePlayConstants.MIN_STAT;
 	}	
 	private int calculateBaseIntel() {
 		int intel = UIMain.player.getEntityClass().getStats().getIntel() 
 				+ UIMain.player.getSpeciesObject().getStats().getIntel();
-		if(intel > 0) {
+		if(intel > GamePlayConstants.MIN_STAT) {
 			return intel;
 		}
-		return 0;
+		return GamePlayConstants.MIN_STAT;
 	}	
 	private int calculateBaseCha() {
 		int cha = UIMain.player.getEntityClass().getStats().getCha() 
 				+ UIMain.player.getSpeciesObject().getStats().getCha();
-		if(cha > 0) {
+		if(cha > GamePlayConstants.MIN_STAT) {
 			return cha;
 		}
-		return 0;
+		return GamePlayConstants.MIN_STAT;
 	}	
 	private int calculateBaseSta() {
 		int sta = UIMain.player.getEntityClass().getStats().getSta() 
 				+ UIMain.player.getSpeciesObject().getStats().getSta();
-		if(sta > 0) {
+		if(sta > GamePlayConstants.MIN_STAT) {
 			return sta;
 		}
-		return 0;
+		return GamePlayConstants.MIN_STAT;
 	}
 	private int calculateBaseAgi() {
 		int agi = UIMain.player.getEntityClass().getStats().getAgi() 
 				+ UIMain.player.getSpeciesObject().getStats().getAgi();
-		if(agi > 0) {
+		if(agi > GamePlayConstants.MIN_STAT) {
 			return agi;
 		}
-		return 0;
+		return GamePlayConstants.MIN_STAT;
 	}
 	private int calculateBaseAcc() {
 		int acc = UIMain.player.getEntityClass().getStats().getAcc() 
 				+ UIMain.player.getSpeciesObject().getStats().getAcc();
-		if(acc > 0) {
+		if(acc > GamePlayConstants.MIN_STAT) {
 			return acc;
 		}
-		return 0;
+		return GamePlayConstants.MIN_STAT;
 	}	
 }
