@@ -118,9 +118,10 @@ public class SpellService {
 		output.append(String.format("%5s",  UIMain.player.getStats().getHp()));
 		output.append(String.format("%13s",  "SP: "));
 		output.append(String.format("%6s", UIMain.player.getStats().getSp()));
+		output.append("\n**********\n");
 		output.append(String.format("%-25s", "Name: " + spell.getName()));
 		output.append(String.format("%20s", "Min Level: " + spell.getMinLevel()));
-		output.append("\n\n\n");
+		output.append("\n\n");
 		output.append(String.format("%-5s",  "HP COST: "));
 		output.append(String.format("%5s",  spell.getHpCost()));
 		output.append(String.format("%13s",  "SP COST: "));

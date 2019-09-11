@@ -55,13 +55,13 @@ public class BattleOrder {
 				UIMain.battleOrder.add(initialOrder.get(i));
 			} else {
 				if(initialOrder.get(i).getStats().getInit() > UIMain.battleOrder.get(i-1).getStats().getInit()) {
-					for(int j=0; j<UIMain.battleOrder.size(); j++) {
+					for(int j=UIMain.battleOrder.size()-1; j>-1; j--) {
 						double higherStat = initialOrder.get(i).getStats().getInit();
 						if(higherStat < UIMain.battleOrder.get(j).getStats().getInit()) {
-							if(j == 0) {
-								UIMain.battleOrder.add(j, initialOrder.get(i));
+							if(j == UIMain.battleOrder.size()) {
+								UIMain.battleOrder.add(initialOrder.get(i));
 							} else {
-								UIMain.battleOrder.add(j-1, initialOrder.get(i));
+								UIMain.battleOrder.add(j+1, initialOrder.get(i));
 							}
 							break;
 						}
