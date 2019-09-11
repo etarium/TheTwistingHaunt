@@ -79,7 +79,7 @@ public class VictoryService {
 		if(VictoryService.isVictory()) {
 			output = VictoryService.victory();
 		} else {
-			output = "\nThe " + selectedTarget.getName() + "let out a horrible scream.\n"
+			output = "\nThe " + selectedTarget.getName() + " let out a horrible scream.\n"
 					+ "Great Job! Only " + UIMain.player.currentCell.getEnemies().size() + " remaining!\n";
 		}
 		return output;

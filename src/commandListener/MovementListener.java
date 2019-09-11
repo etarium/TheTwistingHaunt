@@ -93,7 +93,6 @@ public class MovementListener {
 					}
 					upperOutput = newUpperOutput;
 				} else {
-					System.out.println("failed movement east");
 					output = failedMovementOutput;
 				}
 
@@ -113,7 +112,7 @@ public class MovementListener {
 						output = outputBuilder.toString();
 					}
 					upperOutput = newUpperOutput;
-				} else {;
+				} else {
 				output = failedMovementOutput;
 				}
 

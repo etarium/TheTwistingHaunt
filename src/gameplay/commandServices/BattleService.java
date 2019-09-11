@@ -5,11 +5,8 @@ import java.util.List;
 
 import gameplay.StatModMethods.BattleEnemyStatMethods;
 import gameplay.StatModMethods.BattlePlayerStatMethods;
-import gameplay.battle.CheckStatuses;
-import gameplay.battle.DeathService;
 import gameplay.battle.PhysicalService;
 import gameplay.battle.SpellService;
-import gameplay.battle.VictoryService;
 import pojos.Ability;
 import pojos.ability.enums.AbilityType;
 import pojos.entity.EnemyEntity;
@@ -114,22 +111,22 @@ public class BattleService {
 	}
 
 	public String spAtk(Ability spell, EnemyEntity selectedTarget) {
+		StringBuilder outputBuilder = new StringBuilder();
 		if(spell.getType().equals(AbilityType.DAMAGE)) {
-			SpellService.useDamageSpell(spell, (EnemyEntity) selectedTarget);
+			outputBuilder.append(SpellService.useDamageSpell(spell, (EnemyEntity) selectedTarget));
 
 		} else if(spell.getType().equals(AbilityType.DEBUFF)) {
 			//TODO
-			SpellService.useDeBuffSpell(spell, (EnemyEntity) selectedTarget);
+			outputBuilder.append(SpellService.useDeBuffSpell(spell, (EnemyEntity) selectedTarget));
 		} else if(spell.getType().equals(AbilityType.DRAIN)) {
 			//TODO
-			SpellService.useDrainSpell(spell, (EnemyEntity) selectedTarget);
+			outputBuilder.append(SpellService.useDrainSpell(spell, (EnemyEntity) selectedTarget));
 		}
 
-		return "";
+		return outputBuilder.toString();
 	}
 
 	public String inspectEnemy(String target) {
-		//TODO
 		EnemyEntity selectedTarget = findEnemy(target);
 		if(selectedTarget == null) {
 			return "You squinted at the enemies before you, unable to focus on any foe in particular."
@@ -187,6 +184,13 @@ public class BattleService {
 		for(int i = 0; i<printedList.size(); i++) {
 			outputBuilder.append(String.format("%15s",   "HP: " +
 					UIMain.battleOrder.get(i).getStats().getCurrentHP() + " |" + UIMain.battleOrder.get(i).getStats().getHp()));
+		}
+		outputBuilder.append("\n");
+		outputBuilder.append(String.format("%25s",   "SP: " +
+				UIMain.player.getStats().getCurrentSP() + " |" + UIMain.player.getStats().getSp()));
+		for(int i = 0; i<printedList.size(); i++) {
+			outputBuilder.append(String.format("%25s",   "SP: " +
+					UIMain.battleOrder.get(i).getStats().getCurrentSP() + " |" + UIMain.battleOrder.get(i).getStats().getSp()));
 		}
 		return outputBuilder.toString();
 	}

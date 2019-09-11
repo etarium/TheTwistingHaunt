@@ -17,25 +17,31 @@ public class SpellService {
 		int enemyDef = (int) BattleEnemyStatMethods.calculateEnemySpDef(target);
 		int total = dmg - enemyDef;
 		//apply the damage
-
-		if(BattlePlayerStatMethods.calculatePlayerHitRate(target)) {
-			target.getStats().setCurrentHP(target.getStats().getCurrentHP() - total);
-			if(target.getStats().getCurrentHP() < 0) {
-				target.getStats().setCurrentHP(0);
-			}
-
-			if(!CheckStatuses.isEnemyDead(target)) {
-				output = "With a deep breath, you cast " + spell.getName() + ", and the raging magic rings out, ravishing " + target.getName() +" \n"
-						+ "You deal " + total + " damage. \n"
-						+ "Nice work, hero! \n";
+		if(checkResourcesAvailable(spell)) {
+			if(BattlePlayerStatMethods.calculatePlayerHitRate(target)) {
+				target.getStats().setCurrentHP(target.getStats().getCurrentHP() - total);
+				if(target.getStats().getCurrentHP() < 0) {
+					target.getStats().setCurrentHP(0);
+				}
+				System.out.println(output);
+				if(!CheckStatuses.isEnemyDead(target)) {
+					output = "With a deep breath, you cast " + spell.getName() + ", and the raging magic rings out, ravishing the" + target.getName() +"! \n"
+							+ "You deal " + total + " damage. \n"
+							+ "Nice work, hero! \n";
+				} else {
+					VictoryService.trackXP(target.getXp(), target.getLevel());
+					output = "With a deep breath, you cast " + spell.getName() + ", and the raging magic rings out, ravishing the " + target.getName() +"! \n"
+							+ "You deal " + total + " damage. \n" + VictoryService.defeatedEnemy(target);
+				}
 			} else {
-				VictoryService.trackXP(target.getXp(), target.getLevel());
-				output = "With a deep breath, you cast " + spell.getName() + ", and the raging magic rings out, ravishing " + target.getName() +" \n"
-						+ "You deal " + total + " damage. \n" + VictoryService.defeatedEnemy(target);
+				output = "\nYou lunge toward " + target.getName() + ", but you were sidestepped and missed completely.\n"
+						+ "Big bummer, hero. \n";
 			}
 		} else {
-			output = "\nYou lunge toward " + target.getName() + ", but you were sidestepped and missed completely.\n"
-					+ "Big bummer, hero. \n";
+
+			output = "\nYou do not have the necessary resources left to use this skill! \n" +
+					listResourceInfo(spell) +
+					"\n[use /stats to check your stats, and /skills to see abilities and try again!]";
 		}
 		//TODO: incorporate elemental strengths and weaknesses
 
@@ -86,4 +92,41 @@ public class SpellService {
 		//TODO: incorporate elemental strengths and weaknesses
 		return "";
 	}
+
+	private static boolean checkResourcesAvailable(Ability spell) {
+		int newHP = UIMain.player.getStats().getCurrentHP() - spell.getHpCost();
+		int newSP = UIMain.player.getStats().getCurrentSP() - spell.getSpCost();
+		if(newHP <= 0 || newSP < 0) {
+			//the player does not have the necessary hp or sp left to use this skill
+			//sp can reach zero, hp cannot.
+			return false;
+		}
+		
+		UIMain.player.getStats().setCurrentHP(newHP);
+		UIMain.player.getStats().setCurrentSP(newSP);
+		return true;
+	}
+
+	private static String listResourceInfo(Ability spell) {
+		StringBuilder output = new StringBuilder();
+		output.append(String.format("%-25s", "Name: " + UIMain.player.getName()));
+		output.append(String.format("%10s", "Class: " + UIMain.player.getEntityClass().getName()));
+		output.append(String.format("%20s", "Level: " + UIMain.player.getLevel()));
+		output.append(String.format("%30s",  "Species: " + UIMain.player.getSpeciesObject().getName()));
+		output.append("\n\n\n");
+		output.append(String.format("%-5s",  "HP: "));
+		output.append(String.format("%5s",  UIMain.player.getStats().getHp()));
+		output.append(String.format("%13s",  "SP: "));
+		output.append(String.format("%6s", UIMain.player.getStats().getSp()));
+		output.append(String.format("%-25s", "Name: " + spell.getName()));
+		output.append(String.format("%20s", "Min Level: " + spell.getMinLevel()));
+		output.append("\n\n\n");
+		output.append(String.format("%-5s",  "HP COST: "));
+		output.append(String.format("%5s",  spell.getHpCost()));
+		output.append(String.format("%13s",  "SP COST: "));
+		output.append(String.format("%6s", spell.getSpCost()));
+
+		return output.toString();
+	}
+
 }
