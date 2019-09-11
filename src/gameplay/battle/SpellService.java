@@ -68,7 +68,7 @@ public class SpellService {
 		if(UIMain.player.getStats().getCurrentHP() > UIMain.player.getStats().getHp()) {
 			UIMain.player.getStats().setCurrentHP(UIMain.player.getStats().getHp());
 		}
-		String output = "With a deep breath, you cast " + spell.getName() + ", and feel yourself being healed. \n"
+		String output = "With a deep breath, you cast " + spell.getName() + ", and feel yourself being rejuvenated. \n"
 				+ "You have been healed " + heal + ". Your HP is now " + UIMain.player.getStats().getCurrentHP();
 		//ensure the stat does not exceed max stat
 		//TODO: incorporate elemental strengths and weaknesses

@@ -45,6 +45,7 @@ public class BattleService {
 					outputBuilder.append(enemyAttack((EnemyEntity) activeEntity));
 				}
 			}
+			outputBuilder.append("\n**********\n");
 		}
 		outputBuilder.append(formatBattleOutput());
 		return outputBuilder.toString();
@@ -78,6 +79,7 @@ public class BattleService {
 					outputBuilder.append(enemyAttack((EnemyEntity) activeEntity));
 				}
 			}
+			outputBuilder.append("\n**********\n");
 		}
 		outputBuilder.append(formatBattleOutput());
 		return outputBuilder.toString();
@@ -105,6 +107,7 @@ public class BattleService {
 					outputBuilder.append(enemyAttack((EnemyEntity) activeEntity));
 				}
 			}
+			outputBuilder.append("\n**********\n");
 		}
 		outputBuilder.append(formatBattleOutput());
 		return outputBuilder.toString();
