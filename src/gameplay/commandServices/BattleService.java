@@ -3,9 +3,11 @@ package gameplay.commandServices;
 import java.util.ArrayList;
 import java.util.List;
 
-import gameplay.StatModMethods.BattleStatMethods;
+import gameplay.StatModMethods.BattleEnemyStatMethods;
+import gameplay.StatModMethods.BattlePlayerStatMethods;
 import gameplay.battle.CheckStatuses;
 import gameplay.battle.DeathService;
+import gameplay.battle.PhysicalService;
 import gameplay.battle.SpellService;
 import gameplay.battle.VictoryService;
 import pojos.Ability;
@@ -38,7 +40,7 @@ public class BattleService {
 
 		for(Entity activeEntity : UIMain.battleOrder) {
 			if(activeEntity.equals(UIMain.player)) {
-				outputBuilder.append(playerPhysAttack(selectedTarget));
+				outputBuilder.append(PhysicalService.playerPhysAttack(selectedTarget));
 			} else {
 				if(!UIMain.player.isInEncounter) {
 					break;
@@ -55,17 +57,7 @@ public class BattleService {
 		//TODO
 		StringBuilder outputBuilder = new StringBuilder();
 		EnemyEntity selectedTarget = findEnemy(target);
-		if(spell.getType().equals(AbilityType.DAMAGE)) {
-			SpellService.useDamageSpell(spell, (EnemyEntity) selectedTarget);
 
-		} else if(spell.getType().equals(AbilityType.DEBUFF)) {
-			//TODO
-			SpellService.useDeBuffSpell(spell, (EnemyEntity) selectedTarget);
-		} else if(spell.getType().equals(AbilityType.DRAIN)) {
-			//TODO
-			SpellService.useDrainSpell(spell, (EnemyEntity) selectedTarget);
-		}
-		
 		if(selectedTarget == null && ( spell.getType().equals(AbilityType.DAMAGE) 
 				|| spell.getType().equals(AbilityType.DEBUFF) 
 				|| spell.getType().equals(AbilityType.DRAIN))) {
@@ -81,7 +73,7 @@ public class BattleService {
 
 		for(Entity activeEntity : UIMain.battleOrder) {
 			if(activeEntity.equals(UIMain.player)) {
-				outputBuilder.append(playerSkill(spell, selectedTarget));
+				outputBuilder.append(spAtk(spell, selectedTarget));
 			} else {
 				if(!UIMain.player.isInEncounter) {
 					break;
@@ -94,38 +86,48 @@ public class BattleService {
 		return outputBuilder.toString();
 	}
 
-	public String spSupport(Ability spell, String target) {
+	public String spSupport(Ability spell) {
 		StringBuilder outputBuilder = new StringBuilder();
-		Entity selectedTarget = new Entity();
 		//TODO
 		//add support for party members.
 		//all support skills are currently used on the player.
-		
+
 		//if the target is the player
-		if(target == null || target.equals("") || target.equalsIgnoreCase("self") || target.equalsIgnoreCase(UIMain.player.getName())) {
-			selectedTarget = UIMain.player;
-		}
-		
-		//if the target isn't the player 
-		if(selectedTarget == null && ( spell.getType().equals(AbilityType.HEAL) 
-				|| spell.getType().equals(AbilityType.BUFF))) {
-			output = "\nMagic pounds in your ears, your heroic will urging you to help your allies. Stopping in the final moments, "
-					+ "you realize that there doesn't seem to be any allies called that.\n"
-					+ "[try again, or type '/help' for battle assistance]\n";
-
-			Logs.LOGGER.info("Target could not be found during support spell \n" +
-					"target: " + target + ", battle: " + UIMain.battleOrder);
-		}
 		//determine type of spell being used for the appropriate method
-		if(spell.getType().equals(AbilityType.HEAL)) {
-			SpellService.useHealSpell(spell, (EnemyEntity) selectedTarget);
-
-		} else if(spell.getType().equals(AbilityType.BUFF)) {
-			//TODO
-			SpellService.useBuffSpell(spell, (EnemyEntity) selectedTarget);
+		for(Entity activeEntity : UIMain.battleOrder) {
+			if(activeEntity.equals(UIMain.player)) {
+				if (spell.getType().equals(AbilityType.HEAL)) {
+					outputBuilder.append(SpellService.useHealSpell(spell));
+				} else if(spell.getType().equals(AbilityType.BUFF)) {
+					outputBuilder.append(SpellService.useBuffSpell(spell));
+				}
+			} else {
+				if(!UIMain.player.isInEncounter) {
+					break;
+				} else {
+					outputBuilder.append(enemyAttack((EnemyEntity) activeEntity));
+				}
+			}
 		}
+		outputBuilder.append(formatBattleOutput());
+		return outputBuilder.toString();
+	}
+
+	public String spAtk(Ability spell, EnemyEntity selectedTarget) {
+		if(spell.getType().equals(AbilityType.DAMAGE)) {
+			SpellService.useDamageSpell(spell, (EnemyEntity) selectedTarget);
+
+		} else if(spell.getType().equals(AbilityType.DEBUFF)) {
+			//TODO
+			SpellService.useDeBuffSpell(spell, (EnemyEntity) selectedTarget);
+		} else if(spell.getType().equals(AbilityType.DRAIN)) {
+			//TODO
+			SpellService.useDrainSpell(spell, (EnemyEntity) selectedTarget);
+		}
+
 		return "";
 	}
+
 	public String inspectEnemy(String target) {
 		//TODO
 		EnemyEntity selectedTarget = findEnemy(target);
@@ -149,98 +151,15 @@ public class BattleService {
 		return null;
 	}
 
-	private String defeatedEnemy(EnemyEntity selectedTarget) {
-		DeathService.removeEnemy(selectedTarget);
-		if(VictoryService.isVictory()) {
-			output = VictoryService.victory();
-		} else {
-			output = "\nThe " + selectedTarget.getName() + "let out a horrible scream.\n"
-					+ "Great Job! Only " + UIMain.player.currentCell.getEnemies().size() + " remaining!\n";
-		}
-		return output;
-	}
-
 	private String enemyAttack(EnemyEntity enemy) {
 		//TODO: make it smart enough to use skills instead of just physical attacks
-		int totalDamage = (int) ( BattleStatMethods.calculateEnemyPhysDamage(enemy) - BattleStatMethods.calculatePlayerPhysDefense());
-		if(BattleStatMethods.calculateEnemyHitRate(enemy)) {
+		int totalDamage = (int) ( BattleEnemyStatMethods.calculateEnemyPhysDamage(enemy) - BattlePlayerStatMethods.calculatePlayerPhysDefense());
+		if(BattleEnemyStatMethods.calculateEnemyHitRate(enemy)) {
 			UIMain.player.getStats().setCurrentHP(UIMain.player.getStats().getCurrentHP() - totalDamage);
 			output = "\nThe " + enemy.getName() + " lashes out, inflicting " + totalDamage + " damage!\n";
 		} else {
 			output = "\n The " + enemy.getName() + " stumbles, missing its target.\n";
 		}
-		return output;
-	}
-
-	private String playerPhysAttack(EnemyEntity selectedTarget) {
-
-		int total = (int) (BattleStatMethods.calculatePlayerPhysDamage() - BattleStatMethods.calculateEnemyPhysDefense(selectedTarget));
-
-		if(BattleStatMethods.calculatePlayerHitRate(selectedTarget)) {
-			selectedTarget.getStats().setCurrentHP(selectedTarget.getStats().getCurrentHP() - total);
-			if(selectedTarget.getStats().getCurrentHP() < 0) {
-				selectedTarget.getStats().setCurrentHP(0);
-			}
-
-			if(!CheckStatuses.isEnemyDead(selectedTarget)) {
-				output = "\nYou attack " + selectedTarget.getName() + ", and with a stunning blow deal " + total + " damage. \n"
-						+ "Nice work, hero! \n";
-			} else {
-				VictoryService.trackXP(selectedTarget.getXp(), selectedTarget.getLevel());
-				output = "\nYou attack " + selectedTarget.getName() + ", and with a stunning blow deal " + total + " damage. \n" + defeatedEnemy(selectedTarget);
-			}
-		} else {
-			output = "\nYou lunge toward " + selectedTarget.getName() + ", but you were sidestepped and missed completely.\n"
-					+ "Big bummer, hero. \n";
-		}
-		return output;
-	}
-
-	private String playerSkill(Ability spell, Entity selectedTarget) {
-		
-		if(spell.getType().equals(AbilityType.DAMAGE)) {
-			SpellService.useDamageSpell(spell, (EnemyEntity) selectedTarget);
-
-		} else if (spell.getType().equals(AbilityType.HEAL)) {
-			//TODO
-			if(selectedTarget == null) {
-				SpellService.useHealSpell(spell, UIMain.player);
-			} else {
-				SpellService.useHealSpell(spell, selectedTarget);
-			}
-		} else if(spell.getType().equals(AbilityType.BUFF)) {
-			//TODO
-			if(selectedTarget == null) {
-				SpellService.useBuffSpell(spell, UIMain.player);
-			} else {
-				SpellService.useBuffSpell(spell, selectedTarget);
-			}
-		} else if(spell.getType().equals(AbilityType.DEBUFF)) {
-			//TODO
-			SpellService.useDeBuffSpell(spell, (EnemyEntity) selectedTarget);
-		} else if(spell.getType().equals(AbilityType.DRAIN)) {
-			//TODO
-			SpellService.useDrainSpell(spell, (EnemyEntity) selectedTarget);
-		}
-//		int total = (int) (BattleStatMethods.calculatePlayerPhysDamage() - BattleStatMethods.calculateEnemyPhysDefense(selectedTarget));
-//
-//		if(BattleStatMethods.calculatePlayerHitRate(selectedTarget)) {
-//			selectedTarget.getStats().setCurrentHP(selectedTarget.getStats().getCurrentHP() - total);
-//			if(selectedTarget.getStats().getCurrentHP() < 0) {
-//				selectedTarget.getStats().setCurrentHP(0);
-//			}
-//
-//			if(!CheckStatuses.isEnemyDead(selectedTarget)) {
-//				output = "\nYou attack " + selectedTarget.getName() + ", and with a stunning blow deal " + total + " damage. \n"
-//						+ "Nice work, hero! \n";
-//			} else {
-//				VictoryService.trackXP(selectedTarget.getXp(), selectedTarget.getLevel());
-//				output = "\nYou attack " + selectedTarget.getName() + ", and with a stunning blow deal " + total + " damage. \n" + defeatedEnemy(selectedTarget);
-//			}
-//		} else {
-//			output = "\nYou lunge toward " + selectedTarget.getName() + ", but you were sidestepped and missed completely.\n"
-//					+ "Big bummer, hero. \n";
-//		}
 		return output;
 	}
 

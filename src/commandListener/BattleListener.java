@@ -50,41 +50,40 @@ public class BattleListener {
 		default:
 			Logs.LOGGER.info("Hit default case in commandListener.BattleListener.listen with command " + command);
 			isSuccessful = false;
-		}
-
-		//switch cases require final values, therefore dynamically 
-		//creating the switch case based on skills would be cumbersome to implement custom classes for
-		//this should operate in a similar manner
-		for(Ability spell : UIMain.player.getSkills()) {
-			if(command.equalsIgnoreCase(spell.getName())) {
-
-				//if target wasn't specific and the ability is damage
-				if (parameter == null && ( spell.getType().equals(AbilityType.DAMAGE) 
-						|| spell.getType().equals(AbilityType.DEBUFF) 
-						|| spell.getType().equals(AbilityType.DRAIN))) {
-					//if no name, attack first enemy in queue
-					output = system.spAttack(spell, UIMain.player.getCurrentCell().getEnemies().get(0).getName());
-
-					//or if the target wasnt specific and the ability is support
-				} else if(parameter == null && ( spell.getType().equals(AbilityType.HEAL) 
-						|| spell.getType().equals(AbilityType.BUFF) )) {
-
-					output = system.spSupport(spell, null);
-
-					//or a target was specified
-				} else {
-					if(spell.getType().equals(AbilityType.DAMAGE) 
-							|| spell.getType().equals(AbilityType.DEBUFF) 
-							|| spell.getType().equals(AbilityType.DRAIN)) {
-						output = system.spAttack(spell, parameter);
-
-					} else {
-						output = system.spSupport(spell, parameter);
-					}
-
-					Logs.LOGGER.info("Hit spell if statement in commandListener.BattleListener.listen with command " + command);	
+			//switch cases require final values, therefore dynamically 
+			//creating the switch case based on skills would be cumbersome to implement custom classes for
+			//this should operate in a similar manner
+			for(Ability spell : UIMain.player.getSkills()) {
+				if(command.equalsIgnoreCase("/"+spell.getName())) {
 					isSuccessful = true;
-					break;
+					//if target wasn't specific and the ability is damage
+					if (parameter == null && ( spell.getType().equals(AbilityType.DAMAGE) 
+							|| spell.getType().equals(AbilityType.DEBUFF) 
+							|| spell.getType().equals(AbilityType.DRAIN))) {
+						//if no name, attack first enemy in queue
+						output = system.spAttack(spell, UIMain.player.getCurrentCell().getEnemies().get(0).getName());
+
+						//or if the target wasnt specific and the ability is support
+					} else if(parameter == null && ( spell.getType().equals(AbilityType.HEAL) 
+							|| spell.getType().equals(AbilityType.BUFF) )) {
+
+						output = system.spSupport(spell);
+
+						//or a target was specified
+					} else {
+						if(spell.getType().equals(AbilityType.DAMAGE) 
+								|| spell.getType().equals(AbilityType.DEBUFF) 
+								|| spell.getType().equals(AbilityType.DRAIN)) {
+							output = system.spAttack(spell, parameter);
+
+						} else {
+							output = system.spSupport(spell);
+						}
+
+						Logs.LOGGER.info("Hit spell if statement in commandListener.BattleListener.listen with command " + command);	
+
+						break;
+					}
 				}
 			}
 		}

@@ -3,7 +3,7 @@ package gameplay.battle;
 import java.util.LinkedList;
 import java.util.List;
 
-import gameplay.StatModMethods.BattleStatMethods;
+import gameplay.StatModMethods.BattlePlayerStatMethods;
 import pojos.entity.EnemyEntity;
 import pojos.entity.Entity;
 import uiView.UIMain;
@@ -11,7 +11,7 @@ import utilities.Logs;
 
 public class BattleOrder {
 
-	private BattleStatMethods statMethods = new BattleStatMethods();
+	private BattlePlayerStatMethods statMethods = new BattlePlayerStatMethods();
 	private List<Entity> initialOrder = new LinkedList<Entity>();
 	double enemyInit = 0.0;
 
