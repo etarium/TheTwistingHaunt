@@ -73,7 +73,7 @@ public class BattleService {
 					+ "you realize that there doesn't seem to be any enemies called that.\n"
 					+ "[try again, or type '/help' for battle assistance]\n";
 
-			Logs.LOGGER.info("Target could not be found during phys attack \n" +
+			Logs.LOGGER.info("Target could not be found during spell attack \n" +
 					"target: " + target + ", battle: " + UIMain.battleOrder);
 
 			return output;
@@ -95,21 +95,35 @@ public class BattleService {
 	}
 
 	public String spSupport(Ability spell, String target) {
-//
-//	if (spell.getType().equals(AbilityType.HEAL)) {
-//		//TODO
-//		if(selectedTarget == null) {
-//			SpellService.useHealSpell(spell, UIMain.player);
-//		} else {
-//			SpellService.useHealSpell(spell, selectedTarget);
-//		}
-//	} else if(spell.getType().equals(AbilityType.BUFF)) {
-//		//TODO
-//		if(selectedTarget == null) {
-//			SpellService.useBuffSpell(spell, UIMain.player);
-//		} else {
-//			SpellService.useBuffSpell(spell, selectedTarget);
-//		}
+		StringBuilder outputBuilder = new StringBuilder();
+		Entity selectedTarget = new Entity();
+		//TODO
+		//add support for party members.
+		//all support skills are currently used on the player.
+		
+		//if the target is the player
+		if(target == null || target.equals("") || target.equalsIgnoreCase("self") || target.equalsIgnoreCase(UIMain.player.getName())) {
+			selectedTarget = UIMain.player;
+		}
+		
+		//if the target isn't the player 
+		if(selectedTarget == null && ( spell.getType().equals(AbilityType.HEAL) 
+				|| spell.getType().equals(AbilityType.BUFF))) {
+			output = "\nMagic pounds in your ears, your heroic will urging you to help your allies. Stopping in the final moments, "
+					+ "you realize that there doesn't seem to be any allies called that.\n"
+					+ "[try again, or type '/help' for battle assistance]\n";
+
+			Logs.LOGGER.info("Target could not be found during support spell \n" +
+					"target: " + target + ", battle: " + UIMain.battleOrder);
+		}
+		//determine type of spell being used for the appropriate method
+		if(spell.getType().equals(AbilityType.HEAL)) {
+			SpellService.useHealSpell(spell, (EnemyEntity) selectedTarget);
+
+		} else if(spell.getType().equals(AbilityType.BUFF)) {
+			//TODO
+			SpellService.useBuffSpell(spell, (EnemyEntity) selectedTarget);
+		}
 		return "";
 	}
 	public String inspectEnemy(String target) {
