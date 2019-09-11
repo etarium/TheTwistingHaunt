@@ -183,14 +183,14 @@ public class BattleService {
 				+ " | " + UIMain.player.getStats().getHp()));
 		for(int i = 0; i<printedList.size(); i++) {
 			outputBuilder.append(String.format("%15s",   "HP: " +
-					UIMain.battleOrder.get(i).getStats().getCurrentHP() + " |" + UIMain.battleOrder.get(i).getStats().getHp()));
+					UIMain.battleOrder.get(i).getStats().getCurrentHP() + " | " + UIMain.battleOrder.get(i).getStats().getHp()));
 		}
 		outputBuilder.append("\n");
-		outputBuilder.append(String.format("%25s",   "SP: " +
-				UIMain.player.getStats().getCurrentSP() + " |" + UIMain.player.getStats().getSp()));
+		outputBuilder.append(String.format("%-5s",   "SP: " +
+				UIMain.player.getStats().getCurrentSP() + " | " + UIMain.player.getStats().getSp()));
 		for(int i = 0; i<printedList.size(); i++) {
-			outputBuilder.append(String.format("%25s",   "SP: " +
-					UIMain.battleOrder.get(i).getStats().getCurrentSP() + " |" + UIMain.battleOrder.get(i).getStats().getSp()));
+			outputBuilder.append(String.format("%15s",   "SP: " +
+					UIMain.battleOrder.get(i).getStats().getCurrentSP() + " | " + UIMain.battleOrder.get(i).getStats().getSp()));
 		}
 		return outputBuilder.toString();
 	}

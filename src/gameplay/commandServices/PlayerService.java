@@ -309,6 +309,7 @@ public class PlayerService {
 			if(ability.getSpCost() > 0) {
 				outputBuilder.append(String.format("%30s", "SP: " + ability.getSpCost()));
 			}
+			outputBuilder.append("\n\n");
 		}
 		return outputBuilder.toString();
 	}

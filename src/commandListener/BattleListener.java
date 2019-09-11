@@ -54,6 +54,7 @@ public class BattleListener {
 			//creating the switch case based on skills would be cumbersome to implement custom classes for
 			//this should operate in a similar manner
 			for(Ability spell : UIMain.player.getSkills()) {
+				System.out.println(spell.getName());
 				if(command.equalsIgnoreCase("/"+spell.getName())) {
 					isSuccessful = true;
 					//if target wasn't specific and the ability is damage
