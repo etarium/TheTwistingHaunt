@@ -1,5 +1,6 @@
 package gameplay.battle;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,28 +48,35 @@ public class BattleOrder {
 	}
 
 	public List<Entity> determineBattleOrder () {
-		UIMain.battleOrder = new LinkedList<Entity>();
+		UIMain.battleOrder = new ArrayList<Entity>();
+		ArrayList<Entity> battleDebug = new ArrayList<Entity>();
 		initialOrder = calculateAllInits();
+		boolean wasAdded = false;
 		//then check against all entities
 		for(int i=0; i < initialOrder.size(); i++) {
 			if(UIMain.battleOrder.isEmpty()) {
 				UIMain.battleOrder.add(initialOrder.get(i));
+				battleDebug.add(initialOrder.get(i));
 			} else {
-				if(initialOrder.get(i).getStats().getInit() > UIMain.battleOrder.get(i-1).getStats().getInit()) {
-					for(int j=UIMain.battleOrder.size()-1; j>-1; j--) {
-						double higherStat = initialOrder.get(i).getStats().getInit();
-						if(higherStat < UIMain.battleOrder.get(j).getStats().getInit()) {
-							if(j == UIMain.battleOrder.size()) {
-								UIMain.battleOrder.add(initialOrder.get(i));
-							} else {
-								UIMain.battleOrder.add(j+1, initialOrder.get(i));
-							}
-							break;
+				for(int j=UIMain.battleOrder.size()-1; j>-1; j--) {
+					double higherStat = initialOrder.get(i).getStats().getInit();
+					//if the current entity has higher init than already placed entity
+					//then move it ahead of the others
+					if(higherStat < UIMain.battleOrder.get(j).getStats().getInit()) {
+						if(j == UIMain.battleOrder.size()) {
+							UIMain.battleOrder.add(initialOrder.get(i));
+							battleDebug.add(initialOrder.get(i));
+						} else {
+							UIMain.battleOrder.add(j+1, initialOrder.get(i));
+							battleDebug.add(j+1, initialOrder.get(i));
 						}
+						wasAdded = true;
+						break;
 					}
+				}
+				if(!wasAdded) {
 					UIMain.battleOrder.add(0, initialOrder.get(i));
-				} else {
-					UIMain.battleOrder.add(initialOrder.get(i));
+					battleDebug.add(0, initialOrder.get(i));
 				}
 			}
 		}
