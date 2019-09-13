@@ -3,7 +3,6 @@ package tests.gameplay.battle.commandServices.utilities;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import gameplay.GamePlayConstants;
 import gameplay.commandServices.CellService;
@@ -21,7 +20,6 @@ public class TakeUtilitiesTest {
 	@Mock
 	InspectableObjects recentlyOpenedObject = new InspectableObjects();
 
-	@Mock
 	TakeUtilities utility = new TakeUtilities();
 
 	//declare reused variables
@@ -292,7 +290,7 @@ public class TakeUtilitiesTest {
 
 		//then when the only item from the cell is taken
 		utility.takeOnlyItemFromCell();
-		
+
 		//it should fail and no changes should be made.
 		//and the cell should not have changed
 		assert(UIMain.player.currentCell.getItems().size() == newItemsToAdd);
@@ -307,10 +305,10 @@ public class TakeUtilitiesTest {
 		//and given the opened object has two items
 		int originalInventorySize = UIMain.player.getInventory().size();
 		int newItemsToAdd = UIMain.player.currentCell.getItems().size();
-		
+
 		//then when the only item from the cell is taken
 		utility.takeOnlyItemFromCell();
-		
+
 		//it should fail and no changes should be made.
 		//and the cell should not have changed
 		assert(UIMain.player.currentCell.getItems().size() == newItemsToAdd);
@@ -321,16 +319,57 @@ public class TakeUtilitiesTest {
 
 	@Test
 	public void takeItemByNameFromCellSuccess() {
+		//given that the player and cell are defined
+		//and given the cell has two items
+		int originalInventorySize = UIMain.player.getInventory().size();
+		int newItemsToAdd = UIMain.player.currentCell.getItems().size();
 
+		//then when a specific item is taken
+		utility.takeItemByNameFromCell("Test Item 1");
+
+		//it should succeed and one item should be taken;
+		//the cell should have this change;
+		assert(UIMain.player.currentCell.getItems().size() == newItemsToAdd - 1);
+
+		//and the players inventory should have increased by 1
+		assert(UIMain.player.getInventory().size() == (originalInventorySize + 1));
 	}
 
 	@Test
 	public void takeItemByNameFromCellInventoryFull() {
-
+		//given that the player and cell are defined
+		//and given the cell has two items
+		int newItemsToAdd = UIMain.player.currentCell.getItems().size();
+		
+		//and the inventory is full
+		for(int i=0; i<GamePlayConstants.MAX_INVENTORY_SIZE; i++) { UIMain.player.getInventory().add(item); }
+		
+		//then when the specific item from the cell is taken
+		utility.takeItemByNameFromCell("Test Item 1");
+		
+		//it should fail and no changes should be made.
+		//and the cell should not have changed
+		assert(UIMain.player.currentCell.getItems().size() == newItemsToAdd);
+		
+		//and the players inventory should not have changed
+		assert(UIMain.player.getInventory().size() == GamePlayConstants.MAX_INVENTORY_SIZE);
 	}
 
 	@Test
 	public void takeItemByNameFromCellWrongName() {
+		//given that the player and cell are defined
+		//and given the cell has two items
+		int originalInventorySize = UIMain.player.getInventory().size();
+		int newItemsToAdd = UIMain.player.currentCell.getItems().size();
 
+		//then when a specific item is taken, but there is no item by that name
+		utility.takeItemByNameFromCell("Wrong Item Name");
+
+		//it should fail and no changes should be made.
+		//the cell should not have changed
+		assert(UIMain.player.currentCell.getItems().size() == newItemsToAdd);
+
+		//and the players inventory should not have changed
+		assert(UIMain.player.getInventory().size() == originalInventorySize);
 	}
 }
