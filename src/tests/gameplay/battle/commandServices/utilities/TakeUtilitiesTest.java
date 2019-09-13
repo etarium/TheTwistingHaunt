@@ -41,15 +41,19 @@ public class TakeUtilitiesTest {
 	@Test
 	public void takeAllItemsFromInspectableSuccess() {
 
-		//initialize the static values ahead of time
+		//given that the player and recently opened object are defined
 		UIMain.player = SetupStaticValues.setUpPlayer();
 		CellService.recentlyOpenedObject = SetupStaticValues.setUpRecentlyInspectedObject();
 		
+		//then when all items are taken
 		String output = utility.takeAllFromInspectable();
 
-		System.out.println(output);
+		//the recently opend object should be empty
 		assert(CellService.recentlyOpenedObject.getItems().isEmpty());
 
+		//and the cell should also reflect this change
+		//we know in this test there is only one inspectable item
+		assert(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().isEmpty());
 	}
 
 	@Test

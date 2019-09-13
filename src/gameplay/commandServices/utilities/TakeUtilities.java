@@ -104,6 +104,7 @@ public class TakeUtilities {
 			UIMain.cells.remove(UIMain.player.currentCell);	
 			UIMain.player.currentCell.getInspectableObjects().remove(matchedInspectable);
 			UIMain.player.currentCell.getInspectableObjects().add(matchedInspectable);
+			CellService.recentlyOpenedObject = matchedInspectable;
 			UIMain.cells.add(UIMain.player.currentCell);
 		}
 	}

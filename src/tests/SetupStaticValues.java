@@ -3,13 +3,11 @@ package tests;
 import java.util.ArrayList;
 import java.util.List;
 
-import gameplay.commandServices.CellService;
 import pojos.entity.PlayerEntity;
 import pojos.environment.Cell;
 import pojos.environment.InspectableObjects;
 import pojos.environment.Location;
 import pojos.items.Item;
-import uiView.UIMain;
 
 public class SetupStaticValues {
 
@@ -25,7 +23,6 @@ public class SetupStaticValues {
 	}
 	
 	public static Cell setUpActiveCell() {
-		List<Cell> cells = new ArrayList<Cell>();
 		Cell newCell = new Cell();
 		newCell.setLocation(new Location (0,1, 0));
 		List<InspectableObjects> listInspectables = new ArrayList<InspectableObjects>();
@@ -36,8 +33,11 @@ public class SetupStaticValues {
 	}
 	
 	public static InspectableObjects setUpRecentlyInspectedObject() {
+		item.setName("Test Item 1");
+		item2.setName("Test Item 2");
 		InspectableObjects recentlyOpenedObject = new InspectableObjects();
 		recentlyOpenedObject = new InspectableObjects();
+		recentlyOpenedObject.setName("Inspectable Object Test");
 		recentlyOpenedObject.getItems().add(item);
 		recentlyOpenedObject.getItems().add(item2);
 		
