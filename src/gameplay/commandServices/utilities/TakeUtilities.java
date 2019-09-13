@@ -121,8 +121,9 @@ public class TakeUtilities {
 		List<Item> itemsToRemove = new ArrayList<Item>();
 		for(Item item : UIMain.player.currentCell.getItems()) {
 			if(UIMain.player.getInventory().size() >= GamePlayConstants.MAX_INVENTORY_SIZE) {
-				return "Your bag is heaving with the volume of items inside. You couldn't possible take anymore!"
-						+ "\n [Use /drop to remove items from your inventory.]";
+				outputBuilder.replace(0, outputBuilder.length(), "Your bag is heaving with the volume of items inside. You couldn't possible take anymore!"
+						+ "\n [Use /drop to remove items from your inventory.]");
+				break;
 			} else {
 				UIMain.player.getInventory().add(item);
 				itemsToRemove.add(item);

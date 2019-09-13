@@ -1,8 +1,5 @@
 package tests.gameplay.battle.commandServices.utilities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -106,6 +103,7 @@ public class TakeUtilitiesTest {
 		assert(UIMain.player.getInventory().size() == (originalInventorySize  + newItemsToAdd));
 	}
 
+
 	@Test
 	public void takeOnlyItemFromInspectableInventoryFull() {
 		//given that the player and recently opened object are defined
@@ -133,6 +131,7 @@ public class TakeUtilitiesTest {
 		assert(UIMain.player.getInventory().size() == GamePlayConstants.MAX_INVENTORY_SIZE);
 
 	}
+
 
 	@Test
 	public void takeOnlyItemFromInspectableMoreThanOneItem() {
@@ -202,6 +201,7 @@ public class TakeUtilitiesTest {
 		assert(UIMain.player.getInventory().size() == GamePlayConstants.MAX_INVENTORY_SIZE);
 	}
 
+
 	@Test
 	public void takeItemByNameFromInspectableWrongName() {
 		//given that the player and recently opened object are defined
@@ -224,6 +224,7 @@ public class TakeUtilitiesTest {
 		assert(UIMain.player.getInventory().size() == originalInventorySize);
 	}
 
+	@Test
 	public void takeAllItemsFromCellSucces() {
 		//given that the player and recently opened object are defined
 		int originalInventorySize = UIMain.player.getInventory().size();
@@ -239,6 +240,7 @@ public class TakeUtilitiesTest {
 		assert(UIMain.player.getInventory().size() == (originalInventorySize  + newItemsToAdd));
 	}
 
+	@Test
 	public void takeAllItemsFromCelInventoryFull() {
 		//given that the player and recently opened object are defined
 		//and given the opened object has two items
@@ -259,26 +261,32 @@ public class TakeUtilitiesTest {
 		assert(UIMain.player.getInventory().size() == GamePlayConstants.MAX_INVENTORY_SIZE);
 	}
 
+	@Test
 	public void takeOnlyItemFromCellSuccess() {
 
 	}
 
+	@Test
 	public void takeOnlyItemFromCellInventoryFull() {
 
 	}
 
+	@Test
 	public void takeOnlyItemFromCellMorethanOneItem() {
 
 	}
 
+	@Test
 	public void takeItemByNameFromCellSuccess() {
 
 	}
 
+	@Test
 	public void takeItemByNameFromCellInventoryFull() {
 
 	}
 
+	@Test
 	public void takeItemByNameFromCellWrongName() {
 
 	}
