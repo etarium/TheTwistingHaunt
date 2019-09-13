@@ -58,6 +58,11 @@ public class PlayerListener {
 		case "/stats":
 			output = system.getPlayerStats();
 			break;
+			
+		case "/skills":
+		case "/abilities":
+			output = system.listAbilities();
+			break;
 
 		default:
 			Logs.LOGGER.info("Hit default case in commandListener.InventoryListener.listen with command " + command);

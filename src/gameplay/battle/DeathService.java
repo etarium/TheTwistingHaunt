@@ -13,6 +13,7 @@ public class DeathService {
 			}
 			if(UIMain.battleOrder.get(i).getName().equalsIgnoreCase(selectedTarget.getName())) {
 				UIMain.battleOrder.remove(i);
+				break;
 			}
 		}
 	}

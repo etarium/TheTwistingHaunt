@@ -1,5 +1,8 @@
 package utilities;
 
+import pojos.Ability;
+import uiView.UIMain;
+
 public class InputParser {
     /**
      * Parses input into an array with the format {verb},{object}. If no
@@ -23,7 +26,25 @@ public class InputParser {
         stringArray[1] = (containsSpace) ? input.substring(indexOfSpace + 1) : null;
 
         return stringArray;
-
     }
     
+    public static String[] parseMultiWordSkills(String input) {
+        String[] stringArray = new String[2];
+        int indexOfSpace = -1;
+        input = input.trim().toLowerCase();
+
+        for(Ability ability : UIMain.player.getSkills()) {
+        	if(input.contains(ability.getName().toLowerCase())) {
+        		//will be -1 if no space present
+        		indexOfSpace = ability.getName().toLowerCase().length() + 1;
+        		String inputSubstring = input.substring(indexOfSpace);
+        		boolean containsSpace = inputSubstring.contains(" ");
+
+                stringArray[0] = (containsSpace) ? input.substring(0, indexOfSpace) : input;
+                stringArray[1] = (containsSpace) ? input.substring(indexOfSpace + 1) : null;
+                return stringArray;
+        	}
+        }
+        return stringArray;
+    }
 }
