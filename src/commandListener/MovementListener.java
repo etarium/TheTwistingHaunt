@@ -1,5 +1,6 @@
 package commandListener;
 
+import gameplay.GamePlayConstants;
 import gameplay.commandServices.MovementService;
 import pojos.entity.EnemyEntity;
 import uiView.UIMain;
@@ -7,11 +8,11 @@ import utilities.Logs;
 
 public class MovementListener {
 
+	MovementService system = new MovementService();
+	
 	public Reply listen(String command) {
-		MovementService system = new MovementService();
-
+		
 		String output = "";
-		String failedMovementOutput = "You'd like to go that way, wouldn't you?";
 		String newUpperOutput = "";
 		boolean isSuccessful = true;
 
@@ -41,12 +42,12 @@ public class MovementListener {
 			String upperOutput = UIMain.player.currentCell.getDescription();
 			switch (direction) {
 			case 'n':
-
-				newUpperOutput = system.moveNorth(direction);
+				
+				newUpperOutput = system.moveNorth();
 
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
-						outputBuilder.append("You move to the north, and find yourself surrounded by ");
+						outputBuilder.append(GamePlayConstants.BATTLE_OUTPUT);
 						output = battleOutput(outputBuilder);
 					} else {
 						outputBuilder.append("You move to the north.");
@@ -55,17 +56,17 @@ public class MovementListener {
 					}
 					upperOutput = newUpperOutput;
 				} else {
-					output = failedMovementOutput;
+					output = GamePlayConstants.FAILED_MOVEMENT;
 				}
 
 				break;
 			case 's':
 
-				newUpperOutput = system.moveSouth(direction);
+				newUpperOutput = system.moveSouth();
 
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
-						outputBuilder.append("You move to the south, and find yourself surrounded by ");
+						outputBuilder.append(GamePlayConstants.BATTLE_OUTPUT);
 						output = battleOutput(outputBuilder);
 					} else {
 						outputBuilder.append("You move to the south.");
@@ -74,17 +75,17 @@ public class MovementListener {
 					}
 					upperOutput = newUpperOutput;
 				} else {
-					output = failedMovementOutput;
+					output = GamePlayConstants.FAILED_MOVEMENT;
 				}
 
 				break;
 			case 'e':
 
-				newUpperOutput = system.moveEast(direction);
+				newUpperOutput = system.moveEast();
 
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
-						outputBuilder.append("You move to the east, and find yourself surrounded by ");
+						outputBuilder.append(GamePlayConstants.BATTLE_OUTPUT);
 						output = battleOutput(outputBuilder);
 					} else {
 						outputBuilder.append("You move to the east.");
@@ -93,18 +94,18 @@ public class MovementListener {
 					}
 					upperOutput = newUpperOutput;
 				} else {
-					output = failedMovementOutput;
+					output = GamePlayConstants.FAILED_MOVEMENT;
 				}
 
 				break;
 			case 'w':
 
-				newUpperOutput = system.moveWest(direction);
+				newUpperOutput = system.moveWest();
 
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
 
-						outputBuilder.append("You move to the west, and find yourself surrounded by ");
+						outputBuilder.append(GamePlayConstants.BATTLE_OUTPUT);
 						output = battleOutput(outputBuilder);
 					} else {
 						outputBuilder.append("You move to the west.");
@@ -113,7 +114,7 @@ public class MovementListener {
 					}
 					upperOutput = newUpperOutput;
 				} else {
-				output = failedMovementOutput;
+					output = GamePlayConstants.FAILED_MOVEMENT;
 				}
 
 				break;

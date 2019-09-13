@@ -6,7 +6,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 
 import static org.mockito.Mockito.verify;
 import static org.junit.Assert.assertFalse;
@@ -299,15 +298,7 @@ public class PlayerListenerTest {
 		assertFalse(reply.isSuccess);
 
 		//and no actions on the playerservice should be taken
-		verify(service, times(0)).rest();
-		verify(service, times(0)).takeItem(null);
-		verify(service, times(0)).useItem(null);
-		verify(service, times(0)).dropItem(null);
-		verify(service, times(0)).equipItem(null);
-		verify(service, times(0)).inventory();
-		verify(service, times(0)).equipment();
-		verify(service, times(0)).getPlayerStats();
-		verify(service, times(0)).listAbilities();
+		verify(service, times(0));
 	}
 
 }
