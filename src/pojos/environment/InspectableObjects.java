@@ -1,5 +1,6 @@
 package pojos.environment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,8 +13,8 @@ public class InspectableObjects {
 
 	String name;
 	String description;
-	List<Entity> enemies;
-	List<Item> items;
+	List<Entity> enemies = new ArrayList<Entity>();
+	List<Item> items = new ArrayList<Item>();
 	boolean isLocked;
 	
 	public String getName() {

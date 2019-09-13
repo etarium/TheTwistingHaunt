@@ -17,7 +17,7 @@ public class Cell {
 	String description;
 	String terrain;
 	List<InspectableObjects> inspectableObjects;
-	List<Item> items;
+	List<Item> items = new ArrayList<Item>();
 	List<Entity> npcs;
 	List<EnemyEntity> enemies = new ArrayList<EnemyEntity>();
 	boolean isLocked;

@@ -74,6 +74,7 @@ public class DBConnector {
 		MongoCollection<Document> classCollection = database.getCollection("Classes");
 		Document classDocument = classCollection.find(eq("name", className.toString())).first();
 		try {
+			System.out.println(classDocument);
 			return mapper.readValue(classDocument.toJson(), EntityClassObject.class);
 		} catch (IOException e) {
 			Logs.LOGGER.severe("Reading Entity Class Objects has failed.");
