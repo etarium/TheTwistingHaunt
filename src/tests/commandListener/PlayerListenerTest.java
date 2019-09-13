@@ -53,7 +53,8 @@ public class PlayerListenerTest {
 		verify(service, times(0)).listAbilities();
 	}
 
-	public void takeSuccessfulCommandButInencounter() {
+	@Test
+	public void takeSuccessfulCommandButInEncounter() {
 		//given the command is correct, but the player is in battle
 		UIMain.player.setIsInEncounter(true);
 		Reply reply = listener.listen("/take", null);
@@ -72,6 +73,7 @@ public class PlayerListenerTest {
 		verify(service, times(0)).getPlayerStats();
 		verify(service, times(0)).listAbilities();
 	}
+	
 	@Test
 	public void dropSuccess() {
 		Reply reply = listener.listen("/drop", null);
@@ -91,6 +93,7 @@ public class PlayerListenerTest {
 		verify(service, times(0)).listAbilities();
 	}
 
+	@Test
 	public void dropSuccessfulCommandButInEncounter() {
 		//given the command is correct, but the player is in battle
 		UIMain.player.setIsInEncounter(true);
