@@ -72,7 +72,7 @@ public class TakeUtilities {
 		return outputBuilder.toString();
 	}
 
-	public void removeItemFromInspectableObject(Item item) {
+	private void removeItemFromInspectableObject(Item item) {
 		InspectableObjects matchedInspectable = new InspectableObjects();
 		for(InspectableObjects object : UIMain.player.currentCell.getInspectableObjects()) {
 			for(int i = 0; i < object.getItems().size(); i ++) {
@@ -91,7 +91,7 @@ public class TakeUtilities {
 		UIMain.cells.add(UIMain.player.currentCell);
 	}
 
-	public void removeItemsFromInspectableObject(List<Item> items) {
+	private void removeItemsFromInspectableObject(List<Item> items) {
 		InspectableObjects matchedInspectable = new InspectableObjects();
 		for(Item item : items) {
 			for(InspectableObjects object : UIMain.player.currentCell.getInspectableObjects()) {
@@ -174,7 +174,7 @@ public class TakeUtilities {
 		return outputBuilder.toString();
 	}
 
-	public void removeItemsFromCell(List<Item> itemsToRemove) {
+	private void removeItemsFromCell(List<Item> itemsToRemove) {
 		List<Item> itemsInCell = UIMain.player.currentCell.getItems();
 		for(Item item : itemsToRemove) {
 			for(int i = 0; i < itemsInCell.size(); i ++) {
@@ -185,7 +185,7 @@ public class TakeUtilities {
 		}
 	}
 
-	public void removeItemFromCell(Item itemToRemove) {
+	private void removeItemFromCell(Item itemToRemove) {
 		List<Item> itemsInCell = UIMain.player.currentCell.getItems();
 		for(int i = 0; i < itemsInCell.size(); i ++) {
 			if(itemToRemove.getName().equalsIgnoreCase(itemsInCell.get(i).getName())) {

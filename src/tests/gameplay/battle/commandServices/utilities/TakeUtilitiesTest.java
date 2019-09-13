@@ -1,5 +1,7 @@
 package tests.gameplay.battle.commandServices.utilities;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -24,6 +26,9 @@ public class TakeUtilitiesTest {
 
 	//declare reused variables
 	Item item = new Item();
+	Item itemAdded = new Item();
+	String queryName = "Test Item 1";
+	String wrongName = "Wrong Item Name";
 
 	@Before
 	public void setUp() {
@@ -41,14 +46,14 @@ public class TakeUtilitiesTest {
 		utility.takeAllFromInspectable();
 
 		//the recently opened object should be empty
-		assert(CellService.recentlyOpenedObject.getItems().isEmpty());
+		assertTrue(CellService.recentlyOpenedObject.getItems().isEmpty());
 
 		//and the cell should also reflect this change
 		//we know in this test there is only one inspectable item
-		assert(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().isEmpty());
+		assertTrue(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().isEmpty());
 
 		//and the players inventory should be that many items larger.
-		assert(UIMain.player.getInventory().size() == (originalInventorySize  + newItemsToAdd));
+		assertTrue(UIMain.player.getInventory().size() == (originalInventorySize  + newItemsToAdd));
 	}
 
 	@Test
@@ -65,14 +70,14 @@ public class TakeUtilitiesTest {
 		//there should be an error since the inventory is full, only one item can be taken
 
 		//and should have a size of 1
-		assert(CellService.recentlyOpenedObject.getItems().size() == newItemsToAdd - 1);
+		assertTrue(CellService.recentlyOpenedObject.getItems().size() == newItemsToAdd - 1);
 
 		//and the cell should also reflect this change
 		//we know in this test there is only one inspectable item
-		assert(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().size() == 1);
+		assertTrue(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().size() == 1);
 
 		//and the player's inventory is only one larger, and at the max size
-		assert(UIMain.player.getInventory().size() == GamePlayConstants.MAX_INVENTORY_SIZE);
+		assertTrue(UIMain.player.getInventory().size() == GamePlayConstants.MAX_INVENTORY_SIZE);
 
 	}
 
@@ -82,6 +87,12 @@ public class TakeUtilitiesTest {
 		//removing the second item from the original init
 		CellService.recentlyOpenedObject.getItems().remove(1);
 		UIMain.player.currentCell.getInspectableObjects().get(0).getItems().remove(1);
+		for(Item item : UIMain.player.currentCell.getInspectableObjects().get(0).getItems()) {
+			if(item.getName() == queryName) {
+				itemAdded = item;
+				break;
+			}
+		}
 
 		//given that the player and recently opened object are defined
 		int originalInventorySize = UIMain.player.getInventory().size();
@@ -91,14 +102,17 @@ public class TakeUtilitiesTest {
 		utility.takeOnlyItemFromInspectable();
 
 		//the recently opened object should be empty
-		assert(CellService.recentlyOpenedObject.getItems().isEmpty());
+		assertTrue(CellService.recentlyOpenedObject.getItems().isEmpty());
 
 		//and the cell should also reflect this change
 		//we know in this test there is only one inspectable item
-		assert(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().isEmpty());
+		assertTrue(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().isEmpty());
 
 		//and the players inventory should be that many items larger.
-		assert(UIMain.player.getInventory().size() == (originalInventorySize  + newItemsToAdd));
+		assertTrue(UIMain.player.getInventory().size() == (originalInventorySize  + newItemsToAdd));
+
+		//and the inventory should contain the item queried for
+		assertTrue(UIMain.player.getInventory().contains(itemAdded));
 	}
 
 
@@ -119,14 +133,14 @@ public class TakeUtilitiesTest {
 
 		//it should fail and no changes should be made.
 		//the recently opened object should not have changed
-		assert(CellService.recentlyOpenedObject.getItems().size() == 1);
+		assertTrue(CellService.recentlyOpenedObject.getItems().size() == 1);
 
 		//and the cell should also not be changed
 		//we know in this test there is only one inspectable item
-		assert(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().size() == 1);
+		assertTrue(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().size() == 1);
 
 		//and the players inventory should not have changed
-		assert(UIMain.player.getInventory().size() == GamePlayConstants.MAX_INVENTORY_SIZE);
+		assertTrue(UIMain.player.getInventory().size() == GamePlayConstants.MAX_INVENTORY_SIZE);
 
 	}
 
@@ -143,14 +157,14 @@ public class TakeUtilitiesTest {
 
 		//it should fail and no changes should be made.
 		//the recently opened object should not have changed
-		assert(CellService.recentlyOpenedObject.getItems().size() == newItemsToAdd);
+		assertTrue(CellService.recentlyOpenedObject.getItems().size() == newItemsToAdd);
 
 		//and the cell should also not be changed
 		//we know in this test there is only one inspectable item
-		assert(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().size() == newItemsToAdd);
+		assertTrue(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().size() == newItemsToAdd);
 
 		//and the players inventory should not have changed
-		assert(UIMain.player.getInventory().size() == (originalInventorySize));
+		assertTrue(UIMain.player.getInventory().size() == (originalInventorySize));
 	}
 
 	@Test
@@ -160,19 +174,28 @@ public class TakeUtilitiesTest {
 		int originalInventorySize = UIMain.player.getInventory().size();
 		int newItemsToAdd = CellService.recentlyOpenedObject.getItems().size();
 
+		for(Item item : UIMain.player.currentCell.getItems()) {
+			if(item.getName() == queryName) {
+				itemAdded = item;
+				break;
+			}
+		}
 		//then when a specific item is taken
-		utility.takeItemByNameFromInspectable("Test Item 1");
+		utility.takeItemByNameFromInspectable(queryName);
 
 		//it should succeed and one item should be taken;
 		//the recently opened object should also have this change;
-		assert(CellService.recentlyOpenedObject.getItems().size() == newItemsToAdd - 1);
+		assertTrue(CellService.recentlyOpenedObject.getItems().size() == newItemsToAdd - 1);
 
 		//and the cell should also be changed
 		//we know in this test there is only one inspectable item
-		assert(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().size() == newItemsToAdd -1);
+		assertTrue(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().size() == newItemsToAdd -1);
 
 		//and the players inventory should have increased by 1
-		assert(UIMain.player.getInventory().size() == (originalInventorySize + 1));
+		assertTrue(UIMain.player.getInventory().size() == (originalInventorySize + 1));
+
+		//and the inventory should contain the item queried for
+		assertTrue(UIMain.player.getInventory().contains(itemAdded));
 	}
 
 	@Test
@@ -185,18 +208,18 @@ public class TakeUtilitiesTest {
 		for(int i=0; i<GamePlayConstants.MAX_INVENTORY_SIZE; i++) { UIMain.player.getInventory().add(item); }
 
 		//then when a specific item is taken
-		utility.takeItemByNameFromInspectable("Test Item 1");
+		utility.takeItemByNameFromInspectable(queryName);
 
 		//it should fail and no changes should be made.
 		//the recently opened object should not have changed
-		assert(CellService.recentlyOpenedObject.getItems().size() == newItemsToAdd);
+		assertTrue(CellService.recentlyOpenedObject.getItems().size() == newItemsToAdd);
 
 		//and the cell should also not be changed
 		//we know in this test there is only one inspectable item
-		assert(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().size() == newItemsToAdd);
+		assertTrue(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().size() == newItemsToAdd);
 
 		//and the players inventory should not have changed
-		assert(UIMain.player.getInventory().size() == GamePlayConstants.MAX_INVENTORY_SIZE);
+		assertTrue(UIMain.player.getInventory().size() == GamePlayConstants.MAX_INVENTORY_SIZE);
 	}
 
 
@@ -208,18 +231,18 @@ public class TakeUtilitiesTest {
 		int newItemsToAdd = CellService.recentlyOpenedObject.getItems().size();
 
 		//then when a specific item is taken, but there is no item by that name
-		utility.takeItemByNameFromInspectable("Wrong Item Name");
+		utility.takeItemByNameFromInspectable(wrongName);
 
 		//it should fail and no changes should be made.
 		//the recently opened object should not have changed
-		assert(CellService.recentlyOpenedObject.getItems().size() == newItemsToAdd);
+		assertTrue(CellService.recentlyOpenedObject.getItems().size() == newItemsToAdd);
 
 		//and the cell should also not be changed
 		//we know in this test there is only one inspectable item
-		assert(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().size() == newItemsToAdd);
+		assertTrue(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().size() == newItemsToAdd);
 
 		//and the players inventory should not have changed
-		assert(UIMain.player.getInventory().size() == originalInventorySize);
+		assertTrue(UIMain.player.getInventory().size() == originalInventorySize);
 	}
 
 	@Test
@@ -232,10 +255,10 @@ public class TakeUtilitiesTest {
 
 		// cell should also reflect this change
 		//we know in this test there is only one inspectable item
-		assert(UIMain.player.currentCell.getItems().isEmpty());
+		assertTrue(UIMain.player.currentCell.getItems().isEmpty());
 
 		//and the players inventory should be that many items larger.
-		assert(UIMain.player.getInventory().size() == (originalInventorySize  + newItemsToAdd));
+		assertTrue(UIMain.player.getInventory().size() == (originalInventorySize  + newItemsToAdd));
 	}
 
 	@Test
@@ -252,10 +275,10 @@ public class TakeUtilitiesTest {
 
 		//there should be an error since the inventory is full, only one item can be taken
 		//and the cell should also reflect this change
-		assert(UIMain.player.currentCell.getItems().size() == newItemsToAdd - 1);
+		assertTrue(UIMain.player.currentCell.getItems().size() == newItemsToAdd - 1);
 
 		//and the player's inventory is only one larger, and at the max size
-		assert(UIMain.player.getInventory().size() == GamePlayConstants.MAX_INVENTORY_SIZE);
+		assertTrue(UIMain.player.getInventory().size() == GamePlayConstants.MAX_INVENTORY_SIZE);
 	}
 
 	@Test
@@ -271,10 +294,11 @@ public class TakeUtilitiesTest {
 		utility.takeOnlyItemFromCell();
 
 		//and the cell should be empty
-		assert(UIMain.player.currentCell.getItems().isEmpty());
+		assertTrue(UIMain.player.currentCell.getItems().isEmpty());
 
 		//and the players inventory should be that many items larger.
-		assert(UIMain.player.getInventory().size() == (originalInventorySize  + newItemsToAdd));
+		assertTrue(UIMain.player.getInventory().size() == (originalInventorySize  + newItemsToAdd));
+
 	}
 
 	@Test
@@ -293,10 +317,10 @@ public class TakeUtilitiesTest {
 
 		//it should fail and no changes should be made.
 		//and the cell should not have changed
-		assert(UIMain.player.currentCell.getItems().size() == newItemsToAdd);
+		assertTrue(UIMain.player.currentCell.getItems().size() == newItemsToAdd);
 
 		//and the players inventory should be at max size
-		assert(UIMain.player.getInventory().size() == GamePlayConstants.MAX_INVENTORY_SIZE);
+		assertTrue(UIMain.player.getInventory().size() == GamePlayConstants.MAX_INVENTORY_SIZE);
 	}
 
 	@Test
@@ -311,10 +335,11 @@ public class TakeUtilitiesTest {
 
 		//it should fail and no changes should be made.
 		//and the cell should not have changed
-		assert(UIMain.player.currentCell.getItems().size() == newItemsToAdd);
+		assertTrue(UIMain.player.currentCell.getItems().size() == newItemsToAdd);
 
 		//and the players inventory should not have changed
-		assert(UIMain.player.getInventory().size() == (originalInventorySize));
+		assertTrue(UIMain.player.getInventory().size() == (originalInventorySize));
+
 	}
 
 	@Test
@@ -323,16 +348,25 @@ public class TakeUtilitiesTest {
 		//and given the cell has two items
 		int originalInventorySize = UIMain.player.getInventory().size();
 		int newItemsToAdd = UIMain.player.currentCell.getItems().size();
+		for(Item item : UIMain.player.currentCell.getItems()) {
+			if(item.getName() == queryName) {
+				itemAdded = item;
+				break;
+			}
+		}
 
 		//then when a specific item is taken
-		utility.takeItemByNameFromCell("Test Item 1");
+		utility.takeItemByNameFromCell(queryName);
 
 		//it should succeed and one item should be taken;
 		//the cell should have this change;
-		assert(UIMain.player.currentCell.getItems().size() == newItemsToAdd - 1);
+		assertTrue(UIMain.player.currentCell.getItems().size() == newItemsToAdd - 1);
 
 		//and the players inventory should have increased by 1
-		assert(UIMain.player.getInventory().size() == (originalInventorySize + 1));
+		assertTrue(UIMain.player.getInventory().size() == (originalInventorySize + 1));
+
+		//and the inventory should contain the item queried for
+		assertTrue(UIMain.player.getInventory().contains(itemAdded));
 	}
 
 	@Test
@@ -340,19 +374,28 @@ public class TakeUtilitiesTest {
 		//given that the player and cell are defined
 		//and given the cell has two items
 		int newItemsToAdd = UIMain.player.currentCell.getItems().size();
-		
+		for(Item item : UIMain.player.currentCell.getItems()) {
+			if(item.getName() == queryName) {
+				itemAdded = item;
+				break;
+			}
+		}
+
 		//and the inventory is full
 		for(int i=0; i<GamePlayConstants.MAX_INVENTORY_SIZE; i++) { UIMain.player.getInventory().add(item); }
-		
+
 		//then when the specific item from the cell is taken
-		utility.takeItemByNameFromCell("Test Item 1");
-		
+		utility.takeItemByNameFromCell(queryName);
+
 		//it should fail and no changes should be made.
 		//and the cell should not have changed
-		assert(UIMain.player.currentCell.getItems().size() == newItemsToAdd);
-		
+		assertTrue(UIMain.player.currentCell.getItems().size() == newItemsToAdd);
+
 		//and the players inventory should not have changed
-		assert(UIMain.player.getInventory().size() == GamePlayConstants.MAX_INVENTORY_SIZE);
+		assertTrue(UIMain.player.getInventory().size() == GamePlayConstants.MAX_INVENTORY_SIZE);
+
+		//and the inventory should not contain the item queried for
+		assertTrue(!UIMain.player.getInventory().contains(itemAdded));
 	}
 
 	@Test
@@ -363,13 +406,13 @@ public class TakeUtilitiesTest {
 		int newItemsToAdd = UIMain.player.currentCell.getItems().size();
 
 		//then when a specific item is taken, but there is no item by that name
-		utility.takeItemByNameFromCell("Wrong Item Name");
+		utility.takeItemByNameFromCell(wrongName);
 
 		//it should fail and no changes should be made.
 		//the cell should not have changed
-		assert(UIMain.player.currentCell.getItems().size() == newItemsToAdd);
+		assertTrue(UIMain.player.currentCell.getItems().size() == newItemsToAdd);
 
 		//and the players inventory should not have changed
-		assert(UIMain.player.getInventory().size() == originalInventorySize);
+		assertTrue(UIMain.player.getInventory().size() == originalInventorySize);
 	}
 }
