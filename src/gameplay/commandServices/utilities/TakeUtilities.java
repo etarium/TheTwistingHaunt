@@ -20,7 +20,7 @@ public class TakeUtilities {
 		for(Item item : CellService.recentlyOpenedObject.getItems()) {
 			if(UIMain.player.getInventory().size() >= GamePlayConstants.MAX_INVENTORY_SIZE) {
 				outputBuilder.replace(0, outputBuilder.length(), "Your bag is heaving with the volume of items inside. You couldn't possible take anymore!"
-				+ "\n [Use /drop to remove items from your inventory.]");
+						+ "\n [Use /drop to remove items from your inventory.]");
 				break;
 			} else {
 				UIMain.player.getInventory().add(item);
@@ -76,7 +76,7 @@ public class TakeUtilities {
 					//to avoid concurrency errors, first add any matching items to a new list
 					matchedInspectable = object;
 					matchedInspectable.getItems().remove(i);
-					object.getItems().remove(i);
+					CellService.recentlyOpenedObject.getItems().remove(i);
 				}
 			}
 		}
@@ -100,7 +100,7 @@ public class TakeUtilities {
 				}
 			}
 			//then replace the current inspectable with the new set
-			
+
 			UIMain.cells.remove(UIMain.player.currentCell);	
 			UIMain.player.currentCell.getInspectableObjects().remove(matchedInspectable);
 			UIMain.player.currentCell.getInspectableObjects().add(matchedInspectable);
