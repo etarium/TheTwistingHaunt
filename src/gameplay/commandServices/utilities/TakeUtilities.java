@@ -138,10 +138,15 @@ public class TakeUtilities {
 		//no parameter but only one item
 		StringBuilder outputBuilder = new StringBuilder();
 		if(UIMain.player.currentCell.getItems() != null && UIMain.player.currentCell.getItems().size() == 1) {
-			UIMain.player.getInventory().add(UIMain.player.currentCell.getItems().get(0));
-			outputBuilder.append("You take the " + UIMain.player.currentCell.getItems().get(0).getName());
-			//then remove the item from the cell / instance
-			removeItemFromInspectableObject(UIMain.player.currentCell.getItems().get(0));
+			if(UIMain.player.getInventory().size() >= GamePlayConstants.MAX_INVENTORY_SIZE) {
+				return "Your bag is heaving with the volume of items inside. You couldn't possible take anymore!"
+						+ "\n [Use /drop to remove items from your inventory.]";
+			} else {
+				UIMain.player.getInventory().add(UIMain.player.currentCell.getItems().get(0));
+				outputBuilder.append("You take the " + UIMain.player.currentCell.getItems().get(0).getName());
+				//then remove the item from the cell / instance
+				removeItemFromCell(UIMain.player.currentCell.getItems().get(0));
+			}
 		} else {
 			outputBuilder.append("I'm not sure what you were expecting to take..."
 					+ "\n [Use /take all for every item, or be more specific.]");
