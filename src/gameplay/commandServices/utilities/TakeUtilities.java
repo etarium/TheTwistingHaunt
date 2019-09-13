@@ -19,7 +19,7 @@ public class TakeUtilities {
 		List<Item> itemsToRemove = new ArrayList<Item>();
 		for(Item item : CellService.recentlyOpenedObject.getItems()) {
 			if(UIMain.player.getInventory().size() >= GamePlayConstants.MAX_INVENTORY_SIZE) {
-				outputBuilder.replace(0, outputBuilder.length(), "Your bag is heaving with the volume of items inside. You couldn't possible take anymore!"
+				outputBuilder.replace(0, outputBuilder.length(), "Your bag is heaving with the volume of items inside. You couldn't possibly take anymore!"
 						+ "\n [Use /drop to remove items from your inventory.]");
 				break;
 			} else {
@@ -37,7 +37,7 @@ public class TakeUtilities {
 		StringBuilder outputBuilder = new StringBuilder();
 		if(CellService.recentlyOpenedObject.getItems() != null && CellService.recentlyOpenedObject.getItems().size() == 1) {
 			if(UIMain.player.getInventory().size() >= GamePlayConstants.MAX_INVENTORY_SIZE) {
-				return "Your bag is heaving with the volume of items inside. You couldn't possible take anymore!"
+				return "Your bag is heaving with the volume of items inside. You couldn't possibly take anymore!"
 						+ "\n [Use /drop to remove items from your inventory.]";
 			} else {
 				UIMain.player.getInventory().add(CellService.recentlyOpenedObject.getItems().get(0));
@@ -55,7 +55,7 @@ public class TakeUtilities {
 	public String takeItemByNameFromInspectable(String param) {
 		StringBuilder outputBuilder = new StringBuilder();
 		if(UIMain.player.getInventory().size() >= GamePlayConstants.MAX_INVENTORY_SIZE) {
-			return "Your bag is heaving with the volume of items inside. You couldn't possible take anymore!"
+			return "Your bag is heaving with the volume of items inside. You couldn't possibly take anymore!"
 					+ "\n [Use /drop to remove items from your inventory.]";
 		} else {
 			for(Item item : CellService.recentlyOpenedObject.getItems()) {
