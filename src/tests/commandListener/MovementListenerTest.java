@@ -17,6 +17,7 @@ import commandListener.Reply;
 import gameplay.GamePlayConstants;
 import gameplay.commandServices.MovementService;
 import pojos.environment.Cell;
+import pojos.environment.Location;
 import tests.SetupStaticValues;
 import uiView.UIMain;
 
@@ -27,12 +28,13 @@ public class MovementListenerTest {
 
 	@InjectMocks
 	MovementListener listener = new MovementListener();
+	
+	Location originalLocation = new Location(0,1,0);
 
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 		UIMain.cells = SetupStaticValues.setUpCells();
-
 		UIMain.player = SetupStaticValues.setUpPlayer();
 
 	}
@@ -100,8 +102,6 @@ public class MovementListenerTest {
 		Mockito.when(service.moveNorth()).thenReturn(UIMain.player.currentCell.getDescription());
 		Reply reply = listener.listen("/n");
 
-		System.out.println(reply.output);
-		System.out.println(reply.upperOutput);
 		//the call should succeed
 		assertTrue(reply.isSuccess);
 
@@ -178,8 +178,6 @@ public class MovementListenerTest {
 		Mockito.when(service.moveSouth()).thenReturn(UIMain.player.currentCell.getDescription());
 		Reply reply = listener.listen("/s");
 
-		System.out.println(reply.output);
-		System.out.println(reply.upperOutput);
 		//the call should succeed
 		assertTrue(reply.isSuccess);
 
@@ -256,8 +254,6 @@ public class MovementListenerTest {
 		Mockito.when(service.moveEast()).thenReturn(UIMain.player.currentCell.getDescription());
 		Reply reply = listener.listen("/e");
 
-		System.out.println(reply.output);
-		System.out.println(reply.upperOutput);
 		//the call should succeed
 		assertTrue(reply.isSuccess);
 
@@ -311,6 +307,7 @@ public class MovementListenerTest {
 		}
 		Mockito.doCallRealMethod().when(service).moveWest();
 
+		System.out.println(originalLocation);
 		Reply reply = listener.listen("/w");
 
 		//the call should succeed
@@ -335,8 +332,6 @@ public class MovementListenerTest {
 		Mockito.when(service.moveWest()).thenReturn(UIMain.player.currentCell.getDescription());
 		Reply reply = listener.listen("/w");
 
-		System.out.println(reply.output);
-		System.out.println(reply.upperOutput);
 		//the call should succeed
 		assertTrue(reply.isSuccess);
 
