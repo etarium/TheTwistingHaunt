@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.verify;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.times;
@@ -17,12 +18,8 @@ import commandListener.SystemListener;
 import gameplay.commandServices.GameService;
 import tests.SetupStaticValues;
 import uiView.UIMain;
-import uiView.classes.HelpWin;
 
 public class SystemListenerTest {
-	
-	@Mock
-	HelpWin win = new HelpWin();
 	
 	@Mock
 	GameService service = Mockito.mock(GameService.class);
@@ -40,9 +37,10 @@ public class SystemListenerTest {
 	@Test
 	public void helpWindow() {
 		
-		Reply reply = listener.listen("/save", service,  null);
+		Reply reply = listener.listen("/help", service,  null);
 		
 		assertTrue(reply.isSuccess);
+		assertEquals(reply.output, "Your cries for help go answered, and text appears before your eyes.");
 	}
 	
 	@Test
