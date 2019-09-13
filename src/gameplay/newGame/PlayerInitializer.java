@@ -2,6 +2,7 @@ package gameplay.newGame;
 
 import db.api.DbAPI;
 import gameplay.StatModMethods.PlayerStatMethods;
+import pojos.Ability;
 import pojos.entity.PlayerEntity;
 import pojos.environment.Cell;
 import uiView.UIMain;
@@ -32,6 +33,9 @@ public class PlayerInitializer {
 						UIMain.player.setCurrentCell(cell);
 						break;
 				}
+			}
+			for(Ability ability : payload.getClassName().getSkills()) {
+				UIMain.player.getSkills().add(ability);
 			}
 			UIMain.player.setLevel(1);
 			UIMain.player.setXp(0);

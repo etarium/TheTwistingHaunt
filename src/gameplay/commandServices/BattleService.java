@@ -3,11 +3,12 @@ package gameplay.commandServices;
 import java.util.ArrayList;
 import java.util.List;
 
-import gameplay.StatModMethods.BattleStatMethods;
-import gameplay.battle.CheckStatuses;
-import gameplay.battle.DeathService;
-import gameplay.battle.VictoryService;
+import gameplay.StatModMethods.BattleEnemyStatMethods;
+import gameplay.StatModMethods.BattlePlayerStatMethods;
+import gameplay.battle.PhysicalService;
+import gameplay.battle.SpellService;
 import pojos.Ability;
+import pojos.ability.enums.AbilityType;
 import pojos.entity.EnemyEntity;
 import pojos.entity.Entity;
 import uiView.UIMain;
@@ -36,7 +37,7 @@ public class BattleService {
 
 		for(Entity activeEntity : UIMain.battleOrder) {
 			if(activeEntity.equals(UIMain.player)) {
-				outputBuilder.append(playerPhysAttack(selectedTarget));
+				outputBuilder.append(PhysicalService.playerPhysAttack(selectedTarget));
 			} else {
 				if(!UIMain.player.isInEncounter) {
 					break;
@@ -44,6 +45,7 @@ public class BattleService {
 					outputBuilder.append(enemyAttack((EnemyEntity) activeEntity));
 				}
 			}
+			outputBuilder.append("\n**********\n");
 		}
 		outputBuilder.append(formatBattleOutput());
 		return outputBuilder.toString();
@@ -51,11 +53,83 @@ public class BattleService {
 
 	public String spAttack(Ability spell, String target) {
 		//TODO
-		return "";
+		StringBuilder outputBuilder = new StringBuilder();
+		EnemyEntity selectedTarget = findEnemy(target);
+
+		if(selectedTarget == null && ( spell.getType().equals(AbilityType.DAMAGE) 
+				|| spell.getType().equals(AbilityType.DEBUFF) 
+				|| spell.getType().equals(AbilityType.DRAIN))) {
+			output = "\nSwinging wildly, you charge after a figment of your imagination. Stopping at the last second, "
+					+ "you realize that there doesn't seem to be any enemies called that.\n"
+					+ "[try again, or type '/help' for battle assistance]\n";
+
+			Logs.LOGGER.info("Target could not be found during spell attack \n" +
+					"target: " + target + ", battle: " + UIMain.battleOrder);
+
+			return output;
+		}
+
+		for(Entity activeEntity : UIMain.battleOrder) {
+			if(activeEntity.equals(UIMain.player)) {
+				outputBuilder.append(spAtk(spell, selectedTarget));
+			} else {
+				if(!UIMain.player.isInEncounter) {
+					break;
+				} else {
+					outputBuilder.append(enemyAttack((EnemyEntity) activeEntity));
+				}
+			}
+			outputBuilder.append("\n**********\n");
+		}
+		outputBuilder.append(formatBattleOutput());
+		return outputBuilder.toString();
+	}
+
+	public String spSupport(Ability spell) {
+		StringBuilder outputBuilder = new StringBuilder();
+		//TODO
+		//add support for party members.
+		//all support skills are currently used on the player.
+
+		//if the target is the player
+		//determine type of spell being used for the appropriate method
+		for(Entity activeEntity : UIMain.battleOrder) {
+			if(activeEntity.equals(UIMain.player)) {
+				if (spell.getType().equals(AbilityType.HEAL)) {
+					outputBuilder.append(SpellService.useHealSpell(spell));
+				} else if(spell.getType().equals(AbilityType.BUFF)) {
+					outputBuilder.append(SpellService.useBuffSpell(spell));
+				}
+			} else {
+				if(!UIMain.player.isInEncounter) {
+					break;
+				} else {
+					outputBuilder.append(enemyAttack((EnemyEntity) activeEntity));
+				}
+			}
+			outputBuilder.append("\n**********\n");
+		}
+		outputBuilder.append(formatBattleOutput());
+		return outputBuilder.toString();
+	}
+
+	public String spAtk(Ability spell, EnemyEntity selectedTarget) {
+		StringBuilder outputBuilder = new StringBuilder();
+		if(spell.getType().equals(AbilityType.DAMAGE)) {
+			outputBuilder.append(SpellService.useDamageSpell(spell, (EnemyEntity) selectedTarget));
+
+		} else if(spell.getType().equals(AbilityType.DEBUFF)) {
+			//TODO
+			outputBuilder.append(SpellService.useDeBuffSpell(spell, (EnemyEntity) selectedTarget));
+		} else if(spell.getType().equals(AbilityType.DRAIN)) {
+			//TODO
+			outputBuilder.append(SpellService.useDrainSpell(spell, (EnemyEntity) selectedTarget));
+		}
+
+		return outputBuilder.toString();
 	}
 
 	public String inspectEnemy(String target) {
-		//TODO
 		EnemyEntity selectedTarget = findEnemy(target);
 		if(selectedTarget == null) {
 			return "You squinted at the enemies before you, unable to focus on any foe in particular."
@@ -77,49 +151,14 @@ public class BattleService {
 		return null;
 	}
 
-	private String defeatedEnemy(EnemyEntity selectedTarget) {
-		DeathService.removeEnemy(selectedTarget);
-		if(VictoryService.isVictory()) {
-			output = VictoryService.victory();
-		} else {
-			output = "\nThe " + selectedTarget.getName() + "let out a horrible scream.\n"
-					+ "Great Job! Only " + UIMain.player.currentCell.getEnemies().size() + " remaining!\n";
-		}
-		return output;
-	}
-
 	private String enemyAttack(EnemyEntity enemy) {
 		//TODO: make it smart enough to use skills instead of just physical attacks
-		int totalDamage = (int) ( BattleStatMethods.calculateEnemyPhysDamage(enemy) - BattleStatMethods.calculatePlayerPhysDefense());
-		if(BattleStatMethods.calculateEnemyHitRate(enemy)) {
+		int totalDamage = (int) ( BattleEnemyStatMethods.calculateEnemyPhysDamage(enemy) - BattlePlayerStatMethods.calculatePlayerPhysDefense());
+		if(BattleEnemyStatMethods.calculateEnemyHitRate(enemy)) {
 			UIMain.player.getStats().setCurrentHP(UIMain.player.getStats().getCurrentHP() - totalDamage);
 			output = "\nThe " + enemy.getName() + " lashes out, inflicting " + totalDamage + " damage!\n";
 		} else {
 			output = "\n The " + enemy.getName() + " stumbles, missing its target.\n";
-		}
-		return output;
-	}
-
-	private String playerPhysAttack(EnemyEntity selectedTarget) {
-
-		int total = (int) (BattleStatMethods.calculatePlayerPhysDamage() - BattleStatMethods.calculateEnemyPhysDefense(selectedTarget));
-
-		if(BattleStatMethods.calculatePlayerHitRate(selectedTarget)) {
-			selectedTarget.getStats().setCurrentHP(selectedTarget.getStats().getCurrentHP() - total);
-			if(selectedTarget.getStats().getCurrentHP() < 0) {
-				selectedTarget.getStats().setCurrentHP(0);
-			}
-
-			if(!CheckStatuses.isEnemyDead(selectedTarget)) {
-				output = "\nYou attack " + selectedTarget.getName() + ", and with a stunning blow deal " + total + " damage. \n"
-						+ "Nice work, hero! \n";
-			} else {
-				VictoryService.trackXP(selectedTarget.getXp(), selectedTarget.getLevel());
-				output = "\nYou attack " + selectedTarget.getName() + ", and with a stunning blow deal " + total + " damage. \n" + defeatedEnemy(selectedTarget);
-			}
-		} else {
-			output = "\nYou lunge toward " + selectedTarget.getName() + ", but you were sidestepped and missed completely.\n"
-					+ "Big bummer, hero. \n";
 		}
 		return output;
 	}
@@ -147,7 +186,14 @@ public class BattleService {
 				+ " | " + UIMain.player.getStats().getHp()));
 		for(int i = 0; i<printedList.size(); i++) {
 			outputBuilder.append(String.format("%15s",   "HP: " +
-					UIMain.battleOrder.get(i).getStats().getCurrentHP() + " |" + UIMain.battleOrder.get(i).getStats().getHp()));
+					UIMain.battleOrder.get(i).getStats().getCurrentHP() + " | " + UIMain.battleOrder.get(i).getStats().getHp()));
+		}
+		outputBuilder.append("\n");
+		outputBuilder.append(String.format("%-5s",   "SP: " +
+				UIMain.player.getStats().getCurrentSP() + " | " + UIMain.player.getStats().getSp()));
+		for(int i = 0; i<printedList.size(); i++) {
+			outputBuilder.append(String.format("%15s",   "SP: " +
+					UIMain.battleOrder.get(i).getStats().getCurrentSP() + " | " + UIMain.battleOrder.get(i).getStats().getSp()));
 		}
 		return outputBuilder.toString();
 	}

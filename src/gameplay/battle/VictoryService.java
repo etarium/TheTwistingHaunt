@@ -1,6 +1,7 @@
 package gameplay.battle;
 
 import gameplay.commandServices.PlayerService;
+import pojos.entity.EnemyEntity;
 import uiView.UIMain;
 
 public class VictoryService {
@@ -72,4 +73,15 @@ public class VictoryService {
 		return remainingXP;
 	}
 
+	public static String defeatedEnemy(EnemyEntity selectedTarget) {
+		String output = "";
+		DeathService.removeEnemy(selectedTarget);
+		if(VictoryService.isVictory()) {
+			output = VictoryService.victory();
+		} else {
+			output = "\nThe " + selectedTarget.getName() + " let out a horrible scream.\n"
+					+ "Great Job! Only " + UIMain.player.currentCell.getEnemies().size() + " remaining!\n";
+		}
+		return output;
+	}
 }

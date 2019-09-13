@@ -2,6 +2,7 @@ package pojos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import pojos.ability.enums.AbilityType;
 import pojos.enums.Attribute;
 
 @JsonIgnoreProperties
@@ -10,15 +11,14 @@ public class Ability {
 	String name;
 	String description;
 	Attribute attribute;
+	AbilityType type;
+	Statblock stats;
 	int hpCost;
 	int spCost;
-	int accuracy;
 	int duration;
 	int numOfTargets;
 	int minLevel;
-	int damage;
-	int healing;
-	
+
 	public String getName() {
 		return name;
 	}
@@ -49,12 +49,6 @@ public class Ability {
 	public void setSpCost(int spCost) {
 		this.spCost = spCost;
 	}
-	public int getAccuracy() {
-		return accuracy;
-	}
-	public void setAccuracy(int accuracy) {
-		this.accuracy = accuracy;
-	}
 	public int getDuration() {
 		return duration;
 	}
@@ -73,25 +67,22 @@ public class Ability {
 	public void setMinLevel(int minLevel) {
 		this.minLevel = minLevel;
 	}
-	public int getDamage() {
-		return damage;
+	public AbilityType getType() {
+		return type;
 	}
-	public void setDamage(int damage) {
-		this.damage = damage;
+	public void setType(AbilityType type) {
+		this.type = type;
 	}
-	public int getHealing() {
-		return healing;
+	public Statblock getStats() {
+		return stats;
 	}
-	public void setHealing(int healing) {
-		this.healing = healing;
+	public void setStats(Statblock stats) {
+		this.stats = stats;
 	}
-	
 	@Override
 	public String toString() {
-		return "Skill [name=" + name + ", description=" + description + ", attribute=" + attribute + ", hpCost="
-				+ hpCost + ", spCost=" + spCost + ", accuracy=" + accuracy + ", duration=" + duration
-				+ ", numOfTargets=" + numOfTargets + ", minLevel=" + minLevel + ", damage=" + damage + ", healing="
-				+ healing + "]";
+		return "Ability [name=" + name + ", description=" + description + ", attribute=" + attribute + ", type=" + type
+				+ ", stats=" + stats + ", hpCost=" + hpCost + ", spCost=" + spCost + ", duration=" + duration
+				+ ", numOfTargets=" + numOfTargets + ", minLevel=" + minLevel + "]";
 	}
-	
 }

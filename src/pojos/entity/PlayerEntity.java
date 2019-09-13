@@ -1,11 +1,11 @@
 package pojos.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import pojos.Quest;
 import pojos.Ability;
-import pojos.Statblock;
 import pojos.entity.enums.Faction;
 import pojos.environment.Cell;
 import pojos.environment.Location;
@@ -19,12 +19,12 @@ public class PlayerEntity extends Entity{
 	EntityClassObject entityClass;
 	SpeciesObject speciesObject = new SpeciesObject();
 	int numOfHands;
-	List<ArmorMaterial> armorType;
-	List<WeaponType> weaponType;
-	List<Ability> skills;
-	List<Quest> quests;
-	List<ArmorItem> equippedArmor;
-	List<WeaponItem> equippedWeapons;
+	List<ArmorMaterial> armorType = new ArrayList<ArmorMaterial>();
+	List<WeaponType> weaponType = new ArrayList<WeaponType>();
+	List<Ability> skills = new ArrayList<Ability>();
+	List<Quest> quests = new ArrayList<Quest>();
+	List<ArmorItem> equippedArmor = new ArrayList<ArmorItem>();
+	List<WeaponItem> equippedWeapons = new ArrayList<WeaponItem>();
 	Map<Faction, Integer> factionLevel;
 	int xp;
 	int xpToNextLevel;
