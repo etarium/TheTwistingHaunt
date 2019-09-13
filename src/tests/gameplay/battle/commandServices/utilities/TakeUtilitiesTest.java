@@ -45,7 +45,7 @@ public class TakeUtilitiesTest {
 		//then when all items are taken
 		utility.takeAllFromInspectable();
 
-		//the recently opend object should be empty
+		//the recently opened object should be empty
 		assert(CellService.recentlyOpenedObject.getItems().isEmpty());
 
 		//and the cell should also reflect this change
@@ -102,7 +102,7 @@ public class TakeUtilitiesTest {
 		utility.takeOnlyItemFromInspectable();
 
 		//it should fail and no changes should be made.
-		//the recently opend object should not have changed
+		//the recently opened object should not have changed
 		assert(CellService.recentlyOpenedObject.getItems().size() == 1);
 
 		//and the cell should also not be changed
@@ -125,7 +125,7 @@ public class TakeUtilitiesTest {
 		utility.takeOnlyItemFromInspectable();
 
 		//it should fail and no changes should be made.
-		//the recently opend object should not have changed
+		//the recently opened object should not have changed
 		assert(CellService.recentlyOpenedObject.getItems().size() == newItemsToAdd);
 
 		//and the cell should also not be changed
@@ -146,15 +146,15 @@ public class TakeUtilitiesTest {
 		//then when a specific item is taken
 		utility.takeItemByNameFromInspectable("Test Item 1");
 
-		//it should fail and no changes should be made.
-		//the recently opend object should not have changed
+		//it should succeed and one item should be taken;
+		//the recently opened object should also have this change;
 		assert(CellService.recentlyOpenedObject.getItems().size() == newItemsToAdd - 1);
 
-		//and the cell should also not be changed
+		//and the cell should also be changed
 		//we know in this test there is only one inspectable item
 		assert(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().size() == newItemsToAdd -1);
 
-		//and the players inventory should not have changed
+		//and the players inventory should have increased by 1
 		assert(UIMain.player.getInventory().size() == (originalInventorySize + 1));
 	}
 
@@ -171,7 +171,7 @@ public class TakeUtilitiesTest {
 		utility.takeItemByNameFromInspectable("Test Item 1");
 
 		//it should fail and no changes should be made.
-		//the recently opend object should not have changed
+		//the recently opened object should not have changed
 		assert(CellService.recentlyOpenedObject.getItems().size() == newItemsToAdd);
 
 		//and the cell should also not be changed
@@ -184,7 +184,24 @@ public class TakeUtilitiesTest {
 
 	@Test
 	public void takeItemByNameFromInspectableWrongName() {
+		//given that the player and recently opened object are defined
+		//and given the opened object has two items
+		int originalInventorySize = UIMain.player.getInventory().size();
+		int newItemsToAdd = CellService.recentlyOpenedObject.getItems().size();
 
+		//then when a specific item is taken, but there is no item by that name
+		utility.takeItemByNameFromInspectable("Wrong Item Name");
+
+		//it should fail and no changes should be made.
+		//the recently opened object should not have changed
+		assert(CellService.recentlyOpenedObject.getItems().size() == newItemsToAdd);
+
+		//and the cell should also not be changed
+		//we know in this test there is only one inspectable item
+		assert(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().size() == newItemsToAdd);
+
+		//and the players inventory should not have changed
+		assert(UIMain.player.getInventory().size() == originalInventorySize);
 	}
 
 
