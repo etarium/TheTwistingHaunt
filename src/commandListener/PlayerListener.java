@@ -6,8 +6,8 @@ import utilities.Logs;
 
 public class PlayerListener {
 
+	PlayerService system = new PlayerService();
 	public Reply listen(String command, String parameter) {
-		PlayerService system = new PlayerService();
 
 		String output = "";
 		boolean isSuccessful = true;
@@ -58,7 +58,7 @@ public class PlayerListener {
 		case "/stats":
 			output = system.getPlayerStats();
 			break;
-			
+
 		case "/skills":
 		case "/abilities":
 			output = system.listAbilities();
