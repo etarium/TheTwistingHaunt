@@ -1,7 +1,6 @@
 package commandListener;
 
 import gameplay.commandServices.GameService;
-import uiView.UIMain;
 import utilities.Logs;
 
 public class SystemListener {
