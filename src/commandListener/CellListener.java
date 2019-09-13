@@ -5,9 +5,9 @@ import utilities.Logs;
 
 public class CellListener {
 
+	CellService system = new CellService();
 	public Reply listen(String command, String parameter) {
-		CellService system = new CellService();
-
+		
 		String output = "";
 		boolean isSuccessful = true;
 
