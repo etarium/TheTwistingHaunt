@@ -313,6 +313,7 @@ public class PlayerService {
 		}
 		return outputBuilder.toString();
 	}
+	
 	private String takeItemFromCell(String param) {
 		StringBuilder outputBuilder = new StringBuilder();
 		if (param == null || param.equals("")) {
