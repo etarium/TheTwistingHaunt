@@ -60,7 +60,7 @@ public class TakeUtilitiesTest {
 	public void takeAllItemsInventoryFull() {
 		//given that the player and recently opened object are defined
 		//and given the opened object has two items
-
+		int newItemsToAdd = CellService.recentlyOpenedObject.getItems().size();
 		//and the inventory only has one open slot
 		for(int i=0; i<GamePlayConstants.MAX_INVENTORY_SIZE -1; i++) { UIMain.player.getInventory().add(item); }
 
@@ -70,7 +70,7 @@ public class TakeUtilitiesTest {
 		//there should be an error since the inventory is full, only one item can be taken
 
 		//and should have a size of 1
-		assert(CellService.recentlyOpenedObject.getItems().size() == 1);
+		assert(CellService.recentlyOpenedObject.getItems().size() == newItemsToAdd - 1);
 
 		//and the cell should also reflect this change
 		//we know in this test there is only one inspectable item
@@ -84,6 +84,26 @@ public class TakeUtilitiesTest {
 	@Test
 	public void takeOnlyItemFromInspectableSuccess() {
 
+		//removing the second item from the original init
+		CellService.recentlyOpenedObject.getItems().remove(1);
+		UIMain.player.currentCell.getInspectableObjects().get(0).getItems().remove(1);
+
+		//given that the player and recently opened object are defined
+		int originalInventorySize = UIMain.player.getInventory().size();
+		int newItemsToAdd = CellService.recentlyOpenedObject.getItems().size();
+
+		//then when all items are taken
+		utility.takeOnlyItemFromInspectable();
+
+		//the recently opened object should be empty
+		assert(CellService.recentlyOpenedObject.getItems().isEmpty());
+
+		//and the cell should also reflect this change
+		//we know in this test there is only one inspectable item
+		assert(UIMain.player.currentCell.getInspectableObjects().get(0).getItems().isEmpty());
+
+		//and the players inventory should be that many items larger.
+		assert(UIMain.player.getInventory().size() == (originalInventorySize  + newItemsToAdd));
 	}
 
 	@Test
@@ -204,5 +224,62 @@ public class TakeUtilitiesTest {
 		assert(UIMain.player.getInventory().size() == originalInventorySize);
 	}
 
+	public void takeAllItemsFromCellSucces() {
+		//given that the player and recently opened object are defined
+		int originalInventorySize = UIMain.player.getInventory().size();
+		int newItemsToAdd = UIMain.player.currentCell.getItems().size();
+		//then when all items are taken
+		utility.takeAllFromCell();
 
+		// cell should also reflect this change
+		//we know in this test there is only one inspectable item
+		assert(UIMain.player.currentCell.getItems().isEmpty());
+
+		//and the players inventory should be that many items larger.
+		assert(UIMain.player.getInventory().size() == (originalInventorySize  + newItemsToAdd));
+	}
+
+	public void takeAllItemsFromCelInventoryFull() {
+		//given that the player and recently opened object are defined
+		//and given the opened object has two items
+		int newItemsToAdd = UIMain.player.currentCell.getItems().size();
+
+		//and the inventory only has one open slot
+		for(int i=0; i<GamePlayConstants.MAX_INVENTORY_SIZE -1; i++) { UIMain.player.getInventory().add(item); }
+
+		//then when all items are taken
+		utility.takeAllFromCell();
+
+		//there should be an error since the inventory is full, only one item can be taken
+		//and the cell should also reflect this change
+		//we know in this test there is only one inspectable item
+		assert(UIMain.player.currentCell.getItems().size() == newItemsToAdd - 1);
+
+		//and the player's inventory is only one larger, and at the max size
+		assert(UIMain.player.getInventory().size() == GamePlayConstants.MAX_INVENTORY_SIZE);
+	}
+
+	public void takeOnlyItemFromCellSuccess() {
+
+	}
+
+	public void takeOnlyItemFromCellInventoryFull() {
+
+	}
+
+	public void takeOnlyItemFromCellMorethanOneItem() {
+
+	}
+
+	public void takeItemByNameFromCellSuccess() {
+
+	}
+
+	public void takeItemByNameFromCellInventoryFull() {
+
+	}
+
+	public void takeItemByNameFromCellWrongName() {
+
+	}
 }
