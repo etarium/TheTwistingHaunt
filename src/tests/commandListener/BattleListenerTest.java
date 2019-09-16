@@ -117,21 +117,16 @@ public class BattleListenerTest {
 	}
 
 	@Test
-	public void helpWindow() {
-
-	}
-
-	@Test
 	public void useHealSpellWithoutTarget() {
 		String healSpell = "/" + UIMain.player.getSkills().get(3).getName();
 
-		//give a attack spell where an enemy is specified
+		//given a heal spell where target isn't specified
 		Reply reply = listener.listen(healSpell, null);
 
 		//then the command should succeed
 		assertTrue(reply.isSuccess);
 
-		//and the specified enemy should be attacked
+		//and the skill should be cast on the player
 		verify(service, times(1)).spSupport(UIMain.player.getSkills().get(3));
 	}
 	
@@ -139,13 +134,13 @@ public class BattleListenerTest {
 	public void useBuffSpellWithoutTarget() {
 		String buffSpell = "/" + UIMain.player.getSkills().get(4).getName();
 
-		//give a attack spell where an enemy is specified
+		//given a buff spell where target isn't specified
 		Reply reply = listener.listen(buffSpell, null);
 
 		//then the command should succeed
 		assertTrue(reply.isSuccess);
 
-		//and the specified enemy should be attacked
+		//and the skill should be cast on the player
 		verify(service, times(1)).spSupport(UIMain.player.getSkills().get(4));
 	}
 
@@ -155,7 +150,7 @@ public class BattleListenerTest {
 		String specificEnemyInQueue = UIMain.player.getCurrentCell().getEnemies().get(2).getName();
 		String attackSpell = "/" + UIMain.player.getSkills().get(0).getName();
 
-		//give a attack spell where an enemy is specified
+		//given a attack spell where an enemy is specified
 		Reply reply = listener.listen(attackSpell, specificEnemyInQueue);
 
 		//then the command should succeed
@@ -170,7 +165,7 @@ public class BattleListenerTest {
 		String firstEnemyInQueue = UIMain.player.getCurrentCell().getEnemies().get(0).getName();
 		String attackSpell = "/" + UIMain.player.getSkills().get(0).getName();
 		
-		//give a physical attack where no enemy is specified
+		//given a attack spell where no enemy is specified
 		Reply reply = listener.listen(attackSpell, null);
 
 		//then the command should succeed
@@ -186,13 +181,13 @@ public class BattleListenerTest {
 		String specificEnemyInQueue = UIMain.player.getCurrentCell().getEnemies().get(2).getName();
 		String debuffSpell = "/" + UIMain.player.getSkills().get(1).getName();
 
-		//give a attack spell where an enemy is specified
+		//given a debuff spell where an enemy is specified
 		Reply reply = listener.listen(debuffSpell, specificEnemyInQueue);
 
 		//then the command should succeed
 		assertTrue(reply.isSuccess);
 
-		//and the specified enemy should be attacked
+		//and the specified enemy should be debuffed
 		verify(service, times(1)).spAttack(UIMain.player.getSkills().get(1), specificEnemyInQueue);
 	}
 	
@@ -201,13 +196,13 @@ public class BattleListenerTest {
 		String firstEnemyInQueue = UIMain.player.getCurrentCell().getEnemies().get(0).getName();
 		String debuffSpell = "/" + UIMain.player.getSkills().get(1).getName();
 		
-		//give a physical attack where no enemy is specified
+		//given a debuff attack where no enemy is specified
 		Reply reply = listener.listen(debuffSpell, null);
 
 		//then the command should succeed
 		assertTrue(reply.isSuccess);
 
-		//and the first enemy should be attacked
+		//and the first enemy should be debuffed
 		verify(service, times(1)).spAttack(UIMain.player.getSkills().get(1), firstEnemyInQueue);
 	}
 	
@@ -217,13 +212,13 @@ public class BattleListenerTest {
 		String specificEnemyInQueue = UIMain.player.getCurrentCell().getEnemies().get(2).getName();
 		String drainSpell = "/" + UIMain.player.getSkills().get(2).getName();
 
-		//give a attack spell where an enemy is specified
+		//given a drain spell where an enemy is specified
 		Reply reply = listener.listen(drainSpell, specificEnemyInQueue);
 
 		//then the command should succeed
 		assertTrue(reply.isSuccess);
 
-		//and the specified enemy should be attacked
+		//and the specified enemy should be drained
 		verify(service, times(1)).spAttack(UIMain.player.getSkills().get(2), specificEnemyInQueue);
 	}
 	
@@ -231,13 +226,13 @@ public class BattleListenerTest {
 	public void useDrainSpellWithoutTarget() {
 		String firstEnemyInQueue = UIMain.player.getCurrentCell().getEnemies().get(0).getName();
 		String drainSpell = "/" + UIMain.player.getSkills().get(2).getName();
-		//give a physical attack where no enemy is specified
+		//given a drain attack where no enemy is specified
 		Reply reply = listener.listen(drainSpell, null);
 
 		//then the command should succeed
 		assertTrue(reply.isSuccess);
 
-		//and the first enemy should be attacked
+		//and the first enemy should be drained
 		verify(service, times(1)).spAttack(UIMain.player.getSkills().get(2), firstEnemyInQueue);
 	}
 	
