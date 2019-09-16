@@ -5,11 +5,16 @@ import java.util.List;
 
 import pojos.Statblock;
 import pojos.entity.EnemyEntity;
+import pojos.entity.EntityClassObject;
 import pojos.entity.PlayerEntity;
+import pojos.entity.SpeciesObject;
+import pojos.entity.enums.EntityClassEnum;
 import pojos.environment.Cell;
 import pojos.environment.InspectableObjects;
 import pojos.environment.Location;
 import pojos.items.Item;
+import pojos.items.enums.ArmorMaterial;
+import pojos.items.enums.WeaponType;
 
 public class SetupStaticValues {
 
@@ -108,5 +113,23 @@ public class SetupStaticValues {
 		stats.setSta(10);
 		
 		return stats;
+	}
+	
+	public static EntityClassObject mockClass() {
+		EntityClassObject mockClass = new EntityClassObject();
+		mockClass.setName(EntityClassEnum.MAGE);
+		mockClass.setStats(setUpStatblock());
+		mockClass.setArmorType(new ArrayList<ArmorMaterial>());
+		mockClass.setWeaponType(new ArrayList<WeaponType>());
+		
+		return mockClass;
+	}
+	
+	public static SpeciesObject mockSpecies() {
+		SpeciesObject species = new SpeciesObject();
+		species.setName("HUMAN");
+		species.setNumOfHands(2);
+		species.setStats(setUpStatblock());
+		return species;
 	}
 }
