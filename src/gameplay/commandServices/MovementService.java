@@ -8,44 +8,48 @@ import uiView.UIMain;
 
 public class MovementService {
 	
-	String output = UIMain.player.currentCell.getDescription();
+	String output = "";
 	public MovementService() {
 		//empty constructor
 	}
 
-	public String moveNorth(char direction) {
+	public String moveNorth() {
 		if(UIMain.player.currentCell.isNorth()) {
 			Location newLoc = UIMain.player.getLocation();
 			newLoc.setY(newLoc.getY()+1);
 			output = setNewCell(newLoc);
 		}
+		output = UIMain.player.currentCell.getDescription();
 		return output;
 	}
 
-	public String moveSouth(char direction) {
+	public String moveSouth() {
 		if(UIMain.player.currentCell.isSouth()) {
 			Location newLoc = UIMain.player.getLocation();
 			newLoc.setY(newLoc.getY()-1);
 			output = setNewCell(newLoc);
 		}
+		output = UIMain.player.currentCell.getDescription();
 		return output;
 	}
 
-	public String moveEast(char direction) {
+	public String moveEast() {
 		if(UIMain.player.currentCell.isEast()) {
 			Location newLoc = UIMain.player.getLocation();
 			newLoc.setX(newLoc.getX()+1);
 			output = setNewCell(newLoc);
 		}
+		output = UIMain.player.currentCell.getDescription();
 		return output;
 	}
 
-	public String moveWest(char direction) {
+	public String moveWest() {
 		if(UIMain.player.currentCell.isWest()) {
 			Location newLoc = UIMain.player.getLocation();
 			newLoc.setX(newLoc.getX()-1);
 			output = setNewCell(newLoc);
 		}
+		output = UIMain.player.currentCell.getDescription();
 		return output;
 	}
 
