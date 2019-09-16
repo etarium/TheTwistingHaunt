@@ -52,7 +52,6 @@ public class BattleService {
 	}
 
 	public String spAttack(Ability spell, String target) {
-		//TODO
 		StringBuilder outputBuilder = new StringBuilder();
 		EnemyEntity selectedTarget = findEnemy(target);
 
