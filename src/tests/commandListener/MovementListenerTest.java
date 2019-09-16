@@ -74,7 +74,7 @@ public class MovementListenerTest {
 	public void moveNorthHitsEncounter() {
 		//given the command is correct, but the player is in battle
 		for(Cell cell : UIMain.cells) {
-			cell.setEnemies(SetupStaticValues.setUpEnemies());
+			cell.setEnemies(SetupStaticValues.setUpOneEnemy());
 		}
 		Mockito.doCallRealMethod().when(service).moveNorth();
 
@@ -150,7 +150,7 @@ public class MovementListenerTest {
 	public void moveSouthHitsEncounter() {
 		//given the command is correct, but the player is in battle
 		for(Cell cell : UIMain.cells) {
-			cell.setEnemies(SetupStaticValues.setUpEnemies());
+			cell.setEnemies(SetupStaticValues.setUpOneEnemy());
 		}
 		Mockito.doCallRealMethod().when(service).moveSouth();
 
@@ -226,7 +226,7 @@ public class MovementListenerTest {
 	public void moveEastHitsEncounter() {
 		//given the command is correct, but the player is in battle
 		for(Cell cell : UIMain.cells) {
-			cell.setEnemies(SetupStaticValues.setUpEnemies());
+			cell.setEnemies(SetupStaticValues.setUpOneEnemy());
 		}
 		Mockito.doCallRealMethod().when(service).moveEast();
 
@@ -303,11 +303,10 @@ public class MovementListenerTest {
 	public void moveWestHitsEncounter() {
 		//given the command is correct, but the player is in battle
 		for(Cell cell : UIMain.cells) {
-			cell.setEnemies(SetupStaticValues.setUpEnemies());
+			cell.setEnemies(SetupStaticValues.setUpOneEnemy());
 		}
 		Mockito.doCallRealMethod().when(service).moveWest();
 
-		System.out.println(originalLocation);
 		Reply reply = listener.listen("/w");
 
 		//the call should succeed
