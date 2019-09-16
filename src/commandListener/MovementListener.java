@@ -47,10 +47,10 @@ public class MovementListener {
 
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
-						outputBuilder.append(GamePlayConstants.BATTLE_OUTPUT);
+						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "north, " + GamePlayConstants.BATTLE_OUTPUT);
 						output = battleOutput(outputBuilder);
 					} else {
-						outputBuilder.append("You move to the north.");
+						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "north.");
 						outputBuilder.append(restOutput());
 						output = outputBuilder.toString();
 					}
@@ -66,10 +66,10 @@ public class MovementListener {
 
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
-						outputBuilder.append(GamePlayConstants.BATTLE_OUTPUT);
+						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "south, " + GamePlayConstants.BATTLE_OUTPUT);
 						output = battleOutput(outputBuilder);
 					} else {
-						outputBuilder.append("You move to the south.");
+						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "south.");
 						outputBuilder.append(restOutput());
 						output = outputBuilder.toString();
 					}
@@ -85,10 +85,10 @@ public class MovementListener {
 
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
-						outputBuilder.append(GamePlayConstants.BATTLE_OUTPUT);
+						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "east, " + GamePlayConstants.BATTLE_OUTPUT);
 						output = battleOutput(outputBuilder);
 					} else {
-						outputBuilder.append("You move to the east.");
+						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "east");
 						outputBuilder.append(restOutput());
 						output = outputBuilder.toString();
 					}
@@ -105,10 +105,10 @@ public class MovementListener {
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
 
-						outputBuilder.append(GamePlayConstants.BATTLE_OUTPUT);
+						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "west, " + GamePlayConstants.BATTLE_OUTPUT);
 						output = battleOutput(outputBuilder);
 					} else {
-						outputBuilder.append("You move to the west.");
+						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "west.");
 						outputBuilder.append(restOutput());
 						output = outputBuilder.toString();
 					}

@@ -46,7 +46,7 @@ public class BattleListenerTest {
 		String specificEnemyInQueue = UIMain.player.getCurrentCell().getEnemies().get(2).getName();
 		
 		//given a physical attack where the enemy is specified
-		Reply reply = listener.listen("/phys", "Toranga Leela");
+		Reply reply = listener.listen("/phys", specificEnemyInQueue);
 
 		//then the command should succeed
 		assertTrue(reply.isSuccess);
@@ -89,7 +89,7 @@ public class BattleListenerTest {
 		String specificEnemyInQueue = UIMain.player.getCurrentCell().getEnemies().get(2).getName();
 		
 		//given a look command attack where there the enemy is specified
-		Reply reply = listener.listen("/look", "Toranga Leela");
+		Reply reply = listener.listen("/look", specificEnemyInQueue);
 
 		//then the command should succeed
 		assertTrue(reply.isSuccess);
@@ -122,43 +122,123 @@ public class BattleListenerTest {
 	}
 
 	@Test
-	public void useAttackSpellWithoutTarget() {
-		String firstEnemyInQueue = UIMain.player.getCurrentCell().getEnemies().get(0).getName();
+	public void useHealSpellWithoutTarget() {
+		String healSpell = "/" + UIMain.player.getSkills().get(3).getName();
 
-		//give a physical attack where no enemy is specified
-		Reply reply = listener.listen("/phys", null);
+		//give a attack spell where an enemy is specified
+		Reply reply = listener.listen(healSpell, null);
 
 		//then the command should succeed
 		assertTrue(reply.isSuccess);
 
-		//and the first enemy should be attacked
-		verify(service, times(1)).physAttack(firstEnemyInQueue);
+		//and the specified enemy should be attacked
+		verify(service, times(1)).spSupport(UIMain.player.getSkills().get(3));
 	}
-
+	
 	@Test
-	public void useSupportSpellWithoutTarget() {
+	public void useBuffSpellWithoutTarget() {
+		String buffSpell = "/" + UIMain.player.getSkills().get(4).getName();
 
+		//give a attack spell where an enemy is specified
+		Reply reply = listener.listen(buffSpell, null);
+
+		//then the command should succeed
+		assertTrue(reply.isSuccess);
+
+		//and the specified enemy should be attacked
+		verify(service, times(1)).spSupport(UIMain.player.getSkills().get(4));
 	}
 
 	@Test
 	public void useAttackSpellWithTarget() {
 		UIMain.player.currentCell.setEnemies(SetupStaticValues.setUpMultipleEnemies());
 		String specificEnemyInQueue = UIMain.player.getCurrentCell().getEnemies().get(2).getName();
+		String attackSpell = "/" + UIMain.player.getSkills().get(0).getName();
 
-		//give a physical attack where an enemy is specified
-		Reply reply = listener.listen("/phys", specificEnemyInQueue);
+		//give a attack spell where an enemy is specified
+		Reply reply = listener.listen(attackSpell, specificEnemyInQueue);
 
 		//then the command should succeed
 		assertTrue(reply.isSuccess);
 
 		//and the specified enemy should be attacked
-		verify(service, times(1)).physAttack(specificEnemyInQueue);
+		verify(service, times(1)).spAttack(UIMain.player.getSkills().get(0), specificEnemyInQueue);
 	}
-
+	
 	@Test
-	public void useSupportSpellWithTarget() {
-		UIMain.player.currentCell.setEnemies(SetupStaticValues.setUpMultipleEnemies());
+	public void useAttackSpellWithoutTarget() {
+		String firstEnemyInQueue = UIMain.player.getCurrentCell().getEnemies().get(0).getName();
+		String attackSpell = "/" + UIMain.player.getSkills().get(0).getName();
+		
+		//give a physical attack where no enemy is specified
+		Reply reply = listener.listen(attackSpell, null);
 
+		//then the command should succeed
+		assertTrue(reply.isSuccess);
+
+		//and the first enemy should be attacked
+		verify(service, times(1)).spAttack(UIMain.player.getSkills().get(0), firstEnemyInQueue);
+	}
+	
+	@Test
+	public void useDebuffSpellWithTarget() {
+		UIMain.player.currentCell.setEnemies(SetupStaticValues.setUpMultipleEnemies());
+		String specificEnemyInQueue = UIMain.player.getCurrentCell().getEnemies().get(2).getName();
+		String debuffSpell = "/" + UIMain.player.getSkills().get(1).getName();
+
+		//give a attack spell where an enemy is specified
+		Reply reply = listener.listen(debuffSpell, specificEnemyInQueue);
+
+		//then the command should succeed
+		assertTrue(reply.isSuccess);
+
+		//and the specified enemy should be attacked
+		verify(service, times(1)).spAttack(UIMain.player.getSkills().get(1), specificEnemyInQueue);
+	}
+	
+	@Test
+	public void useDebuffSpellWithoutTarget() {
+		String firstEnemyInQueue = UIMain.player.getCurrentCell().getEnemies().get(0).getName();
+		String debuffSpell = "/" + UIMain.player.getSkills().get(1).getName();
+		
+		//give a physical attack where no enemy is specified
+		Reply reply = listener.listen(debuffSpell, null);
+
+		//then the command should succeed
+		assertTrue(reply.isSuccess);
+
+		//and the first enemy should be attacked
+		verify(service, times(1)).spAttack(UIMain.player.getSkills().get(1), firstEnemyInQueue);
+	}
+	
+	@Test
+	public void useDrainSpellWithTarget() {
+		UIMain.player.currentCell.setEnemies(SetupStaticValues.setUpMultipleEnemies());
+		String specificEnemyInQueue = UIMain.player.getCurrentCell().getEnemies().get(2).getName();
+		String drainSpell = "/" + UIMain.player.getSkills().get(2).getName();
+
+		//give a attack spell where an enemy is specified
+		Reply reply = listener.listen(drainSpell, specificEnemyInQueue);
+
+		//then the command should succeed
+		assertTrue(reply.isSuccess);
+
+		//and the specified enemy should be attacked
+		verify(service, times(1)).spAttack(UIMain.player.getSkills().get(2), specificEnemyInQueue);
+	}
+	
+	@Test
+	public void useDrainSpellWithoutTarget() {
+		String firstEnemyInQueue = UIMain.player.getCurrentCell().getEnemies().get(0).getName();
+		String drainSpell = "/" + UIMain.player.getSkills().get(2).getName();
+		//give a physical attack where no enemy is specified
+		Reply reply = listener.listen(drainSpell, null);
+
+		//then the command should succeed
+		assertTrue(reply.isSuccess);
+
+		//and the first enemy should be attacked
+		verify(service, times(1)).spAttack(UIMain.player.getSkills().get(2), firstEnemyInQueue);
 	}
 	
 	@Test

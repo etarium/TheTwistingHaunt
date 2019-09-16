@@ -117,22 +117,31 @@ public class SetupStaticValues {
 	public static List<Ability> setUpSkills() {
 		//adds a skill of all 5 types, DAMAGE, HEAL, BUFF, DEBUFF, DRAIN
 		List<Ability> listOfSkills = new ArrayList<Ability>();
-		Ability ability = new Ability();
-		ability.setName("Attack Spell");
-		ability.setType(AbilityType.DAMAGE);
-		listOfSkills.add(ability);
-		ability.setName("Debuff Spell");
-		ability.setType(AbilityType.DEBUFF);
-		listOfSkills.add(ability);
-		ability.setName("Drain Spell");
-		ability.setType(AbilityType.DRAIN);
-		listOfSkills.add(ability);
-		ability.setName("Heal Spell");
-		ability.setType(AbilityType.HEAL);
-		listOfSkills.add(ability);
-		ability.setName("Buff Spell");
-		ability.setType(AbilityType.BUFF);
-		listOfSkills.add(ability);
+		Ability attackAbility = new Ability();
+		Ability debuffAbility = new Ability();
+		Ability drainAbility = new Ability();
+		Ability healAbility = new Ability();
+		Ability buffAbility = new Ability();
+		//0
+		attackAbility.setName("Attack Spell");
+		attackAbility.setType(AbilityType.DAMAGE);
+		listOfSkills.add(attackAbility);
+		//1
+		debuffAbility.setName("Debuff Spell");
+		debuffAbility.setType(AbilityType.DEBUFF);
+		listOfSkills.add(debuffAbility);
+		//2
+		drainAbility.setName("Drain Spell");
+		drainAbility.setType(AbilityType.DRAIN);
+		listOfSkills.add(drainAbility);
+		//3
+		healAbility.setName("Heal Spell");
+		healAbility.setType(AbilityType.HEAL);
+		listOfSkills.add(healAbility);
+		//4
+		buffAbility.setName("Buff Spell");
+		buffAbility.setType(AbilityType.BUFF);
+		listOfSkills.add(buffAbility);
 		return listOfSkills;
 	}
 	public static Statblock setUpStatblock() {
