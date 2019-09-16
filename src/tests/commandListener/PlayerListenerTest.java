@@ -298,7 +298,15 @@ public class PlayerListenerTest {
 		assertFalse(reply.isSuccess);
 
 		//and no actions on the playerservice should be taken
-		verify(service, times(0));
+		verify(service, times(0)).rest();
+		verify(service, times(0)).takeItem(null);
+		verify(service, times(0)).dropItem(null);
+		verify(service, times(0)).equipItem(null);
+		verify(service, times(0)).inventory();
+		verify(service, times(0)).equipment();
+		verify(service, times(0)).getPlayerStats();
+		verify(service, times(0)).useItem(null);
+		verify(service, times(0)).listAbilities();
 	}
 
 }
