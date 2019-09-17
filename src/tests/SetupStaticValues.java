@@ -26,10 +26,16 @@ public class SetupStaticValues {
 
 	public static PlayerEntity setUpPlayer() {
 		PlayerEntity player = new PlayerEntity();
+		player.setName("Test Player");
 		player.setCurrentCell(setUpActiveCell());
 		player.setLocation(setUpActiveCell().getLocation());
 		player.setStats(setUpStatblock());
 		player.setSkills(setUpSkills());
+		player.setLevel(1);
+		player.setXpToNextLevel(50);
+		player.setXp(0);
+		player.setEntityClass(mockClass());
+		player.setSpecies(mockSpecies());
 		return player;
 	}
 
