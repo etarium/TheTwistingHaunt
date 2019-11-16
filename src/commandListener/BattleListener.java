@@ -14,9 +14,9 @@ public class BattleListener {
 		BattleService system = new BattleService();
 		BattleOrder order = new BattleOrder();
 
-		String output="";
+		String output = "";
 		String description = UIMain.player.currentCell.getDescription() + "\n"; 
-		String upperOutput = description + order.formatBattleOrder(UIMain.battleOrder);
+		String upperOutput;
 		boolean isSuccessful = true;
 		switch (command) {
 
