@@ -2,7 +2,7 @@ package gameplay.battle;
 
 import gameplay.StatModMethods.BattleEnemyStatMethods;
 import gameplay.StatModMethods.BattlePlayerStatMethods;
-import pojos.entity.EnemyEntity;
+import entity.EnemyEntity;
 
 public class PhysicalService {
 	

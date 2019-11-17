@@ -1,6 +1,6 @@
 package gameplay.battle;
 
-import pojos.entity.EnemyEntity;
+import entity.EnemyEntity;
 import uiView.UIMain;
 
 public class DeathService {

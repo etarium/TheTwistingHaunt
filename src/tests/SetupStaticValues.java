@@ -3,20 +3,20 @@ package tests;
 import java.util.ArrayList;
 import java.util.List;
 
-import pojos.Ability;
-import pojos.Statblock;
-import pojos.ability.enums.AbilityType;
-import pojos.entity.EnemyEntity;
-import pojos.entity.EntityClassObject;
-import pojos.entity.PlayerEntity;
-import pojos.entity.SpeciesObject;
-import pojos.entity.enums.EntityClassEnum;
-import pojos.environment.Cell;
-import pojos.environment.InspectableObjects;
-import pojos.environment.Location;
-import pojos.items.Item;
-import pojos.items.enums.ArmorMaterial;
-import pojos.items.enums.WeaponType;
+import general.Ability;
+import general.Statblock;
+import ability.enums.AbilityType;
+import entity.EnemyEntity;
+import entity.EntityClassObject;
+import entity.PlayerEntity;
+import entity.SpeciesObject;
+import entity.enums.EntityClassEnum;
+import environment.Cell;
+import environment.InspectableObjects;
+import environment.Location;
+import items.Item;
+import items.enums.ArmorMaterial;
+import items.enums.WeaponType;
 
 public class SetupStaticValues {
 

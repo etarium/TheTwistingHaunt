@@ -2,9 +2,9 @@ package gameplay.newGame;
 
 import db.api.DbAPI;
 import gameplay.StatModMethods.PlayerStatMethods;
-import pojos.Ability;
-import pojos.entity.PlayerEntity;
-import pojos.environment.Cell;
+import general.Ability;
+import entity.PlayerEntity;
+import environment.Cell;
 import uiView.UIMain;
 import utilities.Logs;
 

@@ -7,10 +7,10 @@ import gameplay.StatModMethods.BattleEnemyStatMethods;
 import gameplay.StatModMethods.BattlePlayerStatMethods;
 import gameplay.battle.PhysicalService;
 import gameplay.battle.SpellService;
-import pojos.Ability;
-import pojos.ability.enums.AbilityType;
-import pojos.entity.EnemyEntity;
-import pojos.entity.Entity;
+import general.Ability;
+import ability.enums.AbilityType;
+import entity.EnemyEntity;
+import entity.Entity;
 import uiView.UIMain;
 import utilities.Logs;
 

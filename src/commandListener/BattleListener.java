@@ -1,11 +1,11 @@
 package commandListener;
 
+import ability.enums.AbilityType;
 import gameplay.GamePlayConstants;
 import gameplay.battle.BattleOrder;
 import gameplay.commandServices.BattleService;
 import gameplay.commandServices.GameService;
-import pojos.Ability;
-import pojos.ability.enums.AbilityType;
+import general.Ability;
 import uiView.UIMain;
 import utilities.Logs;
 

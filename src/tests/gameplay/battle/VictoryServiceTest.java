@@ -3,15 +3,13 @@ package tests.gameplay.battle;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import gameplay.battle.VictoryService;
-import pojos.entity.EnemyEntity;
-import pojos.entity.Entity;
+import entity.EnemyEntity;
+import entity.Entity;
 import tests.SetupStaticValues;
 import uiView.UIMain;
 

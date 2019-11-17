@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import gameplay.StatModMethods.BattlePlayerStatMethods;
-import pojos.entity.EnemyEntity;
-import pojos.entity.Entity;
+import entity.EnemyEntity;
+import entity.Entity;
 import uiView.UIMain;
 import utilities.Logs;
 

@@ -1,6 +1,6 @@
 package utilities;
 
-import pojos.Ability;
+import general.Ability;
 import uiView.UIMain;
 
 public class InputParser {

@@ -2,9 +2,9 @@ package gameplay.battle;
 
 import gameplay.StatModMethods.BattleEnemyStatMethods;
 import gameplay.StatModMethods.BattlePlayerStatMethods;
-import pojos.Ability;
-import pojos.entity.EnemyEntity;
-import pojos.entity.Entity;
+import general.Ability;
+import entity.EnemyEntity;
+import entity.Entity;
 import uiView.UIMain;
 
 public class SpellService {

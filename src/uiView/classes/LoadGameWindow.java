@@ -6,7 +6,6 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +16,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import pojos.entity.PlayerEntity;
-import pojos.environment.Cell;
+import entity.PlayerEntity;
+import environment.Cell;
 import uiView.UIMain;
 import utilities.ConfigReader;
 import utilities.Logs;

@@ -1,8 +1,9 @@
 package commandListener;
 
+import entity.EnemyEntity;
 import gameplay.GamePlayConstants;
 import gameplay.commandServices.MovementService;
-import pojos.entity.EnemyEntity;
+
 import uiView.UIMain;
 import utilities.Logs;
 

@@ -1,4 +1,4 @@
-package test.gameplay.newGame;
+package tests.gameplay.newGame;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -13,9 +13,9 @@ import db.api.DbAPI;
 import gameplay.StatModMethods.PlayerStatMethods;
 import gameplay.newGame.NewPlayerPayload;
 import gameplay.newGame.PlayerInitializer;
-import pojos.entity.enums.EntityClassEnum;
-import pojos.entity.enums.SpeciesEnum;
-import pojos.environment.Location;
+import entity.enums.EntityClassEnum;
+import entity.enums.SpeciesEnum;
+import environment.Location;
 import tests.SetupStaticValues;
 import uiView.UIMain;
 
