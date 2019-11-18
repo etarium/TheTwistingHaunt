@@ -109,30 +109,23 @@ public class SpellService {
 
 	private static String listResourceInfo(Ability spell) {
 		StringBuilder output = new StringBuilder();
-		if(UIMain.player.getSkills().isEmpty() ) { 
-			output.append("You have not learned any skills, ");
-			output.append(UIMain.player.getName());
-			output.append("\n\n");
-			output.append("You will need to train more to gain proficiencies.");
-		} else {
-			output.append(String.format("%-25s", "Name: " + UIMain.player.getName()));
-			output.append(String.format("%10s", "Class: " + UIMain.player.getEntityClass().getName()));
-			output.append(String.format("%20s", "Level: " + UIMain.player.getLevel()));
-			output.append(String.format("%30s",  "Species: " + UIMain.player.getSpeciesObject().getName()));
-			output.append("\n\n\n");
-			output.append(String.format("%-5s",  "HP: "));
-			output.append(String.format("%5s",  UIMain.player.getStats().getHp()));
-			output.append(String.format("%13s",  "SP: "));
-			output.append(String.format("%6s", UIMain.player.getStats().getSp()));
-			output.append("\n**********\n");
-			output.append(String.format("%-25s", "Name: " + spell.getName()));
-			output.append(String.format("%20s", "Min Level: " + spell.getMinLevel()));
-			output.append("\n\n");
-			output.append(String.format("%-5s",  "HP COST: "));
-			output.append(String.format("%5s",  spell.getHpCost()));
-			output.append(String.format("%13s",  "SP COST: "));
-			output.append(String.format("%6s", spell.getSpCost()));
-		}
+		output.append(String.format("%-25s", "Name: " + UIMain.player.getName()));
+		output.append(String.format("%10s", "Class: " + UIMain.player.getEntityClass().getName()));
+		output.append(String.format("%20s", "Level: " + UIMain.player.getLevel()));
+		output.append(String.format("%30s",  "Species: " + UIMain.player.getSpeciesObject().getName()));
+		output.append("\n\n\n");
+		output.append(String.format("%-5s",  "HP: "));
+		output.append(String.format("%5s",  UIMain.player.getStats().getHp()));
+		output.append(String.format("%13s",  "SP: "));
+		output.append(String.format("%6s", UIMain.player.getStats().getSp()));
+		output.append("\n**********\n");
+		output.append(String.format("%-25s", "Name: " + spell.getName()));
+		output.append(String.format("%20s", "Min Level: " + spell.getMinLevel()));
+		output.append("\n\n");
+		output.append(String.format("%-5s",  "HP COST: "));
+		output.append(String.format("%5s",  spell.getHpCost()));
+		output.append(String.format("%13s",  "SP COST: "));
+		output.append(String.format("%6s", spell.getSpCost()));
 		return output.toString();
 	}
 
