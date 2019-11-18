@@ -332,8 +332,6 @@ public class PlayerService {
 			} else {
 				outputBuilder.append(take.takeItemByNameFromCell(param));
 			}
-		} else {
-			return "You look around, but can't find anything by that name worth taking.";
 		}
 		return outputBuilder.toString();
 	}
@@ -351,8 +349,6 @@ public class PlayerService {
 			} else {
 				outputBuilder.append(take.takeItemByNameFromInspectable(param));
 			}
-		} else {
-			//return "You look around, but can't find anything by that name worth taking.";
 		}
 		return outputBuilder.toString();
 	}
