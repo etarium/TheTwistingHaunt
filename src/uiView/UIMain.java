@@ -37,6 +37,9 @@ public class UIMain {
 		boolean nGame = menu.getNGame();
 		if(nGame == true){//open new game window
 			CharacterCreateWindow window = new CharacterCreateWindow();
+			while(window.getNewPlayer().getName() == null) {
+				//wait to get the player data
+			}
 			player = window.getNewPlayer();
 		}
 		else{   //load game

@@ -300,20 +300,26 @@ public class PlayerService {
 		StringBuilder outputBuilder = new StringBuilder();
 		outputBuilder.append(UIMain.player.getName() + " Abilities, Skills, and Spells");
 		outputBuilder.append("\n\n");
-		for(Ability ability : UIMain.player.getSkills()) {
-			outputBuilder.append(String.format("%-5s",  "NAME: " + ability.getName()));
-			outputBuilder.append(String.format("%20s", "ATTRIBUTE: " + ability.getAttribute()));
-			if(ability.getHpCost() > 0) {
-				outputBuilder.append(String.format("%30s", "HP: " + ability.getHpCost()));
-			}
-			if(ability.getSpCost() > 0) {
-				outputBuilder.append(String.format("%30s", "SP: " + ability.getSpCost()));
-			}
+		if(UIMain.player.getSkills().isEmpty()) {
+			outputBuilder.append("You have not learned any skills, " + UIMain.player.getName() + ".");
 			outputBuilder.append("\n\n");
+			outputBuilder.append("You will need to train more to gain proficiencies.");
+		} else {
+			for(Ability ability : UIMain.player.getSkills()) {
+				outputBuilder.append(String.format("%-5s",  "NAME: " + ability.getName()));
+				outputBuilder.append(String.format("%20s", "ATTRIBUTE: " + ability.getAttribute()));
+				if(ability.getHpCost() > 0) {
+					outputBuilder.append(String.format("%30s", "HP: " + ability.getHpCost()));
+				}
+				if(ability.getSpCost() > 0) {
+					outputBuilder.append(String.format("%30s", "SP: " + ability.getSpCost()));
+				}
+				outputBuilder.append("\n\n");
+			}
 		}
 		return outputBuilder.toString();
 	}
-	
+
 	private String takeItemFromCell(String param) {
 		StringBuilder outputBuilder = new StringBuilder();
 		if (param == null || param.equals("")) {
@@ -326,8 +332,6 @@ public class PlayerService {
 			} else {
 				outputBuilder.append(take.takeItemByNameFromCell(param));
 			}
-		} else {
-			return "You look around, but can't find anything by that name worth taking.";
 		}
 		return outputBuilder.toString();
 	}
@@ -345,8 +349,6 @@ public class PlayerService {
 			} else {
 				outputBuilder.append(take.takeItemByNameFromInspectable(param));
 			}
-		} else {
-			return "You look around, but can't find anything by that name worth taking.";
 		}
 		return outputBuilder.toString();
 	}
