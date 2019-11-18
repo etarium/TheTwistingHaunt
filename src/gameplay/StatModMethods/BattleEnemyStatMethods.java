@@ -1,6 +1,6 @@
 package gameplay.StatModMethods;
 
-import pojos.entity.EnemyEntity;
+import entity.EnemyEntity;
 import uiView.UIMain;
 import utilities.Logs;
 

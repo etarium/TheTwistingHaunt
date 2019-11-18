@@ -16,8 +16,8 @@ import commandListener.MovementListener;
 import commandListener.Reply;
 import gameplay.GamePlayConstants;
 import gameplay.commandServices.MovementService;
-import pojos.environment.Cell;
-import pojos.environment.Location;
+import environment.Cell;
+import environment.Location;
 import tests.SetupStaticValues;
 import uiView.UIMain;
 

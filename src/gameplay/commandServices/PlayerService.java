@@ -2,9 +2,9 @@ package gameplay.commandServices;
 
 import gameplay.StatModMethods.PlayerStatMethods;
 import gameplay.commandServices.utilities.TakeUtilities;
-import pojos.Ability;
-import pojos.items.enums.ArmorMaterial;
-import pojos.items.enums.WeaponType;
+import general.Ability;
+import items.enums.ArmorMaterial;
+import items.enums.WeaponType;
 import uiView.UIMain;
 
 public class PlayerService {

@@ -1,7 +1,7 @@
 package gameplay.commandServices;
 
-import pojos.environment.InspectableObjects;
-import pojos.items.Item;
+import environment.InspectableObjects;
+import items.Item;
 import uiView.UIMain;
 import utilities.Logs;
 

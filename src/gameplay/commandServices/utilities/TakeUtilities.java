@@ -5,8 +5,8 @@ import java.util.List;
 
 import gameplay.GamePlayConstants;
 import gameplay.commandServices.CellService;
-import pojos.environment.InspectableObjects;
-import pojos.items.Item;
+import environment.InspectableObjects;
+import items.Item;
 import uiView.UIMain;
 
 public class TakeUtilities {

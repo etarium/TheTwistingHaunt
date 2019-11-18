@@ -1,7 +1,7 @@
 package gameplay.StatModMethods;
 
 import gameplay.GamePlayConstants;
-import pojos.Statblock;
+import general.Statblock;
 import uiView.UIMain;
 
 public class PlayerStatMethods {

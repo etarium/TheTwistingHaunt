@@ -1,7 +1,7 @@
 package gameplay.battle;
 
 import gameplay.commandServices.PlayerService;
-import pojos.entity.EnemyEntity;
+import entity.EnemyEntity;
 import uiView.UIMain;
 
 public class VictoryService {

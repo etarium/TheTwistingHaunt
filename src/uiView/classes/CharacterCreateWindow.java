@@ -20,9 +20,9 @@ import javax.swing.event.ChangeListener;
 
 import gameplay.newGame.NewPlayerPayload;
 import gameplay.newGame.PlayerInitializer;
-import pojos.entity.EntityClassObject;
-import pojos.entity.PlayerEntity;
-import pojos.entity.SpeciesObject;
+import entity.EntityClassObject;
+import entity.PlayerEntity;
+import entity.SpeciesObject;
 import uiView.UIMain;
 import utilities.Logs;
 

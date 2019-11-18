@@ -1,9 +1,9 @@
 package gameplay.commandServices;
 
 import gameplay.battle.BattleOrder;
-import pojos.environment.Cell;
-import pojos.environment.InspectableObjects;
-import pojos.environment.Location;
+import environment.Cell;
+import environment.InspectableObjects;
+import environment.Location;
 import uiView.UIMain;
 
 public class MovementService {

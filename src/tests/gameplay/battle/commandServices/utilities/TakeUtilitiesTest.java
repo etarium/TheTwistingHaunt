@@ -9,8 +9,8 @@ import org.mockito.Mock;
 import gameplay.GamePlayConstants;
 import gameplay.commandServices.CellService;
 import gameplay.commandServices.utilities.TakeUtilities;
-import pojos.environment.InspectableObjects;
-import pojos.items.Item;
+import environment.InspectableObjects;
+import items.Item;
 import tests.SetupStaticValues;
 import uiView.UIMain;
 
