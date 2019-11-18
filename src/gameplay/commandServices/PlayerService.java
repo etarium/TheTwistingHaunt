@@ -352,7 +352,7 @@ public class PlayerService {
 				outputBuilder.append(take.takeItemByNameFromInspectable(param));
 			}
 		} else {
-			return "You look around, but can't find anything by that name worth taking.";
+			//return "You look around, but can't find anything by that name worth taking.";
 		}
 		return outputBuilder.toString();
 	}

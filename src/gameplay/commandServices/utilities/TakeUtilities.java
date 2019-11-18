@@ -53,7 +53,7 @@ public class TakeUtilities {
 	}
 
 	public String takeItemByNameFromInspectable(String param) {
-		StringBuilder outputBuilder = new StringBuilder();
+		String output = "";
 		if(UIMain.player.getInventory().size() >= GamePlayConstants.MAX_INVENTORY_SIZE) {
 			return "Your bag is heaving with the volume of items inside. You couldn't possibly take anymore!"
 					+ "\n [Use /drop to remove items from your inventory.]";
@@ -61,15 +61,15 @@ public class TakeUtilities {
 			for(Item item : CellService.recentlyOpenedObject.getItems()) {
 				if(item.getName().equalsIgnoreCase(param)) {
 					UIMain.player.getInventory().add(item);
-					outputBuilder.append("You take the " + item.getName());
+					output = "You take the " + item.getName();
 					removeItemFromInspectableObject(item);
 					break;
 				} else {
-					outputBuilder.append("You look around, but can't find anything worth taking by that name.");
+					output = "You look around, but can't find anything worth taking by that name.";
 				}
 			}
 		}
-		return outputBuilder.toString();
+		return output;
 	}
 
 	private void removeItemFromInspectableObject(Item item) {
@@ -155,7 +155,7 @@ public class TakeUtilities {
 	}
 
 	public String takeItemByNameFromCell(String param) {
-		StringBuilder outputBuilder = new StringBuilder();
+		String output ="";
 		if(UIMain.player.getInventory().size() >= GamePlayConstants.MAX_INVENTORY_SIZE) {
 			return "Your bag is heaving with the volume of items inside. You couldn't possible take anymore!"
 					+ "\n [Use /drop to remove items from your inventory.]";
@@ -163,15 +163,15 @@ public class TakeUtilities {
 			for(Item item : UIMain.player.currentCell.getItems()) {
 				if(item.getName().equalsIgnoreCase(param)) {
 					UIMain.player.getInventory().add(item);
-					outputBuilder.append("You take the " + item.getName());
+					output = "You take the " + item.getName();
 					removeItemFromCell(item);
 					break;
 				} else {
-					outputBuilder.append("You look around, but can't find anything worth taking by that name.");
+					output = "You look around, but can't find anything worth taking by that name.";
 				}
 			}
 		}
-		return outputBuilder.toString();
+		return output;
 	}
 
 	private void removeItemsFromCell(List<Item> itemsToRemove) {
