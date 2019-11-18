@@ -107,10 +107,7 @@ public class PlayWindow extends GameWindow{
 		window.pack();
 		window.setVisible(true);
 		
-
 		input.requestFocus();
-		
-	
 		
 	}//end PlayWindow initializer
 
