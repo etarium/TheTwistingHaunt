@@ -206,6 +206,7 @@ public class PlayWindow extends GameWindow{
 		    @Override
 		    protected void configureScrollBarColors() {
 		        this.thumbColor = textColor.darker();
+		        this.scrollBarWidth = 30;
 		    }
 		});
 		
