@@ -2,8 +2,6 @@ package uiView.classes;
 
 import java.awt.Container;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -120,7 +118,6 @@ public class PlayWindow extends GameWindow{
 	private void addOutputBox(Container out, JTextArea box) {
 		box.setOpaque(false);
 		box.setForeground(textColor);
-		//box.setBackground(backgroundColor);
 		box.setFont(gameFont);
 		int margin = BUFFER/2 + MED;
 		box.setSize(out.getWidth() - BUFFER, out.getHeight());
@@ -141,12 +138,6 @@ public class PlayWindow extends GameWindow{
 		lowerScroll.setOpaque(true);
 		lowerScroll.getViewport().setBackground(backgroundColor);
 		lowerScroll.setBorder(BorderFactory.createEmptyBorder());
-		System.out.println(lowerScroll.getViewport());
-		//System.out.println("is border opaqe " + lowerScroll.getViewportBorder().isBorderOpaque());
-		//lowerScroll.setBackground(backgroundColor);
-		//lowerScroll.add(box);
-		//lowerScroll.repaint();
-		//lowerScroll.set
 		
 		out.add(lowerScroll);
 	}
