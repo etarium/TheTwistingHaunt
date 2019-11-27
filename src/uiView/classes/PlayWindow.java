@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import uiView.UIMain;
 
@@ -134,10 +135,8 @@ public class PlayWindow extends GameWindow{
 		  		+ "You had heard of it as the 'Blue Lich' before. Truly, a "
 		  		+ "fearsome beast lies ahead...");
 		
-		lowerScroll = new JScrollPane(box);
-		lowerScroll.setOpaque(true);
-		lowerScroll.getViewport().setBackground(backgroundColor);
-		lowerScroll.setBorder(BorderFactory.createEmptyBorder());
+		lowerScroll = configureScrollbar(box);
+		
 		
 		out.add(lowerScroll);
 	}
@@ -194,6 +193,23 @@ public class PlayWindow extends GameWindow{
 		
 		
 		in.add(box);
+	}
+	
+	private JScrollPane configureScrollbar(JTextArea box) {
+		lowerScroll = new JScrollPane(box);
+		lowerScroll.setOpaque(true);
+		lowerScroll.getViewport().setBackground(backgroundColor);
+		lowerScroll.setBorder(BorderFactory.createEmptyBorder());
+		
+		lowerScroll.getVerticalScrollBar().setBackground(textColor);
+		lowerScroll.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+		    @Override
+		    protected void configureScrollBarColors() {
+		        this.thumbColor = textColor.darker();
+		    }
+		});
+		
+		return lowerScroll;
 	}
 	
 	public JTextArea getUpperOutputBox() {
