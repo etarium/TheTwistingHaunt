@@ -2,12 +2,16 @@ package uiView.classes;
 
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -23,6 +27,7 @@ public class PlayWindow extends GameWindow{
 	static JTextArea upperOutput;
 	static JTextArea lowerOutput;
 	static JTextField input;
+	static JScrollPane lowerScroll;
 	
 	static boolean enterPressed = false;
 	
@@ -50,6 +55,7 @@ public class PlayWindow extends GameWindow{
 		bounds.setBackground(backgroundColor);
 		bounds.setBorder(thinLineBorder);
 		bounds.setLayout(null);
+
 		orig_bounds.add(bounds);
 		
 		int bounds_WIDTH = bounds.getWidth();
@@ -92,7 +98,7 @@ public class PlayWindow extends GameWindow{
 		in.setBorder(medLineBorder);
 		
 		upperOutput = new JTextArea();
-		lowerOutput = new JTextArea();
+		lowerOutput = new JTextArea(16,100);
 		input = new JTextField("Begin your quest by typing here, hero.");
 		
 		upOut.setLayout(new FlowLayout(FlowLayout.LEADING));
@@ -114,6 +120,7 @@ public class PlayWindow extends GameWindow{
 	private void addOutputBox(Container out, JTextArea box) {
 		box.setOpaque(false);
 		box.setForeground(textColor);
+		//box.setBackground(backgroundColor);
 		box.setFont(gameFont);
 		int margin = BUFFER/2 + MED;
 		box.setSize(out.getWidth() - BUFFER, out.getHeight());
@@ -122,8 +129,6 @@ public class PlayWindow extends GameWindow{
 		box.setHighlighter(null);
 		box.setLineWrap(true);
 		box.setWrapStyleWord(true);
-				
-	
 		
 		//initial text while database is loading
 		box.setText("A group of scared villagers begged for your help. They circled you, crying about "
@@ -132,7 +137,18 @@ public class PlayWindow extends GameWindow{
 		  		+ "You had heard of it as the 'Blue Lich' before. Truly, a "
 		  		+ "fearsome beast lies ahead...");
 		
-		out.add(box);
+		lowerScroll = new JScrollPane(box);
+		lowerScroll.setOpaque(true);
+		lowerScroll.getViewport().setBackground(backgroundColor);
+		lowerScroll.setBorder(BorderFactory.createEmptyBorder());
+		System.out.println(lowerScroll.getViewport());
+		//System.out.println("is border opaqe " + lowerScroll.getViewportBorder().isBorderOpaque());
+		//lowerScroll.setBackground(backgroundColor);
+		//lowerScroll.add(box);
+		//lowerScroll.repaint();
+		//lowerScroll.set
+		
+		out.add(lowerScroll);
 	}
 	
 	private void addUpperOutputBox(Container out, JTextArea box) {
