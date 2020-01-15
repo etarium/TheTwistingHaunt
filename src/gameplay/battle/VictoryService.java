@@ -1,7 +1,10 @@
 package gameplay.battle;
 
+import java.util.ArrayList;
+
 import gameplay.commandServices.PlayerService;
 import pojos.entity.EnemyEntity;
+import pojos.entity.Entity;
 import uiView.UIMain;
 
 public class VictoryService {
@@ -9,7 +12,8 @@ public class VictoryService {
 	static int accruedXP = 0;
 	
 	public static boolean isVictory() {
-		if(UIMain.player.currentCell.getEnemies().size() == 0) {
+		if(countRemainingEnemies() == 0) {
+			UIMain.battleOrder = new ArrayList();
 			return true;
 		}
 		return false;
@@ -75,13 +79,23 @@ public class VictoryService {
 
 	public static String defeatedEnemy(EnemyEntity selectedTarget) {
 		String output = "";
-		DeathService.removeEnemy(selectedTarget);
+		//DeathService.removeEnemy(selectedTarget);
 		if(VictoryService.isVictory()) {
 			output = VictoryService.victory();
 		} else {
 			output = "\nThe " + selectedTarget.getName() + " let out a horrible scream.\n"
-					+ "Great Job! Only " + UIMain.player.currentCell.getEnemies().size() + " remaining!\n";
+					+ "Great Job! Only " + countRemainingEnemies() + " remaining!\n";
 		}
 		return output;
+	}
+	
+	private static int countRemainingEnemies() {
+		int remainingEnemies = 0;
+		for(Entity entity : UIMain.battleOrder) {
+			if(!entity.getName().equals(UIMain.player.getName()) && entity.getStats().getCurrentHP() > 0) {
+				remainingEnemies++;
+			}
+		}
+		return remainingEnemies;
 	}
 }

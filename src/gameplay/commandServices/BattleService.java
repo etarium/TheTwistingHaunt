@@ -5,6 +5,7 @@ import java.util.List;
 
 import gameplay.StatModMethods.BattleEnemyStatMethods;
 import gameplay.StatModMethods.BattlePlayerStatMethods;
+import gameplay.battle.CheckStatuses;
 import gameplay.battle.PhysicalService;
 import gameplay.battle.SpellService;
 import pojos.Ability;
@@ -38,14 +39,20 @@ public class BattleService {
 		for(Entity activeEntity : UIMain.battleOrder) {
 			if(activeEntity.equals(UIMain.player)) {
 				outputBuilder.append(PhysicalService.playerPhysAttack(selectedTarget));
+				outputBuilder.append("\n**********\n");
 			} else {
 				if(!UIMain.player.isInEncounter) {
 					break;
 				} else {
-					outputBuilder.append(enemyAttack((EnemyEntity) activeEntity));
+					if(activeEntity.getStats().getCurrentHP() == 0) {
+						//do nothing and skip their turn
+					} else {
+						outputBuilder.append(enemyAttack((EnemyEntity) activeEntity));
+						outputBuilder.append("\n**********\n");
+					}
 				}
 			}
-			outputBuilder.append("\n**********\n");
+			
 		}
 		outputBuilder.append(formatBattleOutput());
 		return outputBuilder.toString();
@@ -72,6 +79,9 @@ public class BattleService {
 		for(Entity activeEntity : UIMain.battleOrder) {
 			if(activeEntity.equals(UIMain.player)) {
 				outputBuilder.append(spAtk(spell, selectedTarget));
+				if(CheckStatuses.isEnemyDead(selectedTarget)) {
+
+				}
 			} else {
 				if(!UIMain.player.isInEncounter) {
 					break;
