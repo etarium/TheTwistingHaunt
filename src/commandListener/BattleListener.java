@@ -1,20 +1,21 @@
 package commandListener;
 
+import ability.enums.AbilityType;
+import gameplay.GamePlayConstants;
 import gameplay.battle.BattleOrder;
 import gameplay.commandServices.BattleService;
 import gameplay.commandServices.GameService;
-import pojos.Ability;
-import pojos.ability.enums.AbilityType;
+import general.Ability;
 import uiView.UIMain;
 import utilities.Logs;
 
 public class BattleListener {
 
-	public Reply listen(String command, String parameter) {
-		BattleService system = new BattleService();
-		BattleOrder order = new BattleOrder();
+	BattleService system = new BattleService();
+	BattleOrder order = new BattleOrder();
 
-		String output = "";
+	public Reply listen(String command, String parameter) {
+		String output="";
 		String description = UIMain.player.currentCell.getDescription() + "\n"; 
 		String upperOutput;
 		boolean isSuccessful = true;
@@ -36,7 +37,7 @@ public class BattleListener {
 				if(UIMain.player.currentCell.getEnemies().size() == 1) {
 					output = system.inspectEnemy(UIMain.player.getCurrentCell().getEnemies().get(0).getName());
 				}
-				output = "Looking out at the enemies before you, you see many worthwhile foes. You would like to focus on one in particular. Yet you pause and wonder... who? Perhaps you should be more specific.";
+				output = GamePlayConstants.SPECIFY_AN_ENEMY_TARGET;
 			} else {
 				output = system.inspectEnemy(parameter);
 			}
@@ -54,7 +55,6 @@ public class BattleListener {
 			//creating the switch case based on skills would be cumbersome to implement custom classes for
 			//this should operate in a similar manner
 			for(Ability spell : UIMain.player.getSkills()) {
-				System.out.println(spell.getName());
 				if(command.equalsIgnoreCase("/"+spell.getName())) {
 					isSuccessful = true;
 					//if target wasn't specific and the ability is damage

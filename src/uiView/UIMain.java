@@ -2,15 +2,15 @@ package uiView;
 
 import gameplay.commandServices.GameService;
 import gameplay.newGame.PlayerInitializer;
-import pojos.entity.Entity;
-import pojos.entity.PlayerEntity;
-import pojos.environment.Cell;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import commandListener.Init;
+import entity.Entity;
+import entity.PlayerEntity;
+import environment.Cell;
 import uiView.classes.CharacterCreateWindow;
 import uiView.classes.GUI_Client;
 import uiView.classes.LoadGameWindow;
@@ -37,6 +37,9 @@ public class UIMain {
 		boolean nGame = menu.getNGame();
 		if(nGame == true){//open new game window
 			CharacterCreateWindow window = new CharacterCreateWindow();
+			while(window.getNewPlayer().getName() == null) {
+				//wait to get the player data
+			}
 			player = window.getNewPlayer();
 		}
 		else{   //load game

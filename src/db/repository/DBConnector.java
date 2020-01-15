@@ -13,11 +13,11 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.*;
 
-import pojos.entity.EntityClassObject;
-import pojos.entity.SpeciesObject;
-import pojos.entity.enums.EntityClassEnum;
-import pojos.entity.enums.SpeciesEnum;
-import pojos.environment.Cell;
+import entity.EntityClassObject;
+import entity.SpeciesObject;
+import entity.enums.EntityClassEnum;
+import entity.enums.SpeciesEnum;
+import environment.Cell;
 import utilities.ConfigReader;
 import utilities.Logs;
 
@@ -74,6 +74,7 @@ public class DBConnector {
 		MongoCollection<Document> classCollection = database.getCollection("Classes");
 		Document classDocument = classCollection.find(eq("name", className.toString())).first();
 		try {
+			System.out.println(classDocument);
 			return mapper.readValue(classDocument.toJson(), EntityClassObject.class);
 		} catch (IOException e) {
 			Logs.LOGGER.severe("Reading Entity Class Objects has failed.");

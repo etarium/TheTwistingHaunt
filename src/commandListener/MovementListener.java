@@ -1,17 +1,19 @@
 package commandListener;
 
+import entity.EnemyEntity;
+import gameplay.GamePlayConstants;
 import gameplay.commandServices.MovementService;
-import pojos.entity.EnemyEntity;
+
 import uiView.UIMain;
 import utilities.Logs;
 
 public class MovementListener {
 
+	MovementService system = new MovementService();
+	
 	public Reply listen(String command) {
-		MovementService system = new MovementService();
-
+		
 		String output = "";
-		String failedMovementOutput = "You'd like to go that way, wouldn't you?";
 		String newUpperOutput = "";
 		boolean isSuccessful = true;
 
@@ -41,79 +43,79 @@ public class MovementListener {
 			String upperOutput = UIMain.player.currentCell.getDescription();
 			switch (direction) {
 			case 'n':
-
-				newUpperOutput = system.moveNorth(direction);
+				
+				newUpperOutput = system.moveNorth();
 
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
-						outputBuilder.append("You move to the north, and find yourself surrounded by ");
+						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "north, " + GamePlayConstants.BATTLE_OUTPUT);
 						output = battleOutput(outputBuilder);
 					} else {
-						outputBuilder.append("You move to the north.");
+						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "north.");
 						outputBuilder.append(restOutput());
 						output = outputBuilder.toString();
 					}
 					upperOutput = newUpperOutput;
 				} else {
-					output = failedMovementOutput;
+					output = GamePlayConstants.FAILED_MOVEMENT;
 				}
 
 				break;
 			case 's':
 
-				newUpperOutput = system.moveSouth(direction);
+				newUpperOutput = system.moveSouth();
 
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
-						outputBuilder.append("You move to the south, and find yourself surrounded by ");
+						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "south, " + GamePlayConstants.BATTLE_OUTPUT);
 						output = battleOutput(outputBuilder);
 					} else {
-						outputBuilder.append("You move to the south.");
+						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "south.");
 						outputBuilder.append(restOutput());
 						output = outputBuilder.toString();
 					}
 					upperOutput = newUpperOutput;
 				} else {
-					output = failedMovementOutput;
+					output = GamePlayConstants.FAILED_MOVEMENT;
 				}
 
 				break;
 			case 'e':
 
-				newUpperOutput = system.moveEast(direction);
+				newUpperOutput = system.moveEast();
 
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
-						outputBuilder.append("You move to the east, and find yourself surrounded by ");
+						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "east, " + GamePlayConstants.BATTLE_OUTPUT);
 						output = battleOutput(outputBuilder);
 					} else {
-						outputBuilder.append("You move to the east.");
+						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "east");
 						outputBuilder.append(restOutput());
 						output = outputBuilder.toString();
 					}
 					upperOutput = newUpperOutput;
 				} else {
-					output = failedMovementOutput;
+					output = GamePlayConstants.FAILED_MOVEMENT;
 				}
 
 				break;
 			case 'w':
 
-				newUpperOutput = system.moveWest(direction);
+				newUpperOutput = system.moveWest();
 
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
 
-						outputBuilder.append("You move to the west, and find yourself surrounded by ");
+						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "west, " + GamePlayConstants.BATTLE_OUTPUT);
 						output = battleOutput(outputBuilder);
 					} else {
-						outputBuilder.append("You move to the west.");
+						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "west.");
 						outputBuilder.append(restOutput());
 						output = outputBuilder.toString();
 					}
 					upperOutput = newUpperOutput;
 				} else {
-				output = failedMovementOutput;
+					output = GamePlayConstants.FAILED_MOVEMENT;
 				}
 
 				break;

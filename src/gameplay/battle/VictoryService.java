@@ -3,8 +3,7 @@ package gameplay.battle;
 import java.util.ArrayList;
 
 import gameplay.commandServices.PlayerService;
-import pojos.entity.EnemyEntity;
-import pojos.entity.Entity;
+import entity.Entity;
 import uiView.UIMain;
 
 public class VictoryService {
@@ -77,9 +76,8 @@ public class VictoryService {
 		return remainingXP;
 	}
 
-	public static String defeatedEnemy(EnemyEntity selectedTarget) {
+	public static String defeatedEnemy(entity.EnemyEntity selectedTarget) {
 		String output = "";
-		//DeathService.removeEnemy(selectedTarget);
 		if(VictoryService.isVictory()) {
 			output = VictoryService.victory();
 		} else {

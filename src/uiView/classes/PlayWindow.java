@@ -6,10 +6,13 @@ import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import uiView.UIMain;
 
@@ -23,6 +26,7 @@ public class PlayWindow extends GameWindow{
 	static JTextArea upperOutput;
 	static JTextArea lowerOutput;
 	static JTextField input;
+	static JScrollPane lowerScroll;
 	
 	static boolean enterPressed = false;
 	
@@ -50,6 +54,7 @@ public class PlayWindow extends GameWindow{
 		bounds.setBackground(backgroundColor);
 		bounds.setBorder(thinLineBorder);
 		bounds.setLayout(null);
+
 		orig_bounds.add(bounds);
 		
 		int bounds_WIDTH = bounds.getWidth();
@@ -92,7 +97,7 @@ public class PlayWindow extends GameWindow{
 		in.setBorder(medLineBorder);
 		
 		upperOutput = new JTextArea();
-		lowerOutput = new JTextArea();
+		lowerOutput = new JTextArea(16,100);
 		input = new JTextField("Begin your quest by typing here, hero.");
 		
 		upOut.setLayout(new FlowLayout(FlowLayout.LEADING));
@@ -107,10 +112,7 @@ public class PlayWindow extends GameWindow{
 		window.pack();
 		window.setVisible(true);
 		
-
 		input.requestFocus();
-		
-	
 		
 	}//end PlayWindow initializer
 
@@ -125,8 +127,6 @@ public class PlayWindow extends GameWindow{
 		box.setHighlighter(null);
 		box.setLineWrap(true);
 		box.setWrapStyleWord(true);
-				
-	
 		
 		//initial text while database is loading
 		box.setText("A group of scared villagers begged for your help. They circled you, crying about "
@@ -135,7 +135,10 @@ public class PlayWindow extends GameWindow{
 		  		+ "You had heard of it as the 'Blue Lich' before. Truly, a "
 		  		+ "fearsome beast lies ahead...");
 		
-		out.add(box);
+		lowerScroll = configureScrollbar(box);
+		
+		
+		out.add(lowerScroll);
 	}
 	
 	private void addUpperOutputBox(Container out, JTextArea box) {
@@ -190,6 +193,24 @@ public class PlayWindow extends GameWindow{
 		
 		
 		in.add(box);
+	}
+	
+	private JScrollPane configureScrollbar(JTextArea box) {
+		lowerScroll = new JScrollPane(box);
+		lowerScroll.setOpaque(true);
+		lowerScroll.getViewport().setBackground(backgroundColor);
+		lowerScroll.setBorder(BorderFactory.createEmptyBorder());
+		
+		lowerScroll.getVerticalScrollBar().setBackground(textColor);
+		lowerScroll.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+		    @Override
+		    protected void configureScrollBarColors() {
+		        this.thumbColor = textColor.darker();
+		        this.scrollBarWidth = 30;
+		    }
+		});
+		
+		return lowerScroll;
 	}
 	
 	public JTextArea getUpperOutputBox() {

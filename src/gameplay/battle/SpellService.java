@@ -2,9 +2,9 @@ package gameplay.battle;
 
 import gameplay.StatModMethods.BattleEnemyStatMethods;
 import gameplay.StatModMethods.BattlePlayerStatMethods;
-import pojos.Ability;
-import pojos.entity.EnemyEntity;
-import pojos.entity.Entity;
+import general.Ability;
+import entity.EnemyEntity;
+import entity.Entity;
 import uiView.UIMain;
 
 public class SpellService {
@@ -101,7 +101,7 @@ public class SpellService {
 			//sp can reach zero, hp cannot.
 			return false;
 		}
-		
+
 		UIMain.player.getStats().setCurrentHP(newHP);
 		UIMain.player.getStats().setCurrentSP(newSP);
 		return true;
@@ -126,7 +126,6 @@ public class SpellService {
 		output.append(String.format("%5s",  spell.getHpCost()));
 		output.append(String.format("%13s",  "SP COST: "));
 		output.append(String.format("%6s", spell.getSpCost()));
-
 		return output.toString();
 	}
 

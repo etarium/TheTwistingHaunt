@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import db.api.DbAPI;
-import pojos.entity.EntityClassObject;
-import pojos.entity.SpeciesObject;
-import pojos.entity.enums.EntityClassEnum;
-import pojos.entity.enums.SpeciesEnum;
-import pojos.environment.Location;
-import pojos.items.ArmorItem;
-import pojos.items.WeaponItem;
+import entity.EntityClassObject;
+import entity.SpeciesObject;
+import entity.enums.EntityClassEnum;
+import entity.enums.SpeciesEnum;
+import environment.Location;
+import items.ArmorItem;
+import items.WeaponItem;
 
 public class NewPlayerPayload {
 

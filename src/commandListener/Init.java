@@ -26,7 +26,10 @@ public class Init {
 
 		String command = stringArray[0];
 		String parameter = stringArray[1];
-		
+
+		String [] spellStringArray = InputParser.parseMultiWordSkills(input);
+		String spellCommand = spellStringArray[0];
+		String spellParameter = spellStringArray[1];
 		//check the listeners
 		//player is not engaged in combat
 		if(!UIMain.player.isInEncounter) { 
@@ -41,18 +44,15 @@ public class Init {
 						+ "[try again, or type '/help' for assistance]";
 			}
 		} else {
+			Reply battleSpellReply = new Reply(false, "","");
 			//player is engaged in combat
 			Reply battleReply = battleListener.listen(command, parameter);
-			Reply battleSpellReply = new Reply(false, "", "");
-			if(!battleReply.isSuccess) {
-				String [] spellStringArray = InputParser.parseMultiWordSkills(input);
-				String spellCommand = spellStringArray[0];
-				String spellParameter = spellStringArray[1];
+			if(!(spellCommand == null)) {
 				battleSpellReply = battleListener.listen(spellCommand,  spellParameter);
 			}
 			Reply movementReply = movementListener.listen(command);
 			Reply inventoryReply = inventoryListener.listen(command, parameter);
-			Reply[] replies = {(battleReply.isSuccess) ? battleReply : battleSpellReply, movementReply, inventoryReply };
+			Reply[] replies = {battleReply, battleSpellReply, movementReply, inventoryReply };
 			Reply reply = processReplies(replies);
 			if(!reply.isSuccess) {
 				output = "This isn't the time or place to do anything other than fight, hero! \n"
