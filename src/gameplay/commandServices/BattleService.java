@@ -38,14 +38,20 @@ public class BattleService {
 		for(Entity activeEntity : UIMain.battleOrder) {
 			if(activeEntity.equals(UIMain.player)) {
 				outputBuilder.append(PhysicalService.playerPhysAttack(selectedTarget));
+				outputBuilder.append("\n**********\n");
 			} else {
 				if(!UIMain.player.isInEncounter) {
 					break;
 				} else {
-					outputBuilder.append(enemyAttack((EnemyEntity) activeEntity));
+					if(activeEntity.getStats().getCurrentHP() == 0) {
+						//do nothing and skip their turn
+					} else {
+						outputBuilder.append(enemyAttack((EnemyEntity) activeEntity));
+						outputBuilder.append("\n**********\n");
+					}
 				}
 			}
-			outputBuilder.append("\n**********\n");
+
 		}
 		outputBuilder.append(formatBattleOutput());
 		return outputBuilder.toString();
@@ -71,14 +77,19 @@ public class BattleService {
 		for(Entity activeEntity : UIMain.battleOrder) {
 			if(activeEntity.equals(UIMain.player)) {
 				outputBuilder.append(spAtk(spell, selectedTarget));
+				outputBuilder.append("\n**********\n");
 			} else {
 				if(!UIMain.player.isInEncounter) {
 					break;
 				} else {
-					outputBuilder.append(enemyAttack((EnemyEntity) activeEntity));
+					if(activeEntity.getStats().getCurrentHP() == 0) {
+						//do nothing and skip their turn
+					} else {
+						outputBuilder.append(enemyAttack((EnemyEntity) activeEntity));
+						outputBuilder.append("\n**********\n");
+					}
 				}
 			}
-			outputBuilder.append("\n**********\n");
 		}
 		outputBuilder.append(formatBattleOutput());
 		return outputBuilder.toString();
@@ -99,14 +110,19 @@ public class BattleService {
 				} else if(spell.getType().equals(AbilityType.BUFF)) {
 					outputBuilder.append(SpellService.useBuffSpell(spell));
 				}
+				outputBuilder.append("\n**********\n");
 			} else {
 				if(!UIMain.player.isInEncounter) {
 					break;
 				} else {
-					outputBuilder.append(enemyAttack((EnemyEntity) activeEntity));
+					if(activeEntity.getStats().getCurrentHP() == 0) {
+						//do nothing and skip their turn
+					} else {
+						outputBuilder.append(enemyAttack((EnemyEntity) activeEntity));
+						outputBuilder.append("\n**********\n");
+					}
 				}
 			}
-			outputBuilder.append("\n**********\n");
 		}
 		outputBuilder.append(formatBattleOutput());
 		return outputBuilder.toString();
@@ -169,7 +185,7 @@ public class BattleService {
 		// lvl | hp			lvl | hp		lvl | hp
 		List<Entity> printedList = UIMain.battleOrder;
 		printedList.remove(UIMain.player);
-		outputBuilder.append("\n\n");
+//		outputBuilder.append("\n\n");
 		outputBuilder.append(String.format("%-5s",  UIMain.player.getName()));
 
 		for(int i = 0; i<printedList.size(); i++) {

@@ -17,7 +17,7 @@ public class BattleListener {
 	public Reply listen(String command, String parameter) {
 		String output="";
 		String description = UIMain.player.currentCell.getDescription() + "\n"; 
-		String upperOutput = description + order.formatBattleOrder(UIMain.battleOrder);
+		String upperOutput;
 		boolean isSuccessful = true;
 		switch (command) {
 
