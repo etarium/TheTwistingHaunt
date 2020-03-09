@@ -3,6 +3,7 @@ package gameplay.commandServices;
 import gameplay.StatModMethods.PlayerStatMethods;
 import gameplay.commandServices.utilities.TakeUtilities;
 import general.Ability;
+import items.Item;
 import items.enums.ArmorMaterial;
 import items.enums.WeaponType;
 import uiView.UIMain;
@@ -94,7 +95,7 @@ public class PlayerService {
         		}
 
         } */
-		return "";
+		return "Talk to your dev. This shit ain't done yet.";
 	}
 
 	public String dropItem(String parameter) {
@@ -150,7 +151,7 @@ public class PlayerService {
 
         		} 
         }  */
-		return "";
+		return "Talk to your dev. This shit ain't done yet.";
 	}
 
 	public String equipItem(String parameter) {
@@ -209,26 +210,25 @@ public class PlayerService {
 
 
         } */
-		return "";
+		return "Talk to your dev. This shit ain't done yet.";
 	}
 
 	public String inventory() {
-		//TODO
-		/*
-		if(this.player.getItemList() == null) {
-			output = "Nothing to see here.";
+		StringBuilder output = new StringBuilder();
+		output.append(String.format("%-25s", "Name: " + UIMain.player.getName()));
+		output.append(String.format("%10s", "Class: " + UIMain.player.getEntityClass().getName()));
+		output.append(String.format("%20s", "Level: " + UIMain.player.getLevel()));
+		output.append(String.format("%30s",  "Species: " + UIMain.player.getSpeciesObject().getName()));
+		output.append("\n\n\n");
+		if(UIMain.player.getInventory().size() == 0) {
+			output.append("Hero, where are your wears! Even if you didn't like 'em, they could sell for a pretty coin. \n");
+			output.append("You should go find some more loot.");
+			return output.toString();
 		}
-		else if(this.player.getItemList().isEmpty()) {
-			output = "You don't have anything in your backpack. Poor you.";
+		for(Item item : UIMain.player.getInventory()) {
+			output.append(item.getName() + ": " + item.getDescription() + "\n*\n");
 		}
-		else {
-			for(Usable item : player.getItemList()) {
-				output += item +  "\n";
-			}
-		} 
-		output = "Nothing to see here.";
-		 */
-		return "";
+		return output.toString();
 	}
 
 	public String equipment() {
@@ -249,7 +249,7 @@ public class PlayerService {
     			}
     		}
 		 */
-		return"";
+		return "Talk to your dev. This shit ain't done yet.";
 	}
 
 	public String getPlayerStats() {
