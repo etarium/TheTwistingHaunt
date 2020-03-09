@@ -226,7 +226,7 @@ public class PlayerService {
 			return output.toString();
 		}
 		for(Item item : UIMain.player.getInventory()) {
-			output.append(item.getName() + ": " + item.getDescription() + "\n*\n");
+			output.append("* "+item.getName() + ": " + item.getDescription() + "\n\n");
 		}
 		return output.toString();
 	}
