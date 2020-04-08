@@ -1,8 +1,12 @@
 steps:
 # Sign into docker packages on github
 - name: 'gcr.io/cloud-builders/docker'
-  entrypoint: 'docker'
-  args: ['login', 'maven.pkg.github.com', '-u', '$_GITHUB_USER', '-p', '$_GITHUB_TOKEN', '&&', 'build', 'gcr.io/$PROJECT_ID/tthv3', '.']
+  entrypoint: 'bash'
+  args: 
+    - 'c'
+    - |
+      docker login maven.pkg.github.com -u $_GITHUB_USER -p $_GITHUB_TOKEN
+      docker build gcr.io/$PROJECT_ID/tthv3 .
   env:
   - '_GITHUB_TOKEN=$_GITHUB_TOKEN'
   - '_GITHUB_USERNAME=$_GITHUB_USER'
