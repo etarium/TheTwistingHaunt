@@ -3,8 +3,10 @@ steps:
 # to run a shell script; and
 # set env variables for its execution
 - name: 'ubuntu'
+  args: ['bash']
   env:
   - 'GITHUB_TOKEN=$_GITHUB_TOKEN'
+  - 'GITHUB_USER=$_GITHUB_USER'
   - 'BUILD=$BUILD_ID'
   - 'PROJECT=$PROJECT_ID'
   - 'REV=$REVISION_ID'
