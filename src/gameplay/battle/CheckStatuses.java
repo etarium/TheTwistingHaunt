@@ -16,6 +16,7 @@ public class CheckStatuses {
 		if(enemy.getStats().getCurrentHP() > 0) {
 			return false;
 		}
+		DeathService.removeEnemy(enemy);
 		return true;
 	}
 
