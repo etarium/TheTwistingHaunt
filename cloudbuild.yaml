@@ -17,8 +17,8 @@ steps:
   args: 
     - 'c'
     - |
-    login docker.pkg.github.com -u $_GITHUB_USER -p $_GITHUB_TOKEN \ 
-    build -t gcr.io/$PROJECT_ID/tthv3 .
+      login docker.pkg.github.com -u $_GITHUB_USER -p $_GITHUB_TOKEN \ 
+      build -t gcr.io/$PROJECT_ID/tthv3 .
   env:
   - '_GITHUB_TOKEN=$_GITHUB_TOKEN'
   - '_GITHUB_USERNAME=$_GITHUB_USER'
