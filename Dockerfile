@@ -5,6 +5,8 @@ LABEL version=0.0.1
 COPY src /usr/src/app/src  
 COPY pom.xml /usr/src/app
 COPY settings.xml /usr/src/app
+ENV GITHUB_USERNAME = $_GITHUB_USERNAME
+ENV GITHUB_TOKEN = $_GITHUB_TOKEN 
 RUN mvn -f /usr/src/app/pom.xml clean package
 
 FROM openjdk:8
