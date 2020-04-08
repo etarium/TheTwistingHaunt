@@ -2,6 +2,7 @@ package commandListener;
 
 import entity.EnemyEntity;
 import gameplay.GamePlayConstants;
+import gameplay.battle.BattleOrder;
 import gameplay.commandServices.MovementService;
 
 import uiView.UIMain;
@@ -10,9 +11,10 @@ import utilities.Logs;
 public class MovementListener {
 
 	MovementService system = new MovementService();
-	
+
 	public Reply listen(String command) {
-		
+
+		BattleOrder battle = new BattleOrder();
 		String output = "";
 		String newUpperOutput = "";
 		boolean isSuccessful = true;
@@ -43,11 +45,12 @@ public class MovementListener {
 			String upperOutput = UIMain.player.currentCell.getDescription();
 			switch (direction) {
 			case 'n':
-				
+
 				newUpperOutput = system.moveNorth();
 
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
+						newUpperOutput = newUpperOutput + "\n" + battle.updateBattleOrder();
 						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "north, " + GamePlayConstants.BATTLE_OUTPUT);
 						output = battleOutput(outputBuilder);
 					} else {
@@ -67,6 +70,7 @@ public class MovementListener {
 
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
+						newUpperOutput = newUpperOutput + "\n" + battle.updateBattleOrder();
 						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "south, " + GamePlayConstants.BATTLE_OUTPUT);
 						output = battleOutput(outputBuilder);
 					} else {
@@ -86,6 +90,7 @@ public class MovementListener {
 
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
+						newUpperOutput = newUpperOutput + "\n" + battle.updateBattleOrder();
 						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "east, " + GamePlayConstants.BATTLE_OUTPUT);
 						output = battleOutput(outputBuilder);
 					} else {
@@ -105,7 +110,7 @@ public class MovementListener {
 
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
-
+						newUpperOutput = newUpperOutput + "\n" + battle.updateBattleOrder();
 						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "west, " + GamePlayConstants.BATTLE_OUTPUT);
 						output = battleOutput(outputBuilder);
 					} else {

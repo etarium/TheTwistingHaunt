@@ -50,7 +50,7 @@ public class VictoryService {
 	private static void awardXP() {
 		UIMain.player.setXp(accruedXP);
 		
-		//after XP has been awared, set the value back to zero for the next battle
+		//after XP has been awarded, set the value back to zero for the next battle
 		
 	}
 	
