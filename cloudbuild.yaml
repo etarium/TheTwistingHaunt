@@ -3,8 +3,8 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   entrypoint: docker
   args:
-    - login maven.pkg.github.com -u $_GITHUB_USER -p $_GITHUB_TOKEN  
-    - build -t gcr.io/$PROJECT_ID/tthv3 .
+    - 'login maven.pkg.github.com -u $_GITHUB_USER -p $_GITHUB_TOKEN'
+    - 'build -t gcr.io/$PROJECT_ID/tthv3 .'
   env:
   - '_GITHUB_TOKEN=$_GITHUB_TOKEN'
   - '_GITHUB_USERNAME=$_GITHUB_USER'
