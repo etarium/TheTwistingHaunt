@@ -11,12 +11,16 @@ steps:
   - 'PROJECT=$PROJECT_ID'
   - 'REV=$REVISION_ID'
 
+# Sign into docker packages on github
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['login', 'docker.pkg.github.com' '-u', $_GITHUB_USER, '-p', $_GITHUB_TOKEN] 
+  env:
+  - '_GITHUB_TOKEN=$_GITHUB_TOKEN'
+  - '_GITHUB_USERNAME=$_GITHUB_USER'
+
 # Uses the docker build step to build an image called my-image
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/tthv3', '.']
-  env:
-  - 'GITHUB_TOKEN=$_GITHUB_TOKEN'
-  - 'GITHUB_USERNAME=$_GITHUB_USER'
 
 # my-image is pushed to Container Registry
 images:
