@@ -5,6 +5,7 @@ import java.util.List;
 
 import gameplay.StatModMethods.BattleEnemyStatMethods;
 import gameplay.StatModMethods.BattlePlayerStatMethods;
+import gameplay.battle.DeathService;
 import gameplay.battle.PhysicalService;
 import gameplay.battle.SpellService;
 import general.Ability;
@@ -39,6 +40,12 @@ public class BattleService {
 			if(activeEntity.equals(UIMain.player)) {
 				outputBuilder.append(PhysicalService.playerPhysAttack(selectedTarget));
 				outputBuilder.append("\n**********\n");
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} else {
 				if(!UIMain.player.isInEncounter) {
 					break;
@@ -52,6 +59,10 @@ public class BattleService {
 				}
 			}
 
+		}
+		//clean up any dead dudes
+		for(EnemyEntity activeEntity : UIMain.player.currentCell.getEnemies()) {
+			if(activeEntity.getStats().getCurrentHP() <= 0) { DeathService.removeEnemy(activeEntity); }
 		}
 		outputBuilder.append(formatBattleOutput());
 		return outputBuilder.toString();

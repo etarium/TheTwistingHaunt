@@ -9,19 +9,11 @@ public class DeathService {
 
 
 	public static void removeEnemy(EnemyEntity selectedTarget) {
-		System.out.println("remove enemies");
 		for(int i=0; i<UIMain.player.currentCell.getEnemies().size(); i++) {
 			if(UIMain.player.currentCell.getEnemies().get(i).getName().equalsIgnoreCase(selectedTarget.getName()) && (UIMain.player.currentCell.getEnemies().get(i).getStats().getCurrentHP() <= 0 )) {
 				UIMain.player.currentCell.getEnemies().remove(i);
 
 				Logs.LOGGER.info("Removed " + selectedTarget + " from Cell enemy list at index " + i);
-			}
-			if(UIMain.battleOrder.get(i).getName().equalsIgnoreCase(selectedTarget.getName()) && (UIMain.battleOrder.get(i).getStats().getCurrentHP() <= 0 )) {
-				UIMain.battleOrder.remove(i);
-
-				Logs.LOGGER.info("Removed " + selectedTarget + " from Cell enemy list at index " + i);
-
-				break;
 			}
 		}
 	}

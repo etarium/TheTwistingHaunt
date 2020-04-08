@@ -2,6 +2,7 @@ package commandListener;
 
 import entity.EnemyEntity;
 import gameplay.GamePlayConstants;
+import gameplay.battle.BattleOrder;
 import gameplay.commandServices.MovementService;
 
 import uiView.UIMain;
@@ -13,6 +14,7 @@ public class MovementListener {
 	
 	public Reply listen(String command) {
 		
+		BattleOrder battle = new BattleOrder();
 		String output = "";
 		String newUpperOutput = "";
 		boolean isSuccessful = true;
@@ -86,6 +88,7 @@ public class MovementListener {
 
 				if(!upperOutput.equals(newUpperOutput) && !upperOutput.equals("")) {
 					if(UIMain.player.isInEncounter) {
+						newUpperOutput = newUpperOutput + "\n" + battle.updateBattleOrder();
 						outputBuilder.append(GamePlayConstants.SUCCESS_MOVE + "east, " + GamePlayConstants.BATTLE_OUTPUT);
 						output = battleOutput(outputBuilder);
 					} else {
