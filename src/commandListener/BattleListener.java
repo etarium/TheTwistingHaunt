@@ -89,7 +89,7 @@ public class BattleListener {
 			}
 		}
 		if(UIMain.player.isInEncounter) {
-			upperOutput = description + order.initializeBattle();
+			upperOutput = description + order.updateBattleOrder();
 		} else {
 			upperOutput = description;
 		}

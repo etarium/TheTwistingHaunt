@@ -22,6 +22,17 @@ public class BattleOrder {
 		return formatBattleOrder(UIMain.battleOrder);
 	}
 
+	public String updateBattleOrder() {
+		if(UIMain.player.isInEncounter) {
+			UIMain.battleOrder = determineBattleOrder();
+			determineFirstAttack();
+
+			return formatBattleOrder(UIMain.battleOrder);
+		} else {
+			return "";
+		}
+	}
+
 	private Entity determineFirstAttack() {
 		Logs.LOGGER.info("Determine First Attacker");
 		return UIMain.battleOrder.get(0);
@@ -49,14 +60,12 @@ public class BattleOrder {
 
 	public List<Entity> determineBattleOrder () {
 		UIMain.battleOrder = new ArrayList<Entity>();
-		ArrayList<Entity> battleDebug = new ArrayList<Entity>();
 		initialOrder = calculateAllInits();
 		boolean wasAdded = false;
 		//then check against all entities
 		for(int i=0; i < initialOrder.size(); i++) {
 			if(UIMain.battleOrder.isEmpty()) {
 				UIMain.battleOrder.add(initialOrder.get(i));
-				battleDebug.add(initialOrder.get(i));
 			} else {
 				for(int j=UIMain.battleOrder.size()-1; j>-1; j--) {
 					double higherStat = initialOrder.get(i).getStats().getInit();
@@ -65,10 +74,8 @@ public class BattleOrder {
 					if(higherStat < UIMain.battleOrder.get(j).getStats().getInit()) {
 						if(j == UIMain.battleOrder.size()) {
 							UIMain.battleOrder.add(initialOrder.get(i));
-							battleDebug.add(initialOrder.get(i));
 						} else {
 							UIMain.battleOrder.add(j+1, initialOrder.get(i));
-							battleDebug.add(j+1, initialOrder.get(i));
 						}
 						wasAdded = true;
 						break;
@@ -76,7 +83,6 @@ public class BattleOrder {
 				}
 				if(!wasAdded) {
 					UIMain.battleOrder.add(0, initialOrder.get(i));
-					battleDebug.add(0, initialOrder.get(i));
 				}
 			}
 		}
