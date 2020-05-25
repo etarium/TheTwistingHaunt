@@ -24,21 +24,6 @@ import utilities.Logs;
 public class DBConnector {
 	MongoDatabase database;
 	ObjectMapper mapper = new ObjectMapper();
-//	public DBConnector() {
-//		ConfigReader config = new ConfigReader();
-//		
-//		String user = config.getProperty("user");
-//		String pass = config.getProperty("password");
-//		String dbName = config.getProperty("database");
-//		MongoClientURI uri = new MongoClientURI(
-//				"mongodb+srv://"+user+":"+pass+"@thetwistinghaunt-shard-00-01-hh6b2.mongodb.net/admin");
-//
-//		MongoClient mongoClient = new MongoClient(uri);
-//		database = mongoClient.getDatabase(dbName);
-//		Logs.LOGGER.info("Connected to database " + dbName);
-//
-//	}
-
 	public DBConnector() {
 		ConfigReader config = new ConfigReader();
 		
@@ -46,11 +31,11 @@ public class DBConnector {
 		String pass = config.getProperty("password");
 		String dbName = config.getProperty("database");
 		MongoClientURI uri = new MongoClientURI(
-				"mongodb+srv://player:+USe9LbUxO3AHc3Lt@thetwistinghaunt-shard-00-01-hh6b2.mongodb.net/admin");
+				"mongodb+srv://"+user+":"+pass+"@thetwistinghaunt-shard-00-01-hh6b2.mongodb.net/admin");
 
 		MongoClient mongoClient = new MongoClient(uri);
-		database = mongoClient.getDatabase("TheTwistingHaunt");
-		Logs.LOGGER.info("Connected to database " + "TheTwistingHaunt");
+		database = mongoClient.getDatabase(dbName);
+		Logs.LOGGER.info("Connected to database " + dbName);
 
 	}
 	

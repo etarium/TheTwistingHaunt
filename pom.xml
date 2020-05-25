@@ -53,23 +53,18 @@
 					<exclude>**/*.java</exclude>
 				</excludes>
 				<includes>
+					<include>**/*.class</include>
 					<include>uiView/resources/*.txt</include>
 					<include>uiView/resources/fonts/*.ttf</include>
 					<include>resources/*.properties</include>
 				</includes>
 			</resource>
-			<!--
-			<resource>
-				<directory>src</directory>
-				<includes>
-					<include>**/*.properties</include>
-				</includes>
-			</resource>
-			-->
+			<!-- <resource> <directory>src</directory> <includes> <include>**/*.properties</include> 
+				</includes> </resource> -->
 		</resources>
 		<plugins>
-			<plugin>
-				<!-- Build an executable JAR -->
+			<!-- <plugin>
+				
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>3.1.0</version>
@@ -81,13 +76,35 @@
 						</manifest>
 					</archive>
 				</configuration>
-			</plugin>
+			</plugin> -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>uiView.UIMain</mainClass>
+							<addClasspath>true</addClasspath>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
 				</configuration>
 			</plugin>
 		</plugins>

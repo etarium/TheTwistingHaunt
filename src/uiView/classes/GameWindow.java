@@ -57,7 +57,7 @@ public class GameWindow{
 	protected float helpFontSize = (float)(titleFontSize / 2.5);
 
 		private String dir = "../resources/fonts/";
-	//private String dir = "../src/uiView/resources/fonts/";
+	//private String dir = "/src/uiView/resources/fonts/";
 	private String gameFontFile = "Px437_IBM_VGA9.ttf";
 	private String menuFontFile = "Px437_IBM_Conv.ttf";
 	//TODO: create an options page that lets a user choose a highly readable font
@@ -83,16 +83,18 @@ public class GameWindow{
 	private Font defineFont(String dir, String fontFile) {
 		Font defaultFont = null;
 				try {
-//					File newFile = new File(fontFile);
-//					FileInputStream fis = new FileInputStream(newFile);
+//					File newFile = new File(dir+fontFile);
+//					FileInputStream input = new FileInputStream(newFile);
 //					BufferedInputStream bis = new BufferedInputStream(fis);
 //					GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
 
-					InputStream input = this.getClass().getClassLoader().getResourceAsStream( dir + fontFile);
+//					InputStream input = this.getClass().getClassLoader().getResourceAsStream( dir + fontFile);
+					InputStream input = GameWindow.class.getResourceAsStream("/uiView/resources/fonts/"+fontFile);
 					BufferedInputStream bis = new BufferedInputStream(input);
 					if (input == null) {
-						Logs.LOGGER.warning(fontFile + " was not found via ClassLoader.");
+						Logs.LOGGER.warning(fontFile + " was not found via ClassLoader. \n"
+								+ "Working Directory = " + System.getProperty("user.dir"));
 			            // this is how we load file within editor (eg eclipse)
 			            input = GameWindow.class.getResourceAsStream(dir+fontFile);
 						bis = new BufferedInputStream(input);
