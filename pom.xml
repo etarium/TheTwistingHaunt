@@ -52,7 +52,20 @@
 				<excludes>
 					<exclude>**/*.java</exclude>
 				</excludes>
+				<includes>
+					<include>uiView/resources/*.txt</include>
+					<include>uiView/resources/fonts/*.ttf</include>
+					<include>resources/*.properties</include>
+				</includes>
 			</resource>
+			<!--
+			<resource>
+				<directory>src</directory>
+				<includes>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+			-->
 		</resources>
 		<plugins>
 			<plugin>
@@ -64,8 +77,6 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>uiView.UIMain</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

@@ -8,9 +8,16 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
@@ -49,16 +56,15 @@ public class GameWindow{
 	protected float menuFontSize = (float)(titleFontSize * (.8));
 	protected float helpFontSize = (float)(titleFontSize / 2.5);
 
-	private String dir = "src/uiView/resources/fonts/";
+		private String dir = "../resources/fonts/";
+	//private String dir = "../src/uiView/resources/fonts/";
 	private String gameFontFile = "Px437_IBM_VGA9.ttf";
 	private String menuFontFile = "Px437_IBM_Conv.ttf";
 	//TODO: create an options page that lets a user choose a highly readable font
 	//private String fontFile = "SFNSText.ttf";
-	private String gameFontPath = dir + gameFontFile;
-	private String menuFontPath = dir + menuFontFile;
 
-	protected Font mainMenuFont = this.defineFont(menuFontPath);
-	protected Font mainGameFont = this.defineFont(gameFontPath);
+	protected Font mainMenuFont = this.defineFont(dir, menuFontFile);
+	protected Font mainGameFont = this.defineFont(dir, gameFontFile);
 
 	public Font gameFont = mainGameFont.deriveFont(gameFontSize);
 	public Font titleFont = mainMenuFont.deriveFont(titleFontSize);
@@ -74,19 +80,31 @@ public class GameWindow{
 	public static Border medLineBorder = BorderFactory.createLineBorder(textColor, MED);
 	public static Border thinLineBorder = BorderFactory.createLineBorder(textColor, THIN);	
 
-	private Font defineFont(String filePath) {
+	private Font defineFont(String dir, String fontFile) {
 		Font defaultFont = null;
-		try {
-			File newFile = new File(filePath);
-			FileInputStream fis = new FileInputStream(newFile);
-			BufferedInputStream bis = new BufferedInputStream(fis);
-			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+				try {
+//					File newFile = new File(fontFile);
+//					FileInputStream fis = new FileInputStream(newFile);
+//					BufferedInputStream bis = new BufferedInputStream(fis);
+//					GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
-			defaultFont = Font.createFont(Font.TRUETYPE_FONT, bis);
-			ge.registerFont(defaultFont);
+
+					InputStream input = this.getClass().getClassLoader().getResourceAsStream( dir + fontFile);
+					BufferedInputStream bis = new BufferedInputStream(input);
+					if (input == null) {
+						Logs.LOGGER.warning(fontFile + " was not found via ClassLoader.");
+			            // this is how we load file within editor (eg eclipse)
+			            input = GameWindow.class.getResourceAsStream(dir+fontFile);
+						bis = new BufferedInputStream(input);
+			        }
+					
+					GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		
+					defaultFont = Font.createFont(Font.TRUETYPE_FONT, bis);
+					ge.registerFont(defaultFont);
 
 		} catch(FileNotFoundException e) {
-			Logs.LOGGER.severe("Font File " + defaultFont + " Not Found.");
+			Logs.LOGGER.severe("Font File " + defaultFont + " Not Found at path " + dir + fontFile);
 		}
 		catch(Exception e) {
 			Logs.LOGGER.severe("Caught exception in GameWindow " + e);
@@ -115,13 +133,13 @@ public class GameWindow{
 		panelLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 		panel.add(panelLabel);
-		
+
 		return panel;
 	}
 
 	public JPanel setWindowBorder() {
 		JPanel windowBorder = new JPanel();
-		
+
 		if(UIMain.os.contains("Windows")) {
 			windowBorder.setSize(WINDOW_DIM.width-7, WINDOW_DIM.height-29);
 		} else {
@@ -129,7 +147,7 @@ public class GameWindow{
 		}
 		windowBorder.setOpaque(false);
 		windowBorder.setBorder(thiccLineBorder);
-		
+
 		return windowBorder;
 	}
 
@@ -139,12 +157,12 @@ public class GameWindow{
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getContentPane().setBackground(backgroundColor);
 		window.setLayout(null);
-		
+
 		window.setResizable(false);
 		window.setVisible(true);
 		return window;
 	}
-	
+
 	public JLabel setMenuLabel(String title) {
 		JLabel label = new JLabel(title);
 		label.setFont(mainMenuFont);
@@ -152,7 +170,7 @@ public class GameWindow{
 		label.setBackground(textColor);
 		label.setVerticalTextPosition(SwingConstants.CENTER);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		
+
 		return label;
 	}
 }//end GameWindow class

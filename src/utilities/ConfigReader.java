@@ -11,7 +11,7 @@ public class ConfigReader
 	public Properties setUpConfig() throws FileNotFoundException, IOException {
 
 	String rootPath = System.getProperty("user.dir");
-	String appConfigPath = rootPath + "/resources/application.properties";
+	String appConfigPath = rootPath + "/src/resources/application.properties";
 
 	Properties appProps = new Properties();
 	appProps.load(new FileInputStream(appConfigPath));
