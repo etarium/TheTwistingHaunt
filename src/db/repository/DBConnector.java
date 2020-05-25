@@ -38,7 +38,7 @@ public class DBConnector {
 		Logs.LOGGER.info("Connected to database " + dbName);
 
 	}
-
+	
 	public List<Cell> getAllCellsFromInstance(String instance) {
 		List<Cell> activeCells = new ArrayList();
 		MongoCollection<Document> cellCollection = database.getCollection("Cells");
