@@ -76,6 +76,7 @@
 				<configuration>
 					<archive>
 						<manifest>
+							<mainClass>uiView.UIMain</mainClass>
 							<addClasspath>true</addClasspath>
 						</manifest>
 					</archive>
