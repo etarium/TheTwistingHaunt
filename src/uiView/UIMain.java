@@ -47,7 +47,6 @@ public class UIMain {
 		}
 
 		try{
-			System.out.println(play);
 			play = GUI_Client.getPlayWindow();
 			Logs.LOGGER.info("Play Window launched.");
 		} catch(Exception e) {

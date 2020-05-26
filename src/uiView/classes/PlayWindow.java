@@ -25,11 +25,8 @@ public class PlayWindow extends GameWindow{
 	JPanel upOut, out, in;
 	static JTextArea upperOutput;
 	static JTextArea lowerOutput;
-	//	static JTextField input;
-	static JTextField input = new JTextField("Begin your quest by typing here, hero.");
-
+	static JTextField input;
 	static JScrollPane lowerScroll;
-
 	static boolean enterPressed = false;
 
 	public PlayWindow() {
@@ -138,8 +135,6 @@ public class PlayWindow extends GameWindow{
 				+ "fearsome beast lies ahead...");
 
 		lowerScroll = configureScrollbar(box);
-
-
 		out.add(lowerScroll);
 	}
 
@@ -193,7 +188,6 @@ public class PlayWindow extends GameWindow{
 
 			}});
 
-
 		in.add(box);
 	}
 
@@ -202,7 +196,6 @@ public class PlayWindow extends GameWindow{
 		lowerScroll.setOpaque(true);
 		lowerScroll.getViewport().setBackground(backgroundColor);
 		lowerScroll.setBorder(BorderFactory.createEmptyBorder());
-
 		lowerScroll.getVerticalScrollBar().setBackground(textColor);
 		lowerScroll.getVerticalScrollBar().setUI(new CustomScrollbar());
 		return lowerScroll;
