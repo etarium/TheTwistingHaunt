@@ -16,6 +16,9 @@ public class SpellService {
 		//then, calculate the enemy's defense based on spdef
 		int enemyDef = (int) BattleEnemyStatMethods.calculateEnemySpDef(target);
 		int total = dmg - enemyDef;
+		if (total < 0) {
+			total = 0;
+		}
 		//apply the damage
 		if(checkResourcesAvailable(spell)) {
 			if(BattlePlayerStatMethods.calculatePlayerHitRate(target)) {
@@ -25,9 +28,15 @@ public class SpellService {
 				}
 				System.out.println(output);
 				if(!CheckStatuses.isEnemyDead(target)) {
-					output = "With a deep breath, you cast " + spell.getName() + ", and the raging magic rings out, ravishing the" + target.getName() +"! \n"
-							+ "You deal " + total + " damage. \n"
-							+ "Nice work, hero! \n";
+					if(total == 0) {
+						output = "With a deep breath, you cast " + spell.getName() + ", and the raging magic rings out, but it glances off " + target.getName() +". \n"
+								+ "You deal " + total + " damage. \n"
+								+ "You okay there, hero? \n";
+					} else {
+						output = "With a deep breath, you cast " + spell.getName() + ", and the raging magic rings out, ravishing the" + target.getName() +"! \n"
+								+ "You deal " + total + " damage. \n"
+								+ "Nice work, hero! \n";
+					}
 				} else {
 					VictoryService.trackXP(target.getXp(), target.getLevel());
 					output = "With a deep breath, you cast " + spell.getName() + ", and the raging magic rings out, ravishing the " + target.getName() +"! \n"

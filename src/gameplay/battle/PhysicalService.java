@@ -5,10 +5,13 @@ import gameplay.StatModMethods.BattlePlayerStatMethods;
 import entity.EnemyEntity;
 
 public class PhysicalService {
-	
+
 	public static String playerPhysAttack(EnemyEntity selectedTarget) {
 		String output = "";
 		int total = (int) (BattlePlayerStatMethods.calculatePlayerPhysDamage() - BattleEnemyStatMethods.calculateEnemyPhysDefense(selectedTarget));
+		if(total < 0) {
+			total = 0;
+		}
 
 		if(BattlePlayerStatMethods.calculatePlayerHitRate(selectedTarget)) {
 			selectedTarget.getStats().setCurrentHP(selectedTarget.getStats().getCurrentHP() - total);
@@ -17,8 +20,13 @@ public class PhysicalService {
 			}
 
 			if(!CheckStatuses.isEnemyDead(selectedTarget)) {
-				output = "\nYou attack " + selectedTarget.getName() + ", and with a stunning blow deal " + total + " damage. \n"
-						+ "Nice work, hero! \n";
+				if(total == 0) {
+					output = "\nYou attack " + selectedTarget.getName() + ", but only deal " + total + " damage. \n"
+							+ "Pretty wimpy, hero. \n";	
+				} else {
+					output = "\nYou attack " + selectedTarget.getName() + ", and with a stunning blow deal " + total + " damage. \n"
+							+ "Nice work, hero! \n";
+				}
 			} else {
 				VictoryService.trackXP(selectedTarget.getXp(), selectedTarget.getLevel());
 				output = "\nYou attack " + selectedTarget.getName() + ", and with a stunning blow deal " + total + " damage. \n" + VictoryService.defeatedEnemy(selectedTarget);

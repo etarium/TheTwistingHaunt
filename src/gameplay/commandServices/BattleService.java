@@ -180,9 +180,17 @@ public class BattleService {
 	private String enemyAttack(EnemyEntity enemy) {
 		//TODO: make it smart enough to use skills instead of just physical attacks
 		int totalDamage = (int) ( BattleEnemyStatMethods.calculateEnemyPhysDamage(enemy) - BattlePlayerStatMethods.calculatePlayerPhysDefense());
+		if(totalDamage < 0) {
+			totalDamage = 0;
+		}
 		if(BattleEnemyStatMethods.calculateEnemyHitRate(enemy)) {
-			UIMain.player.getStats().setCurrentHP(UIMain.player.getStats().getCurrentHP() - totalDamage);
+			
+			if(totalDamage == 0) {
+				output = "\nThe " + enemy.getName() + " flails wildly, doing " + totalDamage + " damage in the process. You almost feel bad for it.\n";
+			} else {
+				UIMain.player.getStats().setCurrentHP(UIMain.player.getStats().getCurrentHP() - totalDamage);
 			output = "\nThe " + enemy.getName() + " lashes out, inflicting " + totalDamage + " damage!\n";
+			}
 		} else {
 			output = "\n The " + enemy.getName() + " stumbles, missing its target.\n";
 		}
@@ -196,7 +204,7 @@ public class BattleService {
 		// lvl | hp			lvl | hp		lvl | hp
 		List<Entity> printedList = UIMain.battleOrder;
 		printedList.remove(UIMain.player);
-//		outputBuilder.append("\n\n");
+		//		outputBuilder.append("\n\n");
 		outputBuilder.append(String.format("%-5s",  UIMain.player.getName()));
 
 		for(int i = 0; i<printedList.size(); i++) {
