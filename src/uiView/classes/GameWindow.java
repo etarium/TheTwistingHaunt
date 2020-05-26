@@ -8,17 +8,8 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -56,8 +47,7 @@ public class GameWindow{
 	protected float menuFontSize = (float)(titleFontSize * (.8));
 	protected float helpFontSize = (float)(titleFontSize / 2.5);
 
-		private String dir = "../resources/fonts/";
-	//private String dir = "/src/uiView/resources/fonts/";
+	private String dir = "../resources/fonts/";
 	private String gameFontFile = "Px437_IBM_VGA9.ttf";
 	private String menuFontFile = "Px437_IBM_Conv.ttf";
 	//TODO: create an options page that lets a user choose a highly readable font
@@ -82,28 +72,21 @@ public class GameWindow{
 
 	private Font defineFont(String dir, String fontFile) {
 		Font defaultFont = null;
-				try {
-//					File newFile = new File(dir+fontFile);
-//					FileInputStream input = new FileInputStream(newFile);
-//					BufferedInputStream bis = new BufferedInputStream(fis);
-//					GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		try {
+			InputStream input = GameWindow.class.getResourceAsStream("/uiView/resources/fonts/"+fontFile);
+			BufferedInputStream bis = new BufferedInputStream(input);
+			if (input == null) {
+				Logs.LOGGER.warning(fontFile + " was not found via ClassLoader. \n"
+						+ "Working Directory = " + System.getProperty("user.dir"));
+				// this is how we load file within editor (eg eclipse)
+				input = GameWindow.class.getResourceAsStream(dir+fontFile);
+				bis = new BufferedInputStream(input);
+			}
 
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
-//					InputStream input = this.getClass().getClassLoader().getResourceAsStream( dir + fontFile);
-					InputStream input = GameWindow.class.getResourceAsStream("/uiView/resources/fonts/"+fontFile);
-					BufferedInputStream bis = new BufferedInputStream(input);
-					if (input == null) {
-						Logs.LOGGER.warning(fontFile + " was not found via ClassLoader. \n"
-								+ "Working Directory = " + System.getProperty("user.dir"));
-			            // this is how we load file within editor (eg eclipse)
-			            input = GameWindow.class.getResourceAsStream(dir+fontFile);
-						bis = new BufferedInputStream(input);
-			        }
-					
-					GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		
-					defaultFont = Font.createFont(Font.TRUETYPE_FONT, bis);
-					ge.registerFont(defaultFont);
+			defaultFont = Font.createFont(Font.TRUETYPE_FONT, bis);
+			ge.registerFont(defaultFont);
 
 		} catch(FileNotFoundException e) {
 			Logs.LOGGER.severe("Font File " + defaultFont + " Not Found at path " + dir + fontFile);
