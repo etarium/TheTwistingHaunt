@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import uiView.UIMain;
+import uiView.classes.customOverrides.CustomScrollbar;
 
 public class PlayWindow extends GameWindow{
 
@@ -202,14 +203,15 @@ public class PlayWindow extends GameWindow{
 		lowerScroll.setBorder(BorderFactory.createEmptyBorder());
 		
 		lowerScroll.getVerticalScrollBar().setBackground(textColor);
-		lowerScroll.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
-		    @Override
-		    protected void configureScrollBarColors() {
-		        this.thumbColor = textColor.darker();
-		        this.scrollBarWidth = 30;
-		    }
-		});
-		
+		lowerScroll.getVerticalScrollBar().setUI(new CustomScrollbar());
+//		{
+//		    @Override
+//		    protected void configureScrollBarColors() {
+//		        this.thumbColor = textColor.darker();
+//		        this.scrollBarWidth = 30;
+//		    }
+//		});
+//		
 		return lowerScroll;
 	}
 	
