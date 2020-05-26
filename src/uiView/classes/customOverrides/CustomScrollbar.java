@@ -1,24 +1,34 @@
 package uiView.classes.customOverrides;
 
 import java.awt.Dimension;
-
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import uiView.classes.GameWindow;
+import utilities.Logs;
 
 public class CustomScrollbar extends BasicScrollBarUI {
 
 	private ImageIcon downArrow, upArrow, leftArrow, rightArrow;
 
-	
+
 	public CustomScrollbar(){
-		upArrow = new ImageIcon("src/uiView/resources/buttons/tth_scroll_button_up.png");
-		downArrow = new ImageIcon("src/uiView/resources/buttons/tth_scroll_button_down.png");
-		leftArrow = new ImageIcon("src/uiView/resources/buttons/tth_scroll_button_left.png");
-		rightArrow = new ImageIcon("src/uiView/resources/buttons/tth_scroll_button_right.png");        
+		try {
+			upArrow = new ImageIcon(ImageIO.read(CustomScrollbar.class.getResourceAsStream("/resources/buttons/tth_scroll_button_up.png")));
+		} catch (IOException e) {
+			Logs.LOGGER.warning("Could not find Up Arrow in resources.");
+			e.printStackTrace();
+		}
+		try {
+			downArrow = new ImageIcon(ImageIO.read(CustomScrollbar.class.getResourceAsStream("/resources/buttons/tth_scroll_button_down.png")));
+		} catch (IOException e) {
+			Logs.LOGGER.warning("Could not find Down Arrow in resources.");
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -51,10 +61,10 @@ public class CustomScrollbar extends BasicScrollBarUI {
 		default: return leftArrow;
 		}
 	}
-	
-    @Override
-    protected void configureScrollBarColors() {
-        this.thumbColor = GameWindow.textColor.darker();
-        this.scrollBarWidth = 30;
-    }
+
+	@Override
+	protected void configureScrollBarColors() {
+		this.thumbColor = GameWindow.textColor.darker();
+		this.scrollBarWidth = 30;
+	}
 }    

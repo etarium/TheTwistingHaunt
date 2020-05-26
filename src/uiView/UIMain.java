@@ -30,7 +30,7 @@ public class UIMain {
 
 
 	public static void main (String [] args) {
-		
+
 		Logs.LOGGER.info("Running on OS " + os);
 
 		MainMenu menu = new MainMenu();
@@ -47,11 +47,11 @@ public class UIMain {
 		}
 
 		try{
-			GUI_Client.main(null);
+			System.out.println(play);
 			play = GUI_Client.getPlayWindow();
 			Logs.LOGGER.info("Play Window launched.");
 		} catch(Exception e) {
-			Logs.LOGGER.severe("Exception when trying to play GUI_Client.getPlayWindow()");
+			Logs.LOGGER.severe("Exception when trying to play GUI_Client.getPlayWindow(); \n" + e);
 		}
 
 		boolean run = true;

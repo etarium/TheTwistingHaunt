@@ -57,26 +57,17 @@
 					<include>uiView/resources/*.txt</include>
 					<include>uiView/resources/fonts/*.ttf</include>
 					<include>resources/*.properties</include>
+					<include>**/*.png</include>
 				</includes>
 			</resource>
 			<!-- <resource> <directory>src</directory> <includes> <include>**/*.properties</include> 
 				</includes> </resource> -->
 		</resources>
 		<plugins>
-			<!-- <plugin>
-				
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.1.0</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<mainClass>uiView.UIMain</mainClass>
-							<addClasspath>true</addClasspath>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin> -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-jar-plugin</artifactId> 
+				<version>3.1.0</version> <configuration> <archive> <manifest> <mainClass>uiView.UIMain</mainClass> 
+				<addClasspath>true</addClasspath> </manifest> </archive> </configuration> 
+				</plugin> -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>

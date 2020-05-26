@@ -12,34 +12,35 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import uiView.UIMain;
 import uiView.classes.customOverrides.CustomScrollbar;
 
 public class PlayWindow extends GameWindow{
 
-	
+
 	static JFrame window;
 	Container con;
 	JPanel bounds;
 	JPanel upOut, out, in;
 	static JTextArea upperOutput;
 	static JTextArea lowerOutput;
-	static JTextField input;
+	//	static JTextField input;
+	static JTextField input = new JTextField("Begin your quest by typing here, hero.");
+
 	static JScrollPane lowerScroll;
-	
+
 	static boolean enterPressed = false;
-	
+
 	public PlayWindow() {
-		
+
 		window = new JFrame("The Twisting Haunt");
 		window.setPreferredSize(SCREEN_DIM);
 		window.setSize(SCREEN_DIM);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setLayout(null);
 		window.setMaximumSize(window.getSize());
-		
+
 		con = window.getContentPane();
 		con.setLayout(null);
 		JPanel orig_bounds = new JPanel();
@@ -48,7 +49,7 @@ public class PlayWindow extends GameWindow{
 		orig_bounds.setBorder(thiccLineBorder);
 		orig_bounds.setLayout(null);
 		con.add(orig_bounds);
-		
+
 		JPanel bounds = new JPanel();
 		int half_buffer = (int)(BUFFER / 2);
 		bounds.setBounds(half_buffer, half_buffer, SCREEN_WIDTH - BUFFER, SCREEN_HEIGHT -  BUFFER - BUFFER);
@@ -57,7 +58,7 @@ public class PlayWindow extends GameWindow{
 		bounds.setLayout(null);
 
 		orig_bounds.add(bounds);
-		
+
 		int bounds_WIDTH = bounds.getWidth();
 		int bounds_HEIGHT = bounds.getHeight();		
 
@@ -72,7 +73,7 @@ public class PlayWindow extends GameWindow{
 		upOut.setBounds(upperOutBufferWidth,upperOutBufferHeight, upperOutWidth, upperOutHeight);
 		upOut.setBackground(backgroundColor);
 		upOut.setBorder(thiccLineBorder);
-		
+
 		out = new JPanel();
 		bounds.add(out);
 
@@ -85,8 +86,8 @@ public class PlayWindow extends GameWindow{
 		out.setPreferredSize(out.getSize());
 		out.setBackground(backgroundColor);
 		out.setBorder(medLineBorder);
-		
-		
+
+
 		in = new JPanel();
 		bounds.add(in);
 
@@ -96,11 +97,11 @@ public class PlayWindow extends GameWindow{
 		in.setBounds(outBufferWidth,inBufferHeight,outWidth, inHeight);
 		in.setBackground(backgroundColor);
 		in.setBorder(medLineBorder);
-		
+
 		upperOutput = new JTextArea();
 		lowerOutput = new JTextArea(16,100);
 		input = new JTextField("Begin your quest by typing here, hero.");
-		
+
 		upOut.setLayout(new FlowLayout(FlowLayout.LEADING));
 		out.setLayout(new FlowLayout(FlowLayout.LEADING));
 		in.setLayout(new FlowLayout(FlowLayout.LEADING));
@@ -108,13 +109,13 @@ public class PlayWindow extends GameWindow{
 		addUpperOutputBox(upOut, upperOutput);
 		addOutputBox(out, lowerOutput);
 		addInputBox(in,input);
-		
+
 		window.setResizable(false);
 		window.pack();
 		window.setVisible(true);
-		
+
 		input.requestFocus();
-		
+
 	}//end PlayWindow initializer
 
 	private void addOutputBox(Container out, JTextArea box) {
@@ -128,20 +129,20 @@ public class PlayWindow extends GameWindow{
 		box.setHighlighter(null);
 		box.setLineWrap(true);
 		box.setWrapStyleWord(true);
-		
+
 		//initial text while database is loading
 		box.setText("A group of scared villagers begged for your help. They circled you, crying about "
-		  		+ "their deceased. Scared of their deceased -- It seems that this cave you're now in front "
-		  		+ "of is home to the undead. The villagers cried about the evil lurking within. "
-		  		+ "You had heard of it as the 'Blue Lich' before. Truly, a "
-		  		+ "fearsome beast lies ahead...");
-		
+				+ "their deceased. Scared of their deceased -- It seems that this cave you're now in front "
+				+ "of is home to the undead. The villagers cried about the evil lurking within. "
+				+ "You had heard of it as the 'Blue Lich' before. Truly, a "
+				+ "fearsome beast lies ahead...");
+
 		lowerScroll = configureScrollbar(box);
-		
-		
+
+
 		out.add(lowerScroll);
 	}
-	
+
 	private void addUpperOutputBox(Container out, JTextArea box) {
 		box.setOpaque(false);
 		box.setForeground(textColor);
@@ -153,16 +154,16 @@ public class PlayWindow extends GameWindow{
 		box.setHighlighter(null);
 		box.setLineWrap(true);
 		box.setWrapStyleWord(true);
-				
+
 		//initial text while database is loading
 		while(UIMain.player.currentCell == null) {
 			box.setText("Database loading...");
 		}
 		box.setText(UIMain.player.currentCell.getDescription());
-		
+
 		out.add(box);
 	}
-	
+
 	private void addInputBox(Container in, JTextField box) {
 		box.setOpaque(false);
 		box.setBorder(null);
@@ -176,7 +177,7 @@ public class PlayWindow extends GameWindow{
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
@@ -189,62 +190,54 @@ public class PlayWindow extends GameWindow{
 			@Override
 			public void keyReleased(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}});
-		
-		
+
+
 		in.add(box);
 	}
-	
+
 	private JScrollPane configureScrollbar(JTextArea box) {
 		lowerScroll = new JScrollPane(box);
 		lowerScroll.setOpaque(true);
 		lowerScroll.getViewport().setBackground(backgroundColor);
 		lowerScroll.setBorder(BorderFactory.createEmptyBorder());
-		
+
 		lowerScroll.getVerticalScrollBar().setBackground(textColor);
 		lowerScroll.getVerticalScrollBar().setUI(new CustomScrollbar());
-//		{
-//		    @Override
-//		    protected void configureScrollBarColors() {
-//		        this.thumbColor = textColor.darker();
-//		        this.scrollBarWidth = 30;
-//		    }
-//		});
-//		
 		return lowerScroll;
 	}
-	
+
 	public JTextArea getUpperOutputBox() {
 		return upperOutput;
 	}
-	
+
 	public JTextArea getOutputBox() {
 		return lowerOutput;
 	}
-	
+
 	public JTextField getInputBox() {
 		return input;
 	}
-	
+
 	public void outGUI(String outputString) {
 		JTextArea outputBox = getOutputBox();
 		outputBox.setText(outputString);
 	}
-	
+
 	public void outTopGUI(String upperOutputString) {
 		JTextArea upperOutputBox = getUpperOutputBox();
 		upperOutputBox.setText(upperOutputString);
 	}
-	
+
 	public String inGUI() {
 		JTextField inputBox = getInputBox();
 		String response = inputBox.getText();
 		inputBox.setText("");
-		
+
 		return response;
 	}
-	
+
 	public String requestInput() {
 		while(!enterPressed) {
 			try {
@@ -256,11 +249,11 @@ public class PlayWindow extends GameWindow{
 		}
 		enterPressed = false;
 		return inGUI();
-		
+
 	}
-	
+
 	public void exitGame() {
 		window.dispose();
 	}
-	
+
 }//end class
