@@ -8,8 +8,11 @@ import gameplay.commandServices.CellService;
 import environment.InspectableObjects;
 import items.Item;
 import uiView.UIMain;
+import utilities.Logs;
 
 public class TakeUtilities {
+
+	public SelectUtility select = new SelectUtility();
 
 	public String takeAllFromInspectable() {
 		StringBuilder outputBuilder = new StringBuilder();
@@ -159,17 +162,32 @@ public class TakeUtilities {
 		if(UIMain.player.getInventory().size() >= GamePlayConstants.MAX_INVENTORY_SIZE) {
 			return "Your bag is heaving with the volume of items inside. You couldn't possible take anymore!"
 					+ "\n [Use /drop to remove items from your inventory.]";
-		} else {
-			for(Item item : UIMain.player.currentCell.getItems()) {
-				if(item.getName().equalsIgnoreCase(param)) {
-					UIMain.player.getInventory().add(item);
-					output = "You take the " + item.getName();
-					removeItemFromCell(item);
-					break;
-				} else {
-					output = "You look around, but can't find anything worth taking by that name.";
-				}
+		} 
+		if (select.isInteger(param)) {
+			//the player used a number param instead of name
+			int numSelected = Integer.parseInt(param);
+			Logs.LOGGER.info("Number of items in cell " + UIMain.player.currentCell.getItems().size());
+			if(numSelected > UIMain.player.currentCell.getItems().size()) {
+				output = "Your eyes must be bigger than reality, " + UIMain.player.getEntityClass().getName() + ".\n" +
+						"There are only " + UIMain.player.getCurrentCell().getItems().size() + " items here.";
+
+			} else {
+				Item item = UIMain.player.currentCell.getItems().get(numSelected-1);
+				UIMain.player.getInventory().add(item);
+				output = "You take the " + item.getName();
+				removeItemFromCell(item);
 			}
+		} else {
+		for(Item item : UIMain.player.currentCell.getItems()) {
+			if(item.getName().equalsIgnoreCase(param)) {
+				UIMain.player.getInventory().add(item);
+				output = "You take the " + item.getName();
+				removeItemFromCell(item);
+				break;
+			} else {
+				output = "You look around, but can't find anything worth taking by that name.";
+			}
+		}
 		}
 		return output;
 	}
@@ -180,6 +198,7 @@ public class TakeUtilities {
 			for(int i = 0; i < itemsInCell.size(); i ++) {
 				if(item.getName().equalsIgnoreCase(itemsInCell.get(i).getName())) {
 					UIMain.player.currentCell.getItems().remove(item);
+					Logs.LOGGER.info("Removed the " + item.getName() + "from Cell.");
 				}
 			}
 		}
