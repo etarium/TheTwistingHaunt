@@ -181,10 +181,11 @@ public class MainMenu extends GameWindow {
 			buttonPanel.add(buttonLabel);
 			buttonPanel.setLayout(new GridLayout());
 
-			buttons[i].add(buttonPanel);
+//			buttons[i].add(buttonPanel);
 			buttons[i].setLayout(new GridLayout());
 			buttons[i].setBorder(thinLineBorder);
 			buttons[i].setBounds(bounds);
+			buttons[i].add(buttonPanel);
 
 			window.add(buttons[i]);
 		}//end menu button generation
